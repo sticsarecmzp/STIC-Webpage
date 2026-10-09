@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STIC | SAREC Mirzapur | Technology and Innovation Community</title>
+
+    <meta
+      name="description"
+      content="Official platform for STIC (Technology and Innovation Community) at Samrat Ashok Rajkiya Engineering College, Mirzapur. Explore 8 engineering clubs, collaborative tracks, hackathons, and hands-on peer mentorship."
+    />
+    <meta
+      name="keywords"
+      content="STIC, SAREC Mirzapur, Samrat Ashok Rajkiya Engineering College, Technology and Innovation Community, Coding Club, Student Guilds, Hackathons, Mentorship"
+    />
+    <meta property="og:title" content="STIC | SAREC Mirzapur | Technology and Innovation Community" />
+    <meta
+      property="og:description"
+      content="Code, Build, Innovate. The official student-run technical community at Samrat Ashok Rajkiya Engineering College, Mirzapur with 8 specialized tracks, hands-on workshops, and collaborative projects."
+    />
+    <meta property="og:image" content="/assets/logos/stic-logo-light.png" />
+    <meta name="theme-color" content="#030712" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Theme Initialization Script: Runs synchronously before body renders to eliminate white flash -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('stic_theme');
+          var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved ? saved : (systemDark ? 'dark' : 'dark');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

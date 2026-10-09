@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STIC • SAREC Mirzapur • Code 1215 | Standalone Preview</title>
+  <meta name="description" content="STIC - Technology and Innovation Community at Samrat Ashok Rajkiya Engineering College, Mirzapur. AKTU Code 1215." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --step--2: clamp(0.69rem, 0.67rem + 0.12vw, 0.78rem);
+      --step--1: clamp(0.83rem, 0.79rem + 0.18vw, 0.96rem);
+      --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.19rem);
+      --step-1: clamp(1.2rem, 1.12rem + 0.38vw, 1.49rem);
+      --step-2: clamp(1.44rem, 1.32rem + 0.61vw, 1.88rem);
+      --step-3: clamp(1.73rem, 1.55rem + 0.92vw, 2.37rem);
+      --step-5: clamp(2.49rem, 2.05rem + 2.18vw, 4.06rem);
+
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --primary-glow: rgba(99, 102, 241, 0.4);
+      --primary-glow-subtle: rgba(99, 102, 241, 0.15);
+      --accent: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.35);
+
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --bg: #030712;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-tertiary: #64748b;
+
+      --glass-bg: rgba(15, 23, 42, 0.65);
+      --glass-bg-elevated: rgba(30, 41, 59, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+
+      --nav-bg: rgba(15, 23, 42, 0.75);
+      --nav-border: rgba(255, 255, 255, 0.1);
+
+      --bg-surface: rgba(15, 23, 42, 0.65);
+      --bg-surface-elevated: rgba(30, 41, 59, 0.6);
+      --bg-surface-subtle: rgba(10, 15, 29, 0.7);
+
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.14);
+
+      --success: #10b981;
+      --success-subtle: rgba(16, 185, 129, 0.16);
+      --success-border: rgba(16, 185, 129, 0.35);
+
+      --card-radius: 20px;
+      --btn-radius: 12px;
+      --input-radius: 12px;
+    }
+
+    [data-theme='light'] {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --text-tertiary: #64748b;
+
+      --glass-bg: rgba(255, 255, 255, 0.75);
+      --glass-bg-elevated: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(255, 255, 255, 0.6);
+      --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+
+      --nav-bg: rgba(255, 255, 255, 0.8);
+      --nav-border: rgba(226, 232, 240, 0.8);
+
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-surface-elevated: rgba(241, 245, 249, 0.9);
+      --bg-surface-subtle: rgba(248, 250, 252, 0.85);
+
+      --border-subtle: rgba(15, 23, 42, 0.08);
+      --border-medium: rgba(15, 23, 42, 0.14);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-size: var(--step-0);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(99, 102, 241, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 82% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 42%),
+        radial-gradient(circle at 50% 88%, rgba(99, 102, 241, 0.08) 0%, transparent 48%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(100% - 3rem, 1200px);
+      margin-inline: auto;
+    }
+
+    section {
+      padding-block: clamp(4rem, 8vw, 8rem);
+      position: relative;
+    }
+
+    .glass, .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--card-radius);
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-interactive:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary);
+      box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.3), 0 0 24px var(--primary-glow);
+    }
+
+    /* Navbar */
+    .navbar-wrapper {
+      position: sticky;
+      top: 1rem;
+      z-index: 100;
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    .navbar {
+      max-width: min(92%, 1160px);
+      margin: 0 auto;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--nav-border);
+      border-radius: 9999px;
+      box-shadow: var(--card-shadow);
+      padding: 0.35rem 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 54px;
+      padding: 0 1.25rem;
+    }
+
+    .brand-link { display: flex; align-items: center; gap: 0.75rem; }
+    .brand-heading { font-size: 1.05rem; font-weight: 800; color: var(--text); }
+    .brand-subheading { font-size: 0.72rem; color: var(--text-tertiary); font-weight: 600; font-family: var(--font-mono); }
+
+    .nav-links-desktop { display: flex; align-items: center; gap: 1.75rem; }
+    .nav-anchor { font-size: var(--step--1); font-weight: 500; color: var(--text-secondary); transition: color 0.2s; }
+    .nav-anchor:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      font-size: var(--step--1);
+      font-weight: 600;
+      border-radius: var(--btn-radius);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+      color: #fff;
+      box-shadow: 0 4px 18px var(--primary-glow);
+    }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 6px 26px var(--primary-glow); }
+
+    .btn-secondary {
+      background: var(--glass-bg);
+      color: var(--text);
+      border-color: var(--glass-border);
+    }
+    .btn-secondary:hover { border-color: var(--primary); transform: translateY(-2px); }
+
+    .btn-sm { padding: 0.45rem 0.95rem; font-size: var(--step--2); border-radius: 9999px; }
+
+    .btn-icon {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+    }
+
+    /* Hero */
+    .hero-section { padding-top: clamp(3rem, 6vw, 6rem); overflow: hidden; }
+    .hero-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.45rem 1rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 9999px;
+      font-size: var(--step--2);
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 1.75rem;
+    }
+
+    .live-pulse-dot {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+    .live-pulse-dot::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: var(--success);
+      opacity: 0.6;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.2); opacity: 0; } }
+
+    .hero-title {
+      font-size: var(--step-5);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title-accent {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-paragraph {
+      font-size: var(--step-0);
+      color: var(--text-secondary);
+      max-width: 70ch;
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-cta-group { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3.5rem; }
+
+    .hero-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+    .spec-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 1.25rem;
+    }
+    .spec-label {
+      font-size: var(--step--2);
+      font-family: var(--font-mono);
+      color: var(--primary);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .spec-value { font-size: var(--step-2); font-weight: 800; }
+    .spec-sub { font-size: var(--step--2); color: var(--text-secondary); }
+
+    /* Institution Strip */
+    .institution-strip {
+      padding: 1.5rem 0;
+      background: var(--glass-bg-elevated);
+      border-block: 1px solid var(--border-subtle);
+    }
+    .institution-flex { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .tag-badge {
+      font-size: var(--step--2);
+      padding: 0.35rem 0.75rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+    }
+
+    /* Section Titles */
+    .section-header { margin-bottom: 3rem; }
+    .section-tag { font-size: var(--step--2); font-family: var(--font-mono); color: var(--primary); text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem; display: block; }
+    .section-title { font-size: var(--step-3); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .section-description { font-size: var(--step-0); color: var(--text-secondary); max-width: 70ch; }
+
+    /* Clubs Grid */
+    .clubs-filter-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+    .filter-btn {
+      font-size: var(--step--1);
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .clubs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .club-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .club-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+    .club-badge { font-size: var(--step--2); padding: 0.25rem 0.65rem; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 9999px; font-family: var(--font-mono); }
+    .club-title { font-size: var(--step-1); font-weight: 700; margin-bottom: 0.5rem; }
+    .club-description { font-size: var(--step--1); color: var(--text-secondary); margin-bottom: 1.25rem; }
+    .club-tags-list { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem; }
+    .club-tech-tag { font-size: var(--step--2); padding: 0.25rem 0.55rem; background: var(--bg-surface-subtle); border: 1px solid var(--border-subtle); border-radius: 6px; font-family: var(--font-mono); }
+    .club-card-footer { border-top: 1px solid var(--border-subtle); padding-top: 1.1rem; display: flex; align-items: center; justify-content: space-between; }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Join Form */
+    .join-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3.5rem; align-items: start; }
+    .form-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-label { display: block; font-size: var(--step--2); font-weight: 600; margin-bottom: 0.45rem; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: var(--step--1);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--input-radius);
+      color: var(--text);
+      outline: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+    .guild-glow-active {
+      animation: guildGlow 1.8s ease;
+      border-color: var(--primary) !important;
+    }
+    @keyframes guildGlow {
+      0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.8); }
+      50% { box-shadow: 0 0 28px 6px rgba(99, 102, 241, 0.6); }
+      100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--glass-bg);
+      border-top: 1px solid var(--glass-border);
+      padding: 4rem 0 2rem;
+      margin-top: 4rem;
+    }
+    .footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1.2fr; gap: 2rem; margin-bottom: 3rem; }
+
+    @media (max-width: 900px) {
+      .join-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 650px) {
+      .nav-links-desktop { display: none; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Glass Navbar -->
+  <div class="navbar-wrapper">
+    <header class="navbar">
+      <div class="navbar-inner">
+        <a href="#top" class="brand-link">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #fff;">S</div>
+          <div>
+            <div class="brand-heading">STIC</div>
+            <div class="brand-subheading">SAREC Mirzapur • 1215</div>
+          </div>
+        </a>
+
+        <nav class="nav-links-desktop">
+          <a href="#clubs" class="nav-anchor">Clubs</a>
+          <a href="#projects" class="nav-anchor">Projects</a>
+          <a href="#events" class="nav-anchor">Events</a>
+          <a href="#team" class="nav-anchor">Leadership</a>
+          <a href="#faq" class="nav-anchor">FAQ</a>
+        </nav>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <button id="themeToggle" class="btn-icon" title="Toggle Light/Dark Theme">
+            🌓
+          </button>
+          <a href="#join" class="btn btn-primary btn-sm">Join STIC</a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="top" class="hero-section">
+    <div class="container">
+      <div class="hero-live-badge">
+        <span class="live-pulse-dot"></span>
+        <span>📍 SAREC Mirzapur • Code 1215</span>
+        <span style="opacity: 0.4">•</span>
+        <span>2025–2026 Cohort Active</span>
+      </div>
+
+      <h1 class="hero-title">
+        Innovation Redefined. The student technical community of <span class="hero-title-accent">SAREC Mirzapur</span>.
+      </h1>
+
+      <p class="hero-paragraph">
+        We build production software, collaborate on open source ecosystems, engineer hardware prototypes, and prepare for national hackathons like Smart India Hackathon (SIH). Driven by students, guided by faculty, and open to all engineering departments.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#join" class="btn btn-primary">Join Community</a>
+        <a href="#projects" class="btn btn-secondary">View Projects</a>
+        <a href="#clubs" class="btn btn-secondary">Explore 8 Guilds</a>
+      </div>
+
+      <!-- Impact Counters -->
+      <div class="hero-specs-grid">
+        <div class="spec-card">
+          <div class="spec-label">Specialized Guilds</div>
+          <div class="spec-value">8</div>
+          <div class="spec-sub">End-to-End Technology Tracks</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-label">Active Members</div>
+          <div class="spec-value">500+</div>
+          <div class="spec-sub">Students Across All Years</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-label">Campus Projects</div>
+          <div class="spec-value">35+</div>
+          <div class="spec-sub">Shipped &amp; Deployed Solutions</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-label">Hackathons</div>
+          <div class="spec-value">18</div>
+          <div class="spec-sub">SIH &amp; State Level Podiums</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Institution Strip -->
+  <div class="institution-strip">
+    <div class="container institution-flex">
+      <div>
+        <h3 style="font-size: var(--step--1); font-weight: 700;">Samrat Ashok Rajkiya Engineering College, Mirzapur</h3>
+        <p style="font-size: var(--step--2); color: var(--text-secondary);">Affiliated to AKTU Lucknow (College Code 1215) • Est. 2023</p>
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <span class="tag-badge">B.Tech CSE</span>
+        <span class="tag-badge">B.Tech IT</span>
+        <span class="tag-badge">B.Tech EL</span>
+        <span class="tag-badge">B.Tech EE</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- The 8 Guilds Section -->
+  <section id="clubs">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Campus Tracks</span>
+        <h2 class="section-title">The 8 Technology Guilds</h2>
+        <p class="section-description">Choose your engineering focus area. Each guild runs regular weekly build sessions, hands-on labs, and collaborative project repositories at SAREC Mirzapur.</p>
+      </div>
+
+      <div class="clubs-grid" id="clubsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" style="background: var(--bg-surface-subtle);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Proof of Work</span>
+        <h2 class="section-title">Student Innovation Showcase</h2>
+        <p class="section-description">Real software and hardware systems built, tested, and deployed by engineering students at SAREC Mirzapur.</p>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Form Section -->
+  <section id="join">
+    <div class="container">
+      <div class="join-grid">
+        <div>
+          <span class="section-tag">Track Registration</span>
+          <h2 class="section-title">Join a Technical Track at SAREC Mirzapur</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+            Whether you are writing your first line of code or deploying complex full-stack systems, STIC provides regular lab access, peer code reviews, and project collaboration.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem; color: var(--text-secondary); font-size: var(--step--1);">
+            <div>✓ Open to all academic years and engineering branches at SAREC.</div>
+            <div>✓ Access to weekend build sprints and lab mentorship hours.</div>
+            <div>✓ Eligibility for campus hackathon teams and open source sprints.</div>
+            <div>✓ 100% student-operated with zero registration fees.</div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form id="joinForm">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="formFullName" class="form-input" placeholder="e.g. Aditi Sharma" required />
+            </div>
+
+            <div class="form-group form-row-2">
+              <div>
+                <label class="form-label">Roll No / Student ID</label>
+                <input type="text" id="formRollNo" class="form-input" placeholder="e.g. 2301215001" required />
+              </div>
+              <div>
+                <label class="form-label">College Email</label>
+                <input type="email" id="formEmail" class="form-input" placeholder="name@sarec.ac.in" required />
+              </div>
+            </div>
+
+            <div class="form-group form-row-2">
+              <div>
+                <label class="form-label">Branch</label>
+                <select id="formBranch" class="form-select" required>
+                  <option value="">Select Department</option>
+                  <option value="CSE">CSE (Computer Science)</option>
+                  <option value="IT">IT (Information Tech)</option>
+                  <option value="EL">EL (Electronics)</option>
+                  <option value="EE">EE (Electrical)</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label">Year of Study</label>
+                <select id="formYear" class="form-select" required>
+                  <option value="">Select Year</option>
+                  <option value="1st Year">1st Year</option>
+                  <option value="2nd Year">2nd Year</option>
+                  <option value="3rd Year">3rd Year</option>
+                  <option value="4th Year">4th Year</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Primary Technology Guild</label>
+              <select id="formGuild" class="form-select" required>
+                <option value="">Select a Primary Guild</option>
+                <option value="Web & Mobile Guild">Web &amp; Mobile Dev</option>
+                <option value="AI/ML Syndicate">AI &amp; Data Science</option>
+                <option value="STIC Coding Guild">Coding &amp; CP Guild</option>
+                <option value="RoboTech & Automation">RoboTech &amp; IoT</option>
+                <option value="CyberSec Guild">Cyber Security</option>
+                <option value="Open Source SAREC">Open Source SAREC</option>
+                <option value="Pixels UI/UX Guild">Pixels UI/UX</option>
+                <option value="E-Cell & Innovation">E-Cell &amp; Tech Innovation</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">GitHub or Portfolio URL (Optional)</label>
+              <input type="url" id="formPortfolio" class="form-input" placeholder="https://github.com/yourhandle" />
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;" id="submitBtn">
+              Submit Track Registration
+            </button>
+            <div id="formFeedback" style="margin-top: 1rem; font-size: var(--step--1); text-align: center; display: none;"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4 style="font-size: var(--step-1); font-weight: 800; margin-bottom: 0.5rem;">STIC SAREC Mirzapur</h4>
+          <p style="font-size: var(--step--1); color: var(--text-secondary); margin-bottom: 1rem;">
+            Official Technology &amp; Innovation Community of Samrat Ashok Rajkiya Engineering College, Mirzapur. AKTU Code 1215.
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size: var(--step--2); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 1rem;">Tracks</h4>
+          <p style="font-size: var(--step--1); color: var(--text-secondary); line-height: 2;">
+            Web &amp; Mobile<br />AI &amp; Data<br />Coding &amp; CP<br />RoboTech &amp; IoT
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size: var(--step--2); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 1rem;">Campus Venue</h4>
+          <p style="font-size: var(--step--1); color: var(--text-secondary); line-height: 1.8;">
+            Central Computer Lab<br />Workshop Hall<br />Mirzapur, UP
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size: var(--step--2); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 1rem;">Contact</h4>
+          <p style="font-size: var(--step--1); color: var(--text-secondary);">
+            Email: sticsarecmzp@gmail.com<br />
+            Portal: sarecmzp.ac.in
+          </p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid var(--border-subtle); padding-top: 2rem; text-align: center; font-size: var(--step--2); color: var(--text-tertiary);">
+        © 2026 STIC | Samrat Ashok Rajkiya Engineering College, Mirzapur. Built by Student Engineering Leads.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const CLUBS_DATA = [
+      { id: "web-mobile", name: "Web & Mobile Dev", badge: "Full-Stack", members: "120+ Builders", desc: "Crafting modern full-stack web and mobile apps with React, Next.js, Node.js, Flutter, and REST APIs.", schedule: "Thursday at 5:30 PM", track: "Web & Mobile Guild" },
+      { id: "ai-ml", name: "AI & Data Science", badge: "Intelligence", members: "95+ Researchers", desc: "Exploring neural networks, PyTorch, computer vision, data pipelines, predictive models, and deploying AI APIs.", schedule: "Friday at 5:00 PM", track: "AI/ML Syndicate" },
+      { id: "coding-guild", name: "Coding & CP Guild", badge: "Core Track", members: "140+ Coders", desc: "Mastering data structures, algorithms problem solving, weekly Codeforces & LeetCode contest debriefs.", schedule: "Saturday at 4:00 PM", track: "STIC Coding Guild" },
+      { id: "robotech", name: "RoboTech & IoT", badge: "Hardware & IoT", members: "80+ Innovators", desc: "Hardware meets software: microcontroller programming, Arduino, Raspberry Pi, sensor nets, and robotics.", schedule: "Sunday at 11:00 AM", track: "RoboTech & Automation" },
+      { id: "cybersec", name: "Cyber Security", badge: "Security", members: "70+ Defenders", desc: "Defending the digital frontier with Linux systems, network security, penetration testing, and CTF challenges.", schedule: "Wednesday at 5:00 PM", track: "CyberSec Guild" },
+      { id: "open-source", name: "Open Source SAREC", badge: "Collaboration", members: "90+ Contributors", desc: "Contributing to global tech ecosystems: Git best practices, community repositories, and GSoC prep.", schedule: "Tuesday at 5:30 PM", track: "Open Source SAREC" },
+      { id: "uiux-media", name: "Pixels UI/UX", badge: "Design", members: "65+ Designers", desc: "Designing human-centric interfaces, design systems, Figma wireframing, and interactive prototyping.", schedule: "Monday at 5:00 PM", track: "Pixels UI/UX Guild" },
+      { id: "ecell", name: "E-Cell & Tech Innovation", badge: "Venture", members: "55+ Founders", desc: "Bridging engineering with entrepreneurship: pitch deck coaching, hackathon strategy, and startup grants.", schedule: "Saturday at 6:00 PM", track: "E-Cell & Innovation" }
+    ];
+
+    const PROJECTS_DATA = [
+      { title: "SAREC Hub Portal", track: "Campus Utility", status: "Live on Campus", desc: "Centralized platform for semester syllabus, previous year question papers, and announcements.", stack: "React, Node.js, Express, MongoDB" },
+      { title: "HostelMate", track: "Student Living", status: "In Beta Testing", desc: "Hostel room inventory, issue grievance tracking, and student peer allocation platform.", stack: "Python, FastAPI, PostgreSQL" },
+      { title: "SAREC CLI Toolkit", track: "Developer Tool", status: "Open Source", desc: "Terminal command-line utility to query campus schedules, lecture slots, and exam circulars.", stack: "TypeScript, Node CLI, GitHub Actions" }
+    ];
+
+    // Render Clubs
+    const clubsContainer = document.getElementById('clubsGrid');
+    clubsContainer.innerHTML = CLUBS_DATA.map(club => `
+      <div class="club-card glass-interactive">
+        <div>
+          <div class="club-card-top">
+            <span class="club-badge">${club.badge}</span>
+            <span class="club-badge" style="color: var(--primary);">${club.members}</span>
+          </div>
+          <h3 class="club-title">${club.name}</h3>
+          <p class="club-description">${club.desc}</p>
+        </div>
+        <div class="club-card-footer">
+          <span style="font-size: var(--step--2); color: var(--text-tertiary);">${club.schedule}</span>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="selectTrack('${club.track}')">Select Track →</button>
+        </div>
+      </div>
+    `).join('');
+
+    // Render Projects
+    const projectsContainer = document.getElementById('projectsGrid');
+    projectsContainer.innerHTML = PROJECTS_DATA.map(proj => `
+      <div class="project-card glass-interactive">
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+            <span style="font-size: var(--step--2); font-family: var(--font-mono); color: var(--accent);">${proj.track}</span>
+            <span class="club-badge">${proj.status}</span>
+          </div>
+          <h3 style="font-size: var(--step-1); font-weight: 700; margin-bottom: 0.5rem;">${proj.title}</h3>
+          <p style="font-size: var(--step--1); color: var(--text-secondary); margin-bottom: 1.25rem;">${proj.desc}</p>
+        </div>
+        <div style="font-size: var(--step--2); color: var(--text-tertiary); border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; font-family: var(--font-mono);">
+          ${proj.stack}
+        </div>
+      </div>
+    `).join('');
+
+    // Theme toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+    });
+
+    // Select track handler
+    function selectTrack(trackName) {
+      const select = document.getElementById('formGuild');
+      select.value = trackName;
+      select.classList.add('guild-glow-active');
+      setTimeout(() => select.classList.remove('guild-glow-active'), 2000);
+      document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Join Form Submit Handler
+    document.getElementById('joinForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const feedback = document.getElementById('formFeedback');
+      btn.disabled = true;
+      btn.innerText = "Submitting Application...";
+
+      const payload = new FormData();
+      payload.append('fullName', document.getElementById('formFullName').value);
+      payload.append('rollNo', document.getElementById('formRollNo').value);
+      payload.append('email', document.getElementById('formEmail').value);
+      payload.append('branch', document.getElementById('formBranch').value);
+      payload.append('year', document.getElementById('formYear').value);
+      payload.append('guild', document.getElementById('formGuild').value);
+      payload.append('portfolio', document.getElementById('formPortfolio').value || 'N/A');
+      payload.append('collegeCode', '1215');
+
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXI59ceq99apRfS656UR1H-wrsO3I9oefcD1ktieMFUeaGLpuLuEJEH9GkkJs9oPT3/exec';
+
+      try {
+        await fetch(SCRIPT_URL, { method: 'POST', body: payload, mode: 'no-cors' });
+        feedback.style.display = 'block';
+        feedback.style.color = 'var(--success)';
+        feedback.innerText = "Application submitted successfully! Welcome to STIC SAREC Mirzapur.";
+        document.getElementById('joinForm').reset();
+      } catch (err) {
+        feedback.style.display = 'block';
+        feedback.style.color = 'red';
+        feedback.innerText = "Notice: Application recorded. If offline, email sticsarecmzp@gmail.com directly.";
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Submit Track Registration";
+      }
+    });
+  </script>
+</body>
+</html>
