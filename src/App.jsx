@@ -10,6 +10,7 @@ import Team from './components/Team';
 import JoinForm from './components/JoinForm';
 import Faq from './components/Faq';
 import Footer from './components/Footer';
+import NotFound from './components/NotFound';
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -23,6 +24,7 @@ export default function App() {
   });
 
   const [selectedClub, setSelectedClub] = useState('');
+  const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -31,29 +33,53 @@ export default function App() {
     } catch {}
   }, [theme]);
 
+  useEffect(() => {
+    const handlePopState = () => setCurrentPath(window.location.pathname);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('handlePopState', handlePopState);
+  }, []);
+
   const toggleTheme = () => {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   };
 
   const handleSelectClub = (clubTrack) => {
     setSelectedClub(clubTrack);
+    const target = document.getElementById('join');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
   };
+
+  const handleNavigateHome = () => {
+    window.history.pushState({}, '', '/');
+    setCurrentPath('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const is404 = currentPath !== '/' && currentPath !== '' && currentPath !== '/index.html';
 
   return (
     <div className="app-layout">
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
+      <Navbar theme={theme} onToggleTheme={toggleTheme} onHome={handleNavigateHome} />
       <main id="main-content">
-        <Hero onSelectClub={handleSelectClub} />
-        <InstitutionStrip />
-        <Clubs selectedClub={selectedClub} onSelectClub={handleSelectClub} />
-        <WhyStic />
-        <Events />
-        <Projects />
-        <Team />
-        <JoinForm selectedClub={selectedClub} />
-        <Faq />
+        {is404 ? (
+          <NotFound onNavigateHome={handleNavigateHome} />
+        ) : (
+          <>
+            <Hero onSelectClub={handleSelectClub} />
+            <InstitutionStrip />
+            <Clubs selectedClub={selectedClub} onSelectClub={handleSelectClub} />
+            <WhyStic />
+            <Events />
+            <Projects />
+            <Team />
+            <JoinForm selectedClub={selectedClub} />
+            <Faq />
+          </>
+        )}
       </main>
-      <Footer />
+      <Footer onSelectClub={handleSelectClub} />
     </div>
   );
 }

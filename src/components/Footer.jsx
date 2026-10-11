@@ -1,19 +1,34 @@
 import React from 'react';
-import { Mail, MessageSquare, ExternalLink } from 'lucide-react';
+import { Mail, MessageSquare, ExternalLink, Phone } from 'lucide-react';
 import { GithubIcon, InstagramIcon, LinkedinIcon } from './Icons';
 import { COMMUNITY_INFO } from '../data/communityData';
 
-export default function Footer() {
+export default function Footer({ onSelectClub }) {
+  const handleTrackClick = (e, trackName) => {
+    e.preventDefault();
+    if (onSelectClub) {
+      onSelectClub(trackName);
+    } else {
+      const target = document.getElementById('join');
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-grid">
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+            <a
+              href="#top"
+              className="footer-brand-block-link"
+              aria-label="STIC SAREC Mirzapur Home - Back to top"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', textDecoration: 'none' }}
+            >
               <img
                 src="/assets/logos/sarec-college-seal.png"
                 alt="SAREC Mirzapur College Seal"
-                style={{ width: '40px', height: '40px', objectFit: 'contain' }}
+                style={{ width: '42px', height: '42px', objectFit: 'contain' }}
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                 }}
@@ -24,14 +39,14 @@ export default function Footer() {
                   {COMMUNITY_INFO.collegeShort} ({COMMUNITY_INFO.collegeCode})
                 </div>
               </div>
-            </div>
+            </a>
 
             <p className="footer-brand-desc">
               The official student technical and innovation community at Samrat Ashok Rajkiya Engineering
               College, Mirzapur. Fostering software engineering, competitive programming, and robotics.
             </p>
 
-            <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.25rem' }}>
+            <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.25rem', flexWrap: 'wrap' }}>
               <a
                 href={COMMUNITY_INFO.githubOrg}
                 target="_blank"
@@ -65,10 +80,18 @@ export default function Footer() {
               <a
                 href={`mailto:${COMMUNITY_INFO.officialEmail}`}
                 className="btn-icon"
-                aria-label="Contact STIC Email"
-                title="Contact STIC Email"
+                aria-label="Contact STIC via Email"
+                title={`Email STIC: ${COMMUNITY_INFO.officialEmail}`}
               >
                 <Mail size={16} strokeWidth={1.5} />
+              </a>
+              <a
+                href="tel:+919451501321"
+                className="btn-icon"
+                aria-label="Call STIC Coordinator"
+                title="Call STIC: +91 94515 01321"
+              >
+                <Phone size={16} strokeWidth={1.5} />
               </a>
             </div>
           </div>
@@ -76,24 +99,48 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Tracks</h4>
             <ul>
-              <li><a href="#clubs">Coding and CP Guild</a></li>
-              <li><a href="#clubs">Web and Mobile Dev</a></li>
-              <li><a href="#clubs">AI and Data Syndicate</a></li>
-              <li><a href="#clubs">RoboTech and Automation</a></li>
-              <li><a href="#clubs">Cyber Security Club</a></li>
-              <li><a href="#clubs">Open Source SAREC</a></li>
+              <li>
+                <a href="#join" onClick={(e) => handleTrackClick(e, 'STIC Coding Guild')}>
+                  Coding &amp; CP Guild
+                </a>
+              </li>
+              <li>
+                <a href="#join" onClick={(e) => handleTrackClick(e, 'Web & Mobile Guild')}>
+                  Web &amp; Mobile Dev
+                </a>
+              </li>
+              <li>
+                <a href="#join" onClick={(e) => handleTrackClick(e, 'AI/ML Syndicate')}>
+                  AI &amp; Data Science
+                </a>
+              </li>
+              <li>
+                <a href="#join" onClick={(e) => handleTrackClick(e, 'RoboTech & Automation')}>
+                  RoboTech &amp; IoT
+                </a>
+              </li>
+              <li>
+                <a href="#join" onClick={(e) => handleTrackClick(e, 'CyberSec Guild')}>
+                  Cyber Security
+                </a>
+              </li>
+              <li>
+                <a href="#join" onClick={(e) => handleTrackClick(e, 'Open Source SAREC')}>
+                  Open Source SAREC
+                </a>
+              </li>
             </ul>
           </div>
 
           <div className="footer-col">
             <h4>Navigation</h4>
             <ul>
-              <li><a href="#top">Overview</a></li>
-              <li><a href="#why-stic">Why STIC</a></li>
-              <li><a href="#events">Events and Sprints</a></li>
+              <li><a href="#top">Overview &amp; Mission</a></li>
+              <li><a href="#why-stic">Why STIC Methodology</a></li>
+              <li><a href="#events">Events &amp; Sprints</a></li>
               <li><a href="#projects">Student Projects</a></li>
               <li><a href="#team">Leadership Team</a></li>
-              <li><a href="#faq">Questions and Answers</a></li>
+              <li><a href="#faq">Questions &amp; Answers</a></li>
               <li>
                 <a
                   href={COMMUNITY_INFO.collegeWebsite}
@@ -109,12 +156,26 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>Contact and Hub</h4>
+            <h4>Contact &amp; Hub</h4>
             <ul>
               <li>
-                <a href={`mailto:${COMMUNITY_INFO.officialEmail}`} style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                <a
+                  href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}
+                  title="Official Community Email"
+                >
                   <Mail size={13} strokeWidth={1.5} />
                   <span>{COMMUNITY_INFO.officialEmail}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+919451501321"
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}
+                  title="Call Student Coordinator"
+                >
+                  <Phone size={13} strokeWidth={1.5} />
+                  <span>+91 94515 01321</span>
                 </a>
               </li>
               <li>
@@ -136,7 +197,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} STIC | Samrat Ashok Rajkiya Engineering College, Mirzapur. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} STIC | Samrat Ashok Rajkiya Engineering College, Mirzapur. All rights reserved.</p>
           <p>Maintained by STIC Student Web &amp; Systems Team.</p>
         </div>
       </div>

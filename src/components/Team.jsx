@@ -46,14 +46,28 @@ export default function Team() {
               {(member.email || member.phone) && (
                 <div className="team-contacts">
                   {member.email && (
-                    <a href={`mailto:${member.email}`} className="contact-link">
-                      <Mail size={14} strokeWidth={1.5} />
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="contact-link"
+                      aria-label={`Send email to ${member.name} (${member.email})`}
+                      title={`Email ${member.name}: ${member.email}`}
+                    >
+                      <span className="contact-icon-pill">
+                        <Mail size={14} strokeWidth={1.5} />
+                      </span>
                       <span>{member.email}</span>
                     </a>
                   )}
                   {member.phone && (
-                    <a href={`tel:${member.phone.replace(/\s+/g, '')}`} className="contact-link">
-                      <Phone size={14} strokeWidth={1.5} />
+                    <a
+                      href={`tel:${member.phone.replace(/\s+/g, '')}`}
+                      className="contact-link"
+                      aria-label={`Call ${member.name} at ${member.phone}`}
+                      title={`Call ${member.name}: ${member.phone}`}
+                    >
+                      <span className="contact-icon-pill">
+                        <Phone size={14} strokeWidth={1.5} />
+                      </span>
                       <span>{member.phone}</span>
                     </a>
                   )}

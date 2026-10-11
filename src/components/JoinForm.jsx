@@ -1,5 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, CheckCircle, AlertCircle, Loader2, Check, Sparkles, Settings, ExternalLink, X } from 'lucide-react';
+import { 
+  Send, 
+  CheckCircle2, 
+  AlertCircle, 
+  Loader2, 
+  Check, 
+  Sparkles, 
+  Settings, 
+  ExternalLink, 
+  X, 
+  Mail, 
+  MessageSquare, 
+  RefreshCw, 
+  ArrowRight,
+  Phone
+} from 'lucide-react';
 import { COMMUNITY_INFO, DEPARTMENTS } from '../data/communityData';
 
 export default function JoinForm({ selectedClub }) {
@@ -14,6 +29,9 @@ export default function JoinForm({ selectedClub }) {
     portfolio: '',
     message: ''
   });
+
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [submittedData, setSubmittedData] = useState(null);
 
   const [endpointUrl, setEndpointUrl] = useState(() => {
     try {
@@ -34,6 +52,7 @@ export default function JoinForm({ selectedClub }) {
   useEffect(() => {
     if (selectedClub) {
       setFormData(prev => ({ ...prev, guild: selectedClub }));
+      setFieldErrors(prev => ({ ...prev, guild: '' }));
       setGlowGuild(true);
 
       const timer = setTimeout(() => {
@@ -48,9 +67,64 @@ export default function JoinForm({ selectedClub }) {
     }
   }, [selectedClub]);
 
+  // Handle Escape key for modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && showEndpointModal) {
+        setShowEndpointModal(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showEndpointModal]);
+
+  const validateField = (name, value) => {
+    switch (name) {
+      case 'fullName':
+        if (!value.trim()) return 'Full name is required.';
+        if (value.trim().length < 2) return 'Name must be at least 2 characters.';
+        return '';
+      case 'rollNo':
+        if (!value.trim()) return 'Roll number / Student ID is required.';
+        if (value.trim().length < 3) return 'Enter a valid roll number.';
+        return '';
+      case 'email':
+        if (!value.trim()) return 'Email is required.';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return 'Please enter a valid email address.';
+        return '';
+      case 'branch':
+        if (!value) return 'Please select your department.';
+        return '';
+      case 'year':
+        if (!value) return 'Please select your academic year.';
+        return '';
+      case 'guild':
+        if (!value) return 'Please select a primary technology guild.';
+        return '';
+      case 'interests':
+        if (!value) return 'Please choose your specific domain interest.';
+        return '';
+      default:
+        return '';
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+
+    // Realtime error clearing
+    if (fieldErrors[name]) {
+      setFieldErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+    if (error) {
+      setFieldErrors(prev => ({ ...prev, [name]: error }));
+    }
   };
 
   const handleSaveEndpoint = (e) => {
@@ -75,24 +149,39 @@ export default function JoinForm({ selectedClub }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate all required fields
+    const errors = {};
+    const requiredFields = ['fullName', 'rollNo', 'email', 'branch', 'year', 'guild', 'interests'];
+    requiredFields.forEach(field => {
+      const error = validateField(field, formData[field]);
+      if (error) errors[field] = error;
+    });
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setStatus('error');
+      setErrorMessage('Please fix the highlighted errors before submitting.');
+      return;
+    }
+
     setStatus('loading');
     setErrorMessage('');
 
     try {
       const formPayload = new FormData();
       
-      // Fields aligned with Google Sheets Apps Script
-      formPayload.append('fullName', formData.fullName);
-      formPayload.append('name', formData.fullName); // backwards compatibility
-      formPayload.append('rollNo', formData.rollNo);
-      formPayload.append('email', formData.email);
+      formPayload.append('fullName', formData.fullName.trim());
+      formPayload.append('name', formData.fullName.trim());
+      formPayload.append('rollNo', formData.rollNo.trim());
+      formPayload.append('email', formData.email.trim());
       formPayload.append('branch', formData.branch);
       formPayload.append('year', formData.year);
       formPayload.append('guild', formData.guild);
-      formPayload.append('club', formData.guild); // backwards compatibility
+      formPayload.append('club', formData.guild);
       formPayload.append('interests', formData.interests);
-      formPayload.append('portfolio', formData.portfolio || 'N/A');
-      formPayload.append('message', formData.message || 'N/A');
+      formPayload.append('portfolio', formData.portfolio.trim() || 'N/A');
+      formPayload.append('message', formData.message.trim() || 'N/A');
       formPayload.append('collegeCode', COMMUNITY_INFO.collegeCode || '1215');
 
       // Submit to Google Apps Script endpoint in no-cors mode
@@ -102,7 +191,17 @@ export default function JoinForm({ selectedClub }) {
         mode: 'no-cors'
       });
 
+      // Save submission summary for confirmation screen
+      setSubmittedData({
+        name: formData.fullName.trim(),
+        email: formData.email.trim(),
+        guild: formData.guild,
+        branch: formData.branch,
+        year: formData.year
+      });
+
       setStatus('success');
+      setFieldErrors({});
       setFormData({
         fullName: '',
         rollNo: '',
@@ -117,16 +216,23 @@ export default function JoinForm({ selectedClub }) {
     } catch (err) {
       setStatus('error');
       setErrorMessage(
-        'Could not record submission. Please check your internet connection or email us directly at ' +
+        'Could not complete submission due to network latency. Please check your internet connection or email us directly at ' +
           COMMUNITY_INFO.officialEmail
       );
     }
+  };
+
+  const resetFormState = () => {
+    setStatus('idle');
+    setErrorMessage('');
+    setSubmittedData(null);
   };
 
   return (
     <section id="join" className="section">
       <div className="container">
         <div className="join-grid">
+          {/* Information & Benefits Column */}
           <div className="join-info">
             <span className="section-tag">Track Registration</span>
             <h2>Join a Technical Track at SAREC Mirzapur</h2>
@@ -154,276 +260,409 @@ export default function JoinForm({ selectedClub }) {
               </li>
             </ul>
 
-            <div style={{ marginTop: '2rem' }}>
-              <button
-                type="button"
-                className="btn btn-ghost btn-sm"
-                onClick={() => {
-                  setCustomEndpointInput(endpointUrl);
-                  setShowEndpointModal(true);
-                }}
-                style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', border: '1px solid var(--border-subtle)' }}
-              >
-                <Settings size={12} strokeWidth={1.5} />
-                <span>Google Apps Script Endpoint Settings</span>
-              </button>
+            <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <a
+                  href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+                  className="btn btn-secondary btn-sm"
+                  style={{ fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+                >
+                  <Mail size={14} strokeWidth={1.5} />
+                  <span>Email: {COMMUNITY_INFO.officialEmail}</span>
+                </a>
+                <a
+                  href="tel:+919451501321"
+                  className="btn btn-secondary btn-sm"
+                  style={{ fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+                >
+                  <Phone size={14} strokeWidth={1.5} />
+                  <span>Call: +91 94515 01321</span>
+                </a>
+              </div>
+
+              <div>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  onClick={() => {
+                    setCustomEndpointInput(endpointUrl);
+                    setShowEndpointModal(true);
+                  }}
+                  style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--btn-radius)' }}
+                  aria-label="Configure Google Apps Script Endpoint URL"
+                >
+                  <Settings size={12} strokeWidth={1.5} />
+                  <span>Google Apps Script Endpoint Settings</span>
+                </button>
+              </div>
             </div>
           </div>
 
+          {/* Form / Success Card Column */}
           <div className="form-card">
-            {status === 'success' && (
-              <div className="form-status-banner success" role="alert">
-                <CheckCircle size={18} strokeWidth={1.5} />
-                <span>Your registration has been submitted. Check your email for track onboarding details.</span>
-              </div>
-            )}
-
-            {status === 'error' && (
-              <div className="form-status-banner error" role="alert">
-                <AlertCircle size={18} strokeWidth={1.5} />
-                <span>{errorMessage}</span>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit}>
-              {/* Full Name */}
-              <div className="floating-group">
-                <input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  className="floating-input"
-                  placeholder=" "
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  required
-                />
-                <label htmlFor="fullName" className="floating-label">
-                  Full Name
-                </label>
-              </div>
-
-              {/* College Roll No / Student ID & Email Row */}
-              <div className="form-group form-row-2">
-                <div className="floating-group" style={{ marginBottom: 0 }}>
-                  <input
-                    id="rollNo"
-                    name="rollNo"
-                    type="text"
-                    className="floating-input"
-                    placeholder=" "
-                    value={formData.rollNo}
-                    onChange={handleChange}
-                    required
-                  />
-                  <label htmlFor="rollNo" className="floating-label">
-                    Roll No / Student ID
-                  </label>
+            {status === 'success' && submittedData ? (
+              <div className="registration-success-card" role="alert">
+                <div className="success-icon-badge">
+                  <CheckCircle2 size={36} strokeWidth={1.8} style={{ color: 'var(--success)' }} />
                 </div>
 
-                <div className="floating-group" style={{ marginBottom: 0 }}>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    className="floating-input"
-                    placeholder=" "
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                  <label htmlFor="email" className="floating-label">
-                    College / Personal Email
-                  </label>
-                </div>
-              </div>
+                <h3 className="success-heading">Registration Submitted!</h3>
+                <p className="success-subheading">
+                  Welcome to the community, <strong>{submittedData.name}</strong>! Your application for the{' '}
+                  <span className="success-track-pill">{submittedData.guild}</span> has been recorded.
+                </p>
 
-              {/* Branch & Year Row */}
-              <div className="form-group form-row-2">
-                <div>
-                  <label htmlFor="branch" className="form-label">
-                    Branch / Department
-                  </label>
-                  <select
-                    id="branch"
-                    name="branch"
-                    className="form-select"
-                    value={formData.branch}
-                    onChange={handleChange}
-                    required
+                <div className="success-checklist">
+                  <div className="success-step">
+                    <span className="step-num">1</span>
+                    <p>
+                      Check your email (<strong>{submittedData.email}</strong>) for onboarding instructions and weekly lab schedules.
+                    </p>
+                  </div>
+                  <div className="success-step">
+                    <span className="step-num">2</span>
+                    <p>
+                      Join the official WhatsApp community group for real-time announcements.
+                    </p>
+                  </div>
+                  <div className="success-step">
+                    <span className="step-num">3</span>
+                    <p>
+                      Visit the next weekend sprint in the SAREC Central Computer Lab.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="success-action-row">
+                  <a
+                    href="https://wa.me/919451501321?text=Hi%20STIC%20Team%2C%20I%20just%20submitted%20my%20registration%20for%20STIC."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                    style={{ flex: 1 }}
                   >
-                    <option value="">Select Department</option>
-                    {DEPARTMENTS.map((dept) => (
-                      <option key={dept.code} value={dept.code}>
-                        {dept.code} ({dept.name})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="year" className="form-label">
-                    Year of Study
-                  </label>
-                  <select
-                    id="year"
-                    name="year"
-                    className="form-select"
-                    value={formData.year}
-                    onChange={handleChange}
-                    required
+                    <MessageSquare size={16} strokeWidth={1.5} />
+                    <span>Join WhatsApp Community</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={resetFormState}
                   >
-                    <option value="">Select Year</option>
-                    <option value="1st Year">1st Year</option>
-                    <option value="2nd Year">2nd Year</option>
-                    <option value="3rd Year">3rd Year</option>
-                    <option value="4th Year">4th Year</option>
-                  </select>
+                    <RefreshCw size={14} strokeWidth={1.5} />
+                    <span>Submit Another</span>
+                  </button>
                 </div>
               </div>
-
-              {/* Primary Club Guild with Auto-Selection Pulse Glow */}
-              <div className="form-group">
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
-                  <label htmlFor="guild" className="form-label" style={{ marginBottom: 0 }}>
-                    Primary Technology Guild
-                  </label>
-                  {glowGuild && (
-                    <span style={{ fontSize: '0.72rem', color: 'var(--primary)', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', fontWeight: 600 }}>
-                      <Sparkles size={12} strokeWidth={1.5} />
-                      Track Selected
-                    </span>
-                  )}
-                </div>
-                <select
-                  ref={clubSelectRef}
-                  id="guild"
-                  name="guild"
-                  className={`form-select ${glowGuild ? 'guild-glow-active' : ''}`}
-                  value={formData.guild}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Select a Primary Guild</option>
-                  <option value="Web & Mobile Guild">Web &amp; Mobile Dev</option>
-                  <option value="AI/ML Syndicate">AI &amp; Data Science</option>
-                  <option value="STIC Coding Guild">STIC Coding &amp; CP Guild</option>
-                  <option value="RoboTech & Automation">RoboTech &amp; IoT</option>
-                  <option value="CyberSec Guild">Cyber Security</option>
-                  <option value="Open Source SAREC">Open Source SAREC</option>
-                  <option value="Pixels UI/UX Guild">Pixels UI/UX</option>
-                  <option value="E-Cell & Innovation">E-Cell &amp; Tech Innovation</option>
-                </select>
-              </div>
-
-              {/* Specific Interests & Portfolio URL Row */}
-              <div className="form-group form-row-2">
-                <div>
-                  <label htmlFor="interests" className="form-label">
-                    Specific Technical Domain
-                  </label>
-                  <select
-                    id="interests"
-                    name="interests"
-                    className="form-select"
-                    value={formData.interests}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Choose domain focus</option>
-                    <option value="Full-Stack Web">Full-Stack Web Development</option>
-                    <option value="Machine Learning">Machine Learning &amp; AI</option>
-                    <option value="Competitive Programming">Competitive Programming &amp; DSA</option>
-                    <option value="Robotics & IoT">Robotics, Arduino &amp; IoT</option>
-                    <option value="Cyber Security">Cyber Security &amp; CTFs</option>
-                    <option value="Open Source">Open Source Contributions</option>
-                    <option value="UI/UX Prototyping">UI/UX Design Systems</option>
-                  </select>
-                </div>
-
-                <div className="floating-group" style={{ marginBottom: 0, marginTop: '1.6rem' }}>
-                  <input
-                    id="portfolio"
-                    name="portfolio"
-                    type="url"
-                    className="floating-input"
-                    placeholder=" "
-                    value={formData.portfolio}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor="portfolio" className="floating-label">
-                    GitHub / Portfolio URL (Optional)
-                  </label>
-                </div>
-              </div>
-
-              {/* Goals / Message */}
-              <div className="form-group">
-                <label htmlFor="message" className="form-label">
-                  Goals or Project Ideas (Optional)
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={2}
-                  className="form-textarea"
-                  placeholder="Share any languages you know, tools you want to master, or project ideas..."
-                  value={formData.message}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="btn btn-primary"
-                style={{ width: '100%', padding: '0.85rem' }}
-                disabled={status === 'loading'}
-              >
-                {status === 'loading' ? (
-                  <>
-                    <Loader2 size={16} strokeWidth={1.5} className="animate-spin" />
-                    <span>Submitting Application...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Submit Track Registration</span>
-                    <Send size={15} strokeWidth={1.5} />
-                  </>
+            ) : (
+              <>
+                {status === 'error' && (
+                  <div className="form-status-banner error" role="alert">
+                    <AlertCircle size={20} strokeWidth={1.8} style={{ flexShrink: 0 }} />
+                    <div style={{ flex: 1 }}>
+                      <strong>Submission Issue:</strong> {errorMessage}
+                      <div style={{ marginTop: '0.4rem', fontSize: '0.8rem' }}>
+                        Need help? Email us directly at{' '}
+                        <a
+                          href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+                          style={{ textDecoration: 'underline', color: 'inherit', fontWeight: 600 }}
+                        >
+                          {COMMUNITY_INFO.officialEmail}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 )}
-              </button>
 
-              <p className="form-notice">
-                Submissions are sent directly to the STIC organizing team Google Sheet. Your information is strictly used for campus club communications.
-              </p>
-            </form>
+                <form onSubmit={handleSubmit} noValidate>
+                  {/* Full Name */}
+                  <div className="floating-group">
+                    <input
+                      id="fullName"
+                      name="fullName"
+                      type="text"
+                      className={`floating-input ${fieldErrors.fullName ? 'input-error' : ''}`}
+                      placeholder=" "
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      required
+                    />
+                    <label htmlFor="fullName" className="floating-label">
+                      Full Name *
+                    </label>
+                    {fieldErrors.fullName && (
+                      <span className="field-error-text">
+                        <AlertCircle size={12} strokeWidth={1.5} />
+                        {fieldErrors.fullName}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* College Roll No / Student ID & Email Row */}
+                  <div className="form-group form-row-2">
+                    <div className="floating-group" style={{ marginBottom: 0 }}>
+                      <input
+                        id="rollNo"
+                        name="rollNo"
+                        type="text"
+                        className={`floating-input ${fieldErrors.rollNo ? 'input-error' : ''}`}
+                        placeholder=" "
+                        value={formData.rollNo}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        required
+                      />
+                      <label htmlFor="rollNo" className="floating-label">
+                        Roll No / Student ID *
+                      </label>
+                      {fieldErrors.rollNo && (
+                        <span className="field-error-text">
+                          <AlertCircle size={12} strokeWidth={1.5} />
+                          {fieldErrors.rollNo}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="floating-group" style={{ marginBottom: 0 }}>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        className={`floating-input ${fieldErrors.email ? 'input-error' : ''}`}
+                        placeholder=" "
+                        value={formData.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        required
+                      />
+                      <label htmlFor="email" className="floating-label">
+                        College / Personal Email *
+                      </label>
+                      {fieldErrors.email && (
+                        <span className="field-error-text">
+                          <AlertCircle size={12} strokeWidth={1.5} />
+                          {fieldErrors.email}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Branch & Year Row */}
+                  <div className="form-group form-row-2">
+                    <div>
+                      <label htmlFor="branch" className="form-label">
+                        Branch / Department *
+                      </label>
+                      <select
+                        id="branch"
+                        name="branch"
+                        className={`form-select ${fieldErrors.branch ? 'input-error' : ''}`}
+                        value={formData.branch}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        required
+                      >
+                        <option value="">Select Department</option>
+                        {DEPARTMENTS.map((dept) => (
+                          <option key={dept.code} value={dept.code}>
+                            {dept.code} ({dept.name})
+                          </option>
+                        ))}
+                      </select>
+                      {fieldErrors.branch && (
+                        <span className="field-error-text">
+                          <AlertCircle size={12} strokeWidth={1.5} />
+                          {fieldErrors.branch}
+                        </span>
+                      )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="year" className="form-label">
+                        Year of Study *
+                      </label>
+                      <select
+                        id="year"
+                        name="year"
+                        className={`form-select ${fieldErrors.year ? 'input-error' : ''}`}
+                        value={formData.year}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        required
+                      >
+                        <option value="">Select Year</option>
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                      </select>
+                      {fieldErrors.year && (
+                        <span className="field-error-text">
+                          <AlertCircle size={12} strokeWidth={1.5} />
+                          {fieldErrors.year}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Primary Club Guild with Auto-Selection Pulse Glow */}
+                  <div className="form-group">
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
+                      <label htmlFor="guild" className="form-label" style={{ marginBottom: 0 }}>
+                        Primary Technology Guild *
+                      </label>
+                      {glowGuild && (
+                        <span style={{ fontSize: '0.72rem', color: 'var(--primary)', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', fontWeight: 600 }}>
+                          <Sparkles size={12} strokeWidth={1.5} />
+                          Track Selected
+                        </span>
+                      )}
+                    </div>
+                    <select
+                      ref={clubSelectRef}
+                      id="guild"
+                      name="guild"
+                      className={`form-select ${glowGuild ? 'guild-glow-active' : ''} ${fieldErrors.guild ? 'input-error' : ''}`}
+                      value={formData.guild}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      required
+                    >
+                      <option value="">Select a Primary Guild</option>
+                      <option value="Web & Mobile Guild">Web &amp; Mobile Dev</option>
+                      <option value="AI/ML Syndicate">AI &amp; Data Science</option>
+                      <option value="STIC Coding Guild">STIC Coding &amp; CP Guild</option>
+                      <option value="RoboTech & Automation">RoboTech &amp; IoT</option>
+                      <option value="CyberSec Guild">Cyber Security</option>
+                      <option value="Open Source SAREC">Open Source SAREC</option>
+                      <option value="Pixels UI/UX Guild">Pixels UI/UX</option>
+                      <option value="E-Cell & Innovation">E-Cell &amp; Tech Innovation</option>
+                    </select>
+                    {fieldErrors.guild && (
+                      <span className="field-error-text">
+                        <AlertCircle size={12} strokeWidth={1.5} />
+                        {fieldErrors.guild}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Specific Interests & Portfolio URL Row */}
+                  <div className="form-group form-row-2">
+                    <div>
+                      <label htmlFor="interests" className="form-label">
+                        Specific Technical Domain *
+                      </label>
+                      <select
+                        id="interests"
+                        name="interests"
+                        className={`form-select ${fieldErrors.interests ? 'input-error' : ''}`}
+                        value={formData.interests}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        required
+                      >
+                        <option value="">Choose domain focus</option>
+                        <option value="Full-Stack Web">Full-Stack Web Development</option>
+                        <option value="Machine Learning">Machine Learning &amp; AI</option>
+                        <option value="Competitive Programming">Competitive Programming &amp; DSA</option>
+                        <option value="Robotics & IoT">Robotics, Arduino &amp; IoT</option>
+                        <option value="Cyber Security">Cyber Security &amp; CTFs</option>
+                        <option value="Open Source">Open Source Contributions</option>
+                        <option value="UI/UX Prototyping">UI/UX Design Systems</option>
+                      </select>
+                      {fieldErrors.interests && (
+                        <span className="field-error-text">
+                          <AlertCircle size={12} strokeWidth={1.5} />
+                          {fieldErrors.interests}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="floating-group" style={{ marginBottom: 0, marginTop: '1.6rem' }}>
+                      <input
+                        id="portfolio"
+                        name="portfolio"
+                        type="url"
+                        className="floating-input"
+                        placeholder=" "
+                        value={formData.portfolio}
+                        onChange={handleChange}
+                      />
+                      <label htmlFor="portfolio" className="floating-label">
+                        GitHub / Portfolio URL (Optional)
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Goals / Message */}
+                  <div className="form-group">
+                    <label htmlFor="message" className="form-label">
+                      Goals or Project Ideas (Optional)
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={2}
+                      className="form-textarea"
+                      placeholder="Share languages you know, tools you want to learn, or project concepts..."
+                      value={formData.message}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    style={{ width: '100%', padding: '0.85rem' }}
+                    disabled={status === 'loading'}
+                  >
+                    {status === 'loading' ? (
+                      <>
+                        <Loader2 size={16} strokeWidth={1.5} className="animate-spin" />
+                        <span>Submitting Application...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit Track Registration</span>
+                        <Send size={15} strokeWidth={1.5} />
+                      </>
+                    )}
+                  </button>
+
+                  <p className="form-notice">
+                    Submissions are recorded in the official STIC Google Sheet. Your data is strictly used for SAREC campus club communications.
+                  </p>
+                </form>
+              </>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Endpoint Configuration Drawer / Modal */}
+      {/* Endpoint Configuration Modal */}
       {showEndpointModal && (
         <div 
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0, 0, 0, 0.7)',
-            backdropFilter: 'blur(8px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000,
-            padding: '1rem'
-          }}
+          className="modal-backdrop-overlay"
+          onClick={() => setShowEndpointModal(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="endpointModalTitle"
         >
-          <div className="form-card" style={{ maxWidth: '520px', width: '100%' }}>
+          <div 
+            className="form-card modal-dialog-box" 
+            onClick={(e) => e.stopPropagation()}
+          >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-              <h3 style={{ fontSize: 'var(--step-0)', fontWeight: 700, color: 'var(--text)' }}>
+              <h3 id="endpointModalTitle" style={{ fontSize: 'var(--step-0)', fontWeight: 700, color: 'var(--text)' }}>
                 Google Apps Script Web App URL
               </h3>
               <button 
                 type="button" 
                 className="btn-icon" 
                 onClick={() => setShowEndpointModal(false)}
-                aria-label="Close"
+                aria-label="Close endpoint settings modal"
               >
                 <X size={16} strokeWidth={1.5} />
               </button>

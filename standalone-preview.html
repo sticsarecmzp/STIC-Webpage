@@ -3,8 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>STIC • SAREC Mirzapur • Code 1215 | Standalone Preview</title>
-  <meta name="description" content="STIC - Technology and Innovation Community at Samrat Ashok Rajkiya Engineering College, Mirzapur. AKTU Code 1215." />
+  <title>STIC • SAREC Mirzapur | Technology &amp; Innovation Community (AKTU Code 1215)</title>
+  <meta name="description" content="Official platform of STIC (Technology and Innovation Community) at Samrat Ashok Rajkiya Engineering College, Mirzapur (AKTU Code 1215). Explore 8 engineering guilds, peer mentorship, SIH hackathons, and real-world student projects." />
+  <meta name="keywords" content="STIC, SAREC Mirzapur, Samrat Ashok Rajkiya Engineering College, AKTU 1215, Technology and Innovation Community, Coding Club, AI Data Science, Web Development, Robotics, IoT, Hackathons, Smart India Hackathon" />
+  <meta property="og:title" content="STIC • SAREC Mirzapur | Technology &amp; Innovation Community (AKTU Code 1215)" />
+  <meta property="og:description" content="Code, Build, Innovate. The premier student technical community at Samrat Ashok Rajkiya Engineering College, Mirzapur with 8 specialized tracks, hands-on workshops, and collaborative projects." />
+  <meta property="og:image" content="/assets/logos/stic-logo-light.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicons & Manifest -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -422,14 +435,50 @@
     }
     .footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1.2fr; gap: 2rem; margin-bottom: 3rem; }
 
+    .mobile-menu-btn { display: none; }
+    .mobile-nav-panel {
+      display: none;
+      flex-direction: column;
+      padding: 1.25rem 1.5rem;
+      margin-top: 0.5rem;
+      background: var(--glass-bg-elevated);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      gap: 0.6rem;
+      box-shadow: var(--card-shadow);
+    }
+    .mobile-nav-panel.open { display: flex; }
+    .mobile-nav-link {
+      font-size: var(--step--1);
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: color 0.2s ease, padding-left 0.2s ease;
+    }
+    .mobile-nav-link:hover { color: var(--primary); padding-left: 0.5rem; }
+
     @media (max-width: 900px) {
       .join-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .hero-specs-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
       .nav-links-desktop { display: none; }
+      .mobile-menu-btn { display: inline-flex; }
       .form-row-2 { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
+      .institution-flex { flex-direction: column; align-items: flex-start; }
+      .clubs-grid, .projects-grid, .events-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .container { width: min(100% - 1.25rem, 1200px); }
+      .hero-specs-grid { grid-template-columns: 1fr; }
+      .hero-cta-group { flex-direction: column; }
+      .hero-cta-group .btn { width: 100%; }
+      .form-card { padding: 1.25rem 1rem; }
     }
   </style>
 </head>
@@ -439,7 +488,7 @@
   <div class="navbar-wrapper">
     <header class="navbar">
       <div class="navbar-inner">
-        <a href="#top" class="brand-link">
+        <a href="#top" class="brand-link" aria-label="STIC SAREC Mirzapur Home">
           <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #fff;">S</div>
           <div>
             <div class="brand-heading">STIC</div>
@@ -460,7 +509,20 @@
             🌓
           </button>
           <a href="#join" class="btn btn-primary btn-sm">Join STIC</a>
+          <button id="mobileMenuBtn" class="btn-icon mobile-menu-btn" aria-label="Toggle navigation menu">
+            ☰
+          </button>
         </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobileNavDrawer" class="mobile-nav-panel">
+        <a href="#clubs" class="mobile-nav-link" onclick="closeMobileMenu()">Clubs &amp; 8 Guilds</a>
+        <a href="#projects" class="mobile-nav-link" onclick="closeMobileMenu()">Student Projects</a>
+        <a href="#events" class="mobile-nav-link" onclick="closeMobileMenu()">Events Calendar</a>
+        <a href="#team" class="mobile-nav-link" onclick="closeMobileMenu()">Leadership Team</a>
+        <a href="#faq" class="mobile-nav-link" onclick="closeMobileMenu()">Frequently Asked Questions</a>
+        <a href="#join" class="btn btn-primary" onclick="closeMobileMenu()" style="width: 100%; margin-top: 0.5rem;">Join STIC Community</a>
       </div>
     </header>
   </div>
@@ -674,15 +736,16 @@
           </p>
         </div>
         <div>
-          <h4 style="font-size: var(--step--2); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 1rem;">Contact</h4>
-          <p style="font-size: var(--step--1); color: var(--text-secondary);">
-            Email: sticsarecmzp@gmail.com<br />
-            Portal: sarecmzp.ac.in
+          <h4 style="font-size: var(--step--2); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 1rem;">Contact &amp; Hub</h4>
+          <p style="font-size: var(--step--1); color: var(--text-secondary); line-height: 2;">
+            <a href="mailto:sticsarecmzp@gmail.com" style="display: block; color: var(--text);">✉️ sticsarecmzp@gmail.com</a>
+            <a href="tel:+919451501321" style="display: block; color: var(--text);">📞 +91 94515 01321</a>
+            <a href="https://www.sarecmzp.ac.in/" target="_blank" rel="noopener noreferrer" style="display: block; color: var(--accent);">🏛️ sarecmzp.ac.in</a>
           </p>
         </div>
       </div>
       <div style="border-top: 1px solid var(--border-subtle); padding-top: 2rem; text-align: center; font-size: var(--step--2); color: var(--text-tertiary);">
-        © 2026 STIC | Samrat Ashok Rajkiya Engineering College, Mirzapur. Built by Student Engineering Leads.
+        &copy; <span id="copyrightYear"></span> STIC | Samrat Ashok Rajkiya Engineering College, Mirzapur. Built by Student Engineering Leads.
       </div>
     </div>
   </footer>
@@ -759,22 +822,61 @@
       document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Join Form Submit Handler
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+    function toggleMobileMenu() {
+      if (mobileNavDrawer) {
+        mobileNavDrawer.classList.toggle('open');
+        mobileMenuBtn.innerText = mobileNavDrawer.classList.contains('open') ? '✕' : '☰';
+      }
+    }
+    function closeMobileMenu() {
+      if (mobileNavDrawer) {
+        mobileNavDrawer.classList.remove('open');
+        if (mobileMenuBtn) mobileMenuBtn.innerText = '☰';
+      }
+    }
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    }
+
+    // Set Dynamic Copyright Year
+    const yearEl = document.getElementById('copyrightYear');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Join Form Submit Handler with Validation & Detailed Feedback
     document.getElementById('joinForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
       const feedback = document.getElementById('formFeedback');
+
+      const fullName = document.getElementById('formFullName').value.trim();
+      const rollNo = document.getElementById('formRollNo').value.trim();
+      const email = document.getElementById('formEmail').value.trim();
+      const branch = document.getElementById('formBranch').value;
+      const year = document.getElementById('formYear').value;
+      const guild = document.getElementById('formGuild').value;
+
+      if (!fullName || !rollNo || !email || !branch || !year || !guild) {
+        feedback.style.display = 'block';
+        feedback.style.color = '#ef4444';
+        feedback.innerText = "Please fill in all required fields (Name, Roll No, Email, Department, Year, Guild).";
+        return;
+      }
+
       btn.disabled = true;
       btn.innerText = "Submitting Application...";
 
       const payload = new FormData();
-      payload.append('fullName', document.getElementById('formFullName').value);
-      payload.append('rollNo', document.getElementById('formRollNo').value);
-      payload.append('email', document.getElementById('formEmail').value);
-      payload.append('branch', document.getElementById('formBranch').value);
-      payload.append('year', document.getElementById('formYear').value);
-      payload.append('guild', document.getElementById('formGuild').value);
-      payload.append('portfolio', document.getElementById('formPortfolio').value || 'N/A');
+      payload.append('fullName', fullName);
+      payload.append('name', fullName);
+      payload.append('rollNo', rollNo);
+      payload.append('email', email);
+      payload.append('branch', branch);
+      payload.append('year', year);
+      payload.append('guild', guild);
+      payload.append('portfolio', document.getElementById('formPortfolio').value.trim() || 'N/A');
       payload.append('collegeCode', '1215');
 
       const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXI59ceq99apRfS656UR1H-wrsO3I9oefcD1ktieMFUeaGLpuLuEJEH9GkkJs9oPT3/exec';
@@ -783,12 +885,12 @@
         await fetch(SCRIPT_URL, { method: 'POST', body: payload, mode: 'no-cors' });
         feedback.style.display = 'block';
         feedback.style.color = 'var(--success)';
-        feedback.innerText = "Application submitted successfully! Welcome to STIC SAREC Mirzapur.";
+        feedback.innerHTML = `<strong>Registration Submitted!</strong> Welcome to STIC SAREC Mirzapur, ${fullName}. Check your email (${email}) for track orientation.`;
         document.getElementById('joinForm').reset();
       } catch (err) {
         feedback.style.display = 'block';
-        feedback.style.color = 'red';
-        feedback.innerText = "Notice: Application recorded. If offline, email sticsarecmzp@gmail.com directly.";
+        feedback.style.color = '#ef4444';
+        feedback.innerHTML = "Submission issue encountered. Please verify your connection or email <a href='mailto:sticsarecmzp@gmail.com' style='text-decoration:underline;color:inherit;'>sticsarecmzp@gmail.com</a> directly.";
       } finally {
         btn.disabled = false;
         btn.innerText = "Submit Track Registration";

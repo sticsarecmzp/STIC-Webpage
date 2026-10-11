@@ -99,20 +99,36 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="project-footer-meta" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span>{project.teamSize}</span>
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="contact-link"
-                    style={{ fontSize: '0.75rem', color: 'var(--primary)' }}
-                  >
-                    <span>View Repository</span>
-                    <ExternalLink size={11} strokeWidth={1.5} />
-                  </a>
-                )}
+              <div className="project-footer-meta" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>{project.teamSize}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="contact-link"
+                      style={{ fontSize: '0.75rem', color: 'var(--primary)', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                      aria-label={`View repository for ${project.title}`}
+                    >
+                      <GithubIcon size={12} />
+                      <span>Code</span>
+                    </a>
+                  )}
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="contact-link"
+                      style={{ fontSize: '0.75rem', color: 'var(--accent)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
+                      aria-label={`Open live URL for ${project.title}`}
+                    >
+                      <span>Live</span>
+                      <ExternalLink size={11} strokeWidth={1.5} />
+                    </a>
+                  )}
+                </div>
               </div>
             </article>
           ))}
