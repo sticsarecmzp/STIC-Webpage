@@ -93,7 +93,11 @@ export default function SiteSearchModal({ isOpen, onClose, onSelectClub }) {
       )
     : [];
 
-  const totalResults = matchedClubs.length + matchedProjects.length + matchedEvents.length + matchedFaqs.length + matchedTeam.length;
+  const matchedSocial = (q && ('linkedin'.includes(q) || 'posts'.includes(q) || 'social'.includes(q) || 'updates'.includes(q)))
+    ? [{ title: 'STIC LinkedIn Page & Posts', sub: 'Official LinkedIn updates, build announcements & student achievements', url: 'https://www.linkedin.com/company/stic-sarec-mirzapur/posts/' }]
+    : [];
+
+  const totalResults = matchedClubs.length + matchedProjects.length + matchedEvents.length + matchedFaqs.length + matchedTeam.length + matchedSocial.length;
 
   const handleSelectResult = (targetHash, trackName = null) => {
     onClose();
@@ -275,6 +279,33 @@ export default function SiteSearchModal({ isOpen, onClose, onSelectClub }) {
                       </div>
                       <span className="search-item-badge">Profile</span>
                     </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Social & Official Channels */}
+              {matchedSocial.length > 0 && (
+                <div className="search-group">
+                  <div className="search-group-title">
+                    <Sparkles size={13} strokeWidth={2} />
+                    <span>Official Social Hub</span>
+                  </div>
+                  {matchedSocial.map((item, i) => (
+                    <a 
+                      key={i} 
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="search-item" 
+                      style={{ textDecoration: 'none' }}
+                      onClick={onClose}
+                    >
+                      <div>
+                        <div className="search-item-title" style={{ color: '#0a66c2' }}>{item.title}</div>
+                        <div className="search-item-sub">{item.sub}</div>
+                      </div>
+                      <span className="search-item-badge">Open LinkedIn →</span>
+                    </a>
                   ))}
                 </div>
               )}

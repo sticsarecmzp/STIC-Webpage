@@ -8,6 +8,7 @@ import {
   Check, 
   HelpCircle 
 } from 'lucide-react';
+import { LinkedinIcon } from './Icons';
 import { COMMUNITY_INFO } from '../data/communityData';
 
 export default function FloatingContact() {
@@ -35,6 +36,19 @@ export default function FloatingContact() {
           >
             <MessageSquare size={17} strokeWidth={2} />
             <span className="floating-action-tooltip">WhatsApp Group</span>
+          </a>
+
+          {/* LinkedIn Posts Action */}
+          <a
+            href={COMMUNITY_INFO.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="floating-action-item linkedin"
+            title="STIC LinkedIn Posts"
+            aria-label="STIC LinkedIn Posts"
+          >
+            <LinkedinIcon size={17} />
+            <span className="floating-action-tooltip">LinkedIn Posts</span>
           </a>
 
           {/* Email Action */}

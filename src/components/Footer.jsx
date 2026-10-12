@@ -229,6 +229,19 @@ export default function Footer({ onSelectClub }) {
                   <span>STIC WhatsApp Group</span>
                 </a>
               </li>
+              <li>
+                <a
+                  href={COMMUNITY_INFO.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#0a66c2' }}
+                  title="STIC LinkedIn Page & Updates"
+                >
+                  <LinkedinIcon size={13} />
+                  <span>LinkedIn Posts &amp; Updates</span>
+                  <ExternalLink size={11} strokeWidth={1.5} />
+                </a>
+              </li>
               <li style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: 'var(--text-tertiary)', lineHeight: 1.45 }}>
                 Venue: {COMMUNITY_INFO.venue}
               </li>

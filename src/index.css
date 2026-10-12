@@ -3055,6 +3055,10 @@ section, .section {
   70%, 100% { transform: scale(1.55); opacity: 0; }
 }
 
+.floating-action-item.linkedin {
+  background: #0a66c2;
+}
+
 .floating-action-item.email {
   background: #ea4335;
 }
