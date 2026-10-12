@@ -11,6 +11,11 @@ import JoinForm from './components/JoinForm';
 import Faq from './components/Faq';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
+import ScrollProgressBar from './components/ScrollProgressBar';
+import AnnouncementBanner from './components/AnnouncementBanner';
+import BackToTop from './components/BackToTop';
+import FloatingContact from './components/FloatingContact';
+import SiteSearchModal from './components/SiteSearchModal';
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -25,6 +30,7 @@ export default function App() {
 
   const [selectedClub, setSelectedClub] = useState('');
   const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -61,7 +67,25 @@ export default function App() {
 
   return (
     <div className="app-layout">
-      <Navbar theme={theme} onToggleTheme={toggleTheme} onHome={handleNavigateHome} />
+      {/* Accessibility: Skip to Main Content */}
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
+
+      {/* Reading / Scroll Progress Bar */}
+      <ScrollProgressBar />
+
+      {/* Top Announcement Banner */}
+      <AnnouncementBanner />
+
+      {/* Sticky Header with Frosted Glass */}
+      <Navbar 
+        theme={theme} 
+        onToggleTheme={toggleTheme} 
+        onHome={handleNavigateHome} 
+        onOpenSearch={() => setSearchModalOpen(true)}
+      />
+
       <main id="main-content">
         {is404 ? (
           <NotFound onNavigateHome={handleNavigateHome} />
@@ -79,7 +103,19 @@ export default function App() {
           </>
         )}
       </main>
+
       <Footer onSelectClub={handleSelectClub} />
+
+      {/* Floating Action Elements */}
+      <BackToTop />
+      <FloatingContact />
+
+      {/* Global Site Search Modal */}
+      <SiteSearchModal 
+        isOpen={searchModalOpen} 
+        onClose={() => setSearchModalOpen(false)} 
+        onSelectClub={handleSelectClub}
+      />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Menu, X, ArrowUpRight, MessageSquare, Mail } from 'lucide-react';
+import { Sun, Moon, Menu, X, ArrowUpRight, MessageSquare, Mail, Search, Command } from 'lucide-react';
 import { COMMUNITY_INFO } from '../data/communityData';
 
-export default function Navbar({ theme, onToggleTheme, onHome }) {
+export default function Navbar({ theme, onToggleTheme, onHome, onOpenSearch }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -22,6 +22,11 @@ export default function Navbar({ theme, onToggleTheme, onHome }) {
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setMobileMenuOpen(false);
+      // Keyboard shortcut Ctrl+K or Cmd+K
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        if (onOpenSearch) onOpenSearch();
+      }
     };
 
     window.addEventListener('resize', handleResize);
@@ -33,7 +38,7 @@ export default function Navbar({ theme, onToggleTheme, onHome }) {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [onOpenSearch]);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -97,6 +102,18 @@ export default function Navbar({ theme, onToggleTheme, onHome }) {
             </nav>
 
             <div className="nav-actions">
+              {/* Site Search Button */}
+              <button
+                type="button"
+                className="btn-icon"
+                onClick={onOpenSearch}
+                aria-label="Search site (Ctrl+K)"
+                title="Search (Ctrl+K)"
+              >
+                <Search size={16} strokeWidth={1.8} />
+              </button>
+
+              {/* Theme Toggle Button */}
               <button
                 type="button"
                 className="btn-icon"
@@ -111,6 +128,7 @@ export default function Navbar({ theme, onToggleTheme, onHome }) {
                 <span>Join Community</span>
               </a>
 
+              {/* Mobile Menu Hamburger */}
               <button
                 type="button"
                 className="btn-icon mobile-menu-btn"
@@ -125,6 +143,20 @@ export default function Navbar({ theme, onToggleTheme, onHome }) {
 
           {/* Mobile Navigation Drawer */}
           <div className={`mobile-nav-panel ${mobileMenuOpen ? 'open' : ''}`}>
+            {/* Quick Mobile Search Trigger */}
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={() => {
+                closeMenu();
+                if (onOpenSearch) onOpenSearch();
+              }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.45rem', width: '100%', marginBottom: '0.5rem' }}
+            >
+              <Search size={14} strokeWidth={2} />
+              <span>Quick Search (Ctrl+K)</span>
+            </button>
+
             <nav className="mobile-nav-links-list" aria-label="Mobile Navigation">
               <a href="#clubs" className="mobile-nav-link" onClick={closeMenu}>
                 <span>Clubs &amp; 8 Guilds</span>

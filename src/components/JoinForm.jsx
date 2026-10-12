@@ -13,9 +13,15 @@ import {
   MessageSquare, 
   RefreshCw, 
   ArrowRight,
-  Phone
+  Phone,
+  Eye,
+  EyeOff,
+  Copy,
+  KeyRound,
+  Compass
 } from 'lucide-react';
 import { COMMUNITY_INFO, DEPARTMENTS } from '../data/communityData';
+import ConfirmModal from './ConfirmModal';
 
 export default function JoinForm({ selectedClub }) {
   const [formData, setFormData] = useState({
@@ -27,11 +33,36 @@ export default function JoinForm({ selectedClub }) {
     guild: '',
     interests: '',
     portfolio: '',
-    message: ''
+    message: '',
+    referralKey: ''
   });
 
   const [fieldErrors, setFieldErrors] = useState({});
   const [submittedData, setSubmittedData] = useState(null);
+  const [showReferralKey, setShowReferralKey] = useState(false);
+  const [showEndpointKey, setShowEndpointKey] = useState(false);
+  const [customEndpointKey, setCustomEndpointKey] = useState('');
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [copiedCode, setCopiedCode] = useState(false);
+
+  // UTM tracking state
+  const [utmData, setUtmData] = useState({
+    source: '',
+    medium: '',
+    campaign: ''
+  });
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const source = params.get('utm_source') || '';
+      const medium = params.get('utm_medium') || '';
+      const campaign = params.get('utm_campaign') || '';
+      if (source || medium || campaign) {
+        setUtmData({ source, medium, campaign });
+      }
+    } catch {}
+  }, []);
 
   const [endpointUrl, setEndpointUrl] = useState(() => {
     try {
@@ -113,7 +144,6 @@ export default function JoinForm({ selectedClub }) {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
 
-    // Realtime error clearing
     if (fieldErrors[name]) {
       setFieldErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
     }
@@ -125,6 +155,12 @@ export default function JoinForm({ selectedClub }) {
     if (error) {
       setFieldErrors(prev => ({ ...prev, [name]: error }));
     }
+  };
+
+  const handleCopyCollegeCode = () => {
+    navigator.clipboard.writeText('1215');
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2000);
   };
 
   const handleSaveEndpoint = (e) => {
@@ -147,10 +183,10 @@ export default function JoinForm({ selectedClub }) {
     setShowEndpointModal(false);
   };
 
-  const handleSubmit = async (e) => {
+  // Called when user clicks "Submit Track Registration"
+  const handlePreSubmit = (e) => {
     e.preventDefault();
 
-    // Validate all required fields
     const errors = {};
     const requiredFields = ['fullName', 'rollNo', 'email', 'branch', 'year', 'guild', 'interests'];
     requiredFields.forEach(field => {
@@ -161,10 +197,17 @@ export default function JoinForm({ selectedClub }) {
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       setStatus('error');
-      setErrorMessage('Please fix the highlighted errors before submitting.');
+      setErrorMessage('Please fix the highlighted fields before proceeding.');
       return;
     }
 
+    // Open confirmation modal
+    setShowConfirmModal(true);
+  };
+
+  // Called after confirmation in modal
+  const handleConfirmedSubmit = async () => {
+    setShowConfirmModal(false);
     setStatus('loading');
     setErrorMessage('');
 
@@ -182,7 +225,13 @@ export default function JoinForm({ selectedClub }) {
       formPayload.append('interests', formData.interests);
       formPayload.append('portfolio', formData.portfolio.trim() || 'N/A');
       formPayload.append('message', formData.message.trim() || 'N/A');
+      formPayload.append('referralKey', formData.referralKey.trim() || 'N/A');
       formPayload.append('collegeCode', COMMUNITY_INFO.collegeCode || '1215');
+
+      // UTM parameters
+      formPayload.append('utmSource', utmData.source || 'direct');
+      formPayload.append('utmMedium', utmData.medium || 'web');
+      formPayload.append('utmCampaign', utmData.campaign || 'general');
 
       // Submit to Google Apps Script endpoint in no-cors mode
       await fetch(endpointUrl, {
@@ -191,7 +240,6 @@ export default function JoinForm({ selectedClub }) {
         mode: 'no-cors'
       });
 
-      // Save submission summary for confirmation screen
       setSubmittedData({
         name: formData.fullName.trim(),
         email: formData.email.trim(),
@@ -211,7 +259,8 @@ export default function JoinForm({ selectedClub }) {
         guild: '',
         interests: '',
         portfolio: '',
-        message: ''
+        message: '',
+        referralKey: ''
       });
     } catch (err) {
       setStatus('error');
@@ -241,6 +290,14 @@ export default function JoinForm({ selectedClub }) {
               STIC provides regular lab access, peer code reviews, and project collaboration.
             </p>
 
+            {/* UTM Tag Detection Indicator */}
+            {utmData.source && (
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', padding: '0.35rem 0.8rem', background: 'rgba(99, 102, 241, 0.12)', border: '1px solid rgba(99, 102, 241, 0.35)', borderRadius: '9999px', fontSize: '0.78rem', color: 'var(--primary)', marginBottom: '1.25rem' }}>
+                <Compass size={13} strokeWidth={2} />
+                <span>Referred via campaign: <strong>{utmData.source}</strong> ({utmData.campaign || 'general'})</span>
+              </div>
+            )}
+
             <ul className="join-bullets">
               <li className="join-bullet-item">
                 <Check size={16} strokeWidth={1.5} className="bullet-icon" />
@@ -262,6 +319,17 @@ export default function JoinForm({ selectedClub }) {
 
             <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={handleCopyCollegeCode}
+                  title="Copy AKTU College Code"
+                  style={{ fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+                >
+                  <Copy size={13} strokeWidth={1.8} />
+                  <span>{copiedCode ? 'Copied Code 1215!' : 'Copy College Code (1215)'}</span>
+                </button>
+
                 <a
                   href={`mailto:${COMMUNITY_INFO.officialEmail}`}
                   className="btn btn-secondary btn-sm"
@@ -269,14 +337,6 @@ export default function JoinForm({ selectedClub }) {
                 >
                   <Mail size={14} strokeWidth={1.5} />
                   <span>Email: {COMMUNITY_INFO.officialEmail}</span>
-                </a>
-                <a
-                  href="tel:+919451501321"
-                  className="btn btn-secondary btn-sm"
-                  style={{ fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
-                >
-                  <Phone size={14} strokeWidth={1.5} />
-                  <span>Call: +91 94515 01321</span>
                 </a>
               </div>
 
@@ -306,9 +366,9 @@ export default function JoinForm({ selectedClub }) {
                   <CheckCircle2 size={36} strokeWidth={1.8} style={{ color: 'var(--success)' }} />
                 </div>
 
-                <h3 className="success-heading">Registration Submitted!</h3>
+                <h3 className="success-heading">Registration Confirmed!</h3>
                 <p className="success-subheading">
-                  Welcome to the community, <strong>{submittedData.name}</strong>! Your application for the{' '}
+                  Welcome aboard, <strong>{submittedData.name}</strong>! Your application for the{' '}
                   <span className="success-track-pill">{submittedData.guild}</span> has been recorded.
                 </p>
 
@@ -316,7 +376,7 @@ export default function JoinForm({ selectedClub }) {
                   <div className="success-step">
                     <span className="step-num">1</span>
                     <p>
-                      Check your email (<strong>{submittedData.email}</strong>) for onboarding instructions and weekly lab schedules.
+                      Check your email (<strong>{submittedData.email}</strong>) for lab workspace invitations and orientation schedules.
                     </p>
                   </div>
                   <div className="success-step">
@@ -328,7 +388,7 @@ export default function JoinForm({ selectedClub }) {
                   <div className="success-step">
                     <span className="step-num">3</span>
                     <p>
-                      Visit the next weekend sprint in the SAREC Central Computer Lab.
+                      Visit the next weekend build sprint in the SAREC Central Computer Lab.
                     </p>
                   </div>
                 </div>
@@ -361,7 +421,7 @@ export default function JoinForm({ selectedClub }) {
                   <div className="form-status-banner error" role="alert">
                     <AlertCircle size={20} strokeWidth={1.8} style={{ flexShrink: 0 }} />
                     <div style={{ flex: 1 }}>
-                      <strong>Submission Issue:</strong> {errorMessage}
+                      <strong>Submission Notice:</strong> {errorMessage}
                       <div style={{ marginTop: '0.4rem', fontSize: '0.8rem' }}>
                         Need help? Email us directly at{' '}
                         <a
@@ -375,7 +435,7 @@ export default function JoinForm({ selectedClub }) {
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} noValidate>
+                <form onSubmit={handlePreSubmit} noValidate>
                   {/* Full Name */}
                   <div className="floating-group">
                     <input
@@ -596,6 +656,37 @@ export default function JoinForm({ selectedClub }) {
                     </div>
                   </div>
 
+                  {/* Password / Mentor Referral Key with Visibility Toggle */}
+                  <div className="form-group">
+                    <label htmlFor="referralKey" className="form-label" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <KeyRound size={13} strokeWidth={1.8} />
+                        <span>Mentor Referral / Laboratory Passcode (Optional)</span>
+                      </span>
+                    </label>
+                    <div style={{ position: 'relative' }}>
+                      <input
+                        id="referralKey"
+                        name="referralKey"
+                        type={showReferralKey ? "text" : "password"}
+                        className="form-input"
+                        style={{ paddingRight: '2.5rem' }}
+                        placeholder="Enter mentor code if referred by a senior or faculty..."
+                        value={formData.referralKey}
+                        onChange={handleChange}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowReferralKey(!showReferralKey)}
+                        style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', padding: '0.25rem' }}
+                        aria-label={showReferralKey ? "Hide passcode" : "Show passcode"}
+                        title={showReferralKey ? "Hide passcode" : "Show passcode"}
+                      >
+                        {showReferralKey ? <EyeOff size={16} /> : <Eye size={16} />}
+                      </button>
+                    </div>
+                  </div>
+
                   {/* Goals / Message */}
                   <div className="form-group">
                     <label htmlFor="message" className="form-label">
@@ -606,7 +697,7 @@ export default function JoinForm({ selectedClub }) {
                       name="message"
                       rows={2}
                       className="form-textarea"
-                      placeholder="Share languages you know, tools you want to learn, or project concepts..."
+                      placeholder="Share languages you know, tools you want to master, or project concepts..."
                       value={formData.message}
                       onChange={handleChange}
                     />
@@ -640,6 +731,26 @@ export default function JoinForm({ selectedClub }) {
           </div>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Confirm Track Application"
+        message="Please review your details before submitting to the STIC organizing committee:"
+        details={{
+          "Student Name": formData.fullName,
+          "Roll Number": formData.rollNo,
+          "Email Address": formData.email,
+          "Department": formData.branch,
+          "Year of Study": formData.year,
+          "Primary Guild": formData.guild,
+          "Domain Focus": formData.interests
+        }}
+        confirmLabel="Confirm & Submit"
+        cancelLabel="Review & Edit"
+        onConfirm={handleConfirmedSubmit}
+        onCancel={() => setShowConfirmModal(false)}
+      />
 
       {/* Endpoint Configuration Modal */}
       {showEndpointModal && (
@@ -682,6 +793,31 @@ export default function JoinForm({ selectedClub }) {
                   placeholder="https://script.google.com/macros/s/.../exec"
                   required
                 />
+              </div>
+
+              {/* Endpoint API Secret with Password Visibility Toggle */}
+              <div className="form-group">
+                <label className="form-label" style={{ fontSize: '0.78rem' }}>
+                  Optional Sheet API Secret Key:
+                </label>
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type={showEndpointKey ? "text" : "password"}
+                    className="form-input"
+                    placeholder="Enter sheet authorization token..."
+                    value={customEndpointKey}
+                    onChange={(e) => setCustomEndpointKey(e.target.value)}
+                    style={{ paddingRight: '2.5rem' }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowEndpointKey(!showEndpointKey)}
+                    style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer' }}
+                    aria-label="Toggle secret key visibility"
+                  >
+                    {showEndpointKey ? <EyeOff size={15} /> : <Eye size={15} />}
+                  </button>
+                </div>
               </div>
 
               <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '1.25rem' }}>

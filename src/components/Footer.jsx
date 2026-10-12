@@ -1,9 +1,12 @@
-import React from 'react';
-import { Mail, MessageSquare, ExternalLink, Phone } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, MessageSquare, ExternalLink, Phone, Copy, Check, Printer, Clock } from 'lucide-react';
 import { GithubIcon, InstagramIcon, LinkedinIcon } from './Icons';
 import { COMMUNITY_INFO } from '../data/communityData';
 
 export default function Footer({ onSelectClub }) {
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
+
   const handleTrackClick = (e, trackName) => {
     e.preventDefault();
     if (onSelectClub) {
@@ -12,6 +15,21 @@ export default function Footer({ onSelectClub }) {
       const target = document.getElementById('join');
       if (target) target.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleCopy = (text, type) => {
+    navigator.clipboard.writeText(text);
+    if (type === 'email') {
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+    } else if (type === 'phone') {
+      setCopiedPhone(true);
+      setTimeout(() => setCopiedPhone(false), 2000);
+    }
+  };
+
+  const handlePrint = () => {
+    window.print();
   };
 
   return (
@@ -159,24 +177,46 @@ export default function Footer({ onSelectClub }) {
             <h4>Contact &amp; Hub</h4>
             <ul>
               <li>
-                <a
-                  href={`mailto:${COMMUNITY_INFO.officialEmail}`}
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}
-                  title="Official Community Email"
-                >
-                  <Mail size={13} strokeWidth={1.5} />
-                  <span>{COMMUNITY_INFO.officialEmail}</span>
-                </a>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
+                  <a
+                    href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}
+                    title="Official Community Email"
+                  >
+                    <Mail size={13} strokeWidth={1.5} />
+                    <span>{COMMUNITY_INFO.officialEmail}</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => handleCopy(COMMUNITY_INFO.officialEmail, 'email')}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', padding: '0.2rem' }}
+                    title="Copy Email"
+                    aria-label="Copy Email address"
+                  >
+                    {copiedEmail ? <Check size={12} style={{ color: 'var(--success)' }} /> : <Copy size={12} />}
+                  </button>
+                </div>
               </li>
               <li>
-                <a
-                  href="tel:+919451501321"
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}
-                  title="Call Student Coordinator"
-                >
-                  <Phone size={13} strokeWidth={1.5} />
-                  <span>+91 94515 01321</span>
-                </a>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
+                  <a
+                    href="tel:+919451501321"
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}
+                    title="Call Student Coordinator"
+                  >
+                    <Phone size={13} strokeWidth={1.5} />
+                    <span>+91 94515 01321</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => handleCopy('+919451501321', 'phone')}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', padding: '0.2rem' }}
+                    title="Copy Phone number"
+                    aria-label="Copy phone number"
+                  >
+                    {copiedPhone ? <Check size={12} style={{ color: 'var(--success)' }} /> : <Copy size={12} />}
+                  </button>
+                </div>
               </li>
               <li>
                 <a
@@ -192,12 +232,31 @@ export default function Footer({ onSelectClub }) {
               <li style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: 'var(--text-tertiary)', lineHeight: 1.45 }}>
                 Venue: {COMMUNITY_INFO.venue}
               </li>
+              <li style={{ marginTop: '0.75rem' }}>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={handlePrint}
+                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.75rem' }}
+                  title="Print or Save PDF"
+                >
+                  <Printer size={13} strokeWidth={1.8} />
+                  <span>Print Portal Summary</span>
+                </button>
+              </li>
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} STIC | Samrat Ashok Rajkiya Engineering College, Mirzapur. All rights reserved.</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <p>&copy; {new Date().getFullYear()} STIC | Samrat Ashok Rajkiya Engineering College, Mirzapur. All rights reserved.</p>
+            <span style={{ opacity: 0.4 }}>&bull;</span>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--text-secondary)' }}>
+              <Clock size={12} strokeWidth={1.8} />
+              <span>Last Updated: October 2026 (Academic Session 2025–2026)</span>
+            </div>
+          </div>
           <p>Maintained by STIC Student Web &amp; Systems Team.</p>
         </div>
       </div>
