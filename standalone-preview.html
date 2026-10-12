@@ -872,14 +872,15 @@
     /* Clubs Grid */
     .clubs-filter-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
     .filter-btn {
-      font-size: var(--step--1);
+      font-size: 0.74rem;
       font-weight: 600;
-      padding: 0.5rem 1rem;
+      padding: 0.28rem 0.72rem;
       border-radius: 9999px;
       border: 1px solid var(--glass-border);
       background: var(--glass-bg);
       color: var(--text-secondary);
       cursor: pointer;
+      white-space: nowrap;
     }
     .filter-btn.active {
       background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
@@ -901,28 +902,65 @@
       flex-direction: column;
       justify-content: space-between;
     }
-    .club-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
-    .club-badge { font-size: var(--step--2); padding: 0.25rem 0.65rem; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 9999px; font-family: var(--font-mono); }
+    .club-card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; margin-bottom: 1rem; }
+    .club-badges-group { display: flex; align-items: center; gap: 0.3rem; flex-wrap: nowrap; flex-shrink: 0; }
+    .club-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.14rem 0.44rem;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      white-space: nowrap !important;
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
     
     /* Guilds Status Groups & Badges */
-    .guilds-status-header { margin-bottom: 1.75rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .guilds-status-header { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.3rem; }
     .guilds-status-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.85rem; border-radius: 9999px;
-      font-family: var(--font-mono); font-size: var(--step--2); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-      width: fit-content; margin-bottom: 0.45rem;
+      display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.28rem 0.75rem; border-radius: 9999px;
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      width: fit-content; margin-bottom: 0.35rem;
     }
     .guilds-status-badge.badge-active { background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: #10b981; }
     .guilds-status-badge.badge-future { background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.35); color: #a855f7; }
     .guilds-status-title { font-size: var(--step-1); font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
     .guilds-status-subtitle { font-size: var(--step--1); color: var(--text-secondary); max-width: 68ch; line-height: 1.55; }
 
-    .club-badge.club-status-active { color: #10b981; border-color: rgba(16, 185, 129, 0.35); background: rgba(16, 185, 129, 0.1); display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; }
-    .club-badge.club-status-future { color: #a855f7; border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.1); display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; }
-    .live-status-dot { width: 6px; height: 6px; border-radius: 50%; background-color: #10b981; box-shadow: 0 0 8px #10b981; animation: pulse 2s infinite ease-in-out; }
-    .future-status-sparkle { color: #a855f7; font-size: 0.85rem; }
+    .club-badge.club-status-active {
+      color: #10b981; border-color: rgba(16, 185, 129, 0.35); background: rgba(16, 185, 129, 0.08);
+      display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.65rem; font-weight: 700;
+      padding: 0.14rem 0.44rem; white-space: nowrap !important; line-height: 1.2; flex-shrink: 0;
+    }
+    .club-badge.club-status-future {
+      color: #a855f7; border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.08);
+      display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.65rem; font-weight: 700;
+      padding: 0.14rem 0.44rem; white-space: nowrap !important; line-height: 1.2; flex-shrink: 0;
+    }
+    .live-status-dot { width: 5px; height: 5px; border-radius: 50%; background-color: #10b981; box-shadow: 0 0 6px #10b981; flex-shrink: 0; animation: pulse 2s infinite ease-in-out; }
+    .future-status-dot { width: 5px; height: 5px; border-radius: 50%; background-color: #a855f7; box-shadow: 0 0 6px #a855f7; flex-shrink: 0; }
 
     .club-card.club-card-future { border-style: dashed; border-color: rgba(168, 85, 247, 0.28); }
     .club-card.club-card-future:hover { border-style: solid; border-color: #a855f7; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 24px rgba(168, 85, 247, 0.3); }
+
+    .btn-track-action {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.26rem;
+      padding: 0.26rem 0.62rem; font-size: 0.72rem; font-weight: 600; border-radius: 6px;
+      cursor: pointer; border: 1px solid transparent; transition: all 0.2s ease; white-space: nowrap !important; line-height: 1.2; flex-shrink: 0;
+    }
+    .btn-track-active {
+      background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+      color: #ffffff; border-color: rgba(255, 255, 255, 0.18); box-shadow: 0 2px 10px var(--primary-glow);
+    }
+    .btn-track-future {
+      background: var(--glass-bg); color: var(--text-secondary); border-color: var(--glass-border);
+    }
+    .btn-track-future:hover {
+      background: var(--bg-surface-elevated); color: #a855f7; border-color: #a855f7;
+    }
 
     .club-title { font-size: var(--step-1); font-weight: 700; margin-bottom: 0.5rem; }
     .club-description { font-size: var(--step--1); color: var(--text-secondary); margin-bottom: 1.25rem; }
@@ -1474,7 +1512,9 @@
       </div>
       <div style="display: flex; align-items: center; gap: 0.85rem;">
         <a href="#join" class="announcement-link">Register Now →</a>
-        <button type="button" class="announcement-close-btn" onclick="dismissBanner()" aria-label="Dismiss banner">✕</button>
+        <button type="button" class="announcement-close-btn" onclick="dismissBanner()" aria-label="Dismiss banner">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
     </div>
   </aside>
@@ -1500,23 +1540,24 @@
         </nav>
 
         <div style="display: flex; align-items: center; gap: 0.65rem;">
-          <button id="searchBtn" class="btn-icon" title="Search site (Ctrl+K)" onclick="openSearchModal()">
-            🔍
+          <button id="searchBtn" class="btn-icon" title="Search site (Ctrl+K)" onclick="openSearchModal()" aria-label="Open search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </button>
-          <button id="themeToggle" class="btn-icon" title="Toggle Light/Dark Theme">
-            🌓
+          <button id="themeToggle" class="btn-icon" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
           </button>
           <a href="#join" class="btn btn-primary btn-sm">Join STIC</a>
           <button id="mobileMenuBtn" class="btn-icon mobile-menu-btn" aria-label="Toggle navigation menu">
-            ☰
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
           </button>
         </div>
       </div>
 
       <!-- Mobile Navigation Drawer -->
       <div id="mobileNavDrawer" class="mobile-nav-panel">
-        <button type="button" class="btn btn-secondary btn-sm" onclick="closeMobileMenu(); openSearchModal();" style="width: 100%; margin-bottom: 0.5rem;">
-          🔍 Quick Search (Ctrl+K)
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeMobileMenu(); openSearchModal();" style="width: 100%; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Quick Search (Ctrl+K)</span>
         </button>
         <a href="#clubs" class="mobile-nav-link" onclick="closeMobileMenu()">Clubs &amp; 8 Guilds</a>
         <a href="#projects" class="mobile-nav-link" onclick="closeMobileMenu()">Student Projects</a>
@@ -1571,15 +1612,15 @@
           <!-- Verified Campus Proof Bar -->
           <div class="hero-proof-bar">
             <div class="proof-item">
-              <span style="color: var(--success); font-weight: 900;">✓</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="3" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
               <span>8 Specialized Guilds</span>
             </div>
             <div class="proof-item">
-              <span style="color: var(--accent); font-weight: 900;">🛡</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
               <span>AKTU College Code 1215</span>
             </div>
             <div class="proof-item">
-              <span style="color: var(--primary); font-weight: 900;">👥</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
               <span>₹0 100% Free &amp; Open Access</span>
             </div>
           </div>
@@ -1591,7 +1632,7 @@
           <div class="bento-card bento-card-ask">
             <div class="bento-header">
               <span class="bento-label">What Freshers Ask</span>
-              <span style="color: var(--text-tertiary); font-size: 1.1rem;">❓</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
             </div>
             <p class="bento-quote">“What is the actual placement &amp; roadmap reality?”</p>
             <p class="bento-desc">Ask the uncomfortable questions before you spend years in confusion.</p>
@@ -1601,7 +1642,7 @@
           <div class="bento-card bento-card-cost">
             <div class="bento-header">
               <span class="bento-label">Opportunity Cost</span>
-              <span style="color: var(--accent); font-size: 1.1rem;">⚡</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
             </div>
             <div class="bento-number">4 Years</div>
             <p class="bento-desc">Too much valuable time to spend based on outdated slides and random opinions.</p>
@@ -1620,7 +1661,7 @@
               <p class="cta-headline">Find your guild first. Ship your flagship project next.</p>
             </div>
             <div class="cta-circle-btn">
-              ↗
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </div>
           </div>
         </div>
@@ -1660,46 +1701,46 @@
       <!-- Top Dark Angled Ribbon -->
       <div class="ticker-ribbon ticker-ribbon-dark">
         <div class="ticker-track">
-          <span class="ticker-item">STIC CODING <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">ROBOTECH &amp; IOT <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">AI &amp; MACHINE LEARNING <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">CYBER SECURITY <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">WEB &amp; APP DEV <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">OPEN SOURCE SAREC <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">E-CELL &amp; STARTUPS <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">UI/UX &amp; MEDIA <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">STIC CODING <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">ROBOTECH &amp; IOT <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">AI &amp; MACHINE LEARNING <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">CYBER SECURITY <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">WEB &amp; APP DEV <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">OPEN SOURCE SAREC <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">E-CELL &amp; STARTUPS <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">UI/UX &amp; MEDIA <span class="ticker-dot">•</span></span>
           <!-- Seamless Loop Duplicate -->
-          <span class="ticker-item">STIC CODING <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">ROBOTECH &amp; IOT <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">AI &amp; MACHINE LEARNING <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">CYBER SECURITY <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">WEB &amp; APP DEV <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">OPEN SOURCE SAREC <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">E-CELL &amp; STARTUPS <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">UI/UX &amp; MEDIA <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">STIC CODING <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">ROBOTECH &amp; IOT <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">AI &amp; MACHINE LEARNING <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">CYBER SECURITY <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">WEB &amp; APP DEV <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">OPEN SOURCE SAREC <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">E-CELL &amp; STARTUPS <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">UI/UX &amp; MEDIA <span class="ticker-dot">•</span></span>
         </div>
       </div>
 
       <!-- Bottom Light Angled Ribbon -->
       <div class="ticker-ribbon ticker-ribbon-light">
         <div class="ticker-track">
-          <span class="ticker-item">REACT &amp; NEXT.JS <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">PYTHON &amp; PYTORCH <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">RUST &amp; GO <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">DOCKER &amp; KUBERNETES <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">ARDUINO &amp; ESP32 <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">FASTAPI &amp; NODE.JS <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">LINUX &amp; CLOUD <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">GIT &amp; CI/CD <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">REACT &amp; NEXT.JS <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">PYTHON &amp; PYTORCH <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">RUST &amp; GO <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">DOCKER &amp; KUBERNETES <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">ARDUINO &amp; ESP32 <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">FASTAPI &amp; NODE.JS <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">LINUX &amp; CLOUD <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">GIT &amp; CI/CD <span class="ticker-dot">•</span></span>
           <!-- Seamless Loop Duplicate -->
-          <span class="ticker-item">REACT &amp; NEXT.JS <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">PYTHON &amp; PYTORCH <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">RUST &amp; GO <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">DOCKER &amp; KUBERNETES <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">ARDUINO &amp; ESP32 <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">FASTAPI &amp; NODE.JS <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">LINUX &amp; CLOUD <span class="ticker-sparkle">✦</span></span>
-          <span class="ticker-item">GIT &amp; CI/CD <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">REACT &amp; NEXT.JS <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">PYTHON &amp; PYTORCH <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">RUST &amp; GO <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">DOCKER &amp; KUBERNETES <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">ARDUINO &amp; ESP32 <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">FASTAPI &amp; NODE.JS <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">LINUX &amp; CLOUD <span class="ticker-dot">•</span></span>
+          <span class="ticker-item">GIT &amp; CI/CD <span class="ticker-dot">•</span></span>
         </div>
       </div>
     </div>
@@ -1746,8 +1787,8 @@
       <!-- Filter Buttons -->
       <div class="clubs-filter-row" role="tablist">
         <button type="button" class="filter-btn active" id="filterAllBtn" onclick="filterClubs('all', this)">All Guilds (8)</button>
-        <button type="button" class="filter-btn" id="filterCurrentBtn" onclick="filterClubs('current', this)" style="border-color: rgba(16, 185, 129, 0.4);">🟢 In Current Time (4)</button>
-        <button type="button" class="filter-btn" id="filterFutureBtn" onclick="filterClubs('future', this)" style="border-color: rgba(168, 85, 247, 0.4);">🔮 Future Scope (4)</button>
+        <button type="button" class="filter-btn" id="filterCurrentBtn" onclick="filterClubs('current', this)" style="border-color: rgba(16, 185, 129, 0.4);">In Current Time (4)</button>
+        <button type="button" class="filter-btn" id="filterFutureBtn" onclick="filterClubs('future', this)" style="border-color: rgba(168, 85, 247, 0.4);">Future Scope (4)</button>
       </div>
 
       <div id="clubsContainerWrap">
@@ -1809,10 +1850,10 @@
           </p>
 
           <div style="display: flex; flex-direction: column; gap: 1rem; color: var(--text-secondary); font-size: var(--step--1);">
-            <div>✓ Open to all academic years and engineering branches at SAREC.</div>
-            <div>✓ Access to weekend build sprints and lab mentorship hours.</div>
-            <div>✓ Eligibility for campus hackathon teams and open source sprints.</div>
-            <div>✓ 100% student-operated with zero registration fees.</div>
+            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Open to all academic years and engineering branches at SAREC.</div>
+            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Access to weekend build sprints and lab mentorship hours.</div>
+            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Eligibility for campus hackathon teams and open source sprints.</div>
+            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>100% student-operated with zero registration fees.</div>
           </div>
         </div>
 
@@ -1861,13 +1902,13 @@
               <label class="form-label">Primary Technology Guild</label>
               <select id="formGuild" class="form-select" required>
                 <option value="">Select a Primary Guild</option>
-                <optgroup label="🟢 In Current Time (Currently Active Tracks)">
+                <optgroup label="Currently Active Tracks (In Current Time)">
                   <option value="AI/ML Syndicate">AI &amp; Data Science</option>
                   <option value="Web & Mobile Guild">Web &amp; Mobile Dev</option>
                   <option value="STIC Coding Guild">Coding &amp; CP Guild</option>
                   <option value="Open Source SAREC">Open Source SAREC</option>
                 </optgroup>
-                <optgroup label="🔮 Future Scope (Incubation Tracks)">
+                <optgroup label="Future Scope Tracks (Incubation)">
                   <option value="RoboTech & Automation">RoboTech &amp; IoT</option>
                   <option value="CyberSec Guild">Cyber Security</option>
                   <option value="Pixels UI/UX Guild">Pixels UI/UX</option>
@@ -1883,8 +1924,8 @@
               </label>
               <div style="position: relative;">
                 <input type="password" id="formReferralKey" class="form-input" style="padding-right: 2.75rem;" placeholder="Enter lab code or mentor referral key..." />
-                <button type="button" id="togglePasscodeBtn" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-tertiary); cursor: pointer; font-size: 1rem;" title="Toggle passcode visibility" onclick="togglePasscodeVisibility()">
-                  👁️
+                <button type="button" id="togglePasscodeBtn" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-tertiary); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px;" title="Toggle passcode visibility" onclick="togglePasscodeVisibility()" aria-label="Toggle passcode visibility">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                 </button>
               </div>
             </div>
@@ -1927,13 +1968,13 @@
           <p class="section-description">Clear answers about membership, branch eligibility, meeting schedules, and lab guidelines at SAREC Mirzapur.</p>
         </div>
         <button type="button" class="btn btn-secondary btn-sm" onclick="toggleAllFaqs()" id="faqToggleAllBtn">
-          ↕️ Expand All
+          Expand All
         </button>
       </div>
 
       <!-- Live FAQ Filter -->
       <div style="max-width: 420px; margin-bottom: 2rem;">
-        <input type="text" id="faqFilterInput" class="form-input" placeholder="🔍 Filter questions (fees, laptop, branch)..." oninput="filterFaqs(this.value)" />
+        <input type="text" id="faqFilterInput" class="form-input" placeholder="Filter questions (fees, laptop, branch)..." oninput="filterFaqs(this.value)" />
       </div>
 
       <div class="faq-list" id="faqListContainer">
@@ -1952,8 +1993,9 @@
             Official Technology &amp; Innovation Community of Samrat Ashok Rajkiya Engineering College, Mirzapur. AKTU Code 1215.
           </p>
           <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()" style="font-size: 0.75rem;">
-              🖨️ Print Summary
+            <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()" style="font-size: 0.75rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              <span>Print Summary</span>
             </button>
           </div>
         </div>
@@ -1976,14 +2018,27 @@
           <h4 style="font-size: var(--step--2); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 1rem;">Contact &amp; Hub</h4>
           <div style="font-size: var(--step--1); color: var(--text-secondary); line-height: 2.2;">
             <div style="display: flex; align-items: center; justify-content: space-between;">
-              <a href="mailto:sticsarecmzp@gmail.com" style="color: var(--text); text-decoration: none;">✉️ sticsarecmzp@gmail.com</a>
-              <button type="button" onclick="copyText('sticsarecmzp@gmail.com', this)" class="btn btn-secondary btn-sm" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;" title="Copy email">📋</button>
+              <a href="mailto:sticsarecmzp@gmail.com" style="color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <span>sticsarecmzp@gmail.com</span>
+              </a>
+              <button type="button" onclick="copyText('sticsarecmzp@gmail.com', this)" class="btn btn-secondary btn-sm" style="padding: 0.2rem 0.45rem; font-size: 0.7rem; display: inline-flex; align-items: center;" title="Copy email" aria-label="Copy email">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between;">
-              <a href="tel:+919451501321" style="color: var(--text); text-decoration: none;">📞 +91 94515 01321</a>
-              <button type="button" onclick="copyText('+919451501321', this)" class="btn btn-secondary btn-sm" style="padding: 0.15rem 0.45rem; font-size: 0.7rem;" title="Copy phone">📋</button>
+              <a href="tel:+919451501321" style="color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <span>+91 94515 01321</span>
+              </a>
+              <button type="button" onclick="copyText('+919451501321', this)" class="btn btn-secondary btn-sm" style="padding: 0.2rem 0.45rem; font-size: 0.7rem; display: inline-flex; align-items: center;" title="Copy phone" aria-label="Copy phone">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
             </div>
-            <a href="https://www.sarecmzp.ac.in/" target="_blank" rel="noopener noreferrer" style="display: block; color: var(--accent); text-decoration: none;">🏛️ sarecmzp.ac.in</a>
+            <a href="https://www.sarecmzp.ac.in/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.35rem; color: var(--accent); text-decoration: none;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 22 7 12 2"></polygon><polyline points="2 7 2 22 22 22 22 7"></polyline><line x1="12" y1="22" x2="12" y2="12"></line></svg>
+              <span>sarecmzp.ac.in</span>
+            </a>
           </div>
         </div>
       </div>
@@ -1991,8 +2046,9 @@
         <div>
           &copy; <span id="copyrightYear"></span> STIC | Samrat Ashok Rajkiya Engineering College, Mirzapur. All rights reserved.
         </div>
-        <div>
-          🕒 Last Updated: October 2026 (Academic Session 2025–2026)
+        <div style="display: inline-flex; align-items: center; gap: 0.35rem;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Last Updated: October 2026 (Academic Session 2025–2026)</span>
         </div>
       </div>
     </div>
@@ -2006,13 +2062,21 @@
   <!-- Floating Contact Action Dock -->
   <div class="floating-contact-container">
     <div id="floatingContactMenu" class="floating-contact-menu">
-      <a href="https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT" target="_blank" rel="noopener noreferrer" class="floating-action-item whatsapp" title="Join STIC WhatsApp Group">💬</a>
-      <a href="mailto:sticsarecmzp@gmail.com" class="floating-action-item email" title="Send Email">✉️</a>
-      <a href="tel:+919451501321" class="floating-action-item call" title="Call Lead (+91 94515 01321)">📞</a>
-      <button type="button" class="floating-action-item share" onclick="copyText(window.location.href, this)" title="Copy Share Link">🔗</button>
+      <a href="https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT" target="_blank" rel="noopener noreferrer" class="floating-action-item whatsapp" title="Join STIC WhatsApp Group" aria-label="WhatsApp Group">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+      </a>
+      <a href="mailto:sticsarecmzp@gmail.com" class="floating-action-item email" title="Send Email" aria-label="Official Email">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </a>
+      <a href="tel:+919451501321" class="floating-action-item call" title="Call Lead (+91 94515 01321)" aria-label="Call Lead">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      </a>
+      <button type="button" class="floating-action-item share" onclick="copyText(window.location.href, this)" title="Copy Share Link" aria-label="Share Link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+      </button>
     </div>
     <button type="button" class="floating-contact-trigger" onclick="toggleFloatingMenu()" aria-label="Toggle contact help menu" title="Quick Contact">
-      💬
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
     </button>
   </div>
 
@@ -2035,7 +2099,7 @@
   <div id="searchModal" class="search-modal-backdrop" onclick="closeSearchModal()">
     <div class="search-modal-card" onclick="event.stopPropagation()">
       <div class="search-input-header">
-        <span>🔍</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="search" id="searchInput" class="search-modal-input" placeholder="Search guilds, projects, bootcamps, FAQs..." oninput="handleSearch(this.value)" />
         <button type="button" class="btn-icon" onclick="closeSearchModal()" style="font-size: 0.85rem;">ESC</button>
       </div>
@@ -2047,14 +2111,14 @@
 
   <script>
     const CLUBS_DATA = [
-      { id: "ai-ml", name: "AI & Data Science", status: "active", badge: "Intelligence", desc: "Exploring neural networks, PyTorch, computer vision, data pipelines, predictive models, and deploying AI APIs.", schedule: "Fridays at 5:00 PM", track: "AI/ML Syndicate" },
+      { id: "ai-ml", name: "AI & Data Science", status: "active", badge: "AI/ML", desc: "Exploring neural networks, PyTorch, computer vision, data pipelines, predictive models, and deploying AI APIs.", schedule: "Fridays at 5:00 PM", track: "AI/ML Syndicate" },
       { id: "web-mobile", name: "Web & Mobile Dev", status: "active", badge: "Full-Stack", desc: "Crafting modern full-stack web and mobile apps with React, Next.js, Node.js, Flutter, and REST APIs.", schedule: "Thursdays at 5:30 PM", track: "Web & Mobile Guild" },
-      { id: "coding-guild", name: "Coding & CP Guild", status: "active", badge: "Core Track", desc: "Mastering data structures, algorithms problem solving, weekly Codeforces & LeetCode contest debriefs.", schedule: "Saturdays at 4:00 PM", track: "STIC Coding Guild" },
-      { id: "open-source", name: "Open Source SAREC", status: "active", badge: "Collaboration", desc: "Contributing to global tech ecosystems: Git best practices, community repositories, and GSoC prep.", schedule: "Tuesdays at 5:30 PM", track: "Open Source SAREC" },
-      { id: "robotech", name: "RoboTech & IoT", status: "future", badge: "Hardware & IoT", desc: "Hardware meets software: microcontroller programming, Arduino, Raspberry Pi, sensor nets, and robotics.", schedule: "Sundays at 11:00 AM", track: "RoboTech & Automation" },
+      { id: "coding-guild", name: "Coding & CP Guild", status: "active", badge: "CP & DSA", desc: "Mastering data structures, algorithms problem solving, weekly Codeforces & LeetCode contest debriefs.", schedule: "Saturdays at 4:00 PM", track: "STIC Coding Guild" },
+      { id: "open-source", name: "Open Source SAREC", status: "active", badge: "Open Source", desc: "Contributing to global tech ecosystems: Git best practices, community repositories, and GSoC prep.", schedule: "Tuesdays at 5:30 PM", track: "Open Source SAREC" },
+      { id: "robotech", name: "RoboTech & IoT", status: "future", badge: "IoT & Robotics", desc: "Hardware meets software: microcontroller programming, Arduino, Raspberry Pi, sensor nets, and robotics.", schedule: "Sundays at 11:00 AM", track: "RoboTech & Automation" },
       { id: "cybersec", name: "Cyber Security", status: "future", badge: "Security", desc: "Defending the digital frontier with Linux systems, network security, penetration testing, and CTF challenges.", schedule: "Wednesdays at 5:00 PM", track: "CyberSec Guild" },
-      { id: "uiux-media", name: "Pixels UI/UX", status: "future", badge: "Design", desc: "Designing human-centric interfaces, design systems, Figma wireframing, and interactive prototyping.", schedule: "Mondays at 5:00 PM", track: "Pixels UI/UX Guild" },
-      { id: "ecell", name: "E-Cell & Tech Innovation", status: "future", badge: "Venture", desc: "Bridging engineering with entrepreneurship: pitch deck coaching, hackathon strategy, and startup grants.", schedule: "Saturdays at 6:00 PM", track: "E-Cell & Innovation" }
+      { id: "uiux-media", name: "Pixels UI/UX", status: "future", badge: "UI/UX", desc: "Designing human-centric interfaces, design systems, Figma wireframing, and interactive prototyping.", schedule: "Mondays at 5:00 PM", track: "Pixels UI/UX Guild" },
+      { id: "ecell", name: "E-Cell & Tech Innovation", status: "future", badge: "E-Cell", desc: "Bridging engineering with entrepreneurship: pitch deck coaching, hackathon strategy, and startup grants.", schedule: "Saturdays at 6:00 PM", track: "E-Cell & Innovation" }
     ];
 
     function createClubCardHtml(club) {
@@ -2065,15 +2129,9 @@
             <div class="club-card-top">
               <span class="club-badge">${club.badge}</span>
               ${isActive ? `
-                <span class="club-badge club-status-active">
-                  <span class="live-status-dot"></span>
-                  Active Track
-                </span>
+                <span class="club-badge club-status-active"><span class="live-status-dot"></span>Active</span>
               ` : `
-                <span class="club-badge club-status-future">
-                  <span class="future-status-sparkle">✦</span>
-                  Future Scope
-                </span>
+                <span class="club-badge club-status-future"><span class="future-status-dot"></span>Future Scope</span>
               `}
             </div>
             <h3 class="club-title">${club.name}</h3>
@@ -2081,8 +2139,9 @@
           </div>
           <div class="club-card-footer">
             <span style="font-size: var(--step--2); color: var(--text-tertiary);">${club.schedule}</span>
-            <button type="button" class="btn ${isActive ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="selectTrack('${club.track}')">
-              ${isActive ? 'Join Track →' : 'Pre-Register →'}
+            <button type="button" class="btn-track-action ${isActive ? 'btn-track-active' : 'btn-track-future'}" onclick="selectTrack('${club.track}')">
+              <span>${isActive ? 'Join Track' : 'Pre-Register'}</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
           </div>
         </div>
@@ -2114,7 +2173,7 @@
 
           <div class="guilds-status-header">
             <div class="guilds-status-badge badge-future">
-              <span class="future-status-sparkle">✦</span>
+              <span class="future-status-dot"></span>
               <span>INCUBATION ROADMAP • FUTURE SCOPE</span>
             </div>
             <h3 class="guilds-status-title">Future Scope &amp; Incubation Tracks</h3>
@@ -2130,7 +2189,7 @@
         container.innerHTML = `
           <div class="guilds-status-header">
             <div class="guilds-status-badge badge-active">
-              <span>🟢 In Current Time (4 Active Tracks)</span>
+              <span>In Current Time (4 Active Tracks)</span>
             </div>
           </div>
           <div class="clubs-grid">
@@ -2141,7 +2200,7 @@
         container.innerHTML = `
           <div class="guilds-status-header">
             <div class="guilds-status-badge badge-future">
-              <span>🔮 Future Scope (4 Upcoming Tracks)</span>
+              <span>Future Scope (4 Upcoming Tracks)</span>
             </div>
           </div>
           <div class="clubs-grid">
@@ -2281,19 +2340,19 @@
       const btn = document.getElementById('togglePasscodeBtn');
       if (input.type === 'password') {
         input.type = 'text';
-        btn.innerText = '🙈';
+        btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
       } else {
         input.type = 'password';
-        btn.innerText = '👁️';
+        btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
       }
     }
 
     // Copy to clipboard helper
     function copyText(text, btnElement) {
       navigator.clipboard.writeText(text);
-      const original = btnElement.innerText;
-      btnElement.innerText = '✓';
-      setTimeout(() => { btnElement.innerText = original; }, 2000);
+      const original = btnElement.innerHTML;
+      btnElement.innerHTML = '<span style="font-size:0.68rem; font-weight:700; color:var(--success);">Copied</span>';
+      setTimeout(() => { btnElement.innerHTML = original; }, 2000);
     }
 
     // Search Modal
@@ -2379,13 +2438,17 @@
     function toggleMobileMenu() {
       if (mobileNavDrawer) {
         mobileNavDrawer.classList.toggle('open');
-        mobileMenuBtn.innerText = mobileNavDrawer.classList.contains('open') ? '✕' : '☰';
+        mobileMenuBtn.innerHTML = mobileNavDrawer.classList.contains('open') 
+          ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+          : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
       }
     }
     function closeMobileMenu() {
       if (mobileNavDrawer) {
         mobileNavDrawer.classList.remove('open');
-        if (mobileMenuBtn) mobileMenuBtn.innerText = '☰';
+        if (mobileMenuBtn) {
+          mobileMenuBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+        }
       }
     }
     if (mobileMenuBtn) {

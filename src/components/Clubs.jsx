@@ -9,7 +9,6 @@ import {
   Palette, 
   Rocket, 
   Clock, 
-  Sparkles,
   ArrowRight
 } from 'lucide-react';
 import { CLUBS } from '../data/communityData';
@@ -66,18 +65,18 @@ export default function Clubs({ selectedClub, onSelectClub }) {
               className="club-icon-wrap" 
               style={!isActive ? { color: '#a855f7', background: 'rgba(168, 85, 247, 0.12)' } : {}}
             >
-              <IconComponent size={22} strokeWidth={1.5} />
+              <IconComponent size={20} strokeWidth={1.5} />
             </div>
-            <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+            <div className="club-badges-group">
               <span className="club-badge">{club.badge}</span>
               {isActive ? (
                 <span className="club-badge club-status-active">
                   <span className="live-status-dot" />
-                  <span>Active Track</span>
+                  <span>Active</span>
                 </span>
               ) : (
                 <span className="club-badge club-status-future">
-                  <span className="future-status-sparkle">✦</span>
+                  <span className="future-status-dot" />
                   <span>Future Scope</span>
                 </span>
               )}
@@ -96,18 +95,18 @@ export default function Clubs({ selectedClub, onSelectClub }) {
 
         <div className="club-card-footer">
           <div className="club-schedule-text">
-            <Clock size={13} strokeWidth={1.5} />
+            <Clock size={12} strokeWidth={1.5} />
             <span>{club.schedule}</span>
           </div>
 
           <button
             type="button"
-            className={`btn btn-sm ${isSelected ? 'btn-primary' : (isActive ? 'btn-primary' : 'btn-secondary')}`}
+            className={`btn-track-action ${isSelected ? 'btn-track-selected' : (isActive ? 'btn-track-active' : 'btn-track-future')}`}
             onClick={() => handleSelectTrack(club.primaryTrack)}
             title={isActive ? `Join ${club.name}` : `Pre-register for ${club.name}`}
           >
-            <span>{isSelected ? 'Track Selected' : (isActive ? 'Join Track' : 'Pre-Register')}</span>
-            <ArrowRight size={13} strokeWidth={1.5} />
+            <span>{isSelected ? 'Selected' : (isActive ? 'Join Track' : 'Pre-Register')}</span>
+            <ArrowRight size={11} strokeWidth={2} />
           </button>
         </div>
       </div>
@@ -141,7 +140,7 @@ export default function Clubs({ selectedClub, onSelectClub }) {
             onClick={() => setActiveFilter('current')}
             style={activeFilter === 'current' ? {} : { borderColor: 'rgba(16, 185, 129, 0.4)', color: 'var(--text)' }}
           >
-            🟢 In Current Time (4)
+            In Current Time (4)
           </button>
           <button
             type="button"
@@ -149,7 +148,7 @@ export default function Clubs({ selectedClub, onSelectClub }) {
             onClick={() => setActiveFilter('future')}
             style={activeFilter === 'future' ? {} : { borderColor: 'rgba(168, 85, 247, 0.4)', color: 'var(--text)' }}
           >
-            🔮 Future Scope (4)
+            Future Scope (4)
           </button>
           <button
             type="button"
@@ -195,14 +194,14 @@ export default function Clubs({ selectedClub, onSelectClub }) {
                 Running active weekly build sprints, peer problem sheets, code reviews, and live production deployments at SAREC Mirzapur.
               </p>
             </div>
-            <div className="clubs-grid" style={{ marginBottom: '4rem' }}>
+            <div className="clubs-grid" style={{ marginBottom: '3.5rem' }}>
               {activeClubs.map(renderClubCard)}
             </div>
 
             {/* Section 2: Future Scope */}
             <div className="guilds-status-header">
               <div className="guilds-status-badge badge-future">
-                <Sparkles size={13} strokeWidth={2} />
+                <span className="future-status-dot" />
                 <span>INCUBATION ROADMAP • FUTURE SCOPE</span>
               </div>
               <h3 className="guilds-status-title">Future Scope &amp; Incubation Tracks</h3>
@@ -220,9 +219,9 @@ export default function Clubs({ selectedClub, onSelectClub }) {
               <div className={`guilds-status-badge ${activeFilter === 'current' ? 'badge-active' : (activeFilter === 'future' ? 'badge-future' : 'badge-active')}`}>
                 <span>
                   {activeFilter === 'current' 
-                    ? '🟢 In Current Time (4 Active Tracks)' 
+                    ? 'In Current Time (4 Active Tracks)' 
                     : (activeFilter === 'future' 
-                      ? '🔮 Future Scope (4 Upcoming Tracks)' 
+                      ? 'Future Scope (4 Upcoming Tracks)' 
                       : `Filtered Tracks (${filteredClubs.length})`)}
                 </span>
               </div>

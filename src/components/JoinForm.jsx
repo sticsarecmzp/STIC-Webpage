@@ -588,13 +588,13 @@ export default function JoinForm({ selectedClub }) {
                       required
                     >
                       <option value="">Select a Primary Guild</option>
-                      <optgroup label="🟢 In Current Time (Currently Active Tracks)">
+                      <optgroup label="Currently Active Tracks (In Current Time)">
                         <option value="AI/ML Syndicate">AI &amp; Data Science</option>
                         <option value="Web & Mobile Guild">Web &amp; Mobile Dev</option>
                         <option value="STIC Coding Guild">STIC Coding &amp; CP Guild</option>
                         <option value="Open Source SAREC">Open Source SAREC</option>
                       </optgroup>
-                      <optgroup label="🔮 Future Scope (Incubation Tracks)">
+                      <optgroup label="Future Scope Tracks (Incubation)">
                         <option value="RoboTech & Automation">RoboTech &amp; IoT</option>
                         <option value="CyberSec Guild">Cyber Security</option>
                         <option value="Pixels UI/UX Guild">Pixels UI/UX</option>
