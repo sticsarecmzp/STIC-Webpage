@@ -19,7 +19,7 @@ export const COMMUNITY_INFO = {
 };
 
 export const COMMUNITY_STATS = [
-  { value: "8", label: "Specialized Guilds", sub: "Technology Focus Tracks" },
+  { value: "8", label: "Technology Guilds", sub: "4 Active • 4 Future Scope" },
   { value: "4", label: "Engineering Branches", sub: "CSE • IT • EL • EE" },
   { value: "1215", label: "AKTU College Code", sub: "SAREC Mirzapur Campus" },
   { value: "₹0", label: "Membership Cost", sub: "100% Free & Open Access" }
@@ -34,20 +34,12 @@ export const DEPARTMENTS = [
 
 export const CLUBS = [
   {
-    id: "web-mobile",
-    name: "Web & Mobile Dev",
-    category: "software",
-    badge: "Full-Stack",
-    description: "Crafting modern full-stack web and mobile experiences with React, Next.js, Node.js backends, Flutter, and cloud architecture.",
-    schedule: "Thursdays at 5:30 PM",
-    venue: "Lab 2",
-    topics: ["React", "Next.js", "Node.js", "TypeScript", "Flutter"],
-    primaryTrack: "Web & Mobile Guild"
-  },
-  {
     id: "ai-ml",
     name: "AI & Data Science",
     category: "ai",
+    status: "active",
+    statusLabel: "Currently Active",
+    statusBadge: "Active Track",
     badge: "Intelligence",
     description: "Exploring neural networks, PyTorch, computer vision, data pipelines, predictive models, and deploying production AI APIs.",
     schedule: "Fridays at 5:00 PM",
@@ -56,9 +48,26 @@ export const CLUBS = [
     primaryTrack: "AI/ML Syndicate"
   },
   {
+    id: "web-mobile",
+    name: "Web & Mobile Dev",
+    category: "software",
+    status: "active",
+    statusLabel: "Currently Active",
+    statusBadge: "Active Track",
+    badge: "Full-Stack",
+    description: "Crafting modern full-stack web and mobile experiences with React, Next.js, Node.js backends, Flutter, and cloud architecture.",
+    schedule: "Thursdays at 5:30 PM",
+    venue: "Lab 2",
+    topics: ["React", "Next.js", "Node.js", "TypeScript", "Flutter"],
+    primaryTrack: "Web & Mobile Guild"
+  },
+  {
     id: "coding-guild",
     name: "Coding & CP Guild",
     category: "software",
+    status: "active",
+    statusLabel: "Currently Active",
+    statusBadge: "Active Track",
     badge: "Core Track",
     description: "Mastering data structures, algorithms problem solving, weekly Codeforces & LeetCode contest debriefs, and national competitive programming.",
     schedule: "Saturdays at 4:00 PM",
@@ -67,9 +76,26 @@ export const CLUBS = [
     primaryTrack: "STIC Coding Guild"
   },
   {
+    id: "open-source",
+    name: "Open Source SAREC",
+    category: "software",
+    status: "active",
+    statusLabel: "Currently Active",
+    statusBadge: "Active Track",
+    badge: "Collaboration",
+    description: "Contributing to global tech ecosystems: Git and GitHub best practices, open pull requests, documentation, code reviews, and GSoC mentorship.",
+    schedule: "Tuesdays at 5:30 PM",
+    venue: "Lab 1",
+    topics: ["Git", "GitHub", "Open Source", "Documentation", "Linux"],
+    primaryTrack: "Open Source SAREC"
+  },
+  {
     id: "robotech",
     name: "RoboTech & IoT",
     category: "hardware",
+    status: "future",
+    statusLabel: "Future Scope",
+    statusBadge: "Future Scope",
     badge: "Hardware & IoT",
     description: "Where hardware meets software innovation: microcontroller programming, Arduino, Raspberry Pi, sensor networks, PCB prototyping, and robotics.",
     schedule: "Sundays at 11:00 AM",
@@ -81,6 +107,9 @@ export const CLUBS = [
     id: "cybersec",
     name: "Cyber Security",
     category: "software",
+    status: "future",
+    statusLabel: "Future Scope",
+    statusBadge: "Future Scope",
     badge: "Security",
     description: "Defending the digital frontier with Linux administration, network security, penetration testing methodologies, web exploits, and CTF competitions.",
     schedule: "Wednesdays at 5:00 PM",
@@ -89,20 +118,12 @@ export const CLUBS = [
     primaryTrack: "CyberSec Guild"
   },
   {
-    id: "open-source",
-    name: "Open Source SAREC",
-    category: "software",
-    badge: "Collaboration",
-    description: "Contributing to global tech ecosystems: Git and GitHub best practices, open pull requests, documentation, code reviews, and GSoC mentorship.",
-    schedule: "Tuesdays at 5:30 PM",
-    venue: "Lab 1",
-    topics: ["Git", "GitHub", "Open Source", "Documentation", "Linux"],
-    primaryTrack: "Open Source SAREC"
-  },
-  {
     id: "uiux-media",
     name: "Pixels UI/UX",
     category: "creative",
+    status: "future",
+    statusLabel: "Future Scope",
+    statusBadge: "Future Scope",
     badge: "Design",
     description: "Designing human-centric interfaces, design systems, Figma wireframing, interactive prototyping, and technical accessibility for web & mobile.",
     schedule: "Mondays at 5:00 PM",
@@ -114,6 +135,9 @@ export const CLUBS = [
     id: "ecell",
     name: "E-Cell & Tech Innovation",
     category: "creative",
+    status: "future",
+    statusLabel: "Future Scope",
+    statusBadge: "Future Scope",
     badge: "Venture",
     description: "Bridging engineering with entrepreneurship: translating campus code into scalable products, pitch deck coaching, hackathon strategy, and startup grants.",
     schedule: "Saturdays at 6:00 PM",

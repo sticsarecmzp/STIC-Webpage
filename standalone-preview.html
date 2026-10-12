@@ -903,6 +903,27 @@
     }
     .club-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
     .club-badge { font-size: var(--step--2); padding: 0.25rem 0.65rem; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: 9999px; font-family: var(--font-mono); }
+    
+    /* Guilds Status Groups & Badges */
+    .guilds-status-header { margin-bottom: 1.75rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .guilds-status-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.85rem; border-radius: 9999px;
+      font-family: var(--font-mono); font-size: var(--step--2); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      width: fit-content; margin-bottom: 0.45rem;
+    }
+    .guilds-status-badge.badge-active { background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: #10b981; }
+    .guilds-status-badge.badge-future { background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.35); color: #a855f7; }
+    .guilds-status-title { font-size: var(--step-1); font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+    .guilds-status-subtitle { font-size: var(--step--1); color: var(--text-secondary); max-width: 68ch; line-height: 1.55; }
+
+    .club-badge.club-status-active { color: #10b981; border-color: rgba(16, 185, 129, 0.35); background: rgba(16, 185, 129, 0.1); display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; }
+    .club-badge.club-status-future { color: #a855f7; border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.1); display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; }
+    .live-status-dot { width: 6px; height: 6px; border-radius: 50%; background-color: #10b981; box-shadow: 0 0 8px #10b981; animation: pulse 2s infinite ease-in-out; }
+    .future-status-sparkle { color: #a855f7; font-size: 0.85rem; }
+
+    .club-card.club-card-future { border-style: dashed; border-color: rgba(168, 85, 247, 0.28); }
+    .club-card.club-card-future:hover { border-style: solid; border-color: #a855f7; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 24px rgba(168, 85, 247, 0.3); }
+
     .club-title { font-size: var(--step-1); font-weight: 700; margin-bottom: 0.5rem; }
     .club-description { font-size: var(--step--1); color: var(--text-secondary); margin-bottom: 1.25rem; }
     .club-tags-list { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem; }
@@ -1717,12 +1738,19 @@
   <section id="clubs">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Campus Tracks</span>
+        <span class="section-tag">Campus Tracks &amp; Roadmap</span>
         <h2 class="section-title">The 8 Technology Guilds</h2>
-        <p class="section-description">Choose your engineering focus area. Each guild runs regular weekly build sessions, hands-on labs, and collaborative project repositories at SAREC Mirzapur.</p>
+        <p class="section-description">Explore 4 tracks active in current time with live weekly labs at SAREC Mirzapur, alongside 4 upcoming tracks in our future scope incubation roadmap.</p>
       </div>
 
-      <div class="clubs-grid" id="clubsGrid">
+      <!-- Filter Buttons -->
+      <div class="clubs-filter-row" role="tablist">
+        <button type="button" class="filter-btn active" id="filterAllBtn" onclick="filterClubs('all', this)">All Guilds (8)</button>
+        <button type="button" class="filter-btn" id="filterCurrentBtn" onclick="filterClubs('current', this)" style="border-color: rgba(16, 185, 129, 0.4);">🟢 In Current Time (4)</button>
+        <button type="button" class="filter-btn" id="filterFutureBtn" onclick="filterClubs('future', this)" style="border-color: rgba(168, 85, 247, 0.4);">🔮 Future Scope (4)</button>
+      </div>
+
+      <div id="clubsContainerWrap">
         <!-- Rendered dynamically -->
       </div>
     </div>
@@ -1833,14 +1861,18 @@
               <label class="form-label">Primary Technology Guild</label>
               <select id="formGuild" class="form-select" required>
                 <option value="">Select a Primary Guild</option>
-                <option value="Web & Mobile Guild">Web &amp; Mobile Dev</option>
-                <option value="AI/ML Syndicate">AI &amp; Data Science</option>
-                <option value="STIC Coding Guild">Coding &amp; CP Guild</option>
-                <option value="RoboTech & Automation">RoboTech &amp; IoT</option>
-                <option value="CyberSec Guild">Cyber Security</option>
-                <option value="Open Source SAREC">Open Source SAREC</option>
-                <option value="Pixels UI/UX Guild">Pixels UI/UX</option>
-                <option value="E-Cell & Innovation">E-Cell &amp; Tech Innovation</option>
+                <optgroup label="🟢 In Current Time (Currently Active Tracks)">
+                  <option value="AI/ML Syndicate">AI &amp; Data Science</option>
+                  <option value="Web & Mobile Guild">Web &amp; Mobile Dev</option>
+                  <option value="STIC Coding Guild">Coding &amp; CP Guild</option>
+                  <option value="Open Source SAREC">Open Source SAREC</option>
+                </optgroup>
+                <optgroup label="🔮 Future Scope (Incubation Tracks)">
+                  <option value="RoboTech & Automation">RoboTech &amp; IoT</option>
+                  <option value="CyberSec Guild">Cyber Security</option>
+                  <option value="Pixels UI/UX Guild">Pixels UI/UX</option>
+                  <option value="E-Cell & Innovation">E-Cell &amp; Tech Innovation</option>
+                </optgroup>
               </select>
             </div>
 
@@ -2015,50 +2047,117 @@
 
   <script>
     const CLUBS_DATA = [
-      { id: "web-mobile", name: "Web & Mobile Dev", badge: "Full-Stack", desc: "Crafting modern full-stack web and mobile apps with React, Next.js, Node.js, Flutter, and REST APIs.", schedule: "Thursdays at 5:30 PM", track: "Web & Mobile Guild" },
-      { id: "ai-ml", name: "AI & Data Science", badge: "Intelligence", desc: "Exploring neural networks, PyTorch, computer vision, data pipelines, predictive models, and deploying AI APIs.", schedule: "Fridays at 5:00 PM", track: "AI/ML Syndicate" },
-      { id: "coding-guild", name: "Coding & CP Guild", badge: "Core Track", desc: "Mastering data structures, algorithms problem solving, weekly Codeforces & LeetCode contest debriefs.", schedule: "Saturdays at 4:00 PM", track: "STIC Coding Guild" },
-      { id: "robotech", name: "RoboTech & IoT", badge: "Hardware & IoT", desc: "Hardware meets software: microcontroller programming, Arduino, Raspberry Pi, sensor nets, and robotics.", schedule: "Sundays at 11:00 AM", track: "RoboTech & Automation" },
-      { id: "cybersec", name: "Cyber Security", badge: "Security", desc: "Defending the digital frontier with Linux systems, network security, penetration testing, and CTF challenges.", schedule: "Wednesdays at 5:00 PM", track: "CyberSec Guild" },
-      { id: "open-source", name: "Open Source SAREC", badge: "Collaboration", desc: "Contributing to global tech ecosystems: Git best practices, community repositories, and GSoC prep.", schedule: "Tuesdays at 5:30 PM", track: "Open Source SAREC" },
-      { id: "uiux-media", name: "Pixels UI/UX", badge: "Design", desc: "Designing human-centric interfaces, design systems, Figma wireframing, and interactive prototyping.", schedule: "Mondays at 5:00 PM", track: "Pixels UI/UX Guild" },
-      { id: "ecell", name: "E-Cell & Tech Innovation", badge: "Venture", desc: "Bridging engineering with entrepreneurship: pitch deck coaching, hackathon strategy, and startup grants.", schedule: "Saturdays at 6:00 PM", track: "E-Cell & Innovation" }
+      { id: "ai-ml", name: "AI & Data Science", status: "active", badge: "Intelligence", desc: "Exploring neural networks, PyTorch, computer vision, data pipelines, predictive models, and deploying AI APIs.", schedule: "Fridays at 5:00 PM", track: "AI/ML Syndicate" },
+      { id: "web-mobile", name: "Web & Mobile Dev", status: "active", badge: "Full-Stack", desc: "Crafting modern full-stack web and mobile apps with React, Next.js, Node.js, Flutter, and REST APIs.", schedule: "Thursdays at 5:30 PM", track: "Web & Mobile Guild" },
+      { id: "coding-guild", name: "Coding & CP Guild", status: "active", badge: "Core Track", desc: "Mastering data structures, algorithms problem solving, weekly Codeforces & LeetCode contest debriefs.", schedule: "Saturdays at 4:00 PM", track: "STIC Coding Guild" },
+      { id: "open-source", name: "Open Source SAREC", status: "active", badge: "Collaboration", desc: "Contributing to global tech ecosystems: Git best practices, community repositories, and GSoC prep.", schedule: "Tuesdays at 5:30 PM", track: "Open Source SAREC" },
+      { id: "robotech", name: "RoboTech & IoT", status: "future", badge: "Hardware & IoT", desc: "Hardware meets software: microcontroller programming, Arduino, Raspberry Pi, sensor nets, and robotics.", schedule: "Sundays at 11:00 AM", track: "RoboTech & Automation" },
+      { id: "cybersec", name: "Cyber Security", status: "future", badge: "Security", desc: "Defending the digital frontier with Linux systems, network security, penetration testing, and CTF challenges.", schedule: "Wednesdays at 5:00 PM", track: "CyberSec Guild" },
+      { id: "uiux-media", name: "Pixels UI/UX", status: "future", badge: "Design", desc: "Designing human-centric interfaces, design systems, Figma wireframing, and interactive prototyping.", schedule: "Mondays at 5:00 PM", track: "Pixels UI/UX Guild" },
+      { id: "ecell", name: "E-Cell & Tech Innovation", status: "future", badge: "Venture", desc: "Bridging engineering with entrepreneurship: pitch deck coaching, hackathon strategy, and startup grants.", schedule: "Saturdays at 6:00 PM", track: "E-Cell & Innovation" }
     ];
 
-    const PROJECTS_DATA = [
-      { title: "STIC Community Platform", track: "Open Source & Web", status: "Active Repository", desc: "The official open-source web platform for the STIC community at SAREC Mirzapur, built with React, Vite, and modern UI tokens.", stack: "React, Vite, JavaScript, CSS" },
-      { title: "SAREC Hub Academic Vault", track: "Academic Utility", status: "Community Vault", desc: "Centralized repository for semester syllabus, previous year question papers, lab manuals, and departmental circulars.", stack: "Markdown, Git, Open Docs" },
-      { title: "SIH Innovation Sandbox", track: "Hackathons", status: "Cohort Sandbox", desc: "Campus problem statement incubator preparing multidisciplinary engineering student squads for national Smart India Hackathon challenges.", stack: "Ideation, Systems, Prototyping" },
-      { title: "SAREC AI & Data Lab Sandbox", track: "AI & Data Science", status: "Guild Track", desc: "Collaborative repository of machine learning notebooks, exploratory data analysis on regional datasets, and weekly AI guild workshop code.", stack: "Python, Jupyter, Pandas" },
-      { title: "Campus IoT & Robotics Workbench", track: "Hardware & IoT", status: "Workshop Track", desc: "Embedded schematics, sensor telemetry routines, and microcontroller code developed for hands-on electronics training in the SAREC Workshop.", stack: "Arduino, ESP32, Embedded C++" }
-    ];
-
-    const FAQS_DATA = [
-      { q: "What is STIC and who is eligible to join?", a: "STIC is the official student technical community of SAREC Mirzapur (AKTU Code 1215). All enrolled B.Tech students across CSE, IT, EL, and EE from 1st to 4th year are welcome." },
-      { q: "Are there any registration or membership fees?", a: "No. STIC is 100% free for all students of SAREC Mirzapur. All workshops, hackathon preps, and mentorship sessions are complimentary." },
-      { q: "Can I participate in multiple guilds simultaneously?", a: "Yes. While you select one primary track for cohort allocations, all weekly sessions, workshops, and build sprints across other guilds are open to explore." },
-      { q: "Do I need prior coding experience before joining?", a: "No prior experience is necessary. We run fundamental bootcamps in C/C++, Python, Git, and web technologies specifically structured for 1st-year students." },
-      { q: "How do STIC projects support Smart India Hackathon (SIH)?", a: "STIC runs internal problem-statement vetting, ideation bootcamps, and presentation dry-runs to qualify SAREC teams for national SIH editions." }
-    ];
-
-    // Render Clubs
-    const clubsContainer = document.getElementById('clubsGrid');
-    clubsContainer.innerHTML = CLUBS_DATA.map(club => `
-      <div class="club-card glass-interactive">
-        <div>
-          <div class="club-card-top">
-            <span class="club-badge">${club.badge}</span>
-            <span class="club-badge" style="color: var(--primary);">Open Track</span>
+    function createClubCardHtml(club) {
+      const isActive = club.status === 'active';
+      return `
+        <div class="club-card glass-interactive ${isActive ? '' : 'club-card-future'}">
+          <div>
+            <div class="club-card-top">
+              <span class="club-badge">${club.badge}</span>
+              ${isActive ? `
+                <span class="club-badge club-status-active">
+                  <span class="live-status-dot"></span>
+                  Active Track
+                </span>
+              ` : `
+                <span class="club-badge club-status-future">
+                  <span class="future-status-sparkle">✦</span>
+                  Future Scope
+                </span>
+              `}
+            </div>
+            <h3 class="club-title">${club.name}</h3>
+            <p class="club-description">${club.desc}</p>
           </div>
-          <h3 class="club-title">${club.name}</h3>
-          <p class="club-description">${club.desc}</p>
+          <div class="club-card-footer">
+            <span style="font-size: var(--step--2); color: var(--text-tertiary);">${club.schedule}</span>
+            <button type="button" class="btn ${isActive ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="selectTrack('${club.track}')">
+              ${isActive ? 'Join Track →' : 'Pre-Register →'}
+            </button>
+          </div>
         </div>
-        <div class="club-card-footer">
-          <span style="font-size: var(--step--2); color: var(--text-tertiary);">${club.schedule}</span>
-          <button type="button" class="btn btn-secondary btn-sm" onclick="selectTrack('${club.track}')">Select Track →</button>
-        </div>
-      </div>
-    `).join('');
+      `;
+    }
+
+    function renderClubs(filter = 'all') {
+      const container = document.getElementById('clubsContainerWrap');
+      if (!container) return;
+
+      const activeList = CLUBS_DATA.filter(c => c.status === 'active');
+      const futureList = CLUBS_DATA.filter(c => c.status === 'future');
+
+      if (filter === 'all') {
+        container.innerHTML = `
+          <div class="guilds-status-header">
+            <div class="guilds-status-badge badge-active">
+              <span class="live-status-dot"></span>
+              <span>IN CURRENT TIME • CURRENTLY ACTIVE</span>
+            </div>
+            <h3 class="guilds-status-title">Currently Active Cohort (2025–2026)</h3>
+            <p class="guilds-status-subtitle">
+              Running active weekly build sprints, peer problem sheets, code reviews, and live production deployments at SAREC Mirzapur.
+            </p>
+          </div>
+          <div class="clubs-grid" style="margin-bottom: 3.5rem;">
+            ${activeList.map(createClubCardHtml).join('')}
+          </div>
+
+          <div class="guilds-status-header">
+            <div class="guilds-status-badge badge-future">
+              <span class="future-status-sparkle">✦</span>
+              <span>INCUBATION ROADMAP • FUTURE SCOPE</span>
+            </div>
+            <h3 class="guilds-status-title">Future Scope &amp; Incubation Tracks</h3>
+            <p class="guilds-status-subtitle">
+              Scheduled for upcoming academic cohorts, dedicated hardware fabrication labs, and venture incubation. Pre-register now to express interest.
+            </p>
+          </div>
+          <div class="clubs-grid">
+            ${futureList.map(createClubCardHtml).join('')}
+          </div>
+        `;
+      } else if (filter === 'current') {
+        container.innerHTML = `
+          <div class="guilds-status-header">
+            <div class="guilds-status-badge badge-active">
+              <span>🟢 In Current Time (4 Active Tracks)</span>
+            </div>
+          </div>
+          <div class="clubs-grid">
+            ${activeList.map(createClubCardHtml).join('')}
+          </div>
+        `;
+      } else if (filter === 'future') {
+        container.innerHTML = `
+          <div class="guilds-status-header">
+            <div class="guilds-status-badge badge-future">
+              <span>🔮 Future Scope (4 Upcoming Tracks)</span>
+            </div>
+          </div>
+          <div class="clubs-grid">
+            ${futureList.map(createClubCardHtml).join('')}
+          </div>
+        `;
+      }
+    }
+
+    function filterClubs(type, btn) {
+      document.querySelectorAll('.clubs-filter-row .filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderClubs(type);
+    }
+
+    renderClubs('all');
 
     // Render Projects
     const projectsContainer = document.getElementById('projectsGrid');

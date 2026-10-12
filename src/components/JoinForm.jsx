@@ -588,14 +588,18 @@ export default function JoinForm({ selectedClub }) {
                       required
                     >
                       <option value="">Select a Primary Guild</option>
-                      <option value="Web & Mobile Guild">Web &amp; Mobile Dev</option>
-                      <option value="AI/ML Syndicate">AI &amp; Data Science</option>
-                      <option value="STIC Coding Guild">STIC Coding &amp; CP Guild</option>
-                      <option value="RoboTech & Automation">RoboTech &amp; IoT</option>
-                      <option value="CyberSec Guild">Cyber Security</option>
-                      <option value="Open Source SAREC">Open Source SAREC</option>
-                      <option value="Pixels UI/UX Guild">Pixels UI/UX</option>
-                      <option value="E-Cell & Innovation">E-Cell &amp; Tech Innovation</option>
+                      <optgroup label="🟢 In Current Time (Currently Active Tracks)">
+                        <option value="AI/ML Syndicate">AI &amp; Data Science</option>
+                        <option value="Web & Mobile Guild">Web &amp; Mobile Dev</option>
+                        <option value="STIC Coding Guild">STIC Coding &amp; CP Guild</option>
+                        <option value="Open Source SAREC">Open Source SAREC</option>
+                      </optgroup>
+                      <optgroup label="🔮 Future Scope (Incubation Tracks)">
+                        <option value="RoboTech & Automation">RoboTech &amp; IoT</option>
+                        <option value="CyberSec Guild">Cyber Security</option>
+                        <option value="Pixels UI/UX Guild">Pixels UI/UX</option>
+                        <option value="E-Cell & Innovation">E-Cell &amp; Tech Innovation</option>
+                      </optgroup>
                     </select>
                     {fieldErrors.guild && (
                       <span className="field-error-text">

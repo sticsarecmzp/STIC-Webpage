@@ -173,10 +173,15 @@ export default function SiteSearchModal({ isOpen, onClose, onSelectClub }) {
                       onClick={() => handleSelectResult('join', club.primaryTrack)}
                     >
                       <div>
-                        <div className="search-item-title">{club.name}</div>
+                        <div className="search-item-title" style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
+                          <span>{club.name}</span>
+                          <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: club.status === 'active' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(168, 85, 247, 0.15)', color: club.status === 'active' ? '#10b981' : '#a855f7', fontWeight: 700 }}>
+                            {club.status === 'active' ? '🟢 Active' : '🔮 Future Scope'}
+                          </span>
+                        </div>
                         <div className="search-item-sub">{club.description.slice(0, 85)}...</div>
                       </div>
-                      <span className="search-item-badge">Join Track &rarr;</span>
+                      <span className="search-item-badge">{club.status === 'active' ? 'Join Track →' : 'Pre-Register →'}</span>
                     </div>
                   ))}
                 </div>

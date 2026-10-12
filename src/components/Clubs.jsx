@@ -9,8 +9,8 @@ import {
   Palette, 
   Rocket, 
   Clock, 
-  Users, 
-  ArrowRight 
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 import { CLUBS } from '../data/communityData';
 
@@ -26,11 +26,19 @@ const CLUB_ICONS = {
 };
 
 export default function Clubs({ selectedClub, onSelectClub }) {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeFilter, setActiveFilter] = useState('all');
 
-  const filteredClubs = activeCategory === 'all'
-    ? CLUBS
-    : CLUBS.filter(club => club.category === activeCategory);
+  const activeClubs = CLUBS.filter(club => club.status === 'active');
+  const futureClubs = CLUBS.filter(club => club.status === 'future');
+
+  const getFilteredList = () => {
+    if (activeFilter === 'all') return CLUBS;
+    if (activeFilter === 'current') return activeClubs;
+    if (activeFilter === 'future') return futureClubs;
+    return CLUBS.filter(club => club.category === activeFilter);
+  };
+
+  const filteredClubs = getFilteredList();
 
   const handleSelectTrack = (primaryTrack) => {
     if (onSelectClub) {
@@ -42,111 +50,188 @@ export default function Clubs({ selectedClub, onSelectClub }) {
     }
   };
 
+  const renderClubCard = (club) => {
+    const IconComponent = CLUB_ICONS[club.id] || Code2;
+    const isSelected = selectedClub === club.primaryTrack;
+    const isActive = club.status === 'active';
+
+    return (
+      <div 
+        key={club.id} 
+        className={`club-card glass-interactive ${isActive ? 'club-card-active' : 'club-card-future'} ${isSelected ? 'is-selected' : ''}`}
+      >
+        <div>
+          <div className="club-card-top">
+            <div 
+              className="club-icon-wrap" 
+              style={!isActive ? { color: '#a855f7', background: 'rgba(168, 85, 247, 0.12)' } : {}}
+            >
+              <IconComponent size={22} strokeWidth={1.5} />
+            </div>
+            <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+              <span className="club-badge">{club.badge}</span>
+              {isActive ? (
+                <span className="club-badge club-status-active">
+                  <span className="live-status-dot" />
+                  <span>Active Track</span>
+                </span>
+              ) : (
+                <span className="club-badge club-status-future">
+                  <span className="future-status-sparkle">✦</span>
+                  <span>Future Scope</span>
+                </span>
+              )}
+            </div>
+          </div>
+
+          <h3 className="club-title">{club.name}</h3>
+          <p className="club-description">{club.description}</p>
+
+          <div className="club-tags-list">
+            {club.topics.map((topic, i) => (
+              <span key={i} className="club-tech-tag">{topic}</span>
+            ))}
+          </div>
+        </div>
+
+        <div className="club-card-footer">
+          <div className="club-schedule-text">
+            <Clock size={13} strokeWidth={1.5} />
+            <span>{club.schedule}</span>
+          </div>
+
+          <button
+            type="button"
+            className={`btn btn-sm ${isSelected ? 'btn-primary' : (isActive ? 'btn-primary' : 'btn-secondary')}`}
+            onClick={() => handleSelectTrack(club.primaryTrack)}
+            title={isActive ? `Join ${club.name}` : `Pre-register for ${club.name}`}
+          >
+            <span>{isSelected ? 'Track Selected' : (isActive ? 'Join Track' : 'Pre-Register')}</span>
+            <ArrowRight size={13} strokeWidth={1.5} />
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <section id="clubs" className="section">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">Campus Tracks</span>
+          <span className="section-tag">Campus Tracks &amp; Roadmap</span>
           <h2 className="section-title">The 8 Technology Guilds</h2>
           <p className="section-description">
-            Choose your engineering focus area. Each guild runs regular weekly build sessions,
-            hands-on labs, and collaborative project repositories at SAREC Mirzapur.
+            Explore 4 tracks active in current time with live weekly labs at SAREC Mirzapur, 
+            alongside 4 upcoming tracks in our future scope incubation roadmap.
           </p>
         </div>
 
-        <div className="clubs-filter-row" role="tablist" aria-label="Club categories">
+        {/* Filter Navigation Row */}
+        <div className="clubs-filter-row" role="tablist" aria-label="Guild status and categories">
           <button
             type="button"
-            className={`filter-btn ${activeCategory === 'all' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('all')}
+            className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('all')}
           >
-            All Guilds ({CLUBS.length})
+            All Guilds (8)
           </button>
           <button
             type="button"
-            className={`filter-btn ${activeCategory === 'software' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('software')}
+            className={`filter-btn ${activeFilter === 'current' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('current')}
+            style={activeFilter === 'current' ? {} : { borderColor: 'rgba(16, 185, 129, 0.4)', color: 'var(--text)' }}
+          >
+            🟢 In Current Time (4)
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${activeFilter === 'future' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('future')}
+            style={activeFilter === 'future' ? {} : { borderColor: 'rgba(168, 85, 247, 0.4)', color: 'var(--text)' }}
+          >
+            🔮 Future Scope (4)
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${activeFilter === 'software' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('software')}
           >
             Software &amp; Systems
           </button>
           <button
             type="button"
-            className={`filter-btn ${activeCategory === 'hardware' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('hardware')}
+            className={`filter-btn ${activeFilter === 'hardware' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('hardware')}
           >
-            Hardware &amp; Robotics
+            Hardware &amp; IoT
           </button>
           <button
             type="button"
-            className={`filter-btn ${activeCategory === 'ai' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('ai')}
+            className={`filter-btn ${activeFilter === 'ai' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('ai')}
           >
             AI &amp; Data
           </button>
           <button
             type="button"
-            className={`filter-btn ${activeCategory === 'creative' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('creative')}
+            className={`filter-btn ${activeFilter === 'creative' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('creative')}
           >
             Design &amp; Innovation
           </button>
         </div>
 
-        <div className="clubs-grid">
-          {filteredClubs.map((club) => {
-            const IconComponent = CLUB_ICONS[club.id] || Code2;
-            const isSelected = selectedClub === club.primaryTrack;
-
-            return (
-              <div 
-                key={club.id} 
-                className={`club-card glass-interactive ${isSelected ? 'is-selected' : ''}`}
-              >
-                <div>
-                  <div className="club-card-top">
-                    <div className="club-icon-wrap">
-                      <IconComponent size={22} strokeWidth={1.5} />
-                    </div>
-                    <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
-                      <span className="club-badge">{club.badge}</span>
-                      <span 
-                        className="club-badge" 
-                        style={{ color: 'var(--primary)', borderColor: 'var(--primary-glow-subtle)' }}
-                      >
-                        Open Track
-                      </span>
-                    </div>
-                  </div>
-
-                  <h3 className="club-title">{club.name}</h3>
-                  <p className="club-description">{club.description}</p>
-
-                  <div className="club-tags-list">
-                    {club.topics.map((topic, i) => (
-                      <span key={i} className="club-tech-tag">{topic}</span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="club-card-footer">
-                  <div className="club-schedule-text">
-                    <Clock size={13} strokeWidth={1.5} />
-                    <span>{club.schedule}</span>
-                  </div>
-
-                  <button
-                    type="button"
-                    className={`btn btn-sm ${isSelected ? 'btn-primary' : 'btn-secondary'}`}
-                    onClick={() => handleSelectTrack(club.primaryTrack)}
-                  >
-                    <span>{isSelected ? 'Track Selected' : 'Select Track'}</span>
-                    <ArrowRight size={13} strokeWidth={1.5} />
-                  </button>
-                </div>
+        {/* Guilds Display */}
+        {activeFilter === 'all' ? (
+          <div>
+            {/* Section 1: In Current Time */}
+            <div className="guilds-status-header">
+              <div className="guilds-status-badge badge-active">
+                <span className="live-status-dot" />
+                <span>IN CURRENT TIME • CURRENTLY ACTIVE</span>
               </div>
-            );
-          })}
-        </div>
+              <h3 className="guilds-status-title">Currently Active Cohort (2025–2026)</h3>
+              <p className="guilds-status-subtitle">
+                Running active weekly build sprints, peer problem sheets, code reviews, and live production deployments at SAREC Mirzapur.
+              </p>
+            </div>
+            <div className="clubs-grid" style={{ marginBottom: '4rem' }}>
+              {activeClubs.map(renderClubCard)}
+            </div>
+
+            {/* Section 2: Future Scope */}
+            <div className="guilds-status-header">
+              <div className="guilds-status-badge badge-future">
+                <Sparkles size={13} strokeWidth={2} />
+                <span>INCUBATION ROADMAP • FUTURE SCOPE</span>
+              </div>
+              <h3 className="guilds-status-title">Future Scope &amp; Incubation Tracks</h3>
+              <p className="guilds-status-subtitle">
+                Scheduled for upcoming academic cohorts, dedicated hardware fabrication labs, and venture incubation. Pre-register now to express interest.
+              </p>
+            </div>
+            <div className="clubs-grid">
+              {futureClubs.map(renderClubCard)}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="guilds-status-header">
+              <div className={`guilds-status-badge ${activeFilter === 'current' ? 'badge-active' : (activeFilter === 'future' ? 'badge-future' : 'badge-active')}`}>
+                <span>
+                  {activeFilter === 'current' 
+                    ? '🟢 In Current Time (4 Active Tracks)' 
+                    : (activeFilter === 'future' 
+                      ? '🔮 Future Scope (4 Upcoming Tracks)' 
+                      : `Filtered Tracks (${filteredClubs.length})`)}
+                </span>
+              </div>
+            </div>
+            <div className="clubs-grid">
+              {filteredClubs.map(renderClubCard)}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
