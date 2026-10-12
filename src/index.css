@@ -886,6 +886,7 @@ section, .section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.15rem;
+  align-items: stretch;
   position: relative;
   z-index: 5;
   animation: heroFadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
@@ -898,6 +899,9 @@ section, .section {
 }
 
 .bento-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: var(--card-radius);
   padding: 1.5rem;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
@@ -908,7 +912,7 @@ section, .section {
 }
 
 .bento-card:hover {
-  transform: translateY(-5px) scale(1.02);
+  transform: translateY(-4px);
 }
 
 .bento-header {
@@ -931,7 +935,6 @@ section, .section {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
-  transform: translateY(1.2rem);
 }
 
 .bento-card-ask:hover {

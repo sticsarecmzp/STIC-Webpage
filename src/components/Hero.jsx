@@ -57,17 +57,6 @@ export default function Hero({ onSelectClub }) {
                 <span style={{ opacity: 0.4 }}>•</span>
                 <span>{COMMUNITY_INFO.academicYear} Cohort</span>
               </div>
-
-              <a 
-                href={COMMUNITY_INFO.whatsappGroup} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="hero-whatsapp-badge"
-                aria-label="Join Official STIC WhatsApp Community Group"
-              >
-                <span className="whatsapp-dot-pulse" />
-                <span>💬 Join WhatsApp Group →</span>
-              </a>
             </div>
 
             {/* Kinetic Typography Outline Text Rotator */}
