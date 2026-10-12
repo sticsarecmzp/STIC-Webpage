@@ -317,44 +317,41 @@ export default function JoinForm({ selectedClub }) {
               </li>
             </ul>
 
-            <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <button
-                  type="button"
-                  className="btn btn-secondary btn-sm"
-                  onClick={handleCopyCollegeCode}
-                  title="Copy AKTU College Code"
-                  style={{ fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
-                >
-                  <Copy size={13} strokeWidth={1.8} />
-                  <span>{copiedCode ? 'Copied Code 1215!' : 'Copy College Code (1215)'}</span>
-                </button>
+            <div style={{ marginTop: '2rem', display: 'flex', gap: '0.65rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={handleCopyCollegeCode}
+                title="Copy AKTU College Code"
+                style={{ fontSize: '0.8rem' }}
+              >
+                <Copy size={13} strokeWidth={1.8} />
+                <span>{copiedCode ? 'Copied Code 1215!' : 'Copy College Code (1215)'}</span>
+              </button>
 
-                <a
-                  href={`mailto:${COMMUNITY_INFO.officialEmail}`}
-                  className="btn btn-secondary btn-sm"
-                  style={{ fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
-                >
-                  <Mail size={14} strokeWidth={1.5} />
-                  <span>Email: {COMMUNITY_INFO.officialEmail}</span>
-                </a>
-              </div>
+              <a
+                href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+                className="btn btn-secondary btn-sm"
+                style={{ fontSize: '0.8rem' }}
+              >
+                <Mail size={14} strokeWidth={1.5} />
+                <span>Email: {COMMUNITY_INFO.officialEmail}</span>
+              </a>
 
-              <div>
-                <button
-                  type="button"
-                  className="btn btn-ghost btn-sm"
-                  onClick={() => {
-                    setCustomEndpointInput(endpointUrl);
-                    setShowEndpointModal(true);
-                  }}
-                  style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--btn-radius)' }}
-                  aria-label="Configure Google Apps Script Endpoint URL"
-                >
-                  <Settings size={12} strokeWidth={1.5} />
-                  <span>Google Apps Script Endpoint Settings</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                onClick={() => {
+                  setCustomEndpointInput(endpointUrl);
+                  setShowEndpointModal(true);
+                }}
+                style={{ fontSize: '0.78rem' }}
+                title="Configure Google Apps Script Web App Endpoint URL"
+                aria-label="Configure Google Apps Script Endpoint URL"
+              >
+                <Settings size={13} strokeWidth={1.5} />
+                <span>Sheet Endpoint</span>
+              </button>
             </div>
           </div>
 

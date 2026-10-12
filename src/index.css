@@ -375,6 +375,22 @@ section, .section {
   transform: translateY(-2px) scale(1.02);
 }
 
+.btn-ghost {
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  border-color: var(--border-medium);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.btn-ghost:hover {
+  background: var(--bg-surface-elevated);
+  color: var(--text);
+  border-color: var(--primary);
+  box-shadow: 0 0 16px var(--primary-glow-subtle);
+  transform: translateY(-2px) scale(1.02);
+}
+
 .btn-sm {
   padding: 0.45rem 0.95rem;
   font-size: var(--step--2);
