@@ -21,7 +21,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -40,8 +40,8 @@
       --accent: #06b6d4;
       --accent-glow: rgba(6, 182, 212, 0.35);
 
-      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Geist Mono', monospace;
 
       --bg: #030712;
       --text: #f1f5f9;
@@ -862,27 +862,27 @@
         <a href="#clubs" class="btn btn-secondary">Explore 8 Guilds</a>
       </div>
 
-      <!-- Impact Counters -->
+      <!-- Authentic Campus Specifications -->
       <div class="hero-specs-grid">
         <div class="spec-card">
           <div class="spec-label">Specialized Guilds</div>
           <div class="spec-value">8</div>
-          <div class="spec-sub">End-to-End Technology Tracks</div>
+          <div class="spec-sub">Technology Focus Tracks</div>
         </div>
         <div class="spec-card">
-          <div class="spec-label">Active Members</div>
-          <div class="spec-value">500+</div>
-          <div class="spec-sub">Students Across All Years</div>
+          <div class="spec-label">Engineering Branches</div>
+          <div class="spec-value">4</div>
+          <div class="spec-sub">CSE • IT • EL • EE</div>
         </div>
         <div class="spec-card">
-          <div class="spec-label">Campus Projects</div>
-          <div class="spec-value">35+</div>
-          <div class="spec-sub">Shipped &amp; Deployed Solutions</div>
+          <div class="spec-label">AKTU College Code</div>
+          <div class="spec-value">1215</div>
+          <div class="spec-sub">SAREC Mirzapur Campus</div>
         </div>
         <div class="spec-card">
-          <div class="spec-label">Hackathons</div>
-          <div class="spec-value">18</div>
-          <div class="spec-sub">SIH &amp; State Level Podiums</div>
+          <div class="spec-label">Membership Cost</div>
+          <div class="spec-value">₹0</div>
+          <div class="spec-sub">100% Free &amp; Open Access</div>
         </div>
       </div>
     </div>
@@ -1167,20 +1167,22 @@
 
   <script>
     const CLUBS_DATA = [
-      { id: "web-mobile", name: "Web & Mobile Dev", badge: "Full-Stack", members: "120+ Builders", desc: "Crafting modern full-stack web and mobile apps with React, Next.js, Node.js, Flutter, and REST APIs.", schedule: "Thursday at 5:30 PM", track: "Web & Mobile Guild" },
-      { id: "ai-ml", name: "AI & Data Science", badge: "Intelligence", members: "95+ Researchers", desc: "Exploring neural networks, PyTorch, computer vision, data pipelines, predictive models, and deploying AI APIs.", schedule: "Friday at 5:00 PM", track: "AI/ML Syndicate" },
-      { id: "coding-guild", name: "Coding & CP Guild", badge: "Core Track", members: "140+ Coders", desc: "Mastering data structures, algorithms problem solving, weekly Codeforces & LeetCode contest debriefs.", schedule: "Saturday at 4:00 PM", track: "STIC Coding Guild" },
-      { id: "robotech", name: "RoboTech & IoT", badge: "Hardware & IoT", members: "80+ Innovators", desc: "Hardware meets software: microcontroller programming, Arduino, Raspberry Pi, sensor nets, and robotics.", schedule: "Sunday at 11:00 AM", track: "RoboTech & Automation" },
-      { id: "cybersec", name: "Cyber Security", badge: "Security", members: "70+ Defenders", desc: "Defending the digital frontier with Linux systems, network security, penetration testing, and CTF challenges.", schedule: "Wednesday at 5:00 PM", track: "CyberSec Guild" },
-      { id: "open-source", name: "Open Source SAREC", badge: "Collaboration", members: "90+ Contributors", desc: "Contributing to global tech ecosystems: Git best practices, community repositories, and GSoC prep.", schedule: "Tuesday at 5:30 PM", track: "Open Source SAREC" },
-      { id: "uiux-media", name: "Pixels UI/UX", badge: "Design", members: "65+ Designers", desc: "Designing human-centric interfaces, design systems, Figma wireframing, and interactive prototyping.", schedule: "Monday at 5:00 PM", track: "Pixels UI/UX Guild" },
-      { id: "ecell", name: "E-Cell & Tech Innovation", badge: "Venture", members: "55+ Founders", desc: "Bridging engineering with entrepreneurship: pitch deck coaching, hackathon strategy, and startup grants.", schedule: "Saturday at 6:00 PM", track: "E-Cell & Innovation" }
+      { id: "web-mobile", name: "Web & Mobile Dev", badge: "Full-Stack", desc: "Crafting modern full-stack web and mobile apps with React, Next.js, Node.js, Flutter, and REST APIs.", schedule: "Thursdays at 5:30 PM", track: "Web & Mobile Guild" },
+      { id: "ai-ml", name: "AI & Data Science", badge: "Intelligence", desc: "Exploring neural networks, PyTorch, computer vision, data pipelines, predictive models, and deploying AI APIs.", schedule: "Fridays at 5:00 PM", track: "AI/ML Syndicate" },
+      { id: "coding-guild", name: "Coding & CP Guild", badge: "Core Track", desc: "Mastering data structures, algorithms problem solving, weekly Codeforces & LeetCode contest debriefs.", schedule: "Saturdays at 4:00 PM", track: "STIC Coding Guild" },
+      { id: "robotech", name: "RoboTech & IoT", badge: "Hardware & IoT", desc: "Hardware meets software: microcontroller programming, Arduino, Raspberry Pi, sensor nets, and robotics.", schedule: "Sundays at 11:00 AM", track: "RoboTech & Automation" },
+      { id: "cybersec", name: "Cyber Security", badge: "Security", desc: "Defending the digital frontier with Linux systems, network security, penetration testing, and CTF challenges.", schedule: "Wednesdays at 5:00 PM", track: "CyberSec Guild" },
+      { id: "open-source", name: "Open Source SAREC", badge: "Collaboration", desc: "Contributing to global tech ecosystems: Git best practices, community repositories, and GSoC prep.", schedule: "Tuesdays at 5:30 PM", track: "Open Source SAREC" },
+      { id: "uiux-media", name: "Pixels UI/UX", badge: "Design", desc: "Designing human-centric interfaces, design systems, Figma wireframing, and interactive prototyping.", schedule: "Mondays at 5:00 PM", track: "Pixels UI/UX Guild" },
+      { id: "ecell", name: "E-Cell & Tech Innovation", badge: "Venture", desc: "Bridging engineering with entrepreneurship: pitch deck coaching, hackathon strategy, and startup grants.", schedule: "Saturdays at 6:00 PM", track: "E-Cell & Innovation" }
     ];
 
     const PROJECTS_DATA = [
-      { title: "SAREC Hub Portal", track: "Campus Utility", status: "Live on Campus", desc: "Centralized platform for semester syllabus, previous year question papers, and announcements.", stack: "React, Node.js, Express, MongoDB" },
-      { title: "HostelMate", track: "Student Living", status: "In Beta Testing", desc: "Hostel room inventory, issue grievance tracking, and student peer allocation platform.", stack: "Python, FastAPI, PostgreSQL" },
-      { title: "SAREC CLI Toolkit", track: "Developer Tool", status: "Open Source", desc: "Terminal command-line utility to query campus schedules, lecture slots, and exam circulars.", stack: "TypeScript, Node CLI, GitHub Actions" }
+      { title: "STIC Community Platform", track: "Open Source & Web", status: "Active Repository", desc: "The official open-source web platform for the STIC community at SAREC Mirzapur, built with React, Vite, and modern UI tokens.", stack: "React, Vite, JavaScript, CSS" },
+      { title: "SAREC Hub Academic Vault", track: "Academic Utility", status: "Community Vault", desc: "Centralized repository for semester syllabus, previous year question papers, lab manuals, and departmental circulars.", stack: "Markdown, Git, Open Docs" },
+      { title: "SIH Innovation Sandbox", track: "Hackathons", status: "Cohort Sandbox", desc: "Campus problem statement incubator preparing multidisciplinary engineering student squads for national Smart India Hackathon challenges.", stack: "Ideation, Systems, Prototyping" },
+      { title: "SAREC AI & Data Lab Sandbox", track: "AI & Data Science", status: "Guild Track", desc: "Collaborative repository of machine learning notebooks, exploratory data analysis on regional datasets, and weekly AI guild workshop code.", stack: "Python, Jupyter, Pandas" },
+      { title: "Campus IoT & Robotics Workbench", track: "Hardware & IoT", status: "Workshop Track", desc: "Embedded schematics, sensor telemetry routines, and microcontroller code developed for hands-on electronics training in the SAREC Workshop.", stack: "Arduino, ESP32, Embedded C++" }
     ];
 
     const FAQS_DATA = [
@@ -1198,7 +1200,7 @@
         <div>
           <div class="club-card-top">
             <span class="club-badge">${club.badge}</span>
-            <span class="club-badge" style="color: var(--primary);">${club.members}</span>
+            <span class="club-badge" style="color: var(--primary);">Open Track</span>
           </div>
           <h3 class="club-title">${club.name}</h3>
           <p class="club-description">${club.desc}</p>

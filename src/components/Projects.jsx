@@ -67,8 +67,18 @@ export default function Projects() {
           </button>
         </div>
 
-        <div className="projects-grid">
-          {filteredProjects.map((project) => (
+        {filteredProjects.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '3.5rem 1.5rem', background: 'var(--glass-bg)', border: '1px dashed var(--glass-border)', borderRadius: '16px' }}>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: '0.95rem' }}>
+              No repositories currently listed in this category. Guild members are actively ideating new projects!
+            </p>
+            <button type="button" className="btn btn-secondary btn-sm" onClick={() => setActiveCategory('all')}>
+              View All Projects
+            </button>
+          </div>
+        ) : (
+          <div className="projects-grid">
+            {filteredProjects.map((project) => (
             <article key={project.id} className="project-card glass-interactive">
               <div>
                 {/* Visual Project Banner with Grid Pattern */}
@@ -133,6 +143,7 @@ export default function Projects() {
             </article>
           ))}
         </div>
+        )}
       </div>
     </section>
   );

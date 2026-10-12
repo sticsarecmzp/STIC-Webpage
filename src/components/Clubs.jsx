@@ -109,14 +109,12 @@ export default function Clubs({ selectedClub, onSelectClub }) {
                     </div>
                     <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
                       <span className="club-badge">{club.badge}</span>
-                      {club.members && (
-                        <span 
-                          className="club-badge" 
-                          style={{ color: 'var(--primary)', borderColor: 'var(--primary-glow-subtle)' }}
-                        >
-                          {club.members}
-                        </span>
-                      )}
+                      <span 
+                        className="club-badge" 
+                        style={{ color: 'var(--primary)', borderColor: 'var(--primary-glow-subtle)' }}
+                      >
+                        Open Track
+                      </span>
                     </div>
                   </div>
 

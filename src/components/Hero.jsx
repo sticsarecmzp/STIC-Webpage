@@ -1,8 +1,8 @@
 import React from 'react';
-import { ArrowRight, MapPin, Sparkles, Layers, Users, FolderGit2, Trophy } from 'lucide-react';
+import { ArrowRight, MapPin, Sparkles, Layers, GraduationCap, ShieldCheck } from 'lucide-react';
 import { COMMUNITY_INFO, COMMUNITY_STATS } from '../data/communityData';
 
-const STAT_ICONS = [Layers, Users, FolderGit2, Trophy];
+const STAT_ICONS = [Layers, GraduationCap, MapPin, ShieldCheck];
 
 export default function Hero({ onSelectClub }) {
   return (
