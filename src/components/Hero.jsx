@@ -46,19 +46,6 @@ export default function Hero({ onSelectClub }) {
         <div className="hero-grid">
           {/* Left Column: Headlines & Call to Actions */}
           <div className="hero-content">
-            {/* Location & Academic Cohort Pill */}
-            <div className="hero-badges-row">
-              <div className="hero-live-badge">
-                <span className="live-pulse-wrapper">
-                  <span className="live-pulse-ring" />
-                  <span className="live-pulse-dot" />
-                </span>
-                <span>📍 SAREC Mirzapur • Code 1215</span>
-                <span style={{ opacity: 0.4 }}>•</span>
-                <span>{COMMUNITY_INFO.academicYear} Cohort</span>
-              </div>
-            </div>
-
             {/* Kinetic Typography Outline Text Rotator */}
             <h1 className="hero-title">
               <span className="word-stop">STOP</span>
