@@ -14,6 +14,7 @@ export const COMMUNITY_INFO = {
   githubOrg: "https://github.com/sticsarecmzp",
   instagram: "https://www.instagram.com/sticsarecmzp",
   linkedin: "https://www.linkedin.com/company/stic-sarec-mirzapur/posts/",
+  whatsappGroup: "https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT",
   formEndpoint: "https://script.google.com/macros/s/AKfycbxXI59ceq99apRfS656UR1H-wrsO3I9oefcD1ktieMFUeaGLpuLuEJEH9GkkJs9oPT3/exec"
 };
 

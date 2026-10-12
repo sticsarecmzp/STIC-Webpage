@@ -392,7 +392,7 @@ export default function JoinForm({ selectedClub }) {
 
                 <div className="success-action-row">
                   <a
-                    href="https://wa.me/919451501321?text=Hi%20STIC%20Team%2C%20I%20just%20submitted%20my%20registration%20for%20STIC."
+                    href={COMMUNITY_INFO.whatsappGroup}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-primary"

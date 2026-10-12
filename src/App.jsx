@@ -16,6 +16,9 @@ import AnnouncementBanner from './components/AnnouncementBanner';
 import BackToTop from './components/BackToTop';
 import FloatingContact from './components/FloatingContact';
 import SiteSearchModal from './components/SiteSearchModal';
+import SectionDivider from './components/SectionDivider';
+import TickerRibbon from './components/TickerRibbon';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -31,6 +34,9 @@ export default function App() {
   const [selectedClub, setSelectedClub] = useState('');
   const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+
+  // Initialize scroll-driven entrance animations
+  useScrollReveal();
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -92,13 +98,28 @@ export default function App() {
         ) : (
           <>
             <Hero onSelectClub={handleSelectClub} />
+            <TickerRibbon />
             <InstitutionStrip />
+
+            <SectionDivider index="01" tag="8 GUILDS" targetId="clubs" delayClass="divider-delay-1" />
             <Clubs selectedClub={selectedClub} onSelectClub={handleSelectClub} />
+
+            <SectionDivider index="02" tag="METHODOLOGY" targetId="why-stic" delayClass="divider-delay-2" />
             <WhyStic />
+
+            <SectionDivider index="03" tag="CAMPUS CALENDAR" targetId="events" delayClass="divider-delay-3" />
             <Events />
+
+            <SectionDivider index="04" tag="PROVE WORK" targetId="projects" delayClass="divider-delay-4" />
             <Projects />
+
+            <SectionDivider index="05" tag="LEADERSHIP" targetId="team" delayClass="divider-delay-5" />
             <Team />
+
+            <SectionDivider index="06" tag="ADMISSIONS" targetId="join" delayClass="divider-delay-6" />
             <JoinForm selectedClub={selectedClub} />
+
+            <SectionDivider index="07" tag="KNOWLEDGE VAULT" targetId="faq" delayClass="divider-delay-7" />
             <Faq />
           </>
         )}

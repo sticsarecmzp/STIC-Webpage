@@ -220,13 +220,13 @@ export default function Footer({ onSelectClub }) {
               </li>
               <li>
                 <a
-                  href="https://wa.me/919451501321?text=Hi%20STIC%20Team%2C%20I%20have%20a%20question%20about%20clubs%20and%20events."
+                  href={COMMUNITY_INFO.whatsappGroup}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--success)' }}
                 >
                   <MessageSquare size={13} strokeWidth={1.5} />
-                  <span>WhatsApp Community Help</span>
+                  <span>STIC WhatsApp Group</span>
                 </a>
               </li>
               <li style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: 'var(--text-tertiary)', lineHeight: 1.45 }}>

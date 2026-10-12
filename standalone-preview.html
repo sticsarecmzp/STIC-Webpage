@@ -70,6 +70,7 @@
       --card-radius: 20px;
       --btn-radius: 12px;
       --input-radius: 12px;
+      --outline-stroke: #38bdf8;
     }
 
     [data-theme='light'] {
@@ -92,6 +93,7 @@
 
       --border-subtle: rgba(15, 23, 42, 0.08);
       --border-medium: rgba(15, 23, 42, 0.14);
+      --outline-stroke: #090d16;
     }
 
     *, *::before, *::after {
@@ -240,8 +242,84 @@
       color: var(--text);
     }
 
-    /* Hero */
-    .hero-section { padding-top: clamp(3rem, 6vw, 6rem); overflow: hidden; }
+    /* Hero with Cool Animations */
+    .hero-section { padding-top: clamp(3rem, 6vw, 6rem); padding-bottom: clamp(3.5rem, 7vw, 7rem); position: relative; overflow: hidden; }
+    .hero-mesh-glow {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 70%;
+      background: radial-gradient(circle at center, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-floating-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.45;
+      mix-blend-mode: screen;
+    }
+    .hero-floating-orb.orb-1 {
+      top: -8%;
+      right: 8%;
+      width: clamp(260px, 35vw, 500px);
+      height: clamp(260px, 35vw, 500px);
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, rgba(6, 182, 212, 0.2) 45%, transparent 70%);
+      filter: blur(65px);
+      animation: floatHeroOrb1 14s ease-in-out infinite alternate;
+    }
+    .hero-floating-orb.orb-2 {
+      bottom: 8%;
+      left: -4%;
+      width: clamp(220px, 30vw, 440px);
+      height: clamp(220px, 30vw, 440px);
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 70%);
+      filter: blur(60px);
+      animation: floatHeroOrb2 16s ease-in-out infinite alternate;
+    }
+    [data-theme="light"] .hero-floating-orb { opacity: 0.22; mix-blend-mode: multiply; }
+    @keyframes floatHeroOrb1 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-25px, 35px) scale(1.1); }
+      100% { transform: translate(20px, -20px) scale(0.95); }
+    }
+    @keyframes floatHeroOrb2 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(35px, -30px) scale(1.08); }
+      100% { transform: translate(-15px, 25px) scale(0.92); }
+    }
+
+    .hero-grid-mesh {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+      animation: gridPulse 8s ease-in-out infinite alternate;
+    }
+    [data-theme="light"] .hero-grid-mesh {
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    }
+    @keyframes gridPulse { 0% { opacity: 0.35; } 50% { opacity: 0.85; } 100% { opacity: 0.35; } }
+
+    .hero-badges-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+      animation: heroFadeInDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
     .hero-live-badge {
       display: inline-flex;
       align-items: center;
@@ -253,7 +331,40 @@
       font-size: var(--step--2);
       font-weight: 600;
       color: var(--text-secondary);
-      margin-bottom: 1.75rem;
+      transition: all 0.25s ease;
+    }
+    .hero-live-badge:hover { border-color: var(--primary); transform: translateY(-1px); }
+
+    .hero-whatsapp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 1rem;
+      background: rgba(37, 211, 102, 0.12);
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      border-radius: 9999px;
+      font-size: var(--step--2);
+      font-weight: 600;
+      color: #25d366;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+    }
+    .hero-whatsapp-badge:hover {
+      background: rgba(37, 211, 102, 0.22);
+      border-color: #25d366;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 4px 18px rgba(37, 211, 102, 0.35);
+      color: #fff;
+    }
+    .whatsapp-dot-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #25d366;
+      box-shadow: 0 0 8px #25d366;
+      animation: pulse 2s infinite ease-in-out;
     }
 
     .live-pulse-dot {
@@ -274,38 +385,453 @@
     }
     @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.2); opacity: 0; } }
 
-    .hero-title {
-      font-size: var(--step-5);
-      font-weight: 800;
-      line-height: 1.12;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
     }
-    .hero-title-accent {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 4.5vw + 0.6rem, 5.2rem);
+      font-weight: 900;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+    }
+
+    .hero-title .word-stop {
+      display: block;
+      color: var(--text);
+    }
+
+    .hero-title .outline-rotator {
+      display: block;
+      position: relative;
+      height: 1.3em;
+      min-height: 1.3em;
+      line-height: 1.3em;
+      overflow: hidden;
+      margin-top: 0.08em;
+      background: transparent !important;
+    }
+
+    .outline-rotator .rotator-word {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: inline-block;
+      white-space: nowrap;
+      font-family: var(--font-sans);
+      font-size: clamp(2.3rem, 4.2vw + 0.5rem, 4.4rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+      -webkit-text-stroke: 2px var(--outline-stroke);
+      filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.45));
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(40px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s;
+    }
+
+    .outline-rotator .rotator-word.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+      animation: wordSlideIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes wordSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero-paragraph {
       font-size: var(--step-0);
       color: var(--text-secondary);
-      max-width: 70ch;
-      margin-bottom: 2.25rem;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+      max-width: 58ch;
+      animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
     }
 
-    .hero-cta-group { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3.5rem; }
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+    }
+
+    .btn-primary.hero-main-cta {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 22px rgba(99, 102, 241, 0.45);
+      animation: ctaPulseGlow 3.5s ease-in-out infinite;
+    }
+
+    .btn-primary.hero-main-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: skewX(-25deg);
+      animation: ctaShineSweep 4.5s ease-in-out infinite;
+    }
+
+    @keyframes ctaPulseGlow {
+      0%, 100% {
+        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+      }
+      50% {
+        box-shadow: 0 8px 32px rgba(99, 102, 241, 0.65), 0 0 16px rgba(6, 182, 212, 0.4);
+      }
+    }
+
+    @keyframes ctaShineSweep {
+      0% { left: -120%; }
+      25%, 100% { left: 160%; }
+    }
+
+    .hero-proof-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.35rem;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+    }
+
+    .proof-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    /* Hero Floating Bento Cards */
+    .hero-bento-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.15rem;
+      position: relative;
+      z-index: 5;
+      animation: heroFadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+    }
+
+    @media (max-width: 640px) {
+      .hero-bento-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .bento-card {
+      border-radius: var(--card-radius);
+      padding: 1.5rem;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .bento-card:hover {
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    .bento-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.1rem;
+    }
+
+    .bento-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .bento-card-ask {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+      transform: translateY(1.2rem);
+    }
+
+    .bento-card-ask:hover {
+      border-color: var(--primary);
+      box-shadow: 0 20px 48px rgba(99, 102, 241, 0.25);
+    }
+
+    .bento-quote {
+      font-family: var(--font-sans);
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.65rem;
+    }
+
+    .bento-desc {
+      font-size: 0.84rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    .bento-card-cost {
+      background: linear-gradient(145deg, #090d16 0%, #0f172a 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    [data-theme="light"] .bento-card-cost {
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      color: #ffffff;
+    }
+
+    .bento-card-cost .bento-label {
+      color: #94a3b8;
+    }
+
+    .bento-number {
+      font-family: var(--font-sans);
+      font-size: 2.75rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin: 0.75rem 0 0.55rem;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .bento-card-cost .bento-desc {
+      color: #94a3b8;
+    }
+
+    .bento-card-cta {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.14) 0%, rgba(99, 102, 241, 0.16) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      box-shadow: 0 16px 40px rgba(6, 182, 212, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      .bento-card-cta {
+        grid-column: span 1;
+      }
+    }
+
+    .bento-card-cta:hover {
+      border-color: var(--accent);
+      box-shadow: 0 20px 50px rgba(6, 182, 212, 0.3);
+    }
+
+    .cta-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .cta-headline {
+      font-family: var(--font-sans);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-top: 0.25rem;
+    }
+
+    .cta-circle-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(6, 182, 212, 0.4);
+      flex-shrink: 0;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bento-card-cta:hover .cta-circle-btn {
+      transform: rotate(45deg) scale(1.1);
+    }
+
+    /* Dual Angled Ticker Marquee Ribbons */
+    .ticker-section {
+      position: relative;
+      padding: 3.5rem 0;
+      overflow: hidden;
+      background: transparent;
+      z-index: 20;
+    }
+
+    .ticker-wrapper {
+      position: relative;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ticker-ribbon {
+      position: absolute;
+      width: 140vw;
+      left: -20vw;
+      display: flex;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 0.9rem 0;
+      user-select: none;
+    }
+
+    .ticker-ribbon-dark {
+      background: #090d16;
+      color: #ffffff;
+      transform: rotate(-3deg);
+      z-index: 2;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ticker-ribbon-light {
+      background: var(--bg-surface-elevated);
+      color: var(--text);
+      border-top: 1px solid var(--border-medium);
+      border-bottom: 1px solid var(--border-medium);
+      transform: rotate(3deg);
+      z-index: 1;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .ticker-track {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      animation: scrollTicker 30s linear infinite;
+    }
+
+    .ticker-ribbon-light .ticker-track {
+      animation: scrollTickerReverse 32s linear infinite;
+    }
+
+    @keyframes scrollTicker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollTickerReverse {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    .ticker-item {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: 0 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .ticker-sparkle {
+      color: var(--accent);
+      font-size: 1.15rem;
+      text-shadow: 0 0 8px var(--accent);
+    }
+
+    @keyframes heroFadeInUp {
+      from { opacity: 0; transform: translateY(26px); filter: blur(5px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    @keyframes heroFadeInDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     .hero-specs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.25rem;
+      animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
     }
     .spec-card {
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       border-radius: 18px;
       padding: 1.25rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .spec-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .spec-card:hover::before { opacity: 1; }
+    .spec-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3), 0 0 20px rgba(99, 102, 241, 0.25);
     }
     .spec-label {
       font-size: var(--step--2);
@@ -758,11 +1284,150 @@
     /* Print Stylesheet */
     @media print {
       body { background: #fff !important; color: #000 !important; }
-      .navbar-wrapper, .announcement-banner, .back-to-top-btn, .floating-contact-container, .scroll-progress-bar-container, .skip-to-content, .btn, .btn-icon, form {
+      .navbar-wrapper, .announcement-banner, .back-to-top-btn, .floating-contact-container, .scroll-progress-bar-container, .skip-to-content, .btn, .btn-icon, form, .section-divider-wrap {
         display: none !important;
       }
       .club-card, .project-card, .faq-item { border: 1px solid #ccc !important; box-shadow: none !important; break-inside: avoid; }
       a { color: #000 !important; text-decoration: underline !important; }
+    }
+
+    /* Trending Section Transitions & Laser Animations */
+    @keyframes travelLaserBeam {
+      0% { left: -25%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { left: 110%; opacity: 0; }
+    }
+    @keyframes pulseAmbientFlare {
+      0% { opacity: 0.35; transform: translate(-50%, -50%) scale(0.92); }
+      50% { opacity: 0.75; transform: translate(-50%, -50%) scale(1.08); }
+      100% { opacity: 0.35; transform: translate(-50%, -50%) scale(0.92); }
+    }
+    @keyframes pulseNodeDot {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 6px var(--accent); }
+      50% { transform: scale(1.35); box-shadow: 0 0 12px var(--accent), 0 0 20px var(--primary); }
+    }
+
+    .section-divider-wrap {
+      position: relative;
+      width: 100%;
+      margin: 0;
+      padding: clamp(2rem, 3.5vw, 3rem) 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+      pointer-events: auto;
+    }
+    .divider-container {
+      width: min(100% - 3rem, 1200px);
+      margin-inline: auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .divider-ambient-flare {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(260px, 50vw, 680px);
+      height: 50px;
+      background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.28) 0%, rgba(6, 182, 212, 0.16) 45%, transparent 75%);
+      filter: blur(24px);
+      pointer-events: none;
+      z-index: 1;
+      animation: pulseAmbientFlare 5s ease-in-out infinite;
+    }
+    [data-theme="light"] .divider-ambient-flare {
+      background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.14) 0%, rgba(6, 182, 212, 0.08) 45%, transparent 75%);
+    }
+    .divider-line-track {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--border-subtle) 15%, var(--border-medium) 50%, var(--border-subtle) 85%, transparent 100%);
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+    .divider-laser-beam {
+      position: absolute;
+      top: -1px;
+      left: -25%;
+      height: 3px;
+      width: clamp(100px, 20vw, 220px);
+      background: linear-gradient(90deg, transparent 0%, rgba(6, 182, 212, 0.4) 25%, #ffffff 50%, rgba(99, 102, 241, 0.9) 75%, transparent 100%);
+      border-radius: 999px;
+      box-shadow: 0 0 14px rgba(6, 182, 212, 0.8), 0 0 24px rgba(99, 102, 241, 0.6);
+      animation: travelLaserBeam 6.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    [data-theme="light"] .divider-laser-beam {
+      background: linear-gradient(90deg, transparent 0%, rgba(6, 182, 212, 0.6) 25%, #4f46e5 50%, rgba(99, 102, 241, 0.9) 75%, transparent 100%);
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+    }
+    .divider-badge-link {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.35rem 0.95rem;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 999px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 3;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      user-select: none;
+    }
+    .divider-badge-link:hover {
+      transform: translate(-50%, -50%) scale(1.06);
+      border-color: var(--primary);
+      color: var(--text);
+      box-shadow: 0 6px 24px rgba(99, 102, 241, 0.32), 0 0 16px rgba(99, 102, 241, 0.4);
+    }
+    .divider-index { font-weight: 700; color: var(--accent); }
+    .divider-pulse-node {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulseNodeDot 2s infinite ease-in-out;
+    }
+    .divider-tag-label { font-weight: 600; color: var(--text); }
+    .divider-delay-1 .divider-laser-beam { animation-delay: 0s; }
+    .divider-delay-2 .divider-laser-beam { animation-delay: 1.2s; }
+    .divider-delay-3 .divider-laser-beam { animation-delay: 2.4s; }
+    .divider-delay-4 .divider-laser-beam { animation-delay: 3.6s; }
+
+    /* Scroll Reveal */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      filter: blur(4px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .scroll-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .divider-laser-beam, .divider-ambient-flare, .divider-pulse-node { animation: none !important; }
+      .scroll-reveal { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
     }
   </style>
 </head>
@@ -840,30 +1505,126 @@
 
   <!-- Hero Section -->
   <section id="top" class="hero-section">
+    <!-- Ambient Aurora Orbs & Cyber Perspective Grid Mesh -->
+    <div class="hero-mesh-glow" aria-hidden="true"></div>
+    <div class="hero-floating-orb orb-1" aria-hidden="true"></div>
+    <div class="hero-floating-orb orb-2" aria-hidden="true"></div>
+    <div class="hero-grid-mesh" aria-hidden="true"></div>
+
     <div class="container">
-      <div class="hero-live-badge">
-        <span class="live-pulse-dot"></span>
-        <span>📍 SAREC Mirzapur • Code 1215</span>
-        <span style="opacity: 0.4">•</span>
-        <span>2025–2026 Cohort Active</span>
-      </div>
+      <!-- 2-Column Responsive Hero Grid -->
+      <div class="hero-grid">
+        <!-- Left Column: Headlines & Call to Actions -->
+        <div class="hero-content">
+          <!-- Location & Academic Cohort Pill -->
+          <div class="hero-badges-row">
+            <div class="hero-live-badge">
+              <span class="live-pulse-dot"></span>
+              <span>📍 SAREC Mirzapur • Code 1215</span>
+              <span style="opacity: 0.4">•</span>
+              <span>2025–2026 Cohort</span>
+            </div>
 
-      <h1 class="hero-title">
-        Innovation Redefined. The student technical community of <span class="hero-title-accent">SAREC Mirzapur</span>.
-      </h1>
+            <a 
+              href="https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="hero-whatsapp-badge"
+              aria-label="Join Official STIC WhatsApp Community Group"
+            >
+              <span class="whatsapp-dot-pulse"></span>
+              <span>💬 Join WhatsApp Group →</span>
+            </a>
+          </div>
 
-      <p class="hero-paragraph">
-        We build production software, collaborate on open source ecosystems, engineer hardware prototypes, and prepare for national hackathons like Smart India Hackathon (SIH). Driven by students, guided by faculty, and open to all engineering departments.
-      </p>
+          <!-- Kinetic Typography Outline Text Rotator -->
+          <h1 class="hero-title">
+            <span class="word-stop">STOP</span>
+            <div class="outline-rotator" id="heroRotator" aria-live="polite">
+              <span class="rotator-word active">ASSUMING</span>
+              <span class="rotator-word">PANICKING</span>
+              <span class="rotator-word">CODING ALONE</span>
+              <span class="rotator-word">HESITATING</span>
+            </div>
+          </h1>
 
-      <div class="hero-cta-group">
-        <a href="#join" class="btn btn-primary">Join Community</a>
-        <a href="#projects" class="btn btn-secondary">View Projects</a>
-        <a href="#clubs" class="btn btn-secondary">Explore 8 Guilds</a>
+          <p class="hero-paragraph">
+            Before you spend 4 years on theoretical lectures and outdated slides, build with students who are actually shipping systems. Get real roadmaps on placements, open source, hackathons, and software engineering.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#join" class="btn btn-primary hero-main-cta">
+              <span>Join Community</span>
+              <span style="font-size: 1.1rem; line-height: 1;">→</span>
+            </a>
+            <a href="#clubs" class="btn btn-secondary">
+              <span>Explore 8 Guilds</span>
+            </a>
+            <a href="#projects" class="btn btn-secondary" style="border: 1px solid var(--border-subtle);">
+              <span>View Projects</span>
+            </a>
+          </div>
+
+          <!-- Verified Campus Proof Bar -->
+          <div class="hero-proof-bar">
+            <div class="proof-item">
+              <span style="color: var(--success); font-weight: 900;">✓</span>
+              <span>8 Specialized Guilds</span>
+            </div>
+            <div class="proof-item">
+              <span style="color: var(--accent); font-weight: 900;">🛡</span>
+              <span>AKTU College Code 1215</span>
+            </div>
+            <div class="proof-item">
+              <span style="color: var(--primary); font-weight: 900;">👥</span>
+              <span>₹0 100% Free &amp; Open Access</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Floating Bento Grid from stic-delta -->
+        <div class="hero-bento-grid" aria-label="Campus Insights Bento Grid">
+          <!-- Bento Card 1: What Freshers Ask -->
+          <div class="bento-card bento-card-ask">
+            <div class="bento-header">
+              <span class="bento-label">What Freshers Ask</span>
+              <span style="color: var(--text-tertiary); font-size: 1.1rem;">❓</span>
+            </div>
+            <p class="bento-quote">“What is the actual placement &amp; roadmap reality?”</p>
+            <p class="bento-desc">Ask the uncomfortable questions before you spend years in confusion.</p>
+          </div>
+
+          <!-- Bento Card 2: Opportunity Cost -->
+          <div class="bento-card bento-card-cost">
+            <div class="bento-header">
+              <span class="bento-label">Opportunity Cost</span>
+              <span style="color: var(--accent); font-size: 1.1rem;">⚡</span>
+            </div>
+            <div class="bento-number">4 Years</div>
+            <p class="bento-desc">Too much valuable time to spend based on outdated slides and random opinions.</p>
+          </div>
+
+          <!-- Bento Card 3: Campus Blueprint CTA -->
+          <div 
+            class="bento-card bento-card-cta"
+            onclick="document.getElementById('clubs')?.scrollIntoView({ behavior: 'smooth' })"
+            role="button"
+            tabindex="0"
+            aria-label="Find your guild first. Ship your flagship project next."
+          >
+            <div>
+              <span class="cta-tag">Campus Blueprint</span>
+              <p class="cta-headline">Find your guild first. Ship your flagship project next.</p>
+            </div>
+            <div class="cta-circle-btn">
+              ↗
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Authentic Campus Specifications -->
-      <div class="hero-specs-grid">
+      <div class="hero-specs-grid" style="margin-top: 3.5rem;">
         <div class="spec-card">
           <div class="spec-label">Specialized Guilds</div>
           <div class="spec-value">8</div>
@@ -888,6 +1649,59 @@
     </div>
   </section>
 
+  <!-- =========================================
+       DUAL ANGLED TICKER RIBBONS
+       ========================================= -->
+  <section class="ticker-section" aria-label="Campus Tech Clubs Marquee">
+    <div class="ticker-wrapper">
+      <!-- Top Dark Angled Ribbon -->
+      <div class="ticker-ribbon ticker-ribbon-dark">
+        <div class="ticker-track">
+          <span class="ticker-item">STIC CODING <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">ROBOTECH &amp; IOT <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">AI &amp; MACHINE LEARNING <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">CYBER SECURITY <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">WEB &amp; APP DEV <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">OPEN SOURCE SAREC <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">E-CELL &amp; STARTUPS <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">UI/UX &amp; MEDIA <span class="ticker-sparkle">✦</span></span>
+          <!-- Seamless Loop Duplicate -->
+          <span class="ticker-item">STIC CODING <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">ROBOTECH &amp; IOT <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">AI &amp; MACHINE LEARNING <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">CYBER SECURITY <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">WEB &amp; APP DEV <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">OPEN SOURCE SAREC <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">E-CELL &amp; STARTUPS <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">UI/UX &amp; MEDIA <span class="ticker-sparkle">✦</span></span>
+        </div>
+      </div>
+
+      <!-- Bottom Light Angled Ribbon -->
+      <div class="ticker-ribbon ticker-ribbon-light">
+        <div class="ticker-track">
+          <span class="ticker-item">REACT &amp; NEXT.JS <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">PYTHON &amp; PYTORCH <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">RUST &amp; GO <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">DOCKER &amp; KUBERNETES <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">ARDUINO &amp; ESP32 <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">FASTAPI &amp; NODE.JS <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">LINUX &amp; CLOUD <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">GIT &amp; CI/CD <span class="ticker-sparkle">✦</span></span>
+          <!-- Seamless Loop Duplicate -->
+          <span class="ticker-item">REACT &amp; NEXT.JS <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">PYTHON &amp; PYTORCH <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">RUST &amp; GO <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">DOCKER &amp; KUBERNETES <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">ARDUINO &amp; ESP32 <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">FASTAPI &amp; NODE.JS <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">LINUX &amp; CLOUD <span class="ticker-sparkle">✦</span></span>
+          <span class="ticker-item">GIT &amp; CI/CD <span class="ticker-sparkle">✦</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Institution Strip -->
   <div class="institution-strip">
     <div class="container institution-flex">
@@ -901,6 +1715,19 @@
         <span class="tag-badge">B.Tech EL</span>
         <span class="tag-badge">B.Tech EE</span>
       </div>
+    </div>
+  </div>
+
+  <!-- Section Divider: 8 Guilds -->
+  <div class="section-divider-wrap divider-delay-1">
+    <div class="divider-container">
+      <div class="divider-ambient-flare"></div>
+      <div class="divider-line-track"><div class="divider-laser-beam"></div></div>
+      <a href="#clubs" class="divider-badge-link">
+        <span class="divider-index">01</span>
+        <span class="divider-pulse-node"></span>
+        <span class="divider-tag-label">8 GUILDS</span>
+      </a>
     </div>
   </div>
 
@@ -919,6 +1746,19 @@
     </div>
   </section>
 
+  <!-- Section Divider: Projects Showcase -->
+  <div class="section-divider-wrap divider-delay-2">
+    <div class="divider-container">
+      <div class="divider-ambient-flare"></div>
+      <div class="divider-line-track"><div class="divider-laser-beam"></div></div>
+      <a href="#projects" class="divider-badge-link">
+        <span class="divider-index">02</span>
+        <span class="divider-pulse-node"></span>
+        <span class="divider-tag-label">PROJECTS</span>
+      </a>
+    </div>
+  </div>
+
   <!-- Projects Section -->
   <section id="projects" style="background: var(--bg-surface-subtle);">
     <div class="container">
@@ -933,6 +1773,19 @@
       </div>
     </div>
   </section>
+
+  <!-- Section Divider: Registration -->
+  <div class="section-divider-wrap divider-delay-3">
+    <div class="divider-container">
+      <div class="divider-ambient-flare"></div>
+      <div class="divider-line-track"><div class="divider-laser-beam"></div></div>
+      <a href="#join" class="divider-badge-link">
+        <span class="divider-index">03</span>
+        <span class="divider-pulse-node"></span>
+        <span class="divider-tag-label">ENROLLMENT</span>
+      </a>
+    </div>
+  </div>
 
   <!-- Registration Form Section -->
   <section id="join">
@@ -1037,6 +1890,19 @@
     </div>
   </section>
 
+  <!-- Section Divider: FAQ Vault -->
+  <div class="section-divider-wrap divider-delay-4">
+    <div class="divider-container">
+      <div class="divider-ambient-flare"></div>
+      <div class="divider-line-track"><div class="divider-laser-beam"></div></div>
+      <a href="#faq" class="divider-badge-link">
+        <span class="divider-index">04</span>
+        <span class="divider-pulse-node"></span>
+        <span class="divider-tag-label">FAQ VAULT</span>
+      </a>
+    </div>
+  </div>
+
   <!-- Expandable FAQ Section -->
   <section id="faq" style="padding: 4rem 0; background: var(--bg-surface-subtle);">
     <div class="container">
@@ -1126,7 +1992,7 @@
   <!-- Floating Contact Action Dock -->
   <div class="floating-contact-container">
     <div id="floatingContactMenu" class="floating-contact-menu">
-      <a href="https://wa.me/919451501321?text=Hi%20STIC%20Team%2C%20I%20have%20a%20question%20regarding%20clubs." target="_blank" rel="noopener noreferrer" class="floating-action-item whatsapp" title="Chat on WhatsApp">💬</a>
+      <a href="https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT" target="_blank" rel="noopener noreferrer" class="floating-action-item whatsapp" title="Join STIC WhatsApp Group">💬</a>
       <a href="mailto:sticsarecmzp@gmail.com" class="floating-action-item email" title="Send Email">✉️</a>
       <a href="tel:+919451501321" class="floating-action-item call" title="Call Lead (+91 94515 01321)">📞</a>
       <button type="button" class="floating-action-item share" onclick="copyText(window.location.href, this)" title="Copy Share Link">🔗</button>
@@ -1522,7 +2388,7 @@
         await fetch(SCRIPT_URL, { method: 'POST', body: payload, mode: 'no-cors' });
         feedback.style.display = 'block';
         feedback.style.color = 'var(--success)';
-        feedback.innerHTML = `<strong>Registration Submitted!</strong> Welcome to STIC SAREC Mirzapur, ${fullName}. Check your email (${email}) for track orientation.`;
+        feedback.innerHTML = `<strong>Registration Submitted!</strong> Welcome to STIC SAREC Mirzapur, ${fullName}. Check your email (${email}) or <a href='https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT' target='_blank' rel='noopener noreferrer' style='color:#25d366;font-weight:700;text-decoration:underline;'>Join the WhatsApp Community Group →</a>`;
         document.getElementById('joinForm').reset();
       } catch (err) {
         feedback.style.display = 'block';
@@ -1533,6 +2399,32 @@
         btn.innerText = "Submit Track Registration";
       }
     }
+
+    // Hero Kinetic Outline Text Rotator
+    const rotatorWords = document.querySelectorAll('#heroRotator .rotator-word');
+    if (rotatorWords.length > 0) {
+      let rotatorIndex = 0;
+      setInterval(() => {
+        rotatorWords[rotatorIndex].classList.remove('active');
+        rotatorIndex = (rotatorIndex + 1) % rotatorWords.length;
+        rotatorWords[rotatorIndex].classList.add('active');
+      }, 2600);
+    }
+
+    // Initialize Scroll Reveal Animations for sections & dividers
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('section, .institution-strip, .section-divider-wrap').forEach(el => {
+      el.classList.add('scroll-reveal');
+      revealObserver.observe(el);
+    });
   </script>
 </body>
 </html>

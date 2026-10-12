@@ -26,15 +26,15 @@ export default function FloatingContact() {
         <div className="floating-contact-menu">
           {/* WhatsApp Action */}
           <a
-            href="https://wa.me/919451501321?text=Hi%20STIC%20Team%2C%20I%20have%20a%20question%20regarding%20clubs%20and%20membership."
+            href={COMMUNITY_INFO.whatsappGroup}
             target="_blank"
             rel="noopener noreferrer"
             className="floating-action-item whatsapp"
-            title="Chat on WhatsApp"
-            aria-label="Chat on WhatsApp"
+            title="Join STIC WhatsApp Group"
+            aria-label="Join STIC WhatsApp Group"
           >
             <MessageSquare size={17} strokeWidth={2} />
-            <span className="floating-action-tooltip">WhatsApp Help</span>
+            <span className="floating-action-tooltip">WhatsApp Group</span>
           </a>
 
           {/* Email Action */}
