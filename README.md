@@ -31,9 +31,6 @@ npm run build
 npm run preview
 ```
 
-### 3. Zero-Dependency Standalone Preview
-If you want to preview the portal immediately in any browser without installing `node_modules`, open `standalone-preview.html` directly in your browser.
-
 ---
 
 ##  Project Architecture
@@ -43,7 +40,7 @@ STIC-Webpage/
 ├── index.html                   # SEO metadata for STIC SAREC Mirzapur, OpenGraph, Fonts
 ├── vite.config.js               # Vite bundler configuration
 ├── package.json                 # Scripts (dev, build, preview) and dependencies
-├── standalone-preview.html      # Self-contained zero-dependency preview
+├── public/                      # Static favicons, webmanifest, and brand logos
 ├── README.md                    # Setup guide & Google Sheets Apps Script guide
 └── src/
     ├── main.jsx                 # Application entry point
