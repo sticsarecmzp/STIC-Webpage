@@ -2379,6 +2379,182 @@ section, .section {
   padding: clamp(1.75rem, 4vw, 2.5rem);
 }
 
+/* Google Auth Gate (Pre-Form Identity Verification) */
+.google-auth-gate-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 0.5rem 0;
+}
+
+.auth-gate-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 2px solid var(--border-color);
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  width: fit-content;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+.auth-gate-title {
+  font-size: var(--step-1);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.auth-gate-desc {
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.auth-gate-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: var(--bg-surface-elevated);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+.auth-perk-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: var(--step--1);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.auth-perk-icon {
+  color: #000000;
+  background: var(--brutal-yellow);
+  border: 1.5px solid var(--border-color);
+  border-radius: 4px;
+  padding: 2px;
+  flex-shrink: 0;
+}
+
+.btn-google-auth {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.5rem;
+  font-size: var(--step-0);
+  font-weight: 800;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.auth-gate-footnote {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  line-height: 1.45;
+  margin: 0;
+  text-align: center;
+}
+
+.auth-gate-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem 1rem;
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+/* Verified Google User Top Bar */
+.auth-user-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: var(--bg-surface-elevated);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 3px 3px 0px var(--shadow-color);
+}
+
+.auth-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.auth-user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+.auth-user-avatar-placeholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: var(--brutal-yellow);
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.2rem;
+  font-family: var(--font-mono);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+.auth-user-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.auth-user-name {
+  font-size: var(--step-0);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.auth-user-email {
+  font-size: var(--step--2);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
 .form-group {
   margin-bottom: 1.25rem;
   position: relative;

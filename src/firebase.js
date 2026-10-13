@@ -1,7 +1,7 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getAnalytics, isSupported } from 'firebase/analytics';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 
 /**
  * Firebase Client Configuration
@@ -38,14 +38,16 @@ googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
 
+export { onAuthStateChanged };
+
 /**
  * Initiates Google Sign-In with popup
- * @returns {Promise<import('firebase/auth').User|null>} Authenticated user or null
+ * @returns {Promise<import('firebase/auth').User>} Authenticated user
  */
 export async function signInWithGoogle() {
   if (!auth) {
     console.warn('Firebase Auth is not configured. Set VITE_FIREBASE_* in .env.');
-    return null;
+    throw new Error('Firebase Authentication is not configured. Please check environment variables.');
   }
   const result = await signInWithPopup(auth, googleProvider);
   return result.user;

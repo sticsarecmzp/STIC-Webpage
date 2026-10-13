@@ -17,7 +17,9 @@ import {
   EyeOff,
   Copy,
   KeyRound,
-  Compass
+  Compass,
+  ShieldCheck,
+  Lock
 } from 'lucide-react';
 import { COMMUNITY_INFO, DEPARTMENTS } from '../data/communityData';
 import ConfirmModal from './ConfirmModal';
@@ -27,9 +29,43 @@ import {
   recordSubmissionTimestamp,
   sanitizeText 
 } from '../utils/security';
-import { saveRegistrationToFirestore } from '../firebase';
+import { 
+  auth, 
+  signInWithGoogle, 
+  logOut, 
+  onAuthStateChanged, 
+  saveRegistrationToFirestore 
+} from '../firebase';
+
+function GoogleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style={{ flexShrink: 0 }}>
+      <path
+        fill="#4285F4"
+        d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+      />
+    </svg>
+  );
+}
 
 export default function JoinForm({ selectedClub }) {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [authError, setAuthError] = useState('');
+
   const [formData, setFormData] = useState({
     fullName: '',
     rollNo: '',
@@ -57,6 +93,27 @@ export default function JoinForm({ selectedClub }) {
     medium: '',
     campaign: ''
   });
+
+  // Listen for Firebase Auth state changes
+  useEffect(() => {
+    if (!auth) {
+      setAuthLoading(false);
+      return;
+    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setAuthLoading(false);
+      if (user) {
+        setFormData(prev => ({
+          ...prev,
+          fullName: prev.fullName || user.displayName || '',
+          email: user.email || prev.email
+        }));
+        setFieldErrors(prev => ({ ...prev, email: '' }));
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     try {
@@ -119,9 +176,54 @@ export default function JoinForm({ selectedClub }) {
     setTimeout(() => setCopiedCode(false), 2000);
   };
 
+  const handleGoogleSignIn = async () => {
+    setAuthError('');
+    setIsAuthenticating(true);
+    try {
+      const user = await signInWithGoogle();
+      if (user) {
+        setCurrentUser(user);
+        setFormData(prev => ({
+          ...prev,
+          fullName: prev.fullName || user.displayName || '',
+          email: user.email || prev.email
+        }));
+        setFieldErrors(prev => ({ ...prev, email: '', fullName: '' }));
+      }
+    } catch (err) {
+      console.warn('Google sign-in error:', err);
+      if (err?.code === 'auth/popup-closed-by-user') {
+        setAuthError('Sign-in cancelled. The Google authentication window was closed.');
+      } else if (err?.code === 'auth/popup-blocked') {
+        setAuthError('Sign-in pop-up was blocked by your browser. Please allow popups.');
+      } else {
+        setAuthError(err?.message || 'Google authentication failed. Please try again.');
+      }
+    } finally {
+      setIsAuthenticating(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+      setCurrentUser(null);
+      setFormData(prev => ({ ...prev, email: '' }));
+    } catch (err) {
+      console.warn('Sign out error:', err);
+    }
+  };
+
   // Called when user clicks "Submit Track Registration"
   const handlePreSubmit = (e) => {
     e.preventDefault();
+
+    // 0. Enforce Google Authentication
+    if (!currentUser) {
+      setStatus('error');
+      setErrorMessage('Please authenticate with Google before submitting your registration.');
+      return;
+    }
 
     // 1. Client-Side Rate Limit & Cooldown Check (prevents rapid automated submissions)
     const rateCheck = checkSubmissionRateLimit('stic_form_last_sub', 15000);
@@ -153,7 +255,14 @@ export default function JoinForm({ selectedClub }) {
     setErrorMessage('');
 
     try {
-      // Re-verify rate limit & schema validity
+      // Re-verify Google Auth & rate limit & schema validity
+      if (!currentUser) {
+        setShowConfirmModal(false);
+        setStatus('error');
+        setErrorMessage('Authentication expired. Please sign in with Google again.');
+        return;
+      }
+
       const rateCheck = checkSubmissionRateLimit('stic_form_last_sub', 15000);
       if (!rateCheck.allowed) {
         setShowConfirmModal(false);
@@ -188,6 +297,8 @@ export default function JoinForm({ selectedClub }) {
       formPayload.append('message', sanitized.message);
       formPayload.append('referralKey', sanitized.referralKey);
       formPayload.append('collegeCode', COMMUNITY_INFO.collegeCode || '1215');
+      formPayload.append('googleUid', currentUser?.uid || '');
+      formPayload.append('googleVerified', 'true');
 
       // Sanitized UTM parameters
       formPayload.append('utmSource', utmData.source ? sanitizeText(utmData.source, 50) : 'direct');
@@ -207,6 +318,10 @@ export default function JoinForm({ selectedClub }) {
           portfolio: sanitized.portfolio,
           message: sanitized.message,
           collegeCode: COMMUNITY_INFO.collegeCode || '1215',
+          googleUid: currentUser?.uid || null,
+          googleEmail: currentUser?.email || sanitized.email,
+          googlePhoto: currentUser?.photoURL || null,
+          verifiedWithGoogle: true,
           utmSource: utmData.source ? sanitizeText(utmData.source, 50) : 'direct',
           utmMedium: utmData.medium ? sanitizeText(utmData.medium, 50) : 'web',
           utmCampaign: utmData.campaign ? sanitizeText(utmData.campaign, 50) : 'general'
@@ -399,8 +514,107 @@ export default function JoinForm({ selectedClub }) {
                   </button>
                 </div>
               </div>
+            ) : authLoading ? (
+              <div className="auth-gate-loading">
+                <Loader2 size={24} className="spinner" />
+                <span>Checking Google authentication status...</span>
+              </div>
+            ) : !currentUser ? (
+              <div className="google-auth-gate-card">
+                <div className="auth-gate-badge">
+                  <ShieldCheck size={14} strokeWidth={2.5} />
+                  <span>STUDENT VERIFICATION REQUIRED</span>
+                </div>
+
+                <h3 className="auth-gate-title">Authenticate with Google to Register</h3>
+
+                <p className="auth-gate-desc">
+                  Before filling out the technical track registration, please authenticate with your Google account. This verifies your identity, prevents spam, and secures your application record.
+                </p>
+
+                <div className="auth-gate-perks">
+                  <div className="auth-perk-item">
+                    <Check size={14} strokeWidth={2.5} className="auth-perk-icon" />
+                    <span>Official student verification via Gmail OAuth</span>
+                  </div>
+                  <div className="auth-perk-item">
+                    <Check size={14} strokeWidth={2.5} className="auth-perk-icon" />
+                    <span>Automatic pre-fill of your verified Full Name and Email</span>
+                  </div>
+                  <div className="auth-perk-item">
+                    <Check size={14} strokeWidth={2.5} className="auth-perk-icon" />
+                    <span>Instant synchronization to SAREC Cloud Firestore</span>
+                  </div>
+                </div>
+
+                {authError && (
+                  <div className="form-status-banner error" role="alert" style={{ marginBottom: '0.75rem' }}>
+                    <AlertCircle size={16} strokeWidth={2} style={{ flexShrink: 0 }} />
+                    <span>{authError}</span>
+                  </div>
+                )}
+
+                <button
+                  type="button"
+                  className="btn btn-primary btn-google-auth"
+                  onClick={handleGoogleSignIn}
+                  disabled={isAuthenticating}
+                  id="googleAuthTriggerBtn"
+                >
+                  {isAuthenticating ? (
+                    <>
+                      <Loader2 size={16} className="spinner" />
+                      <span>Connecting Google Account...</span>
+                    </>
+                  ) : (
+                    <>
+                      <GoogleIcon />
+                      <span>Continue with Google to Fill Form</span>
+                    </>
+                  )}
+                </button>
+
+                <p className="auth-gate-footnote">
+                  Secured by Firebase Authentication. We only receive your basic profile and verified email address.
+                </p>
+              </div>
             ) : (
               <>
+                {/* Verified Google User Top Bar */}
+                <div className="auth-user-bar">
+                  <div className="auth-user-info">
+                    {currentUser.photoURL ? (
+                      <img
+                        src={currentUser.photoURL}
+                        alt={currentUser.displayName || 'Google Student'}
+                        className="auth-user-avatar"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <div className="auth-user-avatar-placeholder">
+                        {(currentUser.displayName || currentUser.email || 'U')[0].toUpperCase()}
+                      </div>
+                    )}
+                    <div>
+                      <div className="auth-user-tag">
+                        <CheckCircle2 size={12} strokeWidth={2.5} />
+                        <span>GOOGLE VERIFIED STUDENT</span>
+                      </div>
+                      <div className="auth-user-name">{currentUser.displayName || 'Verified Student'}</div>
+                      <div className="auth-user-email">{currentUser.email}</div>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-sm"
+                    onClick={handleSignOut}
+                    title="Switch to another Google account"
+                  >
+                    <RefreshCw size={12} strokeWidth={2} />
+                    <span>Switch</span>
+                  </button>
+                </div>
+
                 {status === 'error' && (
                   <div className="form-status-banner error" role="alert">
                     <AlertCircle size={20} strokeWidth={1.8} style={{ flexShrink: 0 }} />
@@ -477,12 +691,12 @@ export default function JoinForm({ selectedClub }) {
                         className={`floating-input ${fieldErrors.email ? 'input-error' : ''}`}
                         placeholder=" "
                         value={formData.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
+                        readOnly
+                        style={{ background: 'var(--bg-surface-elevated)', cursor: 'default' }}
                         required
                       />
                       <label htmlFor="email" className="floating-label">
-                        College / Personal Email *
+                        Verified Email (Google OAuth) *
                       </label>
                       {fieldErrors.email && (
                         <span className="field-error-text">
