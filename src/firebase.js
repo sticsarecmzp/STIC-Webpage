@@ -5,10 +5,11 @@ import {
   getAuth, 
   GoogleAuthProvider, 
   signInWithPopup, 
-  signInWithRedirect, 
-  getRedirectResult, 
+  signInWithCredential, 
   signOut, 
-  onAuthStateChanged 
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
 } from 'firebase/auth';
 
 /**
@@ -39,36 +40,106 @@ export const db = app ? getFirestore(app) : null;
 
 // Initialize Firebase Authentication & Google Auth Provider
 export const auth = app ? getAuth(app) : null;
-export const googleProvider = new GoogleAuthProvider();
 
-// Customize Google OAuth prompt
+if (auth) {
+  try {
+    setPersistence(auth, browserLocalPersistence).catch(() => {});
+  } catch {}
+}
+
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.addScope('email');
+googleProvider.addScope('profile');
 googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
 
-export { onAuthStateChanged, getRedirectResult };
+export { onAuthStateChanged };
 
 /**
- * Initiates Google Sign-In with popup, falling back to redirect if popup is blocked or partitioned
- * @returns {Promise<import('firebase/auth').User|null>} Authenticated user or null if redirected
+ * Zero-redirect Google OAuth sign-in via Google Identity Services token client
+ * Eliminates cross-origin iframe issues, partitioned cookie bugs, and page reload loops
+ */
+export function triggerGoogleOAuthTokenClient() {
+  return new Promise((resolve, reject) => {
+    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '40086953337-p2nemps907kfra452i78un6r89bhcni3.apps.googleusercontent.com';
+    if (typeof window === 'undefined' || !window.google?.accounts?.oauth2) {
+      return reject(new Error('Google Identity Services client is still loading. Please try again or click Manual Registration.'));
+    }
+
+    try {
+      const client = window.google.accounts.oauth2.initTokenClient({
+        client_id: clientId,
+        scope: 'email profile openid',
+        callback: async (tokenResponse) => {
+          if (tokenResponse?.error) {
+            return reject(new Error(tokenResponse.error_description || tokenResponse.error));
+          }
+          if (tokenResponse?.access_token) {
+            try {
+              const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
+              });
+              const profile = await res.json();
+              if (!profile?.email) {
+                return reject(new Error('Google account did not provide an email address.'));
+              }
+              const userObj = {
+                uid: profile.sub || `google-${Date.now()}`,
+                displayName: profile.name || profile.given_name || 'Google Student',
+                email: profile.email,
+                photoURL: profile.picture || null,
+                accessToken: tokenResponse.access_token
+              };
+              resolve(userObj);
+            } catch (fetchErr) {
+              reject(fetchErr);
+            }
+          } else {
+            reject(new Error('No access token received from Google OAuth.'));
+          }
+        },
+        error_callback: (err) => {
+          reject(new Error(err?.message || 'Google popup sign-in was closed or blocked.'));
+        }
+      });
+
+      client.requestAccessToken({ prompt: 'select_account' });
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+/**
+ * Initiates Google Sign-In with zero page reloads
+ * Tries Firebase Popup first; on iframe/cookie issues falls back to Google Identity Services Token Client
+ * Never triggers signInWithRedirect to avoid reloading and dropping session on localhost
+ * @returns {Promise<Object>} Authenticated user profile
  */
 export async function signInWithGoogle() {
-  if (!auth) {
-    console.warn('Firebase Auth is not configured. Set VITE_FIREBASE_* in .env.');
-    throw new Error('Firebase Authentication is not configured. Please check environment variables.');
-  }
-  try {
-    const result = await signInWithPopup(auth, googleProvider);
-    return result.user;
-  } catch (popupErr) {
-    // If popup fails due to internal-error (common in Chrome with 3rd-party cookie isolation on localhost) or popup blocked, fallback to redirect
-    if (popupErr?.code === 'auth/internal-error' || popupErr?.code === 'auth/popup-blocked') {
-      console.log('Popup auth encountered issue, initiating redirect fallback:', popupErr.code);
-      await signInWithRedirect(auth, googleProvider);
-      return null;
+  if (auth) {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      return result.user;
+    } catch (popupErr) {
+      console.warn('Firebase popup notice:', popupErr?.code, popupErr?.message);
+      if (popupErr?.code === 'auth/popup-closed-by-user') {
+        throw popupErr;
+      }
+      if (popupErr?.code === 'auth/unauthorized-domain') {
+        throw popupErr;
+      }
+      // If popup fails due to internal-error or browser cookie restrictions, proceed to GIS fallback
     }
-    throw popupErr;
   }
+
+  // High-reliability fallback: Google Identity Services Token Client
+  if (typeof window !== 'undefined' && window.google?.accounts?.oauth2) {
+    return await triggerGoogleOAuthTokenClient();
+  }
+
+  throw new Error('Google sign-in service is currently unreachable. You can continue with Manual Registration below.');
 }
 
 /**
@@ -76,7 +147,11 @@ export async function signInWithGoogle() {
  */
 export async function logOut() {
   if (!auth) return;
-  await signOut(auth);
+  try {
+    await signOut(auth);
+  } catch (err) {
+    console.warn('Sign out notice:', err);
+  }
 }
 
 // Initialize Firebase Analytics conditionally

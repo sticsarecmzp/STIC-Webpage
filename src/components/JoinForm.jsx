@@ -34,7 +34,6 @@ import {
   signInWithGoogle, 
   logOut, 
   onAuthStateChanged, 
-  getRedirectResult,
   saveRegistrationToFirestore 
 } from '../firebase';
 
@@ -89,47 +88,57 @@ export default function JoinForm({ selectedClub }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isSubmittingRef = useRef(false);
 
-  // UTM tracking state
-  const [utmData, setUtmData] = useState({
-    source: '',
-    medium: '',
-    campaign: ''
-  });
+  // Helper to persist verified student profile in localStorage
+  const saveAuthSession = (user) => {
+    if (!user) return;
+    try {
+      localStorage.setItem('stic_auth_user', JSON.stringify({
+        uid: user.uid,
+        displayName: user.displayName || '',
+        email: user.email || '',
+        photoURL: user.photoURL || null
+      }));
+    } catch {}
+  };
 
-  // Listen for Firebase Auth state changes & redirect login result
+  // Restore session from cache & listen for Firebase Auth state changes
   useEffect(() => {
+    // 1. Immediately check cached auth to eliminate flicker or page reload lockout
+    try {
+      const cached = localStorage.getItem('stic_auth_user');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed?.email) {
+          setCurrentUser(parsed);
+          setFormData(prev => ({
+            ...prev,
+            fullName: prev.fullName || parsed.displayName || '',
+            email: parsed.email || prev.email
+          }));
+          setFieldErrors(prev => ({ ...prev, email: '', fullName: '' }));
+          setAuthLoading(false);
+        }
+      }
+    } catch (cacheErr) {
+      console.warn('Cached auth read notice:', cacheErr);
+    }
+
     if (!auth) {
       setAuthLoading(false);
       return;
     }
 
-    // Check for redirect result (in case fallback redirect was used)
-    getRedirectResult(auth)
-      .then((res) => {
-        if (res?.user) {
-          setCurrentUser(res.user);
-          setFormData(prev => ({
-            ...prev,
-            fullName: prev.fullName || res.user.displayName || '',
-            email: res.user.email || prev.email
-          }));
-          setFieldErrors(prev => ({ ...prev, email: '', fullName: '' }));
-        }
-      })
-      .catch((err) => {
-        console.warn('Redirect login check:', err);
-      });
-
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
       setAuthLoading(false);
       if (user) {
+        setCurrentUser(user);
+        saveAuthSession(user);
         setFormData(prev => ({
           ...prev,
           fullName: prev.fullName || user.displayName || '',
           email: user.email || prev.email
         }));
-        setFieldErrors(prev => ({ ...prev, email: '' }));
+        setFieldErrors(prev => ({ ...prev, email: '', fullName: '' }));
       }
     });
     return () => unsubscribe();
@@ -201,8 +210,9 @@ export default function JoinForm({ selectedClub }) {
     setIsAuthenticating(true);
     try {
       const user = await signInWithGoogle();
-      if (user) {
+      if (user && user.email) {
         setCurrentUser(user);
+        saveAuthSession(user);
         setFormData(prev => ({
           ...prev,
           fullName: prev.fullName || user.displayName || '',
@@ -216,17 +226,11 @@ export default function JoinForm({ selectedClub }) {
       if (errCode === 'auth/popup-closed-by-user') {
         setAuthError('Sign-in cancelled. The Google authentication popup was closed.');
       } else if (errCode === 'auth/popup-blocked') {
-        setAuthError('The sign-in popup was blocked by your browser. Please allow popups.');
-      } else if (
-        errCode === 'auth/internal-error' || 
-        errCode === 'auth/operation-not-allowed' || 
-        errCode === 'auth/configuration-not-found'
-      ) {
-        setAuthError('Google Sign-in is not yet enabled in Firebase Console. Go to Firebase Console → Authentication → Sign-in method → Enable Google provider. You can also click "Continue with Manual Registration" below.');
+        setAuthError('The sign-in popup was blocked by your browser. Please allow popups for this site.');
       } else if (errCode === 'auth/unauthorized-domain') {
         setAuthError('Domain is not authorized in Firebase. Add this domain in Firebase Console → Authentication → Settings → Authorized domains.');
       } else {
-        setAuthError(err?.message || 'Google authentication failed. Please try again.');
+        setAuthError(err?.message || 'Google authentication failed. Please try again or use Manual Registration below.');
       }
     } finally {
       setIsAuthenticating(false);
@@ -235,6 +239,7 @@ export default function JoinForm({ selectedClub }) {
 
   const handleSignOut = async () => {
     try {
+      localStorage.removeItem('stic_auth_user');
       await logOut();
       setCurrentUser(null);
       setGuestBypass(false);
