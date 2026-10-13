@@ -34,6 +34,7 @@ import {
   signInWithGoogle, 
   logOut, 
   onAuthStateChanged, 
+  getRedirectResult,
   saveRegistrationToFirestore 
 } from '../firebase';
 
@@ -95,12 +96,30 @@ export default function JoinForm({ selectedClub }) {
     campaign: ''
   });
 
-  // Listen for Firebase Auth state changes
+  // Listen for Firebase Auth state changes & redirect login result
   useEffect(() => {
     if (!auth) {
       setAuthLoading(false);
       return;
     }
+
+    // Check for redirect result (in case fallback redirect was used)
+    getRedirectResult(auth)
+      .then((res) => {
+        if (res?.user) {
+          setCurrentUser(res.user);
+          setFormData(prev => ({
+            ...prev,
+            fullName: prev.fullName || res.user.displayName || '',
+            email: res.user.email || prev.email
+          }));
+          setFieldErrors(prev => ({ ...prev, email: '', fullName: '' }));
+        }
+      })
+      .catch((err) => {
+        console.warn('Redirect login check:', err);
+      });
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       setAuthLoading(false);

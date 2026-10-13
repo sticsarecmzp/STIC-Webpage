@@ -1,7 +1,15 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getAnalytics, isSupported } from 'firebase/analytics';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { 
+  getAuth, 
+  GoogleAuthProvider, 
+  signInWithPopup, 
+  signInWithRedirect, 
+  getRedirectResult, 
+  signOut, 
+  onAuthStateChanged 
+} from 'firebase/auth';
 
 /**
  * Firebase Client Configuration
@@ -38,19 +46,29 @@ googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
 
-export { onAuthStateChanged };
+export { onAuthStateChanged, getRedirectResult };
 
 /**
- * Initiates Google Sign-In with popup
- * @returns {Promise<import('firebase/auth').User>} Authenticated user
+ * Initiates Google Sign-In with popup, falling back to redirect if popup is blocked or partitioned
+ * @returns {Promise<import('firebase/auth').User|null>} Authenticated user or null if redirected
  */
 export async function signInWithGoogle() {
   if (!auth) {
     console.warn('Firebase Auth is not configured. Set VITE_FIREBASE_* in .env.');
     throw new Error('Firebase Authentication is not configured. Please check environment variables.');
   }
-  const result = await signInWithPopup(auth, googleProvider);
-  return result.user;
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    return result.user;
+  } catch (popupErr) {
+    // If popup fails due to internal-error (common in Chrome with 3rd-party cookie isolation on localhost) or popup blocked, fallback to redirect
+    if (popupErr?.code === 'auth/internal-error' || popupErr?.code === 'auth/popup-blocked') {
+      console.log('Popup auth encountered issue, initiating redirect fallback:', popupErr.code);
+      await signInWithRedirect(auth, googleProvider);
+      return null;
+    }
+    throw popupErr;
+  }
 }
 
 /**
