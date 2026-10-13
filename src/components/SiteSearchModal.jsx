@@ -50,7 +50,8 @@ export default function SiteSearchModal({ isOpen, onClose, onSelectClub }) {
 
   if (!isOpen) return null;
 
-  const q = query.trim().toLowerCase();
+  // Defensive bounding: cap search string to 80 characters to prevent L7 DoS / regex / scanning CPU exhaustion
+  const q = query.trim().slice(0, 80).toLowerCase();
 
   // Filter items
   const matchedClubs = q
@@ -131,7 +132,8 @@ export default function SiteSearchModal({ isOpen, onClose, onSelectClub }) {
             className="search-modal-input"
             placeholder="Search guilds, projects, bootcamps, FAQs, leaders..."
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            maxLength={80}
+            onChange={(e) => setQuery(e.target.value.slice(0, 80))}
           />
           {query && (
             <button 

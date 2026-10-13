@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { AlertCircle, Check, X } from 'lucide-react';
+import { AlertCircle, Check, X, Loader2 } from 'lucide-react';
 
 export default function ConfirmModal({
   isOpen,
@@ -8,25 +8,28 @@ export default function ConfirmModal({
   details = null,
   confirmLabel = "Confirm",
   cancelLabel = "Cancel",
+  isLoading = false,
   onConfirm,
   onCancel
 }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === 'Escape' && isOpen && !isLoading) {
         onCancel();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onCancel]);
+  }, [isOpen, isLoading, onCancel]);
 
   if (!isOpen) return null;
 
   return (
     <div 
       className="modal-backdrop-overlay" 
-      onClick={onCancel}
+      onClick={() => {
+        if (!isLoading) onCancel();
+      }}
       role="dialog"
       aria-modal="true"
       aria-labelledby="confirmModalTitle"
@@ -49,6 +52,7 @@ export default function ConfirmModal({
             type="button" 
             className="btn-icon" 
             onClick={onCancel}
+            disabled={isLoading}
             aria-label="Close modal"
           >
             <X size={16} strokeWidth={1.5} />
@@ -75,6 +79,7 @@ export default function ConfirmModal({
             type="button"
             className="btn btn-secondary btn-sm"
             onClick={onCancel}
+            disabled={isLoading}
           >
             {cancelLabel}
           </button>
@@ -82,9 +87,19 @@ export default function ConfirmModal({
             type="button"
             className="btn btn-primary btn-sm"
             onClick={onConfirm}
+            disabled={isLoading}
           >
-            <Check size={14} strokeWidth={2} />
-            <span>{confirmLabel}</span>
+            {isLoading ? (
+              <>
+                <Loader2 size={14} className="spin" />
+                <span>Submitting...</span>
+              </>
+            ) : (
+              <>
+                <Check size={14} strokeWidth={2} />
+                <span>{confirmLabel}</span>
+              </>
+            )}
           </button>
         </div>
       </div>

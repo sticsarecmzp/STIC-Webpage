@@ -50,6 +50,8 @@ export default function JoinForm({ selectedClub }) {
   const [endpointError, setEndpointError] = useState('');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
 
   // UTM tracking state
   const [utmData, setUtmData] = useState({
@@ -61,9 +63,9 @@ export default function JoinForm({ selectedClub }) {
   useEffect(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      const source = params.get('utm_source') || '';
-      const medium = params.get('utm_medium') || '';
-      const campaign = params.get('utm_campaign') || '';
+      const source = (params.get('utm_source') || '').slice(0, 50);
+      const medium = (params.get('utm_medium') || '').slice(0, 50);
+      const campaign = (params.get('utm_campaign') || '').slice(0, 50);
       if (source || medium || campaign) {
         setUtmData({ source, medium, campaign });
       }
@@ -208,30 +210,33 @@ export default function JoinForm({ selectedClub }) {
     setShowConfirmModal(true);
   };
 
-  // Called after confirmation in modal
+  // Called after confirmation in modal - enforces atomic in-flight submission lock (CWE-362)
   const handleConfirmedSubmit = async () => {
-    setShowConfirmModal(false);
-
-    // Re-verify rate limit & schema validity
-    const rateCheck = checkSubmissionRateLimit('stic_form_last_sub', 15000);
-    if (!rateCheck.allowed) {
-      setStatus('error');
-      setErrorMessage(`Rate limit: Please wait ${rateCheck.remainingSeconds}s before submitting again.`);
-      return;
-    }
-
-    const validation = validateRegistrationPayload(formData);
-    if (!validation.isValid) {
-      setFieldErrors(validation.errors);
-      setStatus('error');
-      setErrorMessage('Validation error: Please review highlighted fields.');
-      return;
-    }
-
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
+    setIsSubmitting(true);
     setStatus('loading');
     setErrorMessage('');
 
     try {
+      // Re-verify rate limit & schema validity
+      const rateCheck = checkSubmissionRateLimit('stic_form_last_sub', 15000);
+      if (!rateCheck.allowed) {
+        setShowConfirmModal(false);
+        setStatus('error');
+        setErrorMessage(`Rate limit: Please wait ${rateCheck.remainingSeconds}s before submitting again.`);
+        return;
+      }
+
+      const validation = validateRegistrationPayload(formData);
+      if (!validation.isValid) {
+        setShowConfirmModal(false);
+        setFieldErrors(validation.errors);
+        setStatus('error');
+        setErrorMessage('Validation error: Please review highlighted fields.');
+        return;
+      }
+
       const sanitized = validation.sanitizedData;
       const formPayload = new FormData();
       
@@ -278,6 +283,7 @@ export default function JoinForm({ selectedClub }) {
         year: sanitized.year
       });
 
+      setShowConfirmModal(false);
       setStatus('success');
       setFieldErrors({});
       setFormData({
@@ -293,11 +299,15 @@ export default function JoinForm({ selectedClub }) {
         referralKey: ''
       });
     } catch (err) {
+      setShowConfirmModal(false);
       setStatus('error');
       setErrorMessage(
         'Could not complete submission due to network latency. Please check your internet connection or email us directly at ' +
           COMMUNITY_INFO.officialEmail
       );
+    } finally {
+      isSubmittingRef.current = false;
+      setIsSubmitting(false);
     }
   };
 
@@ -780,6 +790,7 @@ export default function JoinForm({ selectedClub }) {
       {/* Confirmation Modal */}
       <ConfirmModal
         isOpen={showConfirmModal}
+        isLoading={isSubmitting}
         title="Confirm Track Application"
         message="Please review your details before submitting to the STIC organizing committee:"
         details={{
@@ -794,7 +805,9 @@ export default function JoinForm({ selectedClub }) {
         confirmLabel="Confirm & Submit"
         cancelLabel="Review & Edit"
         onConfirm={handleConfirmedSubmit}
-        onCancel={() => setShowConfirmModal(false)}
+        onCancel={() => {
+          if (!isSubmitting) setShowConfirmModal(false);
+        }}
       />
 
       {/* Endpoint Configuration Modal */}

@@ -22,12 +22,16 @@ export const ALLOWED_GUILDS = [
   'Design & Innovation Guild'
 ];
 
-// Private / Loopback IP address patterns for SSRF prevention
-const PRIVATE_IP_REGEX = /^(127\.|10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.|192\.168\.|169\.254\.|0\.|localhost)/i;
+// Comprehensive Private / Loopback IP address patterns for SSRF prevention (IPv4, octal, hex, decimal)
+const PRIVATE_IP_REGEX = /^(127\.|10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.|192\.168\.|169\.254\.|0\.|localhost|0x|0177|2130706433)/i;
+
+// IPv6 private & loopback addresses
+const IPV6_PRIVATE_REGEX = /^(::1|0:0:0:0:0:0:0:1|::|fe80:|fc[0-9a-f]{2}:|fd[0-9a-f]{2}:|::ffff:)/i;
 
 /**
  * Validates external URL to prevent SSRF, protocol exploitation, and loopback attacks.
- * Enforces HTTPS and verifies host against an allowlist if provided.
+ * Enforces HTTPS, blocks embedded credentials, verifies host against allowlist,
+ * and validates application-level path structure.
  *
  * @param {string} urlString - URL to test
  * @param {string[]} [allowedDomains] - Optional array of authorized parent domains
@@ -41,7 +45,7 @@ export function validateSafeUrl(urlString, allowedDomains = null) {
   const trimmed = urlString.trim();
 
   // Block dangerous schemes immediately
-  if (/^(javascript:|data:|vbscript:|file:|ftp:)/i.test(trimmed)) {
+  if (/^(javascript:|data:|vbscript:|file:|ftp:|blob:)/i.test(trimmed)) {
     return { valid: false, error: 'Dangerous URL protocol detected.' };
   }
 
@@ -57,10 +61,29 @@ export function validateSafeUrl(urlString, allowedDomains = null) {
     return { valid: false, error: 'Only HTTP/HTTPS URLs are permitted.' };
   }
 
-  // SSRF guard: Block localhost and private IP addresses
+  // Forbid embedded user credentials (RFC 3986 deprecated, common SSRF evasion vector)
+  if (parsed.username || parsed.password) {
+    return { valid: false, error: 'Embedded user credentials in URLs are prohibited.' };
+  }
+
+  // Enforce standard default ports (block non-standard port scanning)
+  if (parsed.port && parsed.port !== '443' && parsed.port !== '80') {
+    return { valid: false, error: 'Non-standard network ports are prohibited.' };
+  }
+
+  // SSRF guard: Block localhost, IPv4/IPv6 private & loopback addresses
   const hostname = parsed.hostname.toLowerCase();
-  if (PRIVATE_IP_REGEX.test(hostname) || hostname === '::1' || hostname.endsWith('.local')) {
-    return { valid: false, error: 'Access to loopback and internal private addresses is forbidden.' };
+  const rawHost = hostname.replace(/^\[|\]$/g, '');
+
+  if (
+    PRIVATE_IP_REGEX.test(rawHost) || 
+    IPV6_PRIVATE_REGEX.test(rawHost) || 
+    rawHost === '::1' || 
+    rawHost.endsWith('.local') ||
+    rawHost.endsWith('.internal') ||
+    rawHost.endsWith('.lan')
+  ) {
+    return { valid: false, error: 'Access to loopback, private, or local metadata addresses is forbidden.' };
   }
 
   // Domain allowlist verification (if specified)
@@ -75,6 +98,16 @@ export function validateSafeUrl(urlString, allowedDomains = null) {
         valid: false, 
         error: `Host "${hostname}" is not in the approved endpoint allowlist (${allowedDomains.join(', ')}).` 
       };
+    }
+
+    // Google Apps Script endpoint path enforcement (must match /macros/s/.../exec)
+    if (hostname === 'script.google.com' || hostname.endsWith('.script.google.com')) {
+      if (!/^\/macros\/s\/[a-zA-Z0-9_-]+\/exec$/i.test(parsed.pathname)) {
+        return { 
+          valid: false, 
+          error: 'Google Apps Script endpoint must follow the format: /macros/s/<DEPLOYMENT_ID>/exec' 
+        };
+      }
     }
   }
 
@@ -156,9 +189,9 @@ export function validateRegistrationPayload(data) {
     sanitized.rollNo = sanitizeForSpreadsheet(rawRoll);
   }
 
-  // 3. Email: Valid format, max 120 characters, RFC standard
+  // 3. Email: Valid format, max 120 characters, deterministic non-backtracking RFC pattern with TLD enforcement
   const rawEmail = sanitizeText(data.email || '', 120).toLowerCase();
-  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,24}$/;
   if (!rawEmail) {
     errors.email = 'Email address is required.';
   } else if (!emailRegex.test(rawEmail)) {
