@@ -269,6 +269,18 @@ export const STUDENT_PROJECTS = [
   }
 ];
 
+export const EXECUTIVE_COUNCIL_INFO = {
+  badge: "Official Student Governance",
+  subBadge: "AKTU Code 1215",
+  title: "The STIC Executive Council",
+  description: "The STIC Executive Council is the apex student governing and execution body at SAREC Mirzapur. Constituted under institutional faculty guidance, the council unites student leaders across Information Technology and Computer Science departments. The council holds end-to-end operational ownership of campus hackathons, technical guild bootcamps, MLH & GDG liaisons, stage & event execution, visual branding, digital systems, and corporate sponsorship partnerships.",
+  stats: [
+    { label: "Executive Appointees", value: "7 Members" },
+    { label: "Engineering Disciplines", value: "IT & CSE Guilds" },
+    { label: "Governance Model", value: "Student-Led, Faculty-Guided" }
+  ]
+};
+
 export const TEAM_MEMBERS = [
   {
     name: "Professor Amit Kumar Tiwari",
@@ -276,37 +288,77 @@ export const TEAM_MEMBERS = [
     affiliation: "Department of Computer Science and Engineering, SAREC Mirzapur",
     initials: "AT",
     isFaculty: true,
+    isCoFounder: false,
     note: "Providing institutional direction, academic lab coordination, and faculty support for all student technical initiatives."
   },
   {
     name: "Piyush Kushwaha",
-    role: "Student Co-founder",
-    affiliation: "B.Tech CSE, SAREC Mirzapur",
+    role: "Student Co-founder & Executive Council Member",
+    affiliation: "B.Tech IT, SAREC Mirzapur",
     email: "piyushkushwaha414@gmail.com",
     phone: "+91 94515 01321",
     initials: "PK",
     isFaculty: false,
-    focus: "Full-Stack Architecture, Community Operations, Web Guild Lead"
+    isCoFounder: true,
+    focus: "Full-Stack Architecture, Community Operations & Web Guild Lead"
   },
   {
     name: "Pawan Kumar Yadav",
-    role: "Student Co-founder",
-    affiliation: "B.Tech CSE, SAREC Mirzapur",
+    role: "Student Co-founder & Executive Council Member",
+    affiliation: "B.Tech IT, SAREC Mirzapur",
     email: "sspawanky@gmail.com",
     phone: "+91 72008 06065",
     initials: "PY",
     isFaculty: false,
+    isCoFounder: true,
     focus: "Competitive Programming, Systems and Linux, Open Source Lead"
   },
   {
     name: "Ayush Mishra",
-    role: "Website Maintenance & Designing",
+    role: "Executive Council Member (Website & Digital Lead)",
     affiliation: "B.Tech IT, SAREC Mirzapur",
     email: "officialayushmishra002@gmail.com",
     phone: "+91 79918 82235",
     initials: "AM",
     isFaculty: false,
-    focus: "Website Maintenance, UI/UX Design & Frontend Architecture"
+    isCoFounder: false,
+    focus: "AI & ML, Website Maintenance & Designing, Online Promotion & Marketing"
+  },
+  {
+    name: "Sidhant Maurya",
+    role: "Executive Council Member",
+    affiliation: "B.Tech CSE, SAREC Mirzapur",
+    initials: "SM",
+    isFaculty: false,
+    isCoFounder: false,
+    focus: "AI & ML, Open Source, Program Execution Ownership (Event Itinerary Planning, MLH Liaison, Host-Portal Application, Stage/Speaker Management & Overall Schedule Execution)"
+  },
+  {
+    name: "Khushi Umrao",
+    role: "Executive Council Member",
+    affiliation: "B.Tech CSE, SAREC Mirzapur",
+    initials: "KU",
+    isFaculty: false,
+    isCoFounder: false,
+    focus: "Designing & Video Editing, Graphics & Branding (Designing Event Posters, Banners, ID Cards, Badges, Certificates & Presentation Templates)"
+  },
+  {
+    name: "Aditi Yadav",
+    role: "Executive Council Member",
+    affiliation: "B.Tech IT, SAREC Mirzapur",
+    initials: "AY",
+    isFaculty: false,
+    isCoFounder: false,
+    focus: "Anchoring & Hospitality, Sponsors & Partner Relations (Finding Sponsors, GDG Prayagraj Coordination, Guest Hospitality & PR/Media)"
+  },
+  {
+    name: "Shital Kushwaha",
+    role: "Executive Council Member",
+    affiliation: "B.Tech CSE, SAREC Mirzapur",
+    initials: "SK",
+    isFaculty: false,
+    isCoFounder: false,
+    focus: "Graphics & Branding (Designing Event Posters, Banners, ID Cards, Badges, Certificates & Presentation Templates)"
   }
 ];
 

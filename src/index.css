@@ -2054,8 +2054,168 @@ section, .section {
 /* Team Section */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 1.5rem;
+}
+
+.faculty-spotlight-wrapper {
+  margin-bottom: 3.5rem;
+}
+
+.faculty-card {
+  max-width: 760px;
+  border-left: 6px solid var(--brutal-yellow);
+}
+
+.faculty-avatar {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.team-group-header {
+  margin-bottom: 1.25rem;
+}
+
+.team-group-pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  margin-bottom: 0.25rem;
+}
+
+.team-group-title {
+  font-size: var(--step-2);
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.team-badge-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 1.5px solid var(--border-color);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.faculty-tag {
+  background: var(--brutal-yellow);
+  color: #000000;
+}
+
+.cofounder-tag {
+  background: var(--brutal-yellow);
+  color: #000000;
+}
+
+.council-tag {
+  background: var(--bg-surface-elevated);
+  color: var(--text);
+}
+
+.council-section-wrapper {
+  margin-top: 1rem;
+}
+
+.council-intro-banner {
+  background: var(--bg-surface-elevated);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.council-intro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.council-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 2px solid var(--border-color);
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+.council-code-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.council-intro-title {
+  font-size: var(--step-1);
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.council-intro-text {
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 980px;
+  margin-bottom: 1.5rem;
+}
+
+.council-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 1rem;
+}
+
+.council-stat-item {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.council-stat-val {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.council-stat-lbl {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .team-card {
@@ -2064,6 +2224,8 @@ section, .section {
   border-radius: var(--card-radius);
   box-shadow: var(--card-shadow);
   padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
   transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.15s ease,
               box-shadow 0.15s ease;
@@ -2072,6 +2234,10 @@ section, .section {
 .team-card:hover {
   transform: translate(-3px, -3px);
   box-shadow: var(--shadow-hover);
+}
+
+.card-cofounder {
+  border-top: 4px solid var(--brutal-yellow);
 }
 
 .team-card-header {
@@ -2084,6 +2250,7 @@ section, .section {
 .team-avatar {
   width: 52px;
   height: 52px;
+  flex-shrink: 0;
   background: var(--brutal-yellow);
   color: #000000;
   border: 2px solid var(--border-color);
@@ -2131,6 +2298,7 @@ section, .section {
   padding: 0.85rem;
   border-radius: 8px;
   font-weight: 600;
+  flex-grow: 1;
 }
 
 .team-contacts {
@@ -2139,6 +2307,7 @@ section, .section {
   gap: 0.5rem;
   border-top: var(--border-width) solid var(--border-color);
   padding-top: 1rem;
+  margin-top: auto;
 }
 
 .contact-link {
