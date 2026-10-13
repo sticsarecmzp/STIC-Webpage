@@ -42,7 +42,8 @@ export default function Team() {
 
               {faculty.note && (
                 <div className="team-notes faculty-note">
-                  <p>{faculty.note}</p>
+                  <strong style={{ color: 'var(--text)', fontWeight: 800 }}>Institutional Focus: </strong>
+                  <span>{faculty.note}</span>
                 </div>
               )}
             </article>
@@ -102,7 +103,7 @@ export default function Team() {
 
                 {member.focus && (
                   <div className="team-notes">
-                    <strong style={{ color: 'var(--text)', fontWeight: 800 }}>Focus Areas: </strong>
+                    <strong style={{ color: 'var(--text)', fontWeight: 800 }}>Guild Track: </strong>
                     <span>{member.focus}</span>
                   </div>
                 )}

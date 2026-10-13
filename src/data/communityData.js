@@ -289,7 +289,7 @@ export const TEAM_MEMBERS = [
     initials: "AT",
     isFaculty: true,
     isCoFounder: false,
-    note: "Providing institutional direction, academic lab coordination, and faculty support for all student technical initiatives."
+    note: "Academic Lab Direction, Faculty Guidance & Technical Mentorship"
   },
   {
     name: "Piyush Kushwaha",
@@ -300,7 +300,7 @@ export const TEAM_MEMBERS = [
     initials: "PK",
     isFaculty: false,
     isCoFounder: true,
-    focus: "Full-Stack Architecture, Community Operations & Web Guild Lead"
+    focus: "Web & Mobile Guild, Full-Stack & Cloud Architecture"
   },
   {
     name: "Pawan Kumar Yadav",
@@ -311,18 +311,18 @@ export const TEAM_MEMBERS = [
     initials: "PY",
     isFaculty: false,
     isCoFounder: true,
-    focus: "Competitive Programming, Systems and Linux, Open Source Lead"
+    focus: "Coding & CP Guild, Linux Systems & Open Source"
   },
   {
     name: "Ayush Mishra",
-    role: "Executive Council Member (Website & Digital Lead)",
+    role: "Executive Council Member",
     affiliation: "B.Tech IT, SAREC Mirzapur",
     email: "officialayushmishra002@gmail.com",
     phone: "+91 79918 82235",
     initials: "AM",
     isFaculty: false,
     isCoFounder: false,
-    focus: "AI & ML, Website Maintenance & Designing, Online Promotion & Marketing"
+    focus: "AI & Data Science Guild, Online Promotion & Marketing"
   },
   {
     name: "Sidhant Maurya",
@@ -331,7 +331,7 @@ export const TEAM_MEMBERS = [
     initials: "SM",
     isFaculty: false,
     isCoFounder: false,
-    focus: "AI & ML, Open Source, Program Execution Ownership (Event Itinerary Planning, MLH Liaison, Host-Portal Application, Stage/Speaker Management & Overall Schedule Execution)"
+    focus: "AI & Data Science Guild, Open Source & Program Execution"
   },
   {
     name: "Khushi Umrao",
@@ -340,7 +340,7 @@ export const TEAM_MEMBERS = [
     initials: "KU",
     isFaculty: false,
     isCoFounder: false,
-    focus: "Designing & Video Editing, Graphics & Branding (Designing Event Posters, Banners, ID Cards, Badges, Certificates & Presentation Templates)"
+    focus: "Creative Design, Graphics & Event Branding"
   },
   {
     name: "Aditi Yadav",
@@ -349,7 +349,7 @@ export const TEAM_MEMBERS = [
     initials: "AY",
     isFaculty: false,
     isCoFounder: false,
-    focus: "Anchoring & Hospitality, Sponsors & Partner Relations (Finding Sponsors, GDG Prayagraj Coordination, Guest Hospitality & PR/Media)"
+    focus: "Sponsorship & Partner Relations, Event Anchoring & PR"
   },
   {
     name: "Shital Kushwaha",
@@ -358,7 +358,7 @@ export const TEAM_MEMBERS = [
     initials: "SK",
     isFaculty: false,
     isCoFounder: false,
-    focus: "Graphics & Branding (Designing Event Posters, Banners, ID Cards, Badges, Certificates & Presentation Templates)"
+    focus: "Visual Design, Event Graphics & Brand Identity"
   }
 ];
 
