@@ -62,6 +62,7 @@ function GoogleIcon() {
 
 export default function JoinForm({ selectedClub }) {
   const [currentUser, setCurrentUser] = useState(null);
+  const [guestBypass, setGuestBypass] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [authError, setAuthError] = useState('');
@@ -192,10 +193,19 @@ export default function JoinForm({ selectedClub }) {
       }
     } catch (err) {
       console.warn('Google sign-in error:', err);
-      if (err?.code === 'auth/popup-closed-by-user') {
-        setAuthError('Sign-in cancelled. The Google authentication window was closed.');
-      } else if (err?.code === 'auth/popup-blocked') {
-        setAuthError('Sign-in pop-up was blocked by your browser. Please allow popups.');
+      const errCode = err?.code || '';
+      if (errCode === 'auth/popup-closed-by-user') {
+        setAuthError('Sign-in cancelled. The Google authentication popup was closed.');
+      } else if (errCode === 'auth/popup-blocked') {
+        setAuthError('The sign-in popup was blocked by your browser. Please allow popups.');
+      } else if (
+        errCode === 'auth/internal-error' || 
+        errCode === 'auth/operation-not-allowed' || 
+        errCode === 'auth/configuration-not-found'
+      ) {
+        setAuthError('Google Sign-in is not yet enabled in Firebase Console. Go to Firebase Console → Authentication → Sign-in method → Enable Google provider. You can also click "Continue with Manual Registration" below.');
+      } else if (errCode === 'auth/unauthorized-domain') {
+        setAuthError('Domain is not authorized in Firebase. Add this domain in Firebase Console → Authentication → Settings → Authorized domains.');
       } else {
         setAuthError(err?.message || 'Google authentication failed. Please try again.');
       }
@@ -208,6 +218,7 @@ export default function JoinForm({ selectedClub }) {
     try {
       await logOut();
       setCurrentUser(null);
+      setGuestBypass(false);
       setFormData(prev => ({ ...prev, email: '' }));
     } catch (err) {
       console.warn('Sign out error:', err);
@@ -218,10 +229,10 @@ export default function JoinForm({ selectedClub }) {
   const handlePreSubmit = (e) => {
     e.preventDefault();
 
-    // 0. Enforce Google Authentication
-    if (!currentUser) {
+    // 0. Enforce Google Authentication unless manual bypass
+    if (!currentUser && !guestBypass) {
       setStatus('error');
-      setErrorMessage('Please authenticate with Google before submitting your registration.');
+      setErrorMessage('Please authenticate with Google or continue with manual registration.');
       return;
     }
 
@@ -519,7 +530,7 @@ export default function JoinForm({ selectedClub }) {
                 <Loader2 size={24} className="spinner" />
                 <span>Checking Google authentication status...</span>
               </div>
-            ) : !currentUser ? (
+            ) : (!currentUser && !guestBypass) ? (
               <div className="google-auth-gate-card">
                 <div className="auth-gate-badge">
                   <ShieldCheck size={14} strokeWidth={2.5} />
@@ -574,46 +585,83 @@ export default function JoinForm({ selectedClub }) {
                   )}
                 </button>
 
+                <div style={{ textAlign: 'center', marginTop: '0.25rem' }}>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => setGuestBypass(true)}
+                    style={{ fontSize: '0.78rem', width: '100%', padding: '0.55rem 1rem' }}
+                  >
+                    Continue with Manual Registration (Without Google)
+                  </button>
+                </div>
+
                 <p className="auth-gate-footnote">
                   Secured by Firebase Authentication. We only receive your basic profile and verified email address.
                 </p>
               </div>
             ) : (
               <>
-                {/* Verified Google User Top Bar */}
-                <div className="auth-user-bar">
-                  <div className="auth-user-info">
-                    {currentUser.photoURL ? (
-                      <img
-                        src={currentUser.photoURL}
-                        alt={currentUser.displayName || 'Google Student'}
-                        className="auth-user-avatar"
-                        referrerPolicy="no-referrer"
-                      />
-                    ) : (
-                      <div className="auth-user-avatar-placeholder">
-                        {(currentUser.displayName || currentUser.email || 'U')[0].toUpperCase()}
+                {/* User Status Bar (Google Verified or Manual Mode) */}
+                {currentUser ? (
+                  <div className="auth-user-bar">
+                    <div className="auth-user-info">
+                      {currentUser.photoURL ? (
+                        <img
+                          src={currentUser.photoURL}
+                          alt={currentUser.displayName || 'Google Student'}
+                          className="auth-user-avatar"
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        <div className="auth-user-avatar-placeholder">
+                          {(currentUser.displayName || currentUser.email || 'U')[0].toUpperCase()}
+                        </div>
+                      )}
+                      <div>
+                        <div className="auth-user-tag">
+                          <CheckCircle2 size={12} strokeWidth={2.5} />
+                          <span>GOOGLE VERIFIED STUDENT</span>
+                        </div>
+                        <div className="auth-user-name">{currentUser.displayName || 'Verified Student'}</div>
+                        <div className="auth-user-email">{currentUser.email}</div>
                       </div>
-                    )}
-                    <div>
-                      <div className="auth-user-tag">
-                        <CheckCircle2 size={12} strokeWidth={2.5} />
-                        <span>GOOGLE VERIFIED STUDENT</span>
-                      </div>
-                      <div className="auth-user-name">{currentUser.displayName || 'Verified Student'}</div>
-                      <div className="auth-user-email">{currentUser.email}</div>
                     </div>
+                    <button
+                      type="button"
+                      className="btn btn-secondary btn-sm"
+                      onClick={handleSignOut}
+                      title="Switch to another Google account"
+                    >
+                      <RefreshCw size={12} strokeWidth={2} />
+                      <span>Switch</span>
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    className="btn btn-secondary btn-sm"
-                    onClick={handleSignOut}
-                    title="Switch to another Google account"
-                  >
-                    <RefreshCw size={12} strokeWidth={2} />
-                    <span>Switch</span>
-                  </button>
-                </div>
+                ) : (
+                  <div className="auth-user-bar">
+                    <div className="auth-user-info">
+                      <div className="auth-user-avatar-placeholder" style={{ background: 'var(--text)', color: 'var(--bg)', fontSize: '0.85rem' }}>
+                        ID
+                      </div>
+                      <div>
+                        <div className="auth-user-tag">
+                          <span>MANUAL ENTRY MODE</span>
+                        </div>
+                        <div className="auth-user-name">Direct Student Registration</div>
+                        <div className="auth-user-email">Manual input without Google verification</div>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      className="btn btn-secondary btn-sm"
+                      onClick={() => setGuestBypass(false)}
+                      title="Switch back to Google Authentication"
+                    >
+                      <RefreshCw size={12} strokeWidth={2} />
+                      <span>Use Google</span>
+                    </button>
+                  </div>
+                )}
 
                 {status === 'error' && (
                   <div className="form-status-banner error" role="alert">
@@ -691,12 +739,14 @@ export default function JoinForm({ selectedClub }) {
                         className={`floating-input ${fieldErrors.email ? 'input-error' : ''}`}
                         placeholder=" "
                         value={formData.email}
-                        readOnly
-                        style={{ background: 'var(--bg-surface-elevated)', cursor: 'default' }}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        readOnly={Boolean(currentUser)}
+                        style={currentUser ? { background: 'var(--bg-surface-elevated)', cursor: 'default' } : {}}
                         required
                       />
                       <label htmlFor="email" className="floating-label">
-                        Verified Email (Google OAuth) *
+                        {currentUser ? 'Verified Email (Google OAuth) *' : 'College / Personal Email *'}
                       </label>
                       {fieldErrors.email && (
                         <span className="field-error-text">
