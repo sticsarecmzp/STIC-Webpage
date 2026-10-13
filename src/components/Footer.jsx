@@ -267,7 +267,7 @@ export default function Footer({ onSelectClub }) {
             <span style={{ opacity: 0.4 }}>&bull;</span>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--text-secondary)' }}>
               <Clock size={12} strokeWidth={1.8} />
-              <span>Last Updated: October 2026 (Academic Session 2025–2026)</span>
+              <span>Last Updated: October 2026 (Academic Session 2026–2027)</span>
             </div>
           </div>
           <p>Maintained by STIC Student Web &amp; Systems Team.</p>

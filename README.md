@@ -137,7 +137,7 @@ function doPost(e) {
 - **Institution**: Samrat Ashok Rajkiya Engineering College, Mirzapur (SAREC Mirzapur)
 - **Affiliation**: Dr. A.P.J. Abdul Kalam Technical University (AKTU Lucknow)
 - **College Code**: 1215
-- **Academic Year**: 2025 – 2026
+- **Academic Year**: 2026 – 2027
 
 ---
 

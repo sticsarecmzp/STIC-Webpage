@@ -9,7 +9,7 @@ export const COMMUNITY_INFO = {
   tagline: "Code, Build, Innovate",
   officialEmail: "sticsarecmzp@gmail.com",
   venue: "SAREC Central Computer Lab and Workshop Hall",
-  academicYear: "2025 - 2026",
+  academicYear: "2026 - 2027",
   meetingSchedule: "Weekly Saturday afternoon build sprints and midweek evening lab hours",
   githubOrg: "https://github.com/sticsarecmzp",
   instagram: "https://www.instagram.com/sticsarecmzp",

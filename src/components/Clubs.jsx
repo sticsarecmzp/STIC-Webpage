@@ -184,7 +184,7 @@ export default function Clubs({ selectedClub, onSelectClub }) {
                 <span className="live-status-dot" />
                 <span>IN CURRENT TIME • CURRENTLY ACTIVE</span>
               </div>
-              <h3 className="guilds-status-title">Currently Active Cohort (2025–2026)</h3>
+              <h3 className="guilds-status-title">Currently Active Cohort (2026–2027)</h3>
               <p className="guilds-status-subtitle">
                 Running active weekly build sprints, peer problem sheets, code reviews, and live production deployments at SAREC Mirzapur.
               </p>

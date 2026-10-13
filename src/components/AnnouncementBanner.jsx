@@ -4,7 +4,7 @@ import { Sparkles, ArrowRight, X } from 'lucide-react';
 export default function AnnouncementBanner() {
   const [visible, setVisible] = useState(() => {
     try {
-      return localStorage.getItem('stic_banner_dismissed_2026') !== 'true';
+      return localStorage.getItem('stic_banner_dismissed_2026_27') !== 'true';
     } catch {
       return true;
     }
@@ -13,7 +13,7 @@ export default function AnnouncementBanner() {
   const handleDismiss = () => {
     setVisible(false);
     try {
-      localStorage.setItem('stic_banner_dismissed_2026', 'true');
+      localStorage.setItem('stic_banner_dismissed_2026_27', 'true');
     } catch {}
   };
 
@@ -28,7 +28,7 @@ export default function AnnouncementBanner() {
             <span>Active Sprint</span>
           </span>
           <span className="announcement-text">
-            <strong>2025–2026 Academic Cohort</strong>: Registrations open across all 8 Guilds &amp; SIH internal qualifiers at SAREC Mirzapur!
+            <strong>2026–2027 Academic Cohort</strong>: Registrations open across all 8 Guilds &amp; SIH internal qualifiers at SAREC Mirzapur!
           </span>
         </div>
 
