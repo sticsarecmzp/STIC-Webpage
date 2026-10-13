@@ -6,13 +6,28 @@ node_modules/
 # Production build output
 dist/
 
-# Local Environment & Logs
-.env
-.env.local
-.env.*.local
+# Local Environment, Secrets & Credentials
+.env*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+*.id_rsa
+*.id_ed25519
+
+# Logs & Debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+
+# Serverless & Deployment Credentials
+.vercel
+.netlify
+.serverless/
 
 # Editor & OS files
 .DS_Store

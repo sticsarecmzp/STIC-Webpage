@@ -22,6 +22,13 @@ import {
 } from 'lucide-react';
 import { COMMUNITY_INFO, DEPARTMENTS } from '../data/communityData';
 import ConfirmModal from './ConfirmModal';
+import { 
+  validateRegistrationPayload, 
+  validateSafeUrl, 
+  checkSubmissionRateLimit, 
+  recordSubmissionTimestamp,
+  sanitizeText 
+} from '../utils/security';
 
 export default function JoinForm({ selectedClub }) {
   const [formData, setFormData] = useState({
@@ -40,8 +47,7 @@ export default function JoinForm({ selectedClub }) {
   const [fieldErrors, setFieldErrors] = useState({});
   const [submittedData, setSubmittedData] = useState(null);
   const [showReferralKey, setShowReferralKey] = useState(false);
-  const [showEndpointKey, setShowEndpointKey] = useState(false);
-  const [customEndpointKey, setCustomEndpointKey] = useState('');
+  const [endpointError, setEndpointError] = useState('');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
 
@@ -64,9 +70,19 @@ export default function JoinForm({ selectedClub }) {
     } catch {}
   }, []);
 
+  // Secured endpoint state: validates stored URL against allowlist and purges tainted values
   const [endpointUrl, setEndpointUrl] = useState(() => {
     try {
-      return localStorage.getItem('stic_apps_script_url') || COMMUNITY_INFO.formEndpoint;
+      const stored = localStorage.getItem('stic_apps_script_url');
+      if (stored) {
+        const check = validateSafeUrl(stored, ['script.google.com']);
+        if (check.valid) {
+          return stored;
+        } else {
+          localStorage.removeItem('stic_apps_script_url');
+        }
+      }
+      return COMMUNITY_INFO.formEndpoint;
     } catch {
       return COMMUNITY_INFO.formEndpoint;
     }
@@ -109,51 +125,22 @@ export default function JoinForm({ selectedClub }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showEndpointModal]);
 
-  const validateField = (name, value) => {
-    switch (name) {
-      case 'fullName':
-        if (!value.trim()) return 'Full name is required.';
-        if (value.trim().length < 2) return 'Name must be at least 2 characters.';
-        return '';
-      case 'rollNo':
-        if (!value.trim()) return 'Roll number / Student ID is required.';
-        if (value.trim().length < 3) return 'Enter a valid roll number.';
-        return '';
-      case 'email':
-        if (!value.trim()) return 'Email is required.';
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return 'Please enter a valid email address.';
-        return '';
-      case 'branch':
-        if (!value) return 'Please select your department.';
-        return '';
-      case 'year':
-        if (!value) return 'Please select your academic year.';
-        return '';
-      case 'guild':
-        if (!value) return 'Please select a primary technology guild.';
-        return '';
-      case 'interests':
-        if (!value) return 'Please choose your specific domain interest.';
-        return '';
-      default:
-        return '';
-    }
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const nextFormData = { ...formData, [name]: value };
+    setFormData(nextFormData);
 
     if (fieldErrors[name]) {
-      setFieldErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+      const validation = validateRegistrationPayload(nextFormData);
+      setFieldErrors(prev => ({ ...prev, [name]: validation.errors[name] || '' }));
     }
   };
 
   const handleBlur = (e) => {
-    const { name, value } = e.target;
-    const error = validateField(name, value);
-    if (error) {
-      setFieldErrors(prev => ({ ...prev, [name]: error }));
+    const { name } = e.target;
+    const validation = validateRegistrationPayload(formData);
+    if (validation.errors[name]) {
+      setFieldErrors(prev => ({ ...prev, [name]: validation.errors[name] }));
     }
   };
 
@@ -165,18 +152,31 @@ export default function JoinForm({ selectedClub }) {
 
   const handleSaveEndpoint = (e) => {
     e.preventDefault();
-    if (customEndpointInput.trim()) {
-      setEndpointUrl(customEndpointInput.trim());
-      try {
-        localStorage.setItem('stic_apps_script_url', customEndpointInput.trim());
-      } catch {}
+    setEndpointError('');
+    const input = customEndpointInput.trim();
+    if (!input) {
+      setEndpointError('Endpoint URL is required.');
+      return;
     }
+
+    // SSRF & Domain allowlist validation: strictly Google Apps Script HTTPS endpoint
+    const check = validateSafeUrl(input, ['script.google.com']);
+    if (!check.valid) {
+      setEndpointError(check.error || 'Endpoint must be a valid HTTPS Google Apps Script URL (script.google.com).');
+      return;
+    }
+
+    setEndpointUrl(input);
+    try {
+      localStorage.setItem('stic_apps_script_url', input);
+    } catch {}
     setShowEndpointModal(false);
   };
 
   const handleResetEndpoint = () => {
     setEndpointUrl(COMMUNITY_INFO.formEndpoint);
     setCustomEndpointInput('');
+    setEndpointError('');
     try {
       localStorage.removeItem('stic_apps_script_url');
     } catch {}
@@ -187,15 +187,18 @@ export default function JoinForm({ selectedClub }) {
   const handlePreSubmit = (e) => {
     e.preventDefault();
 
-    const errors = {};
-    const requiredFields = ['fullName', 'rollNo', 'email', 'branch', 'year', 'guild', 'interests'];
-    requiredFields.forEach(field => {
-      const error = validateField(field, formData[field]);
-      if (error) errors[field] = error;
-    });
+    // 1. Client-Side Rate Limit & Cooldown Check (prevents rapid automated submissions)
+    const rateCheck = checkSubmissionRateLimit('stic_form_last_sub', 15000);
+    if (!rateCheck.allowed) {
+      setStatus('error');
+      setErrorMessage(`Rate limit: Please wait ${rateCheck.remainingSeconds}s before submitting again.`);
+      return;
+    }
 
-    if (Object.keys(errors).length > 0) {
-      setFieldErrors(errors);
+    // 2. Strict Schema Validation (lengths, patterns, protocols, allowlists)
+    const validation = validateRegistrationPayload(formData);
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
       setStatus('error');
       setErrorMessage('Please fix the highlighted fields before proceeding.');
       return;
@@ -208,44 +211,71 @@ export default function JoinForm({ selectedClub }) {
   // Called after confirmation in modal
   const handleConfirmedSubmit = async () => {
     setShowConfirmModal(false);
+
+    // Re-verify rate limit & schema validity
+    const rateCheck = checkSubmissionRateLimit('stic_form_last_sub', 15000);
+    if (!rateCheck.allowed) {
+      setStatus('error');
+      setErrorMessage(`Rate limit: Please wait ${rateCheck.remainingSeconds}s before submitting again.`);
+      return;
+    }
+
+    const validation = validateRegistrationPayload(formData);
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      setStatus('error');
+      setErrorMessage('Validation error: Please review highlighted fields.');
+      return;
+    }
+
     setStatus('loading');
     setErrorMessage('');
 
     try {
+      const sanitized = validation.sanitizedData;
       const formPayload = new FormData();
       
-      formPayload.append('fullName', formData.fullName.trim());
-      formPayload.append('name', formData.fullName.trim());
-      formPayload.append('rollNo', formData.rollNo.trim());
-      formPayload.append('email', formData.email.trim());
-      formPayload.append('branch', formData.branch);
-      formPayload.append('year', formData.year);
-      formPayload.append('guild', formData.guild);
-      formPayload.append('club', formData.guild);
-      formPayload.append('interests', formData.interests);
-      formPayload.append('portfolio', formData.portfolio.trim() || 'N/A');
-      formPayload.append('message', formData.message.trim() || 'N/A');
-      formPayload.append('referralKey', formData.referralKey.trim() || 'N/A');
+      // Sanitized against CSV / Formula Injection
+      formPayload.append('fullName', sanitized.fullName);
+      formPayload.append('name', sanitized.fullName);
+      formPayload.append('rollNo', sanitized.rollNo);
+      formPayload.append('email', sanitized.email);
+      formPayload.append('branch', sanitized.branch);
+      formPayload.append('year', sanitized.year);
+      formPayload.append('guild', sanitized.guild);
+      formPayload.append('club', sanitized.guild);
+      formPayload.append('interests', sanitized.interests);
+      formPayload.append('portfolio', sanitized.portfolio);
+      formPayload.append('message', sanitized.message);
+      formPayload.append('referralKey', sanitized.referralKey);
       formPayload.append('collegeCode', COMMUNITY_INFO.collegeCode || '1215');
 
-      // UTM parameters
-      formPayload.append('utmSource', utmData.source || 'direct');
-      formPayload.append('utmMedium', utmData.medium || 'web');
-      formPayload.append('utmCampaign', utmData.campaign || 'general');
+      // Sanitized UTM parameters
+      formPayload.append('utmSource', utmData.source ? sanitizeText(utmData.source, 50) : 'direct');
+      formPayload.append('utmMedium', utmData.medium ? sanitizeText(utmData.medium, 50) : 'web');
+      formPayload.append('utmCampaign', utmData.campaign ? sanitizeText(utmData.campaign, 50) : 'general');
+
+      // Final URL safety check
+      const targetEndpoint = validateSafeUrl(endpointUrl, ['script.google.com']).valid
+        ? endpointUrl
+        : COMMUNITY_INFO.formEndpoint;
 
       // Submit to Google Apps Script endpoint in no-cors mode
-      await fetch(endpointUrl, {
+      await fetch(targetEndpoint, {
         method: 'POST',
         body: formPayload,
         mode: 'no-cors'
       });
 
+      // Record rate limit timestamp
+      recordSubmissionTimestamp('stic_form_last_sub');
+
       setSubmittedData({
         name: formData.fullName.trim(),
         email: formData.email.trim(),
-        guild: formData.guild,
-        branch: formData.branch,
-        year: formData.year
+        guild: sanitized.guild,
+        branch: sanitized.branch,
+        year: sanitized.year
       });
 
       setStatus('success');
@@ -650,10 +680,17 @@ export default function JoinForm({ selectedClub }) {
                         placeholder=" "
                         value={formData.portfolio}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       <label htmlFor="portfolio" className="floating-label">
                         GitHub / Portfolio URL (Optional)
                       </label>
+                      {fieldErrors.portfolio && (
+                        <span className="field-error-text">
+                          <AlertCircle size={12} strokeWidth={1.5} />
+                          {fieldErrors.portfolio}
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -670,11 +707,12 @@ export default function JoinForm({ selectedClub }) {
                         id="referralKey"
                         name="referralKey"
                         type={showReferralKey ? "text" : "password"}
-                        className="form-input"
+                        className={`form-input ${fieldErrors.referralKey ? 'input-error' : ''}`}
                         style={{ paddingRight: '2.5rem' }}
                         placeholder="Enter mentor code if referred by a senior or faculty..."
                         value={formData.referralKey}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       <button
                         type="button"
@@ -686,6 +724,12 @@ export default function JoinForm({ selectedClub }) {
                         {showReferralKey ? <EyeOff size={16} /> : <Eye size={16} />}
                       </button>
                     </div>
+                    {fieldErrors.referralKey && (
+                      <span className="field-error-text">
+                        <AlertCircle size={12} strokeWidth={1.5} />
+                        {fieldErrors.referralKey}
+                      </span>
+                    )}
                   </div>
 
                   {/* Goals / Message */}
@@ -796,30 +840,12 @@ export default function JoinForm({ selectedClub }) {
                 />
               </div>
 
-              {/* Endpoint API Secret with Password Visibility Toggle */}
-              <div className="form-group">
-                <label className="form-label" style={{ fontSize: '0.78rem' }}>
-                  Optional Sheet API Secret Key:
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <input
-                    type={showEndpointKey ? "text" : "password"}
-                    className="form-input"
-                    placeholder="Enter sheet authorization token..."
-                    value={customEndpointKey}
-                    onChange={(e) => setCustomEndpointKey(e.target.value)}
-                    style={{ paddingRight: '2.5rem' }}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowEndpointKey(!showEndpointKey)}
-                    style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer' }}
-                    aria-label="Toggle secret key visibility"
-                  >
-                    {showEndpointKey ? <EyeOff size={15} /> : <Eye size={15} />}
-                  </button>
+              {endpointError && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.75rem', borderRadius: '4px', background: 'var(--brutal-yellow)', border: '2px solid var(--border-color)', color: '#000000', fontSize: '0.78rem', fontWeight: 600, marginBottom: '1rem' }}>
+                  <AlertCircle size={14} strokeWidth={2} />
+                  <span>{endpointError}</span>
                 </div>
-              </div>
+              )}
 
               <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '1.25rem' }}>
                 <button

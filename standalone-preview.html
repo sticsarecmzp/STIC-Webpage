@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Security & Hardening Controls -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com; frame-ancestors 'none';"
+  />
+
   <title>STIC • SAREC Mirzapur | Technology &amp; Innovation Community (AKTU Code 1215)</title>
   <meta name="description" content="Official platform of STIC (Technology and Innovation Community) at Samrat Ashok Rajkiya Engineering College, Mirzapur (AKTU Code 1215). Explore 8 engineering guilds, peer mentorship, SIH hackathons, and real-world student projects." />
   <meta name="keywords" content="STIC, SAREC Mirzapur, Samrat Ashok Rajkiya Engineering College, AKTU 1215, Technology and Innovation Community, Coding Club, AI Data Science, Web Development, Robotics, IoT, Hackathons, Smart India Hackathon" />
@@ -4127,6 +4137,16 @@ section, .section {
   </div>
 
   <script>
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
     const CLUBS_DATA = [
       { id: "ai-ml", name: "AI & Data Science", status: "active", badge: "AI/ML", desc: "Exploring neural networks, PyTorch, computer vision, data pipelines, predictive models, and deploying AI APIs.", schedule: "Fridays at 5:00 PM", track: "AI/ML Syndicate" },
       { id: "web-mobile", name: "Web & Mobile Dev", status: "active", badge: "Full-Stack", desc: "Crafting modern full-stack web and mobile apps with React, Next.js, Node.js, Flutter, and REST APIs.", schedule: "Thursdays at 5:30 PM", track: "Web & Mobile Guild" },
@@ -4416,12 +4436,12 @@ section, .section {
         results.push({
           title: 'STIC LinkedIn Page & Posts',
           sub: 'Official LinkedIn updates, build announcements & student achievements',
-          action: () => { closeSearchModal(); window.open('https://www.linkedin.com/company/stic-sarec-mirzapur/posts/', '_blank'); }
+          action: () => { closeSearchModal(); window.open('https://www.linkedin.com/company/stic-sarec-mirzapur/posts/', '_blank', 'noopener,noreferrer'); }
         });
       }
 
       if (results.length === 0) {
-        list.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--text-tertiary);">No results found for "${query}"</div>`;
+        list.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--text-tertiary);">No results found for "${escapeHtml(query)}"</div>`;
       } else {
         list.innerHTML = results.slice(0, 7).map((r, i) => `
           <div class="search-item" onclick="searchItemActions[${i}]()">
@@ -4442,8 +4462,8 @@ section, .section {
       const container = document.getElementById('confirmModalDetails');
       container.innerHTML = Object.entries(details).map(([k, v]) => `
         <div style="display: flex; justify-content: space-between;">
-          <span style="color: var(--text-tertiary);">${k}:</span>
-          <strong style="color: var(--text); text-align: right;">${v}</strong>
+          <span style="color: var(--text-tertiary);">${escapeHtml(k)}:</span>
+          <strong style="color: var(--text); text-align: right;">${escapeHtml(v)}</strong>
         </div>
       `).join('');
       document.getElementById('confirmModal').classList.add('open');
@@ -4521,9 +4541,38 @@ section, .section {
       }, () => executeSubmission());
     });
 
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function sanitizeFormula(str) {
+      if (!str) return '';
+      const t = String(str).trim();
+      const dangerous = ['=', '+', '-', '@', '\t', '\r', '%'];
+      return dangerous.includes(t.charAt(0)) ? "'" + t : t;
+    }
+
     async function executeSubmission() {
       const btn = document.getElementById('submitBtn');
       const feedback = document.getElementById('formFeedback');
+
+      // Rate limit check: 15s cooldown
+      const lastSub = sessionStorage.getItem('stic_standalone_last_sub');
+      const now = Date.now();
+      if (lastSub && (now - parseInt(lastSub, 10) < 15000)) {
+        const remaining = Math.ceil((15000 - (now - parseInt(lastSub, 10))) / 1000);
+        feedback.style.display = 'block';
+        feedback.style.color = '#ef4444';
+        feedback.textContent = `Rate limit: Please wait ${remaining} seconds before submitting again.`;
+        return;
+      }
+
       btn.disabled = true;
       btn.innerText = "Submitting Application...";
 
@@ -4534,29 +4583,33 @@ section, .section {
       const year = document.getElementById('formYear').value;
       const guild = document.getElementById('formGuild').value;
       const referralKey = document.getElementById('formReferralKey').value.trim();
+      const portfolio = document.getElementById('formPortfolio').value.trim();
 
       const payload = new FormData();
-      payload.append('fullName', fullName);
-      payload.append('name', fullName);
-      payload.append('rollNo', rollNo);
-      payload.append('email', email);
+      payload.append('fullName', sanitizeFormula(fullName));
+      payload.append('name', sanitizeFormula(fullName));
+      payload.append('rollNo', sanitizeFormula(rollNo));
+      payload.append('email', sanitizeFormula(email));
       payload.append('branch', branch);
       payload.append('year', year);
       payload.append('guild', guild);
-      payload.append('referralKey', referralKey || 'N/A');
-      payload.append('portfolio', document.getElementById('formPortfolio').value.trim() || 'N/A');
+      payload.append('referralKey', referralKey ? sanitizeFormula(referralKey) : 'N/A');
+      payload.append('portfolio', portfolio ? sanitizeFormula(portfolio) : 'N/A');
       payload.append('collegeCode', '1215');
-      if (utmSource) payload.append('utmSource', utmSource);
-      if (utmMedium) payload.append('utmMedium', utmMedium);
-      if (utmCampaign) payload.append('utmCampaign', utmCampaign);
+      if (utmSource) payload.append('utmSource', sanitizeFormula(utmSource));
+      if (utmMedium) payload.append('utmMedium', sanitizeFormula(utmMedium));
+      if (utmCampaign) payload.append('utmCampaign', sanitizeFormula(utmCampaign));
 
       const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXI59ceq99apRfS656UR1H-wrsO3I9oefcD1ktieMFUeaGLpuLuEJEH9GkkJs9oPT3/exec';
 
       try {
         await fetch(SCRIPT_URL, { method: 'POST', body: payload, mode: 'no-cors' });
+        sessionStorage.setItem('stic_standalone_last_sub', Date.now().toString());
         feedback.style.display = 'block';
         feedback.style.color = 'var(--success)';
-        feedback.innerHTML = `<strong>Registration Submitted!</strong> Welcome to STIC SAREC Mirzapur, ${fullName}. Check your email (${email}) or <a href='https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT' target='_blank' rel='noopener noreferrer' style='color:#25d366;font-weight:700;text-decoration:underline;'>Join the WhatsApp Community Group →</a>`;
+        const safeName = escapeHtml(fullName);
+        const safeEmail = escapeHtml(email);
+        feedback.innerHTML = `<strong>Registration Submitted!</strong> Welcome to STIC SAREC Mirzapur, ${safeName}. Check your email (${safeEmail}) or <a href='https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT' target='_blank' rel='noopener noreferrer' style='color:#25d366;font-weight:700;text-decoration:underline;'>Join the WhatsApp Community Group &rarr;</a>`;
         document.getElementById('joinForm').reset();
       } catch (err) {
         feedback.style.display = 'block';
