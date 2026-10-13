@@ -77,8 +77,8 @@ export default function Faq() {
 
         <div className="faq-list">
           {filteredFaqs.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-tertiary)', background: 'var(--glass-bg)', borderRadius: '16px', border: '1px solid var(--glass-border)' }}>
-              No questions matched "{faqFilter}". Have a different question? Email <a href="mailto:sticsarecmzp@gmail.com" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>sticsarecmzp@gmail.com</a>.
+            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-tertiary)', background: 'var(--bg-surface-elevated)', borderRadius: '12px', border: '2px solid var(--border-color)', boxShadow: '4px 4px 0px var(--shadow-color)' }}>
+              No questions matched "{faqFilter}". Have a different question? Email <a href="mailto:sticsarecmzp@gmail.com" style={{ color: 'var(--text)', fontWeight: 700, textDecoration: 'underline' }}>sticsarecmzp@gmail.com</a>.
             </div>
           ) : (
             filteredFaqs.map((faq, index) => {
@@ -93,11 +93,13 @@ export default function Faq() {
                     aria-controls={`faq-answer-${index}`}
                   >
                     <span>{faq.question}</span>
-                    {isOpen ? (
-                      <ChevronUp size={18} strokeWidth={2} color="var(--primary)" />
-                    ) : (
-                      <ChevronDown size={18} strokeWidth={2} />
-                    )}
+                    <span className="faq-chevron-wrap">
+                      {isOpen ? (
+                        <ChevronUp size={16} strokeWidth={2.5} />
+                      ) : (
+                        <ChevronDown size={16} strokeWidth={2.5} />
+                      )}
+                    </span>
                   </button>
                   {isOpen && (
                     <div id={`faq-answer-${index}`} className="faq-answer">

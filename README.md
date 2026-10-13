@@ -6,7 +6,7 @@
 
 ---
 
-## ⚡ Quick Start
+##  Quick Start
 
 ### 1. Prerequisites
 - **Node.js** (v18 or higher recommended)
@@ -36,7 +36,7 @@ If you want to preview the portal immediately in any browser without installing 
 
 ---
 
-## 🚀 Project Architecture
+##  Project Architecture
 
 ```plaintext
 STIC-Webpage/
@@ -67,7 +67,7 @@ STIC-Webpage/
 
 ---
 
-## 🎨 Design System
+##  Design System
 
 - **Fluid Typography**: Calculated with CSS `clamp()` (`--step--2` to `--step-5`) for seamless scaling across devices from 320px mobile up to 4K displays without rigid breakpoint jumps.
 - **Deep Glassmorphism**: High-performance backdrop blur (`backdrop-filter: blur(14px)`), translucent border highlights (`var(--glass-border)`), layered elevation, and ambient radial glow pulses.
@@ -76,7 +76,7 @@ STIC-Webpage/
 
 ---
 
-## 📊 Google Sheets & Apps Script Setup
+##  Google Sheets & Apps Script Setup
 
 The registration form (`JoinForm.jsx`) sends student applications directly to Google Sheets using a Google Apps Script Web App without requiring any dedicated backend server or paid database.
 

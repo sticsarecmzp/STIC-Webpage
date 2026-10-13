@@ -117,8 +117,7 @@ export default function Projects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="contact-link"
-                      style={{ fontSize: '0.75rem', color: 'var(--primary)', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                      className="project-action-badge"
                       aria-label={`View repository for ${project.title}`}
                     >
                       <GithubIcon size={12} />
@@ -130,12 +129,11 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="contact-link"
-                      style={{ fontSize: '0.75rem', color: 'var(--primary)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
+                      className="project-action-badge"
                       aria-label={`Open live URL for ${project.title}`}
                     >
                       <span>Live</span>
-                      <ExternalLink size={11} strokeWidth={1.5} />
+                      <ExternalLink size={11} strokeWidth={2} />
                     </a>
                   )}
                 </div>

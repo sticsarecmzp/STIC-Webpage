@@ -45,11 +45,11 @@ export default function InstitutionStrip() {
               href={COMMUNITY_INFO.collegeWebsite}
               target="_blank"
               rel="noopener noreferrer"
-              className="tag-badge"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--primary)' }}
+              className="tag-badge tag-badge-highlight"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
             >
               <span>sarecmzp.ac.in</span>
-              <ExternalLink size={12} strokeWidth={1.5} />
+              <ExternalLink size={12} strokeWidth={2} />
             </a>
             <span className="tag-badge">B.Tech CSE</span>
             <span className="tag-badge">B.Tech IT</span>

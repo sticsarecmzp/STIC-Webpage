@@ -46,6 +46,7 @@ export default function Footer({ onSelectClub }) {
               <img
                 src="/assets/logos/sarec-college-seal.png"
                 alt="SAREC Mirzapur College Seal"
+                className="college-seal-img"
                 style={{ width: '42px', height: '42px', objectFit: 'contain' }}
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
@@ -189,11 +190,11 @@ export default function Footer({ onSelectClub }) {
                   <button
                     type="button"
                     onClick={() => handleCopy(COMMUNITY_INFO.officialEmail, 'email')}
-                    style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', padding: '0.2rem' }}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.2rem' }}
                     title="Copy Email"
                     aria-label="Copy Email address"
                   >
-                    {copiedEmail ? <Check size={12} style={{ color: 'var(--primary)' }} /> : <Copy size={12} />}
+                    {copiedEmail ? <Check size={13} strokeWidth={2.5} style={{ color: 'var(--text)' }} /> : <Copy size={12} />}
                   </button>
                 </div>
               </li>
@@ -210,11 +211,11 @@ export default function Footer({ onSelectClub }) {
                   <button
                     type="button"
                     onClick={() => handleCopy('+919451501321', 'phone')}
-                    style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', padding: '0.2rem' }}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.2rem' }}
                     title="Copy Phone number"
                     aria-label="Copy phone number"
                   >
-                    {copiedPhone ? <Check size={12} style={{ color: 'var(--primary)' }} /> : <Copy size={12} />}
+                    {copiedPhone ? <Check size={13} strokeWidth={2.5} style={{ color: 'var(--text)' }} /> : <Copy size={12} />}
                   </button>
                 </div>
               </li>

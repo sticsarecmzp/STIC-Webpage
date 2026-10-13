@@ -6,7 +6,6 @@ import {
   Loader2, 
   Check, 
   Sparkles, 
-  Settings, 
   ExternalLink, 
   X, 
   Mail, 
@@ -24,7 +23,6 @@ import { COMMUNITY_INFO, DEPARTMENTS } from '../data/communityData';
 import ConfirmModal from './ConfirmModal';
 import { 
   validateRegistrationPayload, 
-  validateSafeUrl, 
   checkSubmissionRateLimit, 
   recordSubmissionTimestamp,
   sanitizeText 
@@ -47,7 +45,6 @@ export default function JoinForm({ selectedClub }) {
   const [fieldErrors, setFieldErrors] = useState({});
   const [submittedData, setSubmittedData] = useState(null);
   const [showReferralKey, setShowReferralKey] = useState(false);
-  const [endpointError, setEndpointError] = useState('');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,26 +69,6 @@ export default function JoinForm({ selectedClub }) {
     } catch {}
   }, []);
 
-  // Secured endpoint state: validates stored URL against allowlist and purges tainted values
-  const [endpointUrl, setEndpointUrl] = useState(() => {
-    try {
-      const stored = localStorage.getItem('stic_apps_script_url');
-      if (stored) {
-        const check = validateSafeUrl(stored, ['script.google.com']);
-        if (check.valid) {
-          return stored;
-        } else {
-          localStorage.removeItem('stic_apps_script_url');
-        }
-      }
-      return COMMUNITY_INFO.formEndpoint;
-    } catch {
-      return COMMUNITY_INFO.formEndpoint;
-    }
-  });
-
-  const [showEndpointModal, setShowEndpointModal] = useState(false);
-  const [customEndpointInput, setCustomEndpointInput] = useState('');
   const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
   const [glowGuild, setGlowGuild] = useState(false);
@@ -116,17 +93,6 @@ export default function JoinForm({ selectedClub }) {
     }
   }, [selectedClub]);
 
-  // Handle Escape key for modal
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && showEndpointModal) {
-        setShowEndpointModal(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [showEndpointModal]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     const nextFormData = { ...formData, [name]: value };
@@ -150,39 +116,6 @@ export default function JoinForm({ selectedClub }) {
     navigator.clipboard.writeText('1215');
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2000);
-  };
-
-  const handleSaveEndpoint = (e) => {
-    e.preventDefault();
-    setEndpointError('');
-    const input = customEndpointInput.trim();
-    if (!input) {
-      setEndpointError('Endpoint URL is required.');
-      return;
-    }
-
-    // SSRF & Domain allowlist validation: strictly Google Apps Script HTTPS endpoint
-    const check = validateSafeUrl(input, ['script.google.com']);
-    if (!check.valid) {
-      setEndpointError(check.error || 'Endpoint must be a valid HTTPS Google Apps Script URL (script.google.com).');
-      return;
-    }
-
-    setEndpointUrl(input);
-    try {
-      localStorage.setItem('stic_apps_script_url', input);
-    } catch {}
-    setShowEndpointModal(false);
-  };
-
-  const handleResetEndpoint = () => {
-    setEndpointUrl(COMMUNITY_INFO.formEndpoint);
-    setCustomEndpointInput('');
-    setEndpointError('');
-    try {
-      localStorage.removeItem('stic_apps_script_url');
-    } catch {}
-    setShowEndpointModal(false);
   };
 
   // Called when user clicks "Submit Track Registration"
@@ -260,13 +193,8 @@ export default function JoinForm({ selectedClub }) {
       formPayload.append('utmMedium', utmData.medium ? sanitizeText(utmData.medium, 50) : 'web');
       formPayload.append('utmCampaign', utmData.campaign ? sanitizeText(utmData.campaign, 50) : 'general');
 
-      // Final URL safety check
-      const targetEndpoint = validateSafeUrl(endpointUrl, ['script.google.com']).valid
-        ? endpointUrl
-        : COMMUNITY_INFO.formEndpoint;
-
-      // Submit to Google Apps Script endpoint in no-cors mode
-      await fetch(targetEndpoint, {
+      // Submit to official Google Apps Script endpoint in no-cors mode
+      await fetch(COMMUNITY_INFO.formEndpoint, {
         method: 'POST',
         body: formPayload,
         mode: 'no-cors'
@@ -377,21 +305,6 @@ export default function JoinForm({ selectedClub }) {
                 <Mail size={14} strokeWidth={1.5} />
                 <span>Email: {COMMUNITY_INFO.officialEmail}</span>
               </a>
-
-              <button
-                type="button"
-                className="btn btn-ghost btn-sm"
-                onClick={() => {
-                  setCustomEndpointInput(endpointUrl);
-                  setShowEndpointModal(true);
-                }}
-                style={{ fontSize: '0.78rem' }}
-                title="Configure Google Apps Script Web App Endpoint URL"
-                aria-label="Configure Google Apps Script Endpoint URL"
-              >
-                <Settings size={13} strokeWidth={1.5} />
-                <span>Sheet Endpoint</span>
-              </button>
             </div>
           </div>
 
@@ -611,8 +524,8 @@ export default function JoinForm({ selectedClub }) {
                         Primary Technology Guild *
                       </label>
                       {glowGuild && (
-                        <span style={{ fontSize: '0.72rem', color: 'var(--primary)', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', fontWeight: 600 }}>
-                          <Sparkles size={12} strokeWidth={1.5} />
+                        <span style={{ fontSize: '0.72rem', background: 'var(--brutal-yellow)', color: '#000000', border: '1.5px solid var(--border-color)', padding: '0.1rem 0.45rem', borderRadius: '4px', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', fontWeight: 800 }}>
+                          <Sparkles size={12} strokeWidth={2} />
                           Track Selected
                         </span>
                       )}
@@ -809,76 +722,6 @@ export default function JoinForm({ selectedClub }) {
           if (!isSubmitting) setShowConfirmModal(false);
         }}
       />
-
-      {/* Endpoint Configuration Modal */}
-      {showEndpointModal && (
-        <div 
-          className="modal-backdrop-overlay"
-          onClick={() => setShowEndpointModal(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="endpointModalTitle"
-        >
-          <div 
-            className="form-card modal-dialog-box" 
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-              <h3 id="endpointModalTitle" style={{ fontSize: 'var(--step-0)', fontWeight: 700, color: 'var(--text)' }}>
-                Google Apps Script Web App URL
-              </h3>
-              <button 
-                type="button" 
-                className="btn-icon" 
-                onClick={() => setShowEndpointModal(false)}
-                aria-label="Close endpoint settings modal"
-              >
-                <X size={16} strokeWidth={1.5} />
-              </button>
-            </div>
-
-            <p style={{ fontSize: 'var(--step--1)', color: 'var(--text-secondary)', marginBottom: '1.25rem', lineHeight: 1.5 }}>
-              By default, submissions go to the official STIC Google Sheet. If you are deploying your own spreadsheet, paste your Google Apps Script Web App URL below:
-            </p>
-
-            <form onSubmit={handleSaveEndpoint}>
-              <div className="form-group">
-                <input
-                  type="url"
-                  className="form-input"
-                  value={customEndpointInput}
-                  onChange={(e) => setCustomEndpointInput(e.target.value)}
-                  placeholder="https://script.google.com/macros/s/.../exec"
-                  required
-                />
-              </div>
-
-              {endpointError && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.75rem', borderRadius: '4px', background: 'var(--brutal-yellow)', border: '2px solid var(--border-color)', color: '#000000', fontSize: '0.78rem', fontWeight: 600, marginBottom: '1rem' }}>
-                  <AlertCircle size={14} strokeWidth={2} />
-                  <span>{endpointError}</span>
-                </div>
-              )}
-
-              <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '1.25rem' }}>
-                <button
-                  type="button"
-                  className="btn btn-secondary btn-sm"
-                  onClick={handleResetEndpoint}
-                >
-                  Reset Default
-                </button>
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-sm"
-                >
-                  Save Endpoint
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

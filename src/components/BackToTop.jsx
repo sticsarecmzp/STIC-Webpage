@@ -6,14 +6,11 @@ export default function BackToTop() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
+      setVisible(window.scrollY > 120);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Check on mount
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -21,17 +18,15 @@ export default function BackToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (!visible) return null;
-
   return (
     <button
       type="button"
-      className="back-to-top-btn"
+      className={`back-to-top-btn ${visible ? 'visible' : ''}`}
       onClick={scrollToTop}
       aria-label="Back to top of page"
       title="Back to top"
     >
-      <ArrowUp size={18} strokeWidth={2} />
+      <ArrowUp size={20} strokeWidth={2.5} />
     </button>
   );
 }

@@ -78,14 +78,21 @@ export default function Navbar({ theme, onToggleTheme, onHome, onOpenSearch }) {
               onClick={handleBrandClick}
               aria-label="STIC SAREC Mirzapur Home"
             >
-              <img
-                src={theme === 'dark' ? '/assets/logos/stic-logo-dark.png' : '/assets/logos/stic-logo-light.png'}
-                alt="STIC Logo"
-                className="brand-logo-img"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                }}
-              />
+              <div className="brand-logo-container">
+                <img
+                  src={theme === 'dark' ? '/assets/logos/stic-logo-light.png' : '/assets/logos/stic-logo-dark.png'}
+                  alt="STIC Logo"
+                  className="brand-logo-img"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    const fallback = e.currentTarget.nextElementSibling;
+                    if (fallback) fallback.style.display = 'flex';
+                  }}
+                />
+                <span className="brand-logo-fallback" style={{ display: 'none' }}>
+                  STIC
+                </span>
+              </div>
               <div className="brand-text-block">
                 <span className="brand-heading">{COMMUNITY_INFO.name}</span>
                 <span className="brand-subheading">{COMMUNITY_INFO.collegeShort}</span>

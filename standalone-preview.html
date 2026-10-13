@@ -340,15 +340,40 @@ section, .section {
   transform: translate(-1px, -1px);
 }
 
+.brand-logo-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .brand-logo-img {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
   border: 2px solid var(--border-color);
   border-radius: 8px;
   background: var(--bg-surface);
   padding: 2px;
   box-shadow: 2px 2px 0px var(--shadow-color);
+  display: block;
+}
+
+.brand-logo-fallback {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  font-weight: 900;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  display: none;
+  align-items: center;
+  justify-content: center;
 }
 
 .brand-text-block {
@@ -585,7 +610,8 @@ section, .section {
 }
 
 .mobile-nav-link:hover, .mobile-nav-link:active {
-  color: var(--primary);
+  background: var(--brutal-yellow);
+  color: #000000;
   padding-left: 0.75rem;
 }
 
@@ -1336,6 +1362,42 @@ section, .section {
 .tag-badge:hover {
   transform: translate(-1px, -1px);
   box-shadow: 3px 3px 0px var(--shadow-color);
+}
+
+.tag-badge.tag-badge-highlight {
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  font-weight: 800;
+}
+
+.proof-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 1.5px solid var(--border-color);
+  border-radius: 4px;
+  flex-shrink: 0;
+  box-shadow: 1.5px 1.5px 0px var(--shadow-color);
+}
+
+.bento-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 1.5px solid var(--border-color);
+  border-radius: 4px;
+  flex-shrink: 0;
+  box-shadow: 1.5px 1.5px 0px var(--shadow-color);
 }
 
 /* Global Section Headers */
@@ -2751,9 +2813,10 @@ section, .section {
   gap: 0.35rem;
   padding: 0.2rem 0.55rem;
   border-radius: 9999px;
-  background: var(--primary);
-  color: #ffffff;
-  font-weight: 700;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 1.5px solid #000000;
+  font-weight: 800;
   font-size: 0.72rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -2762,11 +2825,11 @@ section, .section {
 
 .announcement-text {
   font-weight: 500;
-  color: var(--text-secondary);
+  color: #FFFFFF;
 }
 
 .announcement-text strong {
-  color: var(--text);
+  color: var(--brutal-yellow);
 }
 
 .announcement-actions {
@@ -2779,21 +2842,21 @@ section, .section {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: var(--primary);
-  font-weight: 700;
+  color: var(--brutal-yellow);
+  font-weight: 800;
   font-size: var(--step--2);
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .announcement-link:hover {
-  color: var(--accent);
+  color: #FACC15;
   transform: translateX(2px);
 }
 
 .announcement-close-btn {
   background: transparent;
   border: none;
-  color: var(--text-tertiary);
+  color: #FFFFFF;
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 6px;
@@ -2924,8 +2987,8 @@ section, .section {
   align-items: center;
   gap: 0.45rem;
   font-size: var(--step--2);
-  font-weight: 700;
-  color: var(--primary);
+  font-weight: 800;
+  color: var(--text);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-family: var(--font-mono);
@@ -3007,26 +3070,52 @@ section, .section {
   position: fixed;
   bottom: 1.75rem;
   right: 1.75rem;
-  width: 44px;
-  height: 44px;
-  border-radius: 4px;
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
   background: var(--brutal-yellow);
   color: #000000;
-  border: 2px solid #000000;
-  box-shadow: 4px 4px 0px #000000;
+  border: 2.5px solid #000000;
+  box-shadow: 4px 4px 0px var(--shadow-color);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 95;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-  animation: fadeInDown 0.25s ease;
+  z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.15s ease,
+              background 0.15s ease;
+}
+
+.back-to-top-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .back-to-top-btn:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000000;
+  box-shadow: 6px 6px 0px var(--shadow-color);
   background: #FACC15;
+}
+
+.back-to-top-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--shadow-color);
+}
+
+[data-theme='dark'] .back-to-top-btn {
+  border: 2.5px solid #000000;
+  box-shadow: 4px 4px 0px #FFE600;
+  outline: 2px solid #FFFFFF;
+}
+
+[data-theme='dark'] .back-to-top-btn:hover {
+  box-shadow: 6px 6px 0px #FFE600;
 }
 
 /* Floating Contact Action Dock */
@@ -3550,7 +3639,10 @@ section, .section {
     <header class="navbar">
       <div class="navbar-inner">
         <a href="#top" class="brand-link" aria-label="STIC SAREC Mirzapur Home">
-          <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #fff;">S</div>
+          <div class="brand-logo-container">
+            <img id="standaloneBrandLogo" src="/assets/logos/stic-logo-light.png" alt="STIC Logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="brand-logo-fallback" style="display: none;">STIC</div>
+          </div>
           <div>
             <div class="brand-heading">STIC</div>
             <div class="brand-subheading">SAREC Mirzapur • 1215</div>
@@ -3638,15 +3730,21 @@ section, .section {
           <!-- Verified Campus Proof Bar -->
           <div class="hero-proof-bar">
             <div class="proof-item">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="3" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span class="proof-icon-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
               <span>8 Specialized Guilds</span>
             </div>
             <div class="proof-item">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span class="proof-icon-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </span>
               <span>AKTU College Code 1215</span>
             </div>
             <div class="proof-item">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span class="proof-icon-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </span>
               <span>₹0 100% Free &amp; Open Access</span>
             </div>
           </div>
@@ -3658,7 +3756,9 @@ section, .section {
           <div class="bento-card bento-card-ask">
             <div class="bento-header">
               <span class="bento-label">What Freshers Ask</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span class="bento-icon-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </span>
             </div>
             <p class="bento-quote">“What is the actual placement &amp; roadmap reality?”</p>
             <p class="bento-desc">Ask the uncomfortable questions before you spend years in confusion.</p>
@@ -3668,7 +3768,9 @@ section, .section {
           <div class="bento-card bento-card-cost">
             <div class="bento-header">
               <span class="bento-label">Opportunity Cost</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              <span class="bento-icon-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </span>
             </div>
             <div class="bento-number">4 Years</div>
             <p class="bento-desc">Too much valuable time to spend based on outdated slides and random opinions.</p>
@@ -3775,11 +3877,45 @@ section, .section {
   <!-- Institution Strip -->
   <div class="institution-strip">
     <div class="container institution-flex">
-      <div>
-        <h3 style="font-size: var(--step--1); font-weight: 700;">Samrat Ashok Rajkiya Engineering College, Mirzapur</h3>
-        <p style="font-size: var(--step--2); color: var(--text-secondary);">Affiliated to AKTU Lucknow (College Code 1215) • Est. 2023</p>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a
+          href="https://sarecmzp.ac.in"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit SAREC Mirzapur College Website"
+          title="Visit official portal: sarecmzp.ac.in"
+          style="display: inline-flex; flex-shrink: 0;"
+        >
+          <img
+            src="/assets/logos/sarec-college-seal.png"
+            alt="SAREC Mirzapur College Seal"
+            class="college-seal-img"
+            onerror="this.style.display='none'"
+          />
+        </a>
+        <div>
+          <a
+            href="https://sarecmzp.ac.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="text-decoration: none; color: inherit;"
+          >
+            <h3 style="font-size: var(--step--1); font-weight: 700;">Samrat Ashok Rajkiya Engineering College, Mirzapur</h3>
+          </a>
+          <p style="font-size: var(--step--2); color: var(--text-secondary);">Affiliated to AKTU Lucknow (College Code 1215) • Est. 2023</p>
+        </div>
       </div>
-      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+        <a
+          href="https://sarecmzp.ac.in"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="tag-badge tag-badge-highlight"
+          style="display: inline-flex; align-items: center; gap: 0.35rem;"
+        >
+          <span>sarecmzp.ac.in</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
         <span class="tag-badge">B.Tech CSE</span>
         <span class="tag-badge">B.Tech IT</span>
         <span class="tag-badge">B.Tech EL</span>
@@ -3876,10 +4012,10 @@ section, .section {
           </p>
 
           <div style="display: flex; flex-direction: column; gap: 1rem; color: var(--text-secondary); font-size: var(--step--1);">
-            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--brutal-yellow)" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Open to all academic years and engineering branches at SAREC.</div>
-            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--brutal-yellow)" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Access to weekend build sprints and lab mentorship hours.</div>
-            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--brutal-yellow)" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Eligibility for campus hackathon teams and open source sprints.</div>
-            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--brutal-yellow)" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>100% student-operated with zero registration fees.</div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><span class="proof-icon-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span>Open to all academic years and engineering branches at SAREC.</span></div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><span class="proof-icon-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span>Access to weekend build sprints and lab mentorship hours.</span></div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><span class="proof-icon-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span>Eligibility for campus hackathon teams and open source sprints.</span></div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;"><span class="proof-icon-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span>100% student-operated with zero registration fees.</span></div>
           </div>
         </div>
 
@@ -4061,7 +4197,7 @@ section, .section {
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>
             </div>
-            <a href="https://www.sarecmzp.ac.in/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.35rem; color: var(--accent); text-decoration: none;">
+            <a href="https://www.sarecmzp.ac.in/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.35rem; color: var(--text); text-decoration: none;">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 22 7 12 2"></polygon><polyline points="22 7 22 22 2 22 2 7"></polyline><line x1="12" y1="22" x2="12" y2="12"></line></svg>
               <span>sarecmzp.ac.in</span>
             </a>
@@ -4086,7 +4222,7 @@ section, .section {
 
   <!-- Back to Top Button -->
   <button id="backToTopBtn" class="back-to-top-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Back to top" title="Back to top">
-    ↑
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
   </button>
 
   <!-- Floating Contact Action Dock -->
@@ -4267,7 +4403,7 @@ section, .section {
       <div class="project-card glass-interactive">
         <div>
           <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
-            <span style="font-size: var(--step--2); font-family: var(--font-mono); color: var(--accent);">${proj.track}</span>
+            <span class="project-track">${proj.track}</span>
             <span class="club-badge">${proj.status}</span>
           </div>
           <h3 style="font-size: var(--step-1); font-weight: 700; margin-bottom: 0.5rem;">${proj.title}</h3>
@@ -4337,20 +4473,28 @@ section, .section {
       document.getElementById('scrollProgressBar').style.width = progress + '%';
 
       const backBtn = document.getElementById('backToTopBtn');
-      if (window.scrollY > 300) {
-        backBtn.style.display = 'flex';
-      } else {
-        backBtn.style.display = 'none';
+      if (backBtn) {
+        if (window.scrollY > 120) {
+          backBtn.classList.add('visible');
+        } else {
+          backBtn.classList.remove('visible');
+        }
       }
     });
 
     // Theme toggle
     const themeBtn = document.getElementById('themeToggle');
-    themeBtn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-    });
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        const logo = document.getElementById('standaloneBrandLogo');
+        if (logo) {
+          logo.src = next === 'dark' ? '/assets/logos/stic-logo-light.png' : '/assets/logos/stic-logo-dark.png';
+        }
+      });
+    }
 
     // Select track handler
     function selectTrack(trackName) {
@@ -4394,7 +4538,7 @@ section, .section {
     function copyText(text, btnElement) {
       navigator.clipboard.writeText(text);
       const original = btnElement.innerHTML;
-      btnElement.innerHTML = '<span style="font-size:0.68rem; font-weight:700; color:var(--success);">Copied</span>';
+      btnElement.innerHTML = '<span style="font-size:0.68rem; font-weight:800; color:#000000; background:var(--brutal-yellow); padding:0.12rem 0.45rem; border:1px solid #000000; border-radius:3px;">Copied</span>';
       setTimeout(() => { btnElement.innerHTML = original; }, 2000);
     }
 
@@ -4455,7 +4599,7 @@ section, .section {
               <div style="font-weight: 700; font-size: 0.95rem; color: var(--text);">${r.title}</div>
               <div style="font-size: 0.8rem; color: var(--text-tertiary);">${r.sub}</div>
             </div>
-            <span style="font-size: 0.75rem; color: var(--primary);">View →</span>
+            <span class="search-item-badge">View →</span>
           </div>
         `).join('');
         window.searchItemActions = results.map(r => r.action);
@@ -4612,10 +4756,14 @@ section, .section {
         await fetch(SCRIPT_URL, { method: 'POST', body: payload, mode: 'no-cors' });
         sessionStorage.setItem('stic_standalone_last_sub', Date.now().toString());
         feedback.style.display = 'block';
-        feedback.style.color = 'var(--success)';
+        feedback.style.color = '#000000';
+        feedback.style.background = 'var(--brutal-yellow)';
+        feedback.style.padding = '0.75rem';
+        feedback.style.borderRadius = '4px';
+        feedback.style.border = '2px solid var(--border-color)';
         const safeName = escapeHtml(fullName);
         const safeEmail = escapeHtml(email);
-        feedback.innerHTML = `<strong>Registration Submitted!</strong> Welcome to STIC SAREC Mirzapur, ${safeName}. Check your email (${safeEmail}) or <a href='https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT' target='_blank' rel='noopener noreferrer' style='color:var(--brutal-yellow);font-weight:700;text-decoration:underline;'>Join the WhatsApp Community Group &rarr;</a>`;
+        feedback.innerHTML = `<strong>Registration Submitted!</strong> Welcome to STIC SAREC Mirzapur, ${safeName}. Check your email (${safeEmail}) or <a href='https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT' target='_blank' rel='noopener noreferrer' style='color:#000000;font-weight:800;text-decoration:underline;'>Join the WhatsApp Community Group &rarr;</a>`;
         document.getElementById('joinForm').reset();
       } catch (err) {
         feedback.style.display = 'block';

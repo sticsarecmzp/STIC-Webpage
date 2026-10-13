@@ -304,15 +304,40 @@ section, .section {
   transform: translate(-1px, -1px);
 }
 
+.brand-logo-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .brand-logo-img {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
   border: 2px solid var(--border-color);
   border-radius: 8px;
   background: var(--bg-surface);
   padding: 2px;
   box-shadow: 2px 2px 0px var(--shadow-color);
+  display: block;
+}
+
+.brand-logo-fallback {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  font-weight: 900;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  display: none;
+  align-items: center;
+  justify-content: center;
 }
 
 .brand-text-block {
@@ -549,7 +574,8 @@ section, .section {
 }
 
 .mobile-nav-link:hover, .mobile-nav-link:active {
-  color: var(--primary);
+  background: var(--brutal-yellow);
+  color: #000000;
   padding-left: 0.75rem;
 }
 
@@ -867,13 +893,26 @@ section, .section {
 .proof-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.55rem;
   background: var(--bg-surface);
   border: 2px solid var(--border-color);
   box-shadow: 2px 2px 0px var(--shadow-color);
   padding: 0.32rem 0.75rem;
   border-radius: var(--badge-radius);
   color: var(--text);
+}
+
+.proof-icon-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 1.5px solid var(--border-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* Hero Floating Bento Cards (Strict 2-3 Colors) */
@@ -970,6 +1009,20 @@ section, .section {
 
 [data-theme="dark"] .bento-card-cost .bento-label {
   color: var(--brutal-yellow);
+}
+
+.bento-icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 2px solid #000000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 0px #000000;
 }
 
 .bento-number {
@@ -1260,9 +1313,11 @@ section, .section {
   object-fit: contain;
   border: 2px solid var(--border-color);
   border-radius: 8px;
-  padding: 2px;
-  background: var(--bg-surface);
+  padding: 3px;
+  background: #FFFFFF !important;
   box-shadow: 2px 2px 0px var(--shadow-color);
+  flex-shrink: 0;
+  display: block;
 }
 
 .institution-meta h3 {
@@ -1295,11 +1350,20 @@ section, .section {
   font-family: var(--font-mono);
   box-shadow: 2px 2px 0px var(--shadow-color);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
+  text-decoration: none;
 }
 
 .tag-badge:hover {
   transform: translate(-1px, -1px);
   box-shadow: 3px 3px 0px var(--shadow-color);
+}
+
+.tag-badge.tag-badge-highlight {
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  font-weight: 800;
 }
 
 /* Global Section Headers */
@@ -1963,6 +2027,30 @@ section, .section {
   font-family: var(--font-mono);
 }
 
+.project-action-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--text);
+  background: var(--bg-surface-elevated);
+  border: 1.5px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  text-decoration: none;
+  transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+}
+
+.project-action-badge:hover {
+  background: var(--brutal-yellow);
+  color: #000000;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--shadow-color);
+}
+
 /* Team Section */
 .team-grid {
   display: grid;
@@ -2296,6 +2384,26 @@ section, .section {
   background: var(--bg-surface-elevated);
 }
 
+.faq-chevron-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--bg-surface-elevated);
+  border: 1.5px solid var(--border-color);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.faq-button[aria-expanded="true"] .faq-chevron-wrap {
+  background: var(--brutal-yellow);
+  color: #000000;
+  border-color: #000000;
+}
+
 .faq-answer {
   padding: 1rem 1.5rem 1.35rem;
   font-size: var(--step--1);
@@ -2393,9 +2501,9 @@ section, .section {
 }
 
 .contact-link:hover .contact-icon-pill {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
+  background: var(--brutal-yellow);
+  color: #000000;
+  border-color: var(--border-color);
 }
 
 .footer-brand-block-link {
@@ -2718,9 +2826,10 @@ section, .section {
   gap: 0.35rem;
   padding: 0.2rem 0.55rem;
   border-radius: 9999px;
-  background: var(--primary);
-  color: #ffffff;
-  font-weight: 700;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 1.5px solid #000000;
+  font-weight: 800;
   font-size: 0.72rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -2729,11 +2838,11 @@ section, .section {
 
 .announcement-text {
   font-weight: 500;
-  color: var(--text-secondary);
+  color: #FFFFFF;
 }
 
 .announcement-text strong {
-  color: var(--text);
+  color: var(--brutal-yellow);
 }
 
 .announcement-actions {
@@ -2746,21 +2855,21 @@ section, .section {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: var(--primary);
-  font-weight: 700;
+  color: var(--brutal-yellow);
+  font-weight: 800;
   font-size: var(--step--2);
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .announcement-link:hover {
-  color: var(--accent);
+  color: #FACC15;
   transform: translateX(2px);
 }
 
 .announcement-close-btn {
   background: transparent;
   border: none;
-  color: var(--text-tertiary);
+  color: #FFFFFF;
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 6px;
@@ -2891,8 +3000,8 @@ section, .section {
   align-items: center;
   gap: 0.45rem;
   font-size: var(--step--2);
-  font-weight: 700;
-  color: var(--primary);
+  font-weight: 800;
+  color: var(--text);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-family: var(--font-mono);
@@ -2974,26 +3083,52 @@ section, .section {
   position: fixed;
   bottom: 1.75rem;
   right: 1.75rem;
-  width: 44px;
-  height: 44px;
-  border-radius: 6px;
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
   background: var(--brutal-yellow);
   color: #000000;
-  border: 2.5px solid var(--border-color);
+  border: 2.5px solid #000000;
   box-shadow: 4px 4px 0px var(--shadow-color);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 95;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
-  animation: fadeInDown 0.25s ease;
+  z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.15s ease,
+              background 0.15s ease;
+}
+
+.back-to-top-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .back-to-top-btn:hover {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0px var(--shadow-color);
-  background: var(--brutal-yellow);
+  background: #FACC15;
+}
+
+.back-to-top-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--shadow-color);
+}
+
+[data-theme='dark'] .back-to-top-btn {
+  border: 2.5px solid #000000;
+  box-shadow: 4px 4px 0px #FFE600;
+  outline: 2px solid #FFFFFF;
+}
+
+[data-theme='dark'] .back-to-top-btn:hover {
+  box-shadow: 6px 6px 0px #FFE600;
 }
 
 /* Floating Contact Action Dock */

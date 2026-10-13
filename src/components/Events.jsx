@@ -70,7 +70,7 @@ export default function Events() {
                 <p className="event-desc">{event.description}</p>
 
                 <div className="event-deliverable">
-                  <strong style={{ color: 'var(--primary)', fontWeight: 600 }}>Expected Outcome: </strong>
+                  <strong style={{ color: 'var(--text)', fontWeight: 800 }}>Expected Outcome: </strong>
                   <span>{event.deliverable}</span>
                 </div>
               </div>
@@ -84,7 +84,7 @@ export default function Events() {
                 >
                   {downloadedEventId === event.id ? (
                     <>
-                      <Check size={14} strokeWidth={1.5} style={{ color: 'var(--primary)' }} />
+                      <Check size={14} strokeWidth={2.5} style={{ color: 'var(--text)' }} />
                       <span>Calendar Saved</span>
                     </>
                   ) : (

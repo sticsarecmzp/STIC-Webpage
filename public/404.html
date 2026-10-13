@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -46,6 +46,37 @@
         --border-color: #FFFFFF;
         --font-sans: 'Geist', -apple-system, sans-serif;
         --font-mono: 'Geist Mono', monospace;
+      }
+
+      [data-theme="light"] {
+        --primary: #FFE600;
+        --primary-hover: #FACC15;
+        --primary-contrast: #000000;
+        --accent: #FFE600;
+        --bg: #FDFBF7;
+        --bg-surface: #FFFFFF;
+        --text: #000000;
+        --text-secondary: #334155;
+        --text-tertiary: #64748B;
+        --border-color: #000000;
+      }
+
+      [data-theme="light"] .btn-secondary {
+        background: #FFFFFF;
+        color: #000000;
+        border: 2px solid #000000;
+        box-shadow: 4px 4px 0px #000000;
+      }
+
+      [data-theme="light"] .btn-secondary:hover {
+        background: var(--primary);
+        color: #000000;
+        border-color: #000000;
+        box-shadow: 6px 6px 0px #000000;
+      }
+
+      [data-theme="light"] .quick-links {
+        border-top: 2px solid rgba(0, 0, 0, 0.15);
       }
 
       * {
@@ -249,5 +280,13 @@
         STIC &bull; Samrat Ashok Rajkiya Engineering College, Mirzapur &bull; AKTU 1215
       </div>
     </main>
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('stic_theme');
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch {}
+    </script>
   </body>
 </html>

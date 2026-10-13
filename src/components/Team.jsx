@@ -38,7 +38,7 @@ export default function Team() {
 
               {member.focus && (
                 <div className="team-notes">
-                  <strong style={{ color: 'var(--primary)' }}>Focus Areas: </strong>
+                  <strong style={{ color: 'var(--text)', fontWeight: 800 }}>Focus Areas: </strong>
                   <span>{member.focus}</span>
                 </div>
               )}
