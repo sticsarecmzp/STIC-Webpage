@@ -88,6 +88,13 @@ export default function JoinForm({ selectedClub }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isSubmittingRef = useRef(false);
 
+  // UTM tracking state
+  const [utmData, setUtmData] = useState({
+    source: '',
+    medium: '',
+    campaign: ''
+  });
+
   // Helper to persist verified student profile in localStorage
   const saveAuthSession = (user) => {
     if (!user) return;
