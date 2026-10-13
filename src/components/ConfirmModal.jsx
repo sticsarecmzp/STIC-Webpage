@@ -52,7 +52,6 @@ export default function ConfirmModal({
             type="button" 
             className="btn-icon" 
             onClick={onCancel}
-            disabled={isLoading}
             aria-label="Close modal"
           >
             <X size={16} strokeWidth={1.5} />

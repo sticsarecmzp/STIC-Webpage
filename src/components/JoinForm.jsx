@@ -194,9 +194,9 @@ export default function JoinForm({ selectedClub }) {
       formPayload.append('utmMedium', utmData.medium ? sanitizeText(utmData.medium, 50) : 'web');
       formPayload.append('utmCampaign', utmData.campaign ? sanitizeText(utmData.campaign, 50) : 'general');
 
-      // 1. Save directly into Firebase Cloud Firestore Database
-      try {
-        await saveRegistrationToFirestore({
+      // 1. Submit concurrently to Firebase Cloud Firestore and Google Sheets with strict fail-safe timeouts
+      const firestoreTask = Promise.race([
+        saveRegistrationToFirestore({
           fullName: sanitized.fullName,
           rollNo: sanitized.rollNo,
           email: sanitized.email,
@@ -210,21 +210,29 @@ export default function JoinForm({ selectedClub }) {
           utmSource: utmData.source ? sanitizeText(utmData.source, 50) : 'direct',
           utmMedium: utmData.medium ? sanitizeText(utmData.medium, 50) : 'web',
           utmCampaign: utmData.campaign ? sanitizeText(utmData.campaign, 50) : 'general'
-        });
-      } catch (firestoreErr) {
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Firestore connection timeout')), 2500)
+        )
+      ]).catch((firestoreErr) => {
         console.warn('Firebase Firestore save notice:', firestoreErr?.message || firestoreErr);
-      }
+      });
 
-      // 2. Submit to official Google Apps Script endpoint in no-cors mode (dual-sync)
-      try {
-        await fetch(COMMUNITY_INFO.formEndpoint, {
+      const sheetTask = Promise.race([
+        fetch(COMMUNITY_INFO.formEndpoint, {
           method: 'POST',
           body: formPayload,
           mode: 'no-cors'
-        });
-      } catch (sheetErr) {
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Google Sheet sync timeout')), 3000)
+        )
+      ]).catch((sheetErr) => {
         console.warn('Google Sheet sync notice:', sheetErr?.message || sheetErr);
-      }
+      });
+
+      // Wait for both to complete or safely timeout (maximum 3 seconds total wait)
+      await Promise.allSettled([firestoreTask, sheetTask]);
 
       // Record rate limit timestamp
       recordSubmissionTimestamp('stic_form_last_sub');

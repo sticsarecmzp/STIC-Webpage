@@ -83,14 +83,26 @@ export async function saveRegistrationToFirestore(registrationData) {
     console.warn('Firestore is not configured. Set VITE_FIREBASE_* environment variables in .env.');
     return null;
   }
-  const registrationsRef = collection(db, 'registrations');
-  const docRef = await addDoc(registrationsRef, {
-    ...registrationData,
-    createdAt: serverTimestamp(),
-    academicCohort: '2026-2027',
-    status: 'pending'
-  });
-  return docRef.id;
+  try {
+    const registrationsRef = collection(db, 'registrations');
+    const docPromise = addDoc(registrationsRef, {
+      ...registrationData,
+      createdAt: serverTimestamp(),
+      academicCohort: '2026-2027',
+      status: 'pending'
+    });
+
+    // 2.5 second timeout safeguard prevents infinite hang if Firestore database is not yet enabled
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Firestore connection timeout (database may be pending initialization)')), 2500)
+    );
+
+    const docRef = await Promise.race([docPromise, timeoutPromise]);
+    return docRef.id;
+  } catch (err) {
+    console.warn('saveRegistrationToFirestore notice:', err?.message || err);
+    return null;
+  }
 }
 
 export default app;
