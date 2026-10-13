@@ -230,14 +230,20 @@ export default function JoinForm({ selectedClub }) {
     } catch (err) {
       console.warn('Google sign-in error:', err);
       const errCode = err?.code || '';
+      const errMsg = String(err?.message || '');
+      const isPopupBlocked = 
+        errCode === 'auth/popup-blocked' || 
+        errMsg.toLowerCase().includes('popup') || 
+        errMsg.toLowerCase().includes('window');
+
       if (errCode === 'auth/popup-closed-by-user') {
         setAuthError('Sign-in cancelled. The Google authentication popup was closed.');
-      } else if (errCode === 'auth/popup-blocked') {
-        setAuthError('The sign-in popup was blocked by your browser. Please allow popups for this site.');
+      } else if (isPopupBlocked) {
+        setAuthError('Browser pop-up blocked! Please click the pop-up blocked icon (⧉) on the right side of your browser URL bar, select "Always allow pop-ups for stic-webpage.vercel.app", and try again.');
       } else if (errCode === 'auth/unauthorized-domain') {
         setAuthError('Domain is not authorized in Firebase. Add this domain in Firebase Console → Authentication → Settings → Authorized domains.');
       } else {
-        setAuthError(err?.message || 'Google authentication failed. Please try again or use Manual Registration below.');
+        setAuthError(errMsg || 'Google authentication failed. Please try again or use Manual Registration below.');
       }
     } finally {
       setIsAuthenticating(false);

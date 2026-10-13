@@ -124,7 +124,7 @@ export async function signInWithGoogle() {
       return result.user;
     } catch (popupErr) {
       console.warn('Firebase popup notice:', popupErr?.code, popupErr?.message);
-      if (popupErr?.code === 'auth/popup-closed-by-user') {
+      if (popupErr?.code === 'auth/popup-closed-by-user' || popupErr?.code === 'auth/popup-blocked') {
         throw popupErr;
       }
       if (popupErr?.code === 'auth/unauthorized-domain') {
