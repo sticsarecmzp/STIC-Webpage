@@ -292,7 +292,7 @@ export default function JoinForm({ selectedClub }) {
 
             {/* UTM Tag Detection Indicator */}
             {utmData.source && (
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', padding: '0.35rem 0.8rem', background: 'rgba(99, 102, 241, 0.12)', border: '1px solid rgba(99, 102, 241, 0.35)', borderRadius: '9999px', fontSize: '0.78rem', color: 'var(--primary)', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', padding: '0.35rem 0.8rem', background: 'var(--brutal-yellow)', border: '2px solid var(--border-color)', borderRadius: '4px', fontSize: '0.78rem', color: '#000000', fontWeight: 600, boxShadow: '2px 2px 0px var(--shadow-color)', marginBottom: '1.25rem' }}>
                 <Compass size={13} strokeWidth={2} />
                 <span>Referred via campaign: <strong>{utmData.source}</strong> ({utmData.campaign || 'general'})</span>
               </div>

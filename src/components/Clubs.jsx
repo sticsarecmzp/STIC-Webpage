@@ -61,10 +61,7 @@ export default function Clubs({ selectedClub, onSelectClub }) {
       >
         <div>
           <div className="club-card-top">
-            <div 
-              className="club-icon-wrap" 
-              style={!isActive ? { color: '#a855f7', background: 'rgba(168, 85, 247, 0.12)' } : {}}
-            >
+            <div className="club-icon-wrap">
               <IconComponent size={20} strokeWidth={1.5} />
             </div>
             <div className="club-badges-group">
@@ -138,7 +135,6 @@ export default function Clubs({ selectedClub, onSelectClub }) {
             type="button"
             className={`filter-btn ${activeFilter === 'current' ? 'active' : ''}`}
             onClick={() => setActiveFilter('current')}
-            style={activeFilter === 'current' ? {} : { borderColor: 'rgba(16, 185, 129, 0.4)', color: 'var(--text)' }}
           >
             In Current Time (4)
           </button>
@@ -146,7 +142,6 @@ export default function Clubs({ selectedClub, onSelectClub }) {
             type="button"
             className={`filter-btn ${activeFilter === 'future' ? 'active' : ''}`}
             onClick={() => setActiveFilter('future')}
-            style={activeFilter === 'future' ? {} : { borderColor: 'rgba(168, 85, 247, 0.4)', color: 'var(--text)' }}
           >
             Future Scope (4)
           </button>

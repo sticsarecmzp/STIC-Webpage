@@ -38,7 +38,7 @@ export default function ConfirmModal({
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-            <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'rgba(99, 102, 241, 0.15)', border: '1px solid var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '6px', background: 'var(--brutal-yellow)', border: '2px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000000', boxShadow: '2px 2px 0px var(--shadow-color)' }}>
               <AlertCircle size={18} strokeWidth={2} />
             </div>
             <h3 id="confirmModalTitle" style={{ fontSize: 'var(--step-0)', fontWeight: 700, color: 'var(--text)' }}>

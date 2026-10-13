@@ -179,7 +179,7 @@ export default function SiteSearchModal({ isOpen, onClose, onSelectClub }) {
                       <div>
                         <div className="search-item-title" style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
                           <span>{club.name}</span>
-                          <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: club.status === 'active' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(168, 85, 247, 0.15)', color: club.status === 'active' ? '#10b981' : '#a855f7', fontWeight: 700 }}>
+                          <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.45rem', borderRadius: '4px', border: '1.5px solid var(--border-color)', background: club.status === 'active' ? 'var(--brutal-yellow)' : 'var(--bg-surface-elevated)', color: club.status === 'active' ? '#000000' : 'var(--text)', fontWeight: 700 }}>
                             {club.status === 'active' ? 'Active' : 'Future Scope'}
                           </span>
                         </div>

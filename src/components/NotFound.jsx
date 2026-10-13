@@ -15,12 +15,12 @@ export default function NotFound({ onNavigateHome }) {
   return (
     <div className="not-found-section" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
       <div className="glass-card" style={{ maxWidth: '600px', width: '100%', padding: 'clamp(2rem, 5vw, 3.5rem)', textAlign: 'center', margin: '0 auto' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.9rem', borderRadius: '9999px', background: 'rgba(239, 68, 68, 0.12)', border: '1px solid rgba(239, 68, 68, 0.35)', color: '#ef4444', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', fontWeight: 600, marginBottom: '1.25rem' }}>
-          <AlertTriangle size={14} strokeWidth={1.5} />
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.9rem', borderRadius: '4px', background: 'var(--brutal-yellow)', border: '2px solid var(--border-color)', color: '#000000', boxShadow: '3px 3px 0px var(--shadow-color)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', fontWeight: 700, marginBottom: '1.25rem' }}>
+          <AlertTriangle size={14} strokeWidth={2} />
           <span>ERROR 404 • ROUTE NOT FOUND</span>
         </div>
 
-        <div style={{ fontSize: 'clamp(4.5rem, 12vw, 6.5rem)', fontWeight: 800, lineHeight: 1, letterSpacing: '-0.04em', background: 'linear-gradient(135deg, var(--text) 30%, var(--primary) 70%, var(--accent) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: '1rem' }}>
+        <div style={{ fontSize: 'clamp(4.5rem, 12vw, 6.5rem)', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.04em', color: 'var(--text)', textShadow: '4px 4px 0px var(--brutal-yellow)', marginBottom: '1rem' }}>
           404
         </div>
 
