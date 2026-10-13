@@ -27,6 +27,7 @@ import {
   recordSubmissionTimestamp,
   sanitizeText 
 } from '../utils/security';
+import { saveRegistrationToFirestore } from '../firebase';
 
 export default function JoinForm({ selectedClub }) {
   const [formData, setFormData] = useState({
@@ -193,12 +194,37 @@ export default function JoinForm({ selectedClub }) {
       formPayload.append('utmMedium', utmData.medium ? sanitizeText(utmData.medium, 50) : 'web');
       formPayload.append('utmCampaign', utmData.campaign ? sanitizeText(utmData.campaign, 50) : 'general');
 
-      // Submit to official Google Apps Script endpoint in no-cors mode
-      await fetch(COMMUNITY_INFO.formEndpoint, {
-        method: 'POST',
-        body: formPayload,
-        mode: 'no-cors'
-      });
+      // 1. Save directly into Firebase Cloud Firestore Database
+      try {
+        await saveRegistrationToFirestore({
+          fullName: sanitized.fullName,
+          rollNo: sanitized.rollNo,
+          email: sanitized.email,
+          branch: sanitized.branch,
+          year: sanitized.year,
+          guild: sanitized.guild,
+          interests: sanitized.interests,
+          portfolio: sanitized.portfolio,
+          message: sanitized.message,
+          collegeCode: COMMUNITY_INFO.collegeCode || '1215',
+          utmSource: utmData.source ? sanitizeText(utmData.source, 50) : 'direct',
+          utmMedium: utmData.medium ? sanitizeText(utmData.medium, 50) : 'web',
+          utmCampaign: utmData.campaign ? sanitizeText(utmData.campaign, 50) : 'general'
+        });
+      } catch (firestoreErr) {
+        console.warn('Firebase Firestore save notice:', firestoreErr?.message || firestoreErr);
+      }
+
+      // 2. Submit to official Google Apps Script endpoint in no-cors mode (dual-sync)
+      try {
+        await fetch(COMMUNITY_INFO.formEndpoint, {
+          method: 'POST',
+          body: formPayload,
+          mode: 'no-cors'
+        });
+      } catch (sheetErr) {
+        console.warn('Google Sheet sync notice:', sheetErr?.message || sheetErr);
+      }
 
       // Record rate limit timestamp
       recordSubmissionTimestamp('stic_form_last_sub');
