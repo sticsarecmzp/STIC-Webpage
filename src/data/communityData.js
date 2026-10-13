@@ -297,6 +297,16 @@ export const TEAM_MEMBERS = [
     initials: "PY",
     isFaculty: false,
     focus: "Competitive Programming, Systems and Linux, Open Source Lead"
+  },
+  {
+    name: "Ayush Mishra",
+    role: "Website Maintenance & Designing",
+    affiliation: "B.Tech IT, SAREC Mirzapur",
+    email: "officialayushmishra002@gmail.com",
+    phone: "+91 79918 82235",
+    initials: "AM",
+    isFaculty: false,
+    focus: "Website Maintenance, UI/UX Design & Frontend Architecture"
   }
 ];
 
