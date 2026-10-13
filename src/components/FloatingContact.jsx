@@ -81,7 +81,7 @@ export default function FloatingContact() {
             title="Share Portal Link"
             aria-label="Copy portal link"
           >
-            {copied ? <Check size={17} style={{ color: 'var(--success)' }} strokeWidth={2.5} /> : <Share2 size={17} strokeWidth={2} />}
+            {copied ? <Check size={17} style={{ color: 'var(--primary)' }} strokeWidth={2.5} /> : <Share2 size={17} strokeWidth={2} />}
             <span className="floating-action-tooltip">
               {copied ? 'Link Copied!' : 'Copy Share Link'}
             </span>

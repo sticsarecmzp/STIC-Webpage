@@ -400,7 +400,7 @@ export default function JoinForm({ selectedClub }) {
             {status === 'success' && submittedData ? (
               <div className="registration-success-card" role="alert">
                 <div className="success-icon-badge">
-                  <CheckCircle2 size={36} strokeWidth={1.8} style={{ color: 'var(--success)' }} />
+                  <CheckCircle2 size={36} strokeWidth={1.8} style={{ color: '#000000' }} />
                 </div>
 
                 <h3 className="success-heading">Registration Confirmed!</h3>

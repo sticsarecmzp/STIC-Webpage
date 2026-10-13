@@ -303,7 +303,7 @@ export default function SiteSearchModal({ isOpen, onClose, onSelectClub }) {
                       onClick={onClose}
                     >
                       <div>
-                        <div className="search-item-title" style={{ color: '#0a66c2' }}>{item.title}</div>
+                        <div className="search-item-title">{item.title}</div>
                         <div className="search-item-sub">{item.sub}</div>
                       </div>
                       <span className="search-item-badge">Open LinkedIn →</span>

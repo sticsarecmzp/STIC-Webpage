@@ -84,7 +84,7 @@ export default function Events() {
                 >
                   {downloadedEventId === event.id ? (
                     <>
-                      <Check size={14} strokeWidth={1.5} style={{ color: 'var(--success)' }} />
+                      <Check size={14} strokeWidth={1.5} style={{ color: 'var(--primary)' }} />
                       <span>Calendar Saved</span>
                     </>
                   ) : (

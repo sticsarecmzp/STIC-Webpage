@@ -46,7 +46,7 @@ export default function InstitutionStrip() {
               target="_blank"
               rel="noopener noreferrer"
               className="tag-badge"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--accent)' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--primary)' }}
             >
               <span>sarecmzp.ac.in</span>
               <ExternalLink size={12} strokeWidth={1.5} />

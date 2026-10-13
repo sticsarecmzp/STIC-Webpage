@@ -131,7 +131,7 @@ export default function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="contact-link"
-                      style={{ fontSize: '0.75rem', color: 'var(--accent)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
+                      style={{ fontSize: '0.75rem', color: 'var(--primary)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
                       aria-label={`Open live URL for ${project.title}`}
                     >
                       <span>Live</span>

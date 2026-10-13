@@ -47,10 +47,10 @@
   --step-4: clamp(2.07rem, 1.81rem + 1.42vw, 3.05rem);
   --step-5: clamp(2.49rem, 2.05rem + 2.18vw, 4.06rem);
 
-  /* Disciplined Neo-Brutalism Palette (Strictly 2-3 Focused Colors) */
-  --brutal-yellow: #FFE600; /* Primary Brand Accent (Arcade Yellow) */
-  --brutal-cyan: #38BDF8;   /* Secondary Structural Accent (Tech Sky Cyan) */
-  --brutal-green: #16A34A;  /* Status Signal (Live / Active) */
+  /* Strict Tri-Color Neo-Brutalism Palette (ONLY Black, White, and Yellow) */
+  --brutal-yellow: #FFE600; /* Signature Arcade Yellow */
+  --brutal-cyan: #FFE600;   /* Unified to Yellow */
+  --brutal-green: #FFE600;  /* Unified to Yellow */
 
   /* Theme Core Colors - Light Mode Neo-Brutalist */
   --primary: #FFE600;
@@ -58,8 +58,8 @@
   --primary-contrast: #000000;
   --primary-glow: transparent;
   --primary-glow-subtle: transparent;
-  --accent: #38BDF8;
-  --accent-hover: #0284C7;
+  --accent: #FFE600;
+  --accent-hover: #FACC15;
   --accent-glow: transparent;
 
   /* Fonts */
@@ -103,12 +103,12 @@
   --bg-surface-subtle: #FAF7EF;
   --bg-surface-active: #FFE600;
 
-  --success: #15803D;
-  --success-subtle: #DCFCE7;
+  --success: #FFE600;
+  --success-subtle: #FFE600;
   --success-border: #000000;
 
-  --warning: #B45309;
-  --warning-subtle: #FEF3C7;
+  --warning: #FFE600;
+  --warning-subtle: #FFE600;
 
   --card-radius: 12px;
   --btn-radius: 8px;
@@ -121,8 +121,12 @@
   --primary: #FFE600;
   --primary-hover: #FACC15;
   --primary-contrast: #000000;
-  --accent: #38BDF8;
-  --accent-hover: #0284C7;
+  --accent: #FFE600;
+  --accent-hover: #FACC15;
+
+  --brutal-yellow: #FFE600;
+  --brutal-cyan: #FFE600;
+  --brutal-green: #FFE600;
 
   /* Dark Canvas Obsidian Neo-Brutalism */
   --bg: #0C0E14;
@@ -159,12 +163,12 @@
   --bg-surface-subtle: #0C0E14;
   --bg-surface-active: #FFE600;
 
-  --success: #4ADE80;
-  --success-subtle: rgba(74, 222, 128, 0.18);
+  --success: #FFE600;
+  --success-subtle: #FFE600;
   --success-border: #FFFFFF;
 
-  --warning: #FBBF24;
-  --warning-subtle: rgba(251, 191, 36, 0.18);
+  --warning: #FFE600;
+  --warning-subtle: #FFE600;
   --outline-stroke: #FFE600;
 }
 
@@ -705,34 +709,31 @@ section, .section {
   align-items: center;
   gap: 0.5rem;
   padding: 0.45rem 1rem;
-  background: rgba(37, 211, 102, 0.12);
-  border: 1px solid rgba(37, 211, 102, 0.35);
-  border-radius: 9999px;
+  background: var(--bg-surface-elevated);
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
   font-size: var(--step--2);
-  font-weight: 600;
-  color: #25d366;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 700;
+  color: var(--text);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  transition: all 0.15s ease;
   text-decoration: none;
   cursor: pointer;
 }
 
 .hero-whatsapp-badge:hover {
-  background: rgba(37, 211, 102, 0.22);
-  border-color: #25d366;
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.35);
-  color: #ffffff;
+  background: var(--brutal-yellow);
+  color: #000000;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px var(--shadow-color);
 }
 
 .whatsapp-dot-pulse {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: #25d366;
-  box-shadow: 0 0 8px #25d366;
-  animation: livePing 2s infinite ease-in-out;
+  background-color: var(--brutal-yellow);
+  box-shadow: 1px 1px 0px var(--shadow-color);
 }
 
 .live-pulse-wrapper {
@@ -1533,13 +1534,13 @@ section, .section {
 }
 
 .guilds-status-badge.badge-active {
-  background: #DCFCE7;
-  color: #15803D;
+  background: var(--brutal-yellow);
+  color: #000000;
 }
 
 [data-theme="dark"] .guilds-status-badge.badge-active {
-  background: #14532D;
-  color: #4ADE80;
+  background: var(--brutal-yellow);
+  color: #000000;
 }
 
 .guilds-status-badge.badge-future {
@@ -1563,9 +1564,9 @@ section, .section {
 
 /* Compact Status Badges on Cards */
 .club-badge.club-status-active {
-  color: #15803D;
+  color: #000000;
   border-color: var(--border-color);
-  background: #DCFCE7;
+  background: var(--brutal-yellow);
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
@@ -1579,8 +1580,8 @@ section, .section {
 }
 
 [data-theme="dark"] .club-badge.club-status-active {
-  background: #14532D;
-  color: #4ADE80;
+  background: var(--brutal-yellow);
+  color: #000000;
 }
 
 .club-badge.club-status-future {
@@ -1600,13 +1601,11 @@ section, .section {
 }
 
 .live-status-dot {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background-color: #16A34A;
-  box-shadow: 0 0 6px #16A34A;
+  background-color: #000000;
   flex-shrink: 0;
-  animation: pulse 2s infinite ease-in-out;
 }
 
 .future-status-dot {
@@ -1815,17 +1814,17 @@ section, .section {
   font-size: var(--step--2);
   font-weight: 800;
   padding: 0.22rem 0.65rem;
-  background: #DCFCE7;
+  background: var(--brutal-yellow);
   border: 1.5px solid var(--border-color);
   box-shadow: 1.5px 1.5px 0px var(--shadow-color);
   border-radius: 4px;
-  color: #15803D;
+  color: #000000;
   font-family: var(--font-mono);
 }
 
 [data-theme="dark"] .event-status {
-  background: #14532D;
-  color: #4ADE80;
+  background: var(--brutal-yellow);
+  color: #000000;
 }
 
 .event-date-row {
@@ -2278,13 +2277,15 @@ section, .section {
 }
 
 .form-status-banner.success {
-  background: #DCFCE7;
-  color: #15803D;
+  background: var(--brutal-yellow);
+  color: #000000;
 }
 
 .form-status-banner.error {
-  background: #FEE2E2;
-  color: #991B1B;
+  background: #000000;
+  color: #FFFFFF;
+  border: 2px solid var(--border-color);
+  box-shadow: 4px 4px 0px var(--brutal-yellow);
 }
 
 /* FAQ Section - Neo-Brutalist Accordion Cards */
@@ -2443,18 +2444,22 @@ section, .section {
 
 /* Input Error and Validation States */
 .input-error {
-  border-color: #ef4444 !important;
-  background: rgba(239, 68, 68, 0.05) !important;
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.25) !important;
+  border-color: var(--border-color) !important;
+  outline: 2px solid var(--brutal-yellow) !important;
+  box-shadow: 3px 3px 0px var(--brutal-yellow) !important;
 }
 
 .field-error-text {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: #ef4444;
+  color: #000000;
+  background: var(--brutal-yellow);
+  border: 1.5px solid #000000;
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
   font-size: 0.74rem;
-  font-weight: 500;
+  font-weight: 700;
   margin-top: 0.35rem;
 }
 
@@ -2475,7 +2480,7 @@ section, .section {
   align-items: center;
   justify-content: center;
   margin-bottom: 1.25rem;
-  box-shadow: 0 0 28px rgba(16, 185, 129, 0.35);
+  box-shadow: 4px 4px 0px #000000;
 }
 
 .success-heading {
@@ -2495,11 +2500,11 @@ section, .section {
 .success-track-pill {
   display: inline-block;
   padding: 0.2rem 0.65rem;
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid var(--primary);
-  border-radius: 9999px;
-  color: var(--primary);
-  font-weight: 600;
+  background: var(--brutal-yellow);
+  border: 2px solid #000000;
+  border-radius: 4px;
+  color: #000000;
+  font-weight: 700;
   font-size: 0.85rem;
 }
 
@@ -2708,21 +2713,19 @@ section, .section {
 
 .scroll-progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 50%, #ec4899 100%);
-  box-shadow: 0 0 10px var(--primary-glow);
+  background: var(--brutal-yellow);
+  box-shadow: none;
   transition: width 0.1s linear;
 }
 
 /* Announcement Banner */
 .announcement-banner {
-  background: linear-gradient(90deg, rgba(99, 102, 241, 0.15) 0%, rgba(6, 182, 212, 0.12) 100%);
-  border-bottom: 1px solid var(--glass-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #000000;
+  border-bottom: 2.5px solid var(--border-color);
   position: relative;
   z-index: 45;
   font-size: var(--step--2);
-  color: var(--text);
+  color: #FFFFFF;
   padding: 0.5rem 0;
   transition: all 0.3s ease;
 }
@@ -2963,12 +2966,12 @@ section, .section {
 
 .search-item-badge {
   font-size: 0.74rem;
-  font-weight: 600;
-  color: var(--primary);
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.25);
-  padding: 0.25rem 0.55rem;
-  border-radius: 9999px;
+  font-weight: 700;
+  color: #000000;
+  background: var(--brutal-yellow);
+  border: 2px solid #000000;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -3006,26 +3009,24 @@ section, .section {
   right: 1.75rem;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: #ffffff;
-  border: none;
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+  border-radius: 4px;
+  background: var(--brutal-yellow);
+  color: #000000;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 95;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.25s ease,
-              background 0.25s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
   animation: fadeInDown 0.25s ease;
 }
 
 .back-to-top-btn:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.5);
-  background: var(--accent);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000000;
+  background: #FACC15;
 }
 
 /* Floating Contact Action Dock */
@@ -3075,17 +3076,18 @@ section, .section {
 }
 
 .floating-action-item.whatsapp {
-  background: #25D366;
+  background: var(--brutal-yellow);
   color: #000000;
+  border: 2px solid var(--border-color);
   position: relative;
 }
 
 .floating-action-item.whatsapp::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -4px;
   border-radius: 10px;
-  border: 2px solid #25D366;
+  border: 2px solid var(--brutal-yellow);
   opacity: 0.7;
   animation: whatsappRadarPing 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
   pointer-events: none;
@@ -3097,23 +3099,27 @@ section, .section {
 }
 
 .floating-action-item.linkedin {
-  background: #0A66C2;
+  background: #000000;
   color: #FFFFFF;
+  border: 2px solid var(--border-color);
 }
 
 .floating-action-item.email {
   background: var(--bg-surface);
   color: var(--text);
+  border: 2px solid var(--border-color);
 }
 
 .floating-action-item.call {
-  background: var(--brutal-cyan);
+  background: var(--brutal-yellow);
   color: #000000;
+  border: 2px solid var(--border-color);
 }
 
 .floating-action-item.share {
-  background: var(--brutal-yellow);
-  color: #000000;
+  background: var(--bg-surface-elevated);
+  color: var(--text);
+  border: 2px solid var(--border-color);
 }
 
 .floating-action-tooltip {
@@ -3807,8 +3813,8 @@ section, .section {
       <!-- Filter Buttons -->
       <div class="clubs-filter-row" role="tablist">
         <button type="button" class="filter-btn active" id="filterAllBtn" onclick="filterClubs('all', this)">All Guilds (8)</button>
-        <button type="button" class="filter-btn" id="filterCurrentBtn" onclick="filterClubs('current', this)" style="border-color: rgba(16, 185, 129, 0.4);">In Current Time (4)</button>
-        <button type="button" class="filter-btn" id="filterFutureBtn" onclick="filterClubs('future', this)" style="border-color: rgba(168, 85, 247, 0.4);">Future Scope (4)</button>
+        <button type="button" class="filter-btn" id="filterCurrentBtn" onclick="filterClubs('current', this)">In Current Time (4)</button>
+        <button type="button" class="filter-btn" id="filterFutureBtn" onclick="filterClubs('future', this)">Future Scope (4)</button>
       </div>
 
       <div id="clubsContainerWrap">
@@ -3870,10 +3876,10 @@ section, .section {
           </p>
 
           <div style="display: flex; flex-direction: column; gap: 1rem; color: var(--text-secondary); font-size: var(--step--1);">
-            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Open to all academic years and engineering branches at SAREC.</div>
-            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Access to weekend build sprints and lab mentorship hours.</div>
-            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Eligibility for campus hackathon teams and open source sprints.</div>
-            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>100% student-operated with zero registration fees.</div>
+            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--brutal-yellow)" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Open to all academic years and engineering branches at SAREC.</div>
+            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--brutal-yellow)" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Access to weekend build sprints and lab mentorship hours.</div>
+            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--brutal-yellow)" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Eligibility for campus hackathon teams and open source sprints.</div>
+            <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--brutal-yellow)" stroke-width="3" style="display:inline-block; vertical-align:middle; margin-right:8px;"><polyline points="20 6 9 17 4 12"></polyline></svg>100% student-operated with zero registration fees.</div>
           </div>
         </div>
 
@@ -4059,7 +4065,7 @@ section, .section {
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 22 7 12 2"></polygon><polyline points="22 7 22 22 2 22 2 7"></polyline><line x1="12" y1="22" x2="12" y2="12"></line></svg>
               <span>sarecmzp.ac.in</span>
             </a>
-            <a href="https://www.linkedin.com/company/stic-sarec-mirzapur/posts/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.35rem; color: #0a66c2; text-decoration: none;" title="STIC LinkedIn Page & Updates">
+            <a href="https://www.linkedin.com/company/stic-sarec-mirzapur/posts/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.35rem; color: var(--text); text-decoration: none;" title="STIC LinkedIn Page & Updates">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
               <span>LinkedIn Posts &amp; Updates</span>
             </a>
@@ -4526,7 +4532,7 @@ section, .section {
 
       if (!fullName || !rollNo || !email || !branch || !year || !guild) {
         feedback.style.display = 'block';
-        feedback.style.color = '#ef4444';
+        feedback.style.color = '#000000'; feedback.style.background = 'var(--brutal-yellow)'; feedback.style.padding = '0.5rem'; feedback.style.borderRadius = '4px'; feedback.style.border = '2px solid var(--border-color)';
         feedback.innerText = "Please fill in all required fields (Name, Roll No, Email, Department, Year, Guild).";
         return;
       }
@@ -4568,7 +4574,7 @@ section, .section {
       if (lastSub && (now - parseInt(lastSub, 10) < 15000)) {
         const remaining = Math.ceil((15000 - (now - parseInt(lastSub, 10))) / 1000);
         feedback.style.display = 'block';
-        feedback.style.color = '#ef4444';
+        feedback.style.color = '#000000'; feedback.style.background = 'var(--brutal-yellow)'; feedback.style.padding = '0.5rem'; feedback.style.borderRadius = '4px'; feedback.style.border = '2px solid var(--border-color)';
         feedback.textContent = `Rate limit: Please wait ${remaining} seconds before submitting again.`;
         return;
       }
@@ -4609,11 +4615,11 @@ section, .section {
         feedback.style.color = 'var(--success)';
         const safeName = escapeHtml(fullName);
         const safeEmail = escapeHtml(email);
-        feedback.innerHTML = `<strong>Registration Submitted!</strong> Welcome to STIC SAREC Mirzapur, ${safeName}. Check your email (${safeEmail}) or <a href='https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT' target='_blank' rel='noopener noreferrer' style='color:#25d366;font-weight:700;text-decoration:underline;'>Join the WhatsApp Community Group &rarr;</a>`;
+        feedback.innerHTML = `<strong>Registration Submitted!</strong> Welcome to STIC SAREC Mirzapur, ${safeName}. Check your email (${safeEmail}) or <a href='https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT' target='_blank' rel='noopener noreferrer' style='color:var(--brutal-yellow);font-weight:700;text-decoration:underline;'>Join the WhatsApp Community Group &rarr;</a>`;
         document.getElementById('joinForm').reset();
       } catch (err) {
         feedback.style.display = 'block';
-        feedback.style.color = '#ef4444';
+        feedback.style.color = '#000000'; feedback.style.background = 'var(--brutal-yellow)'; feedback.style.padding = '0.5rem'; feedback.style.borderRadius = '4px'; feedback.style.border = '2px solid var(--border-color)';
         feedback.innerHTML = "Submission issue encountered. Please verify your connection or email <a href='mailto:sticsarecmzp@gmail.com' style='text-decoration:underline;color:inherit;'>sticsarecmzp@gmail.com</a> directly.";
       } finally {
         btn.disabled = false;

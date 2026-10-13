@@ -83,15 +83,15 @@ export default function Hero({ onSelectClub }) {
             {/* Verified Campus Proof Bar */}
             <div className="hero-proof-bar">
               <div className="proof-item">
-                <CheckCircle2 size={16} strokeWidth={2.5} style={{ color: 'var(--success)' }} />
+                <CheckCircle2 size={16} strokeWidth={2.5} style={{ color: 'var(--brutal-yellow)' }} />
                 <span>8 Specialized Guilds</span>
               </div>
               <div className="proof-item">
-                <ShieldCheck size={16} strokeWidth={2} style={{ color: 'var(--accent)' }} />
+                <ShieldCheck size={16} strokeWidth={2} style={{ color: 'var(--brutal-yellow)' }} />
                 <span>AKTU College Code 1215</span>
               </div>
               <div className="proof-item">
-                <Users size={16} strokeWidth={2} style={{ color: 'var(--primary)' }} />
+                <Users size={16} strokeWidth={2} style={{ color: 'var(--brutal-yellow)' }} />
                 <span>₹0 100% Free &amp; Open Access</span>
               </div>
             </div>
@@ -113,7 +113,7 @@ export default function Hero({ onSelectClub }) {
             <div className="bento-card bento-card-cost">
               <div className="bento-header">
                 <span className="bento-label">Opportunity Cost</span>
-                <Shield size={18} strokeWidth={2} style={{ color: 'var(--accent)' }} />
+                <Shield size={18} strokeWidth={2} style={{ color: 'var(--brutal-yellow)' }} />
               </div>
               <div className="bento-number">4 Years</div>
               <p className="bento-desc">Too much valuable time to spend based on outdated slides and random opinions.</p>

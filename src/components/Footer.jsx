@@ -193,7 +193,7 @@ export default function Footer({ onSelectClub }) {
                     title="Copy Email"
                     aria-label="Copy Email address"
                   >
-                    {copiedEmail ? <Check size={12} style={{ color: 'var(--success)' }} /> : <Copy size={12} />}
+                    {copiedEmail ? <Check size={12} style={{ color: 'var(--primary)' }} /> : <Copy size={12} />}
                   </button>
                 </div>
               </li>
@@ -214,7 +214,7 @@ export default function Footer({ onSelectClub }) {
                     title="Copy Phone number"
                     aria-label="Copy phone number"
                   >
-                    {copiedPhone ? <Check size={12} style={{ color: 'var(--success)' }} /> : <Copy size={12} />}
+                    {copiedPhone ? <Check size={12} style={{ color: 'var(--primary)' }} /> : <Copy size={12} />}
                   </button>
                 </div>
               </li>
@@ -223,7 +223,7 @@ export default function Footer({ onSelectClub }) {
                   href={COMMUNITY_INFO.whatsappGroup}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--success)' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}
                 >
                   <MessageSquare size={13} strokeWidth={1.5} />
                   <span>STIC WhatsApp Group</span>
@@ -234,7 +234,7 @@ export default function Footer({ onSelectClub }) {
                   href={COMMUNITY_INFO.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#0a66c2' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}
                   title="STIC LinkedIn Page & Updates"
                 >
                   <LinkedinIcon size={13} />
