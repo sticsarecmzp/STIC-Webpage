@@ -1,6 +1,7 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getAnalytics, isSupported } from 'firebase/analytics';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
 /**
  * Firebase Client Configuration
@@ -27,6 +28,36 @@ const app = isConfigured
 
 // Initialize Cloud Firestore database
 export const db = app ? getFirestore(app) : null;
+
+// Initialize Firebase Authentication & Google Auth Provider
+export const auth = app ? getAuth(app) : null;
+export const googleProvider = new GoogleAuthProvider();
+
+// Customize Google OAuth prompt
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
+
+/**
+ * Initiates Google Sign-In with popup
+ * @returns {Promise<import('firebase/auth').User|null>} Authenticated user or null
+ */
+export async function signInWithGoogle() {
+  if (!auth) {
+    console.warn('Firebase Auth is not configured. Set VITE_FIREBASE_* in .env.');
+    return null;
+  }
+  const result = await signInWithPopup(auth, googleProvider);
+  return result.user;
+}
+
+/**
+ * Signs out current user
+ */
+export async function logOut() {
+  if (!auth) return;
+  await signOut(auth);
+}
 
 // Initialize Firebase Analytics conditionally
 export let analytics = null;
