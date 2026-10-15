@@ -1,32 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Menu, X, ArrowUpRight, MessageSquare, Mail, Search, Command } from 'lucide-react';
+import { Sun, Moon, Menu, X, ExternalLink } from 'lucide-react';
 import { COMMUNITY_INFO } from '../data/communityData';
 
-export default function Navbar({ theme, onToggleTheme, onHome, onOpenSearch }) {
+export default function Navbar({ theme, onToggleTheme, onHome }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Close mobile menu on resize, track scroll, handle Escape key and body scroll lock
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) setMobileMenuOpen(false);
     };
 
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setMobileMenuOpen(false);
-      // Keyboard shortcut Ctrl+K or Cmd+K
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        if (onOpenSearch) onOpenSearch();
-      }
     };
 
     window.addEventListener('resize', handleResize);
@@ -38,7 +28,7 @@ export default function Navbar({ theme, onToggleTheme, onHome, onOpenSearch }) {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onOpenSearch]);
+  }, []);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -62,7 +52,6 @@ export default function Navbar({ theme, onToggleTheme, onHome, onOpenSearch }) {
 
   return (
     <>
-      {/* Mobile Backdrop Overlay */}
       <div
         className={`mobile-menu-backdrop ${mobileMenuOpen ? 'open' : ''}`}
         onClick={closeMenu}
@@ -71,7 +60,7 @@ export default function Navbar({ theme, onToggleTheme, onHome, onOpenSearch }) {
 
       <div className="navbar-wrapper">
         <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-          <div className="navbar-inner">
+          <div className="navbar-inner container">
             <a
               href="#top"
               className="brand-link"
@@ -80,18 +69,10 @@ export default function Navbar({ theme, onToggleTheme, onHome, onOpenSearch }) {
             >
               <div className="brand-logo-container">
                 <img
-                  src={theme === 'dark' ? '/assets/logos/stic-logo-light.png' : '/assets/logos/stic-logo-dark.png'}
+                  src="/assets/logos/stic-logo-light.png"
                   alt="STIC Logo"
                   className="brand-logo-img"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                    const fallback = e.currentTarget.nextElementSibling;
-                    if (fallback) fallback.style.display = 'flex';
-                  }}
                 />
-                <span className="brand-logo-fallback" style={{ display: 'none' }}>
-                  STIC
-                </span>
               </div>
               <div className="brand-text-block">
                 <span className="brand-heading">{COMMUNITY_INFO.name}</span>
@@ -100,42 +81,36 @@ export default function Navbar({ theme, onToggleTheme, onHome, onOpenSearch }) {
             </a>
 
             <nav className="nav-links-desktop" aria-label="Main Navigation">
-              <a href="#clubs" className="nav-anchor">Clubs</a>
-              <a href="#why-stic" className="nav-anchor">Why STIC</a>
-              <a href="#events" className="nav-anchor">Events</a>
-              <a href="#projects" className="nav-anchor">Projects</a>
-              <a href="#team" className="nav-anchor">Leadership</a>
-              <a href="#faq" className="nav-anchor">FAQ</a>
+              <a href="#about" className="nav-anchor">About</a>
+              <a href="#domains" className="nav-anchor">Focus Areas</a>
+              <a href="#departments" className="nav-anchor">Departments</a>
+              <a href="#leadership" className="nav-anchor">Leadership</a>
+              <a href="#contact" className="nav-anchor">Contact</a>
             </nav>
 
             <div className="nav-actions">
-              {/* Site Search Button */}
-              <button
-                type="button"
-                className="btn-icon"
-                onClick={onOpenSearch}
-                aria-label="Search site (Ctrl+K)"
-                title="Search (Ctrl+K)"
+              <a
+                href={COMMUNITY_INFO.collegeWebsite}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-link-college"
+                title="Official College Portal"
               >
-                <Search size={16} strokeWidth={1.8} />
-              </button>
+                <span>sarecmzp.ac.in</span>
+                <ExternalLink size={13} strokeWidth={2.5} />
+              </a>
 
-              {/* Theme Toggle Button */}
               <button
                 type="button"
-                className="btn-icon"
+                id="theme-toggle-btn"
+                className="btn-icon theme-toggle"
                 onClick={onToggleTheme}
                 aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
                 title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
               >
-                {theme === 'dark' ? <Sun size={17} strokeWidth={1.5} /> : <Moon size={17} strokeWidth={1.5} />}
+                {theme === 'dark' ? <Sun size={17} strokeWidth={2} /> : <Moon size={17} strokeWidth={2} />}
               </button>
 
-              <a href="#join" className="btn btn-primary btn-sm">
-                <span>Join Community</span>
-              </a>
-
-              {/* Mobile Menu Hamburger */}
               <button
                 type="button"
                 className="btn-icon mobile-menu-btn"
@@ -143,71 +118,52 @@ export default function Navbar({ theme, onToggleTheme, onHome, onOpenSearch }) {
                 aria-expanded={mobileMenuOpen}
                 aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               >
-                {mobileMenuOpen ? <X size={18} strokeWidth={1.5} /> : <Menu size={18} strokeWidth={1.5} />}
+                {mobileMenuOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
               </button>
             </div>
           </div>
 
-          {/* Mobile Navigation Drawer */}
           <div className={`mobile-nav-panel ${mobileMenuOpen ? 'open' : ''}`}>
-            {/* Quick Mobile Search Trigger */}
-            <button
-              type="button"
-              className="btn btn-secondary btn-sm"
-              onClick={() => {
-                closeMenu();
-                if (onOpenSearch) onOpenSearch();
-              }}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.45rem', width: '100%', marginBottom: '0.5rem' }}
-            >
-              <Search size={14} strokeWidth={2} />
-              <span>Quick Search (Ctrl+K)</span>
-            </button>
-
             <nav className="mobile-nav-links-list" aria-label="Mobile Navigation">
-              <a href="#clubs" className="mobile-nav-link" onClick={closeMenu}>
-                <span>Clubs &amp; 8 Guilds</span>
+              <a href="#about" className="mobile-nav-link" onClick={closeMenu}>
+                About STIC
               </a>
-              <a href="#why-stic" className="mobile-nav-link" onClick={closeMenu}>
-                <span>Why STIC Methodology</span>
+              <a href="#domains" className="mobile-nav-link" onClick={closeMenu}>
+                Technical Focus Areas
               </a>
-              <a href="#events" className="mobile-nav-link" onClick={closeMenu}>
-                <span>Events &amp; Sprints Calendar</span>
+              <a href="#departments" className="mobile-nav-link" onClick={closeMenu}>
+                Engineering Departments
               </a>
-              <a href="#projects" className="mobile-nav-link" onClick={closeMenu}>
-                <span>Student Innovation Projects</span>
+              <a href="#leadership" className="mobile-nav-link" onClick={closeMenu}>
+                Faculty &amp; Leadership
               </a>
-              <a href="#team" className="mobile-nav-link" onClick={closeMenu}>
-                <span>Faculty &amp; Student Leads</span>
+              <a href="#contact" className="mobile-nav-link" onClick={closeMenu}>
+                Contact &amp; Connect
               </a>
-              <a href="#faq" className="mobile-nav-link" onClick={closeMenu}>
-                <span>Frequently Asked Questions</span>
+              <a
+                href={COMMUNITY_INFO.collegeWebsite}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mobile-nav-link college-link-mobile"
+                onClick={closeMenu}
+              >
+                <span>Visit sarecmzp.ac.in</span>
+                <ExternalLink size={14} strokeWidth={2.5} />
               </a>
             </nav>
 
             <div className="mobile-drawer-footer">
               <div className="mobile-theme-row">
-                <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                  Theme: <strong>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</strong>
-                </span>
+                <span>Theme: <strong>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</strong></span>
                 <button
                   type="button"
                   className="btn-icon"
                   onClick={onToggleTheme}
-                  aria-label="Toggle theme in mobile menu"
+                  aria-label="Toggle theme"
                 >
-                  {theme === 'dark' ? <Sun size={16} strokeWidth={1.5} /> : <Moon size={16} strokeWidth={1.5} />}
+                  {theme === 'dark' ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
                 </button>
               </div>
-
-              <a
-                href="#join"
-                className="btn btn-primary"
-                onClick={closeMenu}
-                style={{ width: '100%', marginTop: '0.75rem' }}
-              >
-                <span>Register for Track</span>
-              </a>
             </div>
           </div>
         </header>
