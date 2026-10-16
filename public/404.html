@@ -10,7 +10,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none';"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
     />
 
     <title>404: Node Not Found • STIC SAREC Mirzapur</title>
@@ -287,6 +287,22 @@
           document.documentElement.setAttribute('data-theme', 'light');
         }
       } catch {}
+    </script>
+    <script>
+      (function () {
+        var dangerousExts = /\.(apk|exe|bat|cmd|vbs|vbe|msi|msp|dmg|pkg|bin|iso|ps1|sh|bash|com|scr|pif|hta|jar|cpl|gadget)(\?.*)?$/i;
+        document.addEventListener('click', function (e) {
+          var target = e.target && e.target.closest ? e.target.closest('a') : null;
+          if (!target) return;
+          var href = target.getAttribute('href') || '';
+          if (dangerousExts.test(href)) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.warn('[STIC Security Guard] Blocked unauthorized executable download link:', href);
+            return false;
+          }
+        }, true);
+      })();
     </script>
   </body>
 </html>

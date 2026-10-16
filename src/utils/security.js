@@ -49,6 +49,11 @@ export function validateSafeUrl(urlString, allowedDomains = null) {
     return { valid: false, error: 'Dangerous URL protocol detected.' };
   }
 
+  // Block dangerous executable extensions (sideloaded APKs, EXEs, scripts)
+  if (isDangerousExecutableUrl(trimmed)) {
+    return { valid: false, error: 'Target URL points to an executable or sideloaded package (.apk, .exe, etc.).' };
+  }
+
   let parsed;
   try {
     parsed = new URL(trimmed);
@@ -302,3 +307,23 @@ export function recordSubmissionTimestamp(actionKey = 'stic_form_last_sub') {
     sessionStorage.setItem(actionKey, Date.now().toString());
   } catch {}
 }
+
+/**
+ * Detects whether a URL or link targets an executable or sideloaded file format
+ * (e.g., Android APK, Windows EXE/MSI, Batch, Shell, Mac DMG).
+ *
+ * @param {string} url - Target URL or filename
+ * @returns {boolean} True if executable/harmful extension detected
+ */
+export function isDangerousExecutableUrl(url) {
+  if (!url || typeof url !== 'string') return false;
+  const clean = url.split('?')[0].split('#')[0].toLowerCase().trim();
+  const dangerousExts = [
+    '.apk', '.exe', '.bat', '.cmd', '.vbs', '.vbe',
+    '.msi', '.msp', '.dmg', '.pkg', '.bin', '.iso',
+    '.ps1', '.sh', '.bash', '.com', '.scr', '.pif',
+    '.hta', '.jar', '.cpl', '.gadget'
+  ];
+  return dangerousExts.some((ext) => clean.endsWith(ext));
+}
+

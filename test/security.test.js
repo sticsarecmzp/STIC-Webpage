@@ -17,6 +17,7 @@ import {
   checkSubmissionRateLimit, 
   recordSubmissionTimestamp,
   sanitizeText,
+  isDangerousExecutableUrl,
   ALLOWED_BRANCHES,
   ALLOWED_YEARS,
   ALLOWED_GUILDS
@@ -177,6 +178,25 @@ console.log('\n=== 5. String Length Capping & Bounding Defense ===');
 const hugeString = 'A'.repeat(5000);
 const cappedName = sanitizeText(hugeString, 100);
 assert(cappedName.length === 100, 'Caps oversized input to specified length limit');
+
+console.log('\n=== 6. Executable Sideloading & Download Defense ===');
+assert(isDangerousExecutableUrl('https://in9plus.vip/download/IN9_APK.apk'), 'Detects .apk download target');
+assert(isDangerousExecutableUrl('https://example.com/payload.exe'), 'Detects .exe binary');
+assert(isDangerousExecutableUrl('https://example.com/setup.msi'), 'Detects .msi installer');
+assert(isDangerousExecutableUrl('https://example.com/script.bat'), 'Detects .bat batch script');
+assert(isDangerousExecutableUrl('https://example.com/app.dmg'), 'Detects .dmg disk image');
+assert(isDangerousExecutableUrl('https://in9plus.vip/app.apk?version=3.13&token=xyz'), 'Detects .apk with query parameters');
+assert(isDangerousExecutableUrl('https://example.com/MALICIOUS.APK'), 'Detects case-insensitive uppercase .APK');
+assert(!isDangerousExecutableUrl('https://example.com/image.png'), 'Allows safe image .png');
+assert(!isDangerousExecutableUrl('https://example.com/profile.webp'), 'Allows safe image .webp');
+assert(!isDangerousExecutableUrl('https://example.com/page.html'), 'Allows safe .html page');
+assert(!isDangerousExecutableUrl('https://github.com/sticsarecmzp'), 'Allows standard web path without extension');
+
+// Verify validateSafeUrl integrates executable defense
+assert(!validateSafeUrl('https://in9plus.vip/IN9_APK_dtortqb7ijuo.apk').valid, 'validateSafeUrl blocks APK download URLs');
+assert(!validateSafeUrl('https://suspicious-domain.com/malware.exe').valid, 'validateSafeUrl blocks EXE binary URLs');
+assert(validateSafeUrl('https://github.com/sticsarecmzp').valid, 'validateSafeUrl allows legitimate web profiles');
+
 
 console.log(`\n========================================`);
 console.log(`Test Execution Summary: ${passed} passed, ${failed} failed.`);
