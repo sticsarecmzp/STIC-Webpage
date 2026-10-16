@@ -10,7 +10,7 @@ export default function About() {
           <span className="section-eyebrow">Institutional Overview</span>
           <h2 className="section-title">About the Community &amp; College</h2>
           <p className="section-subtitle">
-            Cultivating an engineering ecosystem grounded in practical development, collaborative problem solving, and technological innovation.
+            Student technical society at SAREC Mirzapur.
           </p>
         </div>
 
@@ -31,13 +31,13 @@ export default function About() {
                 <span className="card-badge">Parent Institution</span>
                 <h3 className="college-title">{COMMUNITY_INFO.college}</h3>
                 <p className="college-meta-line">
-                  {COMMUNITY_INFO.institutionType} • {COMMUNITY_INFO.collegeCode}
+                  {COMMUNITY_INFO.institutionType}
                 </p>
               </div>
             </div>
 
             <p className="about-text">
-              Samrat Ashok Rajkiya Engineering College (SAREC), Mirzapur is a state government engineering college established by the Government of Uttar Pradesh in 2023, affiliated with Dr. A.P.J. Abdul Kalam Technical University (AKTU Lucknow).
+              State government engineering college established by the Government of Uttar Pradesh (2023), affiliated to AKTU Lucknow.
             </p>
 
             <div className="college-meta-details">
@@ -46,8 +46,8 @@ export default function About() {
                 <span className="meta-val">{COMMUNITY_INFO.university}</span>
               </div>
               <div className="meta-row">
-                <span className="meta-name">AKTU Code</span>
-                <span className="meta-val">{COMMUNITY_INFO.collegeCode}</span>
+                <span className="meta-name">Institution Type</span>
+                <span className="meta-val">{COMMUNITY_INFO.institutionType}</span>
               </div>
               <div className="meta-row">
                 <span className="meta-name">Campus Location</span>
@@ -77,7 +77,7 @@ export default function About() {
             <span className="card-badge highlight-badge">Student Initiative</span>
             <h3 className="community-title">{COMMUNITY_INFO.fullName} ({COMMUNITY_INFO.name})</h3>
             <p className="about-text">
-              STIC serves as the official student-led technical collective at SAREC Mirzapur. Our objective is to bridge classroom syllabus with industry-grade software engineering, open-source development, competitive programming, and research prototyping.
+              Official student technical collective bridging curriculum with hands-on software, open source, and hackathons.
             </p>
 
             <div className="pillars-grid">

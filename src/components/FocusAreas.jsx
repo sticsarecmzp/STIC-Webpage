@@ -1,11 +1,12 @@
 import React from 'react';
-import { Code, Terminal, Cpu, Brain, Layers } from 'lucide-react';
+import { Code, Terminal, Cpu, Brain, ShieldCheck, Layers } from 'lucide-react';
 import { FOCUS_AREAS } from '../data/communityData';
 
 const ICONS = {
   'software': Code,
-  'cp-dsa': Terminal,
   'ai-ds': Brain,
+  'cp-dsa': Terminal,
+  'cyber-devops': ShieldCheck,
   'iot-robotics': Cpu
 };
 
@@ -17,23 +18,24 @@ export default function FocusAreas() {
           <span className="section-eyebrow">Technical Domains</span>
           <h2 className="section-title">What We Explore &amp; Build</h2>
           <p className="section-subtitle">
-            Core engineering tracks focused on practical output, competitive problem solving, and technological innovation.
+            Practical engineering tracks at SAREC Mirzapur.
           </p>
         </div>
 
         <div className="focus-grid">
           {FOCUS_AREAS.map((area) => {
             const IconComponent = ICONS[area.id] || Layers;
+            const accentClass = `domain-${area.accent || 'cyan'}`;
             return (
-              <div key={area.id} className="focus-card">
-                <div className="focus-icon-box">
+              <div key={area.id} className={`focus-card ${accentClass}`}>
+                <div className={`focus-icon-box ${accentClass}-icon`}>
                   <IconComponent size={22} strokeWidth={1.75} />
                 </div>
                 <h3 className="focus-card-title">{area.title}</h3>
                 <p className="focus-card-desc">{area.description}</p>
                 <div className="focus-tags-list">
                   {area.tags.map((tag, idx) => (
-                    <span key={idx} className="focus-tag-chip">
+                    <span key={idx} className={`focus-tag-chip ${accentClass}-tag`}>
                       {tag}
                     </span>
                   ))}

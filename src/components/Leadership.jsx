@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, UserCheck, Shield, Sparkles } from 'lucide-react';
+import { Award, Shield, Sparkles, GraduationCap } from 'lucide-react';
 import { LEADERSHIP } from '../data/communityData';
 
 export default function Leadership() {
@@ -16,27 +16,67 @@ export default function Leadership() {
           </p>
         </div>
 
-        {/* Faculty & Co-Founders Row */}
-        <div className="leadership-top-grid">
-          {/* Faculty Coordinator Card */}
-          <div className="neo-card faculty-card">
-            <div className="neo-badge-row">
-              <span className="neo-badge badge-faculty">
-                <Award size={13} strokeWidth={2.5} />
-                <span>Faculty Coordinator</span>
-              </span>
-              <span className="neo-tag">SAREC CSE</span>
-            </div>
-            <h3 className="leader-name">{faculty.name}</h3>
-            <p className="leader-role">{faculty.affiliation}</p>
-            <p className="leader-college">{faculty.college}</p>
-            <div className="leader-focus-pill">
-              <span>{faculty.focus}</span>
-            </div>
+        {/* Faculty Mentorship Row (3 Faculty Members) */}
+        <div className="leadership-subgroup">
+          <div className="subgroup-header">
+            <span className="neo-badge badge-faculty">
+              <GraduationCap size={13} strokeWidth={2.5} />
+              <span>Faculty Mentorship &amp; Direction</span>
+            </span>
+            <span className="subgroup-count">Academic Leadership &bull; SAREC Mirzapur</span>
           </div>
 
-          {/* Co-Founders Cards */}
-          <div className="cofounders-subgrid">
+          <div className="faculty-grid">
+            {faculty.map((f) => {
+              const isCoordinator = f.role === 'Faculty Coordinator';
+              return (
+                <div key={f.id} className="neo-card faculty-card">
+                  <div className="faculty-photo-wrap">
+                    <img
+                      src={f.image}
+                      alt={f.name}
+                      className="faculty-photo"
+                      onError={(e) => {
+                        if (f.fallbackImage && e.currentTarget.src !== f.fallbackImage) {
+                          e.currentTarget.src = f.fallbackImage;
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="neo-badge-row">
+                    <span className={`neo-badge ${isCoordinator ? 'badge-faculty' : 'badge-mentor'}`}>
+                      {isCoordinator ? (
+                        <Award size={12} strokeWidth={2.5} />
+                      ) : (
+                        <Sparkles size={12} strokeWidth={2.5} />
+                      )}
+                      <span>{f.role}</span>
+                    </span>
+                    <span className="neo-tag">{f.designation}</span>
+                  </div>
+                  <h3 className="leader-name">{f.name}</h3>
+                  <p className="leader-role">{f.affiliation}</p>
+                  <p className="leader-college">{f.college}</p>
+                  <div className="leader-focus-pill">
+                    <span>{f.focus}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Co-Founders Row */}
+        <div className="leadership-subgroup">
+          <div className="subgroup-header">
+            <span className="neo-badge badge-founder">
+              <Sparkles size={13} strokeWidth={2.5} />
+              <span>Student Co-Founders</span>
+            </span>
+            <span className="subgroup-count">2 Student Initiators &bull; B.Tech IT</span>
+          </div>
+
+          <div className="cofounders-grid">
             {coFounders.map((cf, idx) => (
               <div key={idx} className="neo-card cofounder-card">
                 <div className="neo-badge-row">

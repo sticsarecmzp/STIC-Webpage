@@ -4,7 +4,6 @@ export const COMMUNITY_INFO = {
   subtitle: "Student Technical Society & Innovation Hub",
   college: "Samrat Ashok Rajkiya Engineering College, Mirzapur",
   collegeShort: "SAREC Mirzapur",
-  collegeCode: "AKTU Code 1215",
   university: "Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow",
   institutionType: "State Government Engineering College, Uttar Pradesh",
   establishedYear: "2023",
@@ -20,89 +19,128 @@ export const COMMUNITY_INFO = {
 };
 
 export const COMMUNITY_STATS = [
-  { value: "1215", label: "AKTU College Code", sub: "Affiliated to AKTU Lucknow" },
-  { value: "4", label: "Engineering Disciplines", sub: "CSE • IT • EL • EE" },
-  { value: "2023", label: "Established Year", sub: "SAREC Mirzapur Campus" },
-  { value: "100%", label: "Open & Student-Led", sub: "Zero Fee • Free Access" }
+  { value: "AKTU", label: "Affiliated" },
+  { value: "4", label: "Branches" },
+  { value: "2023", label: "Established" },
+  { value: "100%", label: "Student-Led" }
 ];
 
 export const DEPARTMENTS = [
   { 
     code: "CSE", 
     name: "Computer Science & Engineering",
-    description: "Core algorithms, systems architecture, operating systems, and computing foundations."
+    description: "Algorithms, operating systems & computing foundations."
   },
   { 
     code: "IT", 
     name: "Information Technology",
-    description: "Modern cloud infrastructure, web engineering, database systems, and enterprise software."
+    description: "Web engineering, cloud infrastructure & software systems."
   },
   { 
     code: "EL", 
     name: "Electronics Engineering",
-    description: "Embedded circuits, microcontrollers, VLSI, signal processing, and robotics hardware."
+    description: "Embedded circuits, microcontrollers & robotics hardware."
   },
   { 
     code: "EE", 
     name: "Electrical Engineering",
-    description: "Power electronics, automation, renewable energy systems, and IoT hardware interfacing."
+    description: "Power electronics, IoT interfacing & automation."
   }
 ];
 
 export const FOCUS_AREAS = [
   {
     id: "software",
-    title: "Software & Web Engineering",
-    description: "Building production-grade web applications, responsive user interfaces, and robust backend microservices using modern developer frameworks and open-source stacks.",
-    tags: ["React", "Node.js", "Cloud", "Git & GitHub", "APIs"]
-  },
-  {
-    id: "cp-dsa",
-    title: "Competitive Programming & DSA",
-    description: "Rigorous algorithmic problem solving, time complexity optimization, and regular practice on Codeforces, LeetCode, and collegiate coding competitions.",
-    tags: ["C++", "Java", "Data Structures", "Algorithms", "Problem Solving"]
+    title: "Web & Mobile",
+    accent: "cyan",
+    description: "Production-grade web apps, responsive UIs, and modern API microservices.",
+    tags: ["React", "Node.js", "TypeScript", "Next.js", "APIs"]
   },
   {
     id: "ai-ds",
-    title: "AI & Data Science",
-    description: "Hands-on exploration of machine learning pipelines, deep learning models, computer vision, data visualization, and generative AI tool integrations.",
-    tags: ["Python", "PyTorch", "Pandas", "Scikit-Learn", "Machine Learning"]
+    title: "AI / ML & Data",
+    accent: "purple",
+    description: "Neural networks, predictive modeling, data pipelines & LLM integrations.",
+    tags: ["Python", "PyTorch", "Pandas", "Scikit-Learn", "AI"]
+  },
+  {
+    id: "cp-dsa",
+    title: "CP & DSA",
+    accent: "amber",
+    description: "Algorithmic problem solving, time complexity optimization & contests.",
+    tags: ["C++", "Java", "DSA", "Algorithms", "LeetCode"]
+  },
+  {
+    id: "cyber-devops",
+    title: "Cyber Security & DevOps",
+    accent: "emerald",
+    description: "Cloud infrastructure, containerization, defensive posture & CI/CD.",
+    tags: ["Docker", "Linux", "Kubernetes", "CI/CD", "Security"]
   },
   {
     id: "iot-robotics",
-    title: "IoT, Robotics & Hardware",
-    description: "Bridging software with physical computing: programming microcontrollers, sensor telemetry, Arduino, ESP32, and hardware prototyping for real-world automation.",
-    tags: ["Arduino", "ESP32", "Embedded C", "Sensors", "Robotics"]
+    title: "Systems & Embedded",
+    accent: "rose",
+    description: "Microcontrollers, telemetry, physical computing & robotics hardware.",
+    tags: ["Arduino", "ESP32", "Sensors", "Robotics", "Embedded C"]
   }
 ];
 
 export const ABOUT_POINTS = [
   {
-    title: "Campus-Wide Collaboration",
-    description: "Uniting passionate undergraduate engineers from all branches to learn, code, and build collaboratively."
+    title: "Campus Collaboration",
+    description: "Engineers across branches coding and innovating together."
   },
   {
-    title: "Real-World Engineering",
-    description: "Bridging the academic syllabus with hands-on projects, industry workflows, and Git version control."
+    title: "Practical Engineering",
+    description: "Real-world projects, modern stacks, and Git workflows."
   },
   {
-    title: "Hackathons & Innovation",
-    description: "Forming interdisciplinary teams for Smart India Hackathon (SIH), technical symposiums, and innovation challenges."
+    title: "Hackathons & SIH",
+    description: "Interdisciplinary teams for national hackathons."
   },
   {
-    title: "Peer-to-Peer Mentorship",
-    description: "Fostering inclusive senior-junior knowledge sharing, career roadmaps, and open technical discussions."
+    title: "Peer Mentorship",
+    description: "Senior guidance, career roadmaps, and tech sessions."
   }
 ];
 
 export const LEADERSHIP = {
-  faculty: {
-    name: "Prof. Amit Kumar Tiwari",
-    role: "Faculty Coordinator",
-    affiliation: "Department of Computer Science & Engineering",
-    college: "SAREC Mirzapur",
-    focus: "Academic Direction & Lab Mentorship"
-  },
+  faculty: [
+    {
+      id: "amit-tiwari",
+      name: "Dr. Amit Kumar Tiwari",
+      role: "Faculty Coordinator",
+      designation: "Associate Professor",
+      affiliation: "Dept. of Computer Science & Engineering",
+      college: "SAREC Mirzapur",
+      focus: "Academic Direction & Lab Mentorship",
+      image: "/assets/faculty/amit-kumar-tiwari.webp",
+      fallbackImage: "/assets/faculty/amit-kumar-tiwari.jpg"
+    },
+    {
+      id: "prince-rajpoot",
+      name: "Dr. Prince Rajpoot",
+      role: "Faculty Mentor",
+      designation: "Associate Professor",
+      affiliation: "Dept. of Electronics Engineering",
+      college: "SAREC Mirzapur",
+      focus: "WSN, IoT, AI/ML & Embedded Systems",
+      image: "/assets/faculty/prince-rajpoot.webp",
+      fallbackImage: "/assets/faculty/prince-rajpoot.jpg"
+    },
+    {
+      id: "abhinav-gupta",
+      name: "Dr. Abhinav Gupta",
+      role: "Faculty Mentor",
+      designation: "Associate Professor",
+      affiliation: "Dept. of Electronics Engineering",
+      college: "SAREC Mirzapur",
+      focus: "Semiconductor Devices & Low-Power VLSI",
+      image: "/assets/faculty/abhinav-gupta.webp",
+      fallbackImage: "/assets/faculty/abhinav-gupta.jpg"
+    }
+  ],
   coFounders: [
     {
       name: "Piyush Kushwaha",

@@ -32,11 +32,11 @@ export default function Footer() {
             <p className="footer-college-text">
               {COMMUNITY_INFO.college}
               <br />
-              <span className="footer-aktu-badge">AKTU College Code: 1215</span>
+              <span className="footer-aktu-badge">Affiliated to AKTU Lucknow</span>
             </p>
 
             <p className="footer-mission-text">
-              The official student technical community of SAREC Mirzapur, fostering innovation, software engineering, and peer collaboration across all engineering disciplines.
+              Official student technical community &bull; SAREC Mirzapur.
             </p>
           </div>
 

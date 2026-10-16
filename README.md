@@ -1,12 +1,12 @@
 # STIC-Webpage
 
 > **Technology & Innovation Community (STIC)**  
-> **Samrat Ashok Rajkiya Engineering College, Mirzapur** • AKTU College Code 1215  
-> Official community platform crafted with a Human-Centric & Glassmorphism Design System.
+> **Samrat Ashok Rajkiya Engineering College, Mirzapur**  
+> Official community platform crafted with a Human-Centric Neo-Brutalist & Glassmorphic Design System.
 
 ---
 
-##  Quick Start
+## ⚡ Quick Start
 
 ### 1. Prerequisites
 - **Node.js** (v18 or higher recommended)
@@ -24,6 +24,9 @@ npm install
 # Start Vite development server with hot reload
 npm run dev
 
+# Run security verification tests
+npm run test:security
+
 # Build production-ready bundle
 npm run build
 
@@ -33,98 +36,54 @@ npm run preview
 
 ---
 
-##  Project Architecture
+## 📂 Project Architecture
 
 ```plaintext
 STIC-Webpage/
-├── index.html                   # SEO metadata for STIC SAREC Mirzapur, OpenGraph, Fonts
+├── index.html                   # SEO metadata, OpenGraph, security headers, theme anti-flash
 ├── vite.config.js               # Vite bundler configuration
-├── package.json                 # Scripts (dev, build, preview) and dependencies
+├── package.json                 # Scripts and dependencies
+├── vercel.json                  # Deployment rewrites, headers & caching rules
 ├── public/                      # Static favicons, webmanifest, and brand logos
-├── README.md                    # Setup guide & Google Sheets Apps Script guide
+│   └── assets/
+│       ├── logos/               # Institutional seals & STIC logos
+│       └── faculty/             # Faculty coordinator & mentor portraits
+├── README.md                    # Setup guide & architectural documentation
+├── test/
+│   └── security.test.js         # Security unit test suite (52 passing assertions)
 └── src/
     ├── main.jsx                 # Application entry point
     ├── App.jsx                  # Root orchestrator & dark/light state manager
-    ├── index.css                # Fluid typography clamp() & glassmorphic token system
+    ├── index.css                # Fluid typography clamp() & neo-brutalist design system
     ├── data/
-    │   └── communityData.js     # Data layer: 8 Guilds, Projects, Team, FAQs, Stats
+    │   └── communityData.js     # Data layer: Domains, Departments, Leadership, Stats
+    ├── hooks/
+    │   └── useScrollReveal.js   # IntersectionObserver with prefers-reduced-motion check
+    ├── utils/
+    │   └── security.js          # Defensive validation, SSRF guard & formula injection prevention
     └── components/
         ├── Navbar.jsx           # Glass header with theme toggle & mobile menu
-        ├── Hero.jsx             # Mesh gradient glow, SAREC Code 1215 pill, CTAs
-        ├── Clubs.jsx            # The 8 Tech Guilds with interactive glass hover
-        ├── Projects.jsx         # Real student innovation showcase with category filters
-        ├── Team.jsx             # Faculty mentor, student leads & committee cards
-        ├── JoinForm.jsx         # Google Sheets intake form with no-cors POST & prefill
-        ├── Faq.jsx              # Glass accordion for student FAQs
-        ├── WhyStic.jsx          # Core learning methodology pillars
-        ├── Events.jsx           # Campus calendar & .ics invite downloader
-        ├── InstitutionStrip.jsx # AKTU Code 1215 credibility strip
-        └── Footer.jsx           # SAREC Mirzapur credentials, AKTU Code 1215 & socials
+        ├── Hero.jsx             # Dual-column identity showcase, institutional pill & stats
+        ├── About.jsx            # SAREC college profile & STIC mission pillars
+        ├── FocusAreas.jsx       # Technical domain exploration tracks
+        ├── Departments.jsx      # B.Tech engineering disciplines (CSE, IT, EL, EE)
+        ├── Leadership.jsx       # Faculty guidance with portraits, co-founders & executive leads
+        ├── Contact.jsx          # Official email copy-to-clipboard, venue & social channels
+        ├── Footer.jsx           # SAREC Mirzapur credentials, social links & back-to-top
+        ├── ScrollProgressBar.jsx # Reading progress indicator
+        ├── BackToTop.jsx        # Floating back to top trigger
+        ├── NotFound.jsx         # 404 error screen
+        └── Icons.jsx            # Custom SVG social brand icons
 ```
 
 ---
 
-##  Design System
+## 🎨 Design System
 
 - **Fluid Typography**: Calculated with CSS `clamp()` (`--step--2` to `--step-5`) for seamless scaling across devices from 320px mobile up to 4K displays without rigid breakpoint jumps.
-- **Deep Glassmorphism**: High-performance backdrop blur (`backdrop-filter: blur(14px)`), translucent border highlights (`var(--glass-border)`), layered elevation, and ambient radial glow pulses.
-- **Modern Color Palette**: Electric Indigo (`#6366f1`) and Cyan (`#06b6d4`) on midnight dark background (`#030712`) and sleek light background (`#f8fafc`).
-- **Micro-Interactions**: Smooth hover translations (`translateY(-8px)`), animated pulse dots, active track glow in the intake form, and smooth accordion transitions.
-
----
-
-##  Google Sheets & Apps Script Setup
-
-The registration form (`JoinForm.jsx`) sends student applications directly to Google Sheets using a Google Apps Script Web App without requiring any dedicated backend server or paid database.
-
-### Step-by-Step Setup:
-
-1. **Create a Google Sheet**:
-   - Open [Google Sheets](https://sheets.new) and create a new spreadsheet named `STIC SAREC Registrations`.
-   - In row 1, set up the column headers:
-     `Timestamp` | `Full Name` | `Roll No` | `Email` | `Branch` | `Year` | `Guild` | `Interests` | `Portfolio` | `College Code`
-
-2. **Open Apps Script Editor**:
-   - In your Google Sheet, click **Extensions** > **Apps Script**.
-   - Delete any default code in `Code.gs` and paste the following script:
-
-```javascript
-function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var p = e.parameter;
-  
-  sheet.appendRow([
-    new Date(),
-    p.fullName || p.name || 'Anonymous',
-    p.rollNo || 'N/A',
-    p.email || 'N/A',
-    p.branch || 'N/A',
-    p.year || 'N/A',
-    p.guild || p.club || 'N/A',
-    p.interests || p.interest || 'N/A',
-    p.portfolio || 'N/A',
-    p.collegeCode || '1215'
-  ]);
-  
-  return ContentService.createTextOutput(
-    JSON.stringify({ result: 'success' })
-  ).setMimeType(ContentService.MimeType.JSON);
-}
-```
-
-3. **Deploy as a Web App**:
-   - Click the blue **Deploy** button > **New deployment**.
-   - Click the gear icon next to "Select type" and select **Web app**.
-   - Configure the deployment settings:
-     - **Description**: `STIC Registration Form Intake`
-     - **Execute as**: `Me (your email)`
-     - **Who has access**: `Anyone` *(Crucial: allows student submissions without login barriers)*
-   - Click **Deploy** and authorize access if prompted.
-   - Copy the generated **Web app URL** (format: `https://script.google.com/macros/s/.../exec`).
-
-4. **Connect to the Webpage**:
-   - Update `formEndpoint` in `src/data/communityData.js`, OR
-   - Click the **Google Apps Script Endpoint Settings** button directly in the web app under the Join Form to save your custom URL into `localStorage`.
+- **Neo-Brutalist & Glassmorphic Elements**: Arcade Yellow (`#FFE600`) highlights, bold solid borders (`var(--border-width)`), hard contrast shadows (`var(--card-shadow)`), and smooth dark/light theme switching.
+- **Anti-Flash Theme Engine**: Synchronous script in `<head>` inspecting `localStorage` and `prefers-color-scheme` to prevent any white-flash loading state.
+- **Micro-Interactions**: Smooth hover translations (`translateY(-4px)`), animated pulse dots, and responsive navigation drawers.
 
 ---
 
@@ -133,8 +92,7 @@ function doPost(e) {
 - **Community**: Technology & Innovation Community (STIC)
 - **Institution**: Samrat Ashok Rajkiya Engineering College, Mirzapur (SAREC Mirzapur)
 - **Affiliation**: Dr. A.P.J. Abdul Kalam Technical University (AKTU Lucknow)
-- **College Code**: 1215
-- **Academic Year**: 2026 – 2027
+- **Academic Cohort**: 2026 – 2027
 
 ---
 

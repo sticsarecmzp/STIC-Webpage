@@ -19,19 +19,23 @@ export default function Hero() {
           <div className="hero-left-content">
             <div className="institution-pill">
               <span className="live-dot" aria-hidden="true" />
-              <span>{COMMUNITY_INFO.collegeShort} &bull; {COMMUNITY_INFO.collegeCode}</span>
+              <span>{COMMUNITY_INFO.collegeShort} &bull; State Govt. Engineering College</span>
             </div>
 
             <h1 className="hero-title-main">
-              {COMMUNITY_INFO.fullName}
+              STIC
             </h1>
+
+            <p className="hero-tagline-text">
+              {COMMUNITY_INFO.fullName}
+            </p>
 
             <p className="hero-college-name">
               {COMMUNITY_INFO.college}
             </p>
 
             <p className="hero-description">
-              The official student technical community of SAREC Mirzapur (Affiliated to AKTU Lucknow). Empowering engineers across CSE, IT, EL, and EE to build software, master algorithms, and innovate.
+              Official student technical community &bull; Code, build &amp; innovate.
             </p>
 
             <div className="hero-actions">
@@ -68,12 +72,12 @@ export default function Hero() {
               </div>
 
               <div className="emblem-info">
-                <h2 className="emblem-acronym">{COMMUNITY_INFO.name}</h2>
+                <span className="emblem-badge-pill">STUDENT TECHNICAL SOCIETY</span>
                 <span className="emblem-tagline">{COMMUNITY_INFO.tagline}</span>
               </div>
 
               <div className="emblem-meta-line">
-                <span>SAREC MIRZAPUR &bull; CODE 1215</span>
+                <span>EST. 2023 &bull; SAREC MIRZAPUR</span>
               </div>
             </div>
           </div>
