@@ -41,20 +41,25 @@ export default function About() {
               </div>
             </div>
 
-            <p className="about-text">
-              STIC (SAREC Mirzapur Technology & Innovation Community) is the
-              official tech-driven student society of Samrat Ashoka Rajkiya
-              Engineering College, Mirzapur. Built by students for students,
-              STIC bridges the gap between academic curriculum and real-world
-              technology. We focus on hands-on growth across core engineering
-              domains: Data Structures & Algorithms (DSA), Full-Stack
-              Development, Machine Learning, and Competitive Programming. From
-              hosting hackathons to community workshops, our mission is to
-              empower developers from ground zero to confident builders.
-              Following our milestone <strong>Build with AI</strong> initiative, we are actively
-              driving open-source culture on campus, currently organizing Open
-              Source Day in collaboration with WikiClub Tech and GDG Prayagraj.
-            </p>
+            <div className="about-official-content">
+              <p className="about-text">
+                <strong>STIC ({COMMUNITY_INFO.fullName})</strong> is the official tech-driven student society of Samrat Ashoka Rajkiya Engineering College, Mirzapur. Built by students for students, STIC bridges the gap between academic curriculum and real-world technology.
+              </p>
+
+              <p className="about-text">
+                We focus on hands-on growth across core engineering domains: <strong>Data Structures &amp; Algorithms (DSA)</strong>, <strong>Full-Stack Development</strong>, <strong>Machine Learning</strong>, and <strong>Competitive Programming</strong>. From hosting hackathons to community workshops, our mission is to empower developers from ground zero to confident builders.
+              </p>
+
+              <div className="initiative-highlight-box">
+                <div className="initiative-badge-row">
+                  <span className="initiative-badge">FLAGSHIP COLLABORATION</span>
+                  <span className="initiative-tag">OPEN SOURCE SPRINT</span>
+                </div>
+                <p className="initiative-text">
+                  Following our milestone <strong>Build with AI</strong> initiative, we are actively driving open-source culture on campus, currently organizing <strong>Open Source Day</strong> in collaboration with <strong>WikiClub Tech</strong> and <strong>GDG Prayagraj</strong>.
+                </p>
+              </div>
+            </div>
 
             <div className="college-meta-details">
               <div className="meta-row">

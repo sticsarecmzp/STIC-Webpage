@@ -44,7 +44,7 @@ export default function NotFound({ onNavigateHome }) {
         </div>
 
         <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '1.25rem', fontSize: '0.8rem', color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}>
-          STIC &bull; Samrat Ashok Rajkiya Engineering College, Mirzapur
+          STIC &bull; Samrat Ashoka Rajkiya Engineering College, Mirzapur
         </div>
       </div>
     </div>

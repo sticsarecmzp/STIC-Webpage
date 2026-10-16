@@ -1087,6 +1087,47 @@ img {
   }
 }
 
+.initiative-highlight-box {
+  margin-top: 1.15rem;
+  padding: 1.15rem 1.25rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-card);
+  border-left: 3px solid var(--accent-cyan);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.25rem;
+}
+
+.initiative-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.initiative-badge {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  color: var(--accent-cyan);
+  background: var(--accent-cyan-bg);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--accent-cyan-border);
+}
+
+.initiative-tag {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-tertiary);
+}
+
+.initiative-text {
+  font-size: var(--step--2);
+  color: var(--text-primary);
+  line-height: 1.55;
+}
+
 .about-beginner-callout {
   margin-top: 1.5rem;
   padding: 1.15rem 1.25rem;

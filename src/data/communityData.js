@@ -2,7 +2,7 @@ export const COMMUNITY_INFO = {
   name: "STIC",
   fullName: "SAREC Mirzapur Technology & Innovation Community",
   subtitle: "Student Technical Society & Innovation Hub",
-  college: "Samrat Ashok Rajkiya Engineering College, Mirzapur",
+  college: "Samrat Ashoka Rajkiya Engineering College, Mirzapur",
   collegeShort: "SAREC Mirzapur",
   university: "Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow",
   institutionType: "State Government Engineering College, Uttar Pradesh",
@@ -12,6 +12,7 @@ export const COMMUNITY_INFO = {
   officialEmail: "sticsarecmzp@gmail.com",
   venue: "Central Computer Lab & Innovation Workshop, SAREC Mirzapur",
   location: "Mirzapur, Uttar Pradesh - 231001",
+  officialAbout: "STIC (SAREC Mirzapur Technology & Innovation Community) is the official tech-driven student society of Samrat Ashoka Rajkiya Engineering College, Mirzapur. Built by students for students, STIC bridges the gap between academic curriculum and real-world technology. We focus on hands-on growth across core engineering domains: Data Structures & Algorithms (DSA), Full-Stack Development, Machine Learning, and Competitive Programming. From hosting hackathons to community workshops, our mission is to empower developers from ground zero to confident builders. Following our milestone Build with AI initiative, we are actively driving open-source culture on campus, currently organizing Open Source Day in collaboration with WikiClub Tech and GDG Prayagraj.",
   githubOrg: "https://github.com/sticsarecmzp",
   instagram: "https://www.instagram.com/sticsarecmzp",
   linkedin: "https://www.linkedin.com/company/stic-sarec-mirzapur/",
@@ -123,6 +124,23 @@ export const FOCUS_AREAS = [
 
 export const NOTICES_AND_EVENTS = [
   {
+    id: "event-upcoming-opensource",
+    type: "upcoming",
+    category: "Flagship Collaboration",
+    title: "Open Source Day (Collab: WikiClub Tech & GDG Prayagraj)",
+    date: "Upcoming Campus Event",
+    time: "Full-Day Collaborative Contribution Sprint",
+    venue: "Central Computer Center, SAREC Mirzapur",
+    badge: "FEATURED EVENT",
+    accent: "cyan",
+    description: "Driving open-source culture on campus! Organized by STIC in collaboration with WikiClub Tech and GDG Prayagraj, featuring hands-on pull-request workshops, project showcases, and developer networking.",
+    eligibility: "Open to all B.Tech students (1st, 2nd, 3rd & 4th Year) across all branches.",
+    actions: [
+      { label: "Register Interest", url: "#contact", isInternal: true, primary: true },
+      { label: "Explore STIC GitHub", url: "https://github.com/sticsarecmzp", isInternal: false, primary: false }
+    ]
+  },
+  {
     id: "event-upcoming-1",
     type: "upcoming",
     category: "Hackathon",
@@ -153,6 +171,22 @@ export const NOTICES_AND_EVENTS = [
     eligibility: "Open to all students aiming for top-tier product engineering careers.",
     actions: [
       { label: "Reserve Seat (Free)", url: "#contact", isInternal: true, primary: true }
+    ]
+  },
+  {
+    id: "event-past-buildwithai",
+    type: "past",
+    category: "Milestone Initiative",
+    title: "Build with AI: Campus AI/ML Developer Initiative",
+    date: "Milestone Session",
+    time: "Multi-Week Hands-on Series",
+    venue: "Central Computer Lab, SAREC Mirzapur",
+    badge: "MILESTONE ACHIEVED",
+    accent: "purple",
+    description: "Milestone hands-on developer initiative introducing students to modern Artificial Intelligence, Machine Learning models, and intelligent systems. Set the foundation for active AI and open-source projects on campus.",
+    recap: "Over 120+ students across CSE, IT, EL, and EE built predictive models, explored neural networks, and developed AI-assisted applications.",
+    actions: [
+      { label: "Explore STIC Projects", url: "https://github.com/sticsarecmzp", isInternal: false, primary: true }
     ]
   },
   {

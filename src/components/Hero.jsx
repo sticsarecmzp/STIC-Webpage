@@ -37,7 +37,7 @@ export default function Hero() {
             </p>
 
             <p className="hero-description">
-              The premier student technical society and engineering incubator at SAREC Mirzapur. We empower aspiring engineers from ground zero through hands-on software development, AI &amp; data science projects, competitive programming, and peer-to-peer mentorship.
+              The official tech-driven student society of Samrat Ashoka Rajkiya Engineering College, Mirzapur. Built by students for students, STIC bridges the gap between academic curriculum and real-world technology across Data Structures &amp; Algorithms (DSA), Full-Stack Development, Machine Learning, and Competitive Programming.
             </p>
 
             <div className="hero-actions">

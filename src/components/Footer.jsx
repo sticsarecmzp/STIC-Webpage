@@ -27,13 +27,13 @@ export default function Footer() {
             </div>
 
             <p className="footer-college-text">
-              Software &amp; Technology Innovation Club
+              {COMMUNITY_INFO.college}
               <br />
-              <span className="footer-aktu-badge">SAREC Mirzapur</span>
+              <span className="footer-aktu-badge">Official Tech-Driven Student Society</span>
             </p>
 
             <p className="footer-mission-text">
-              Official student technical community &bull; Code, build &amp; innovate.
+              Built by students for students &bull; Code, build &amp; innovate.
             </p>
           </div>
 
