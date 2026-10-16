@@ -126,129 +126,124 @@ export const NOTICES_AND_EVENTS = [
   {
     id: "event-upcoming-opensource",
     type: "upcoming",
-    category: "Flagship Collaboration",
+    category: "Flagship Campus Initiative",
     title: "Open Source Day (Collab: WikiClub Tech & GDG Prayagraj)",
     date: "Upcoming Campus Event",
     time: "Full-Day Collaborative Contribution Sprint",
-    venue: "Central Computer Center, SAREC Mirzapur",
-    badge: "FEATURED EVENT",
+    venue: "Central Computer Center / Seminar Hall, SAREC Mirzapur",
+    badge: "UPCOMING EVENT",
     accent: "cyan",
-    description: "Driving open-source culture on campus! Organized by STIC in collaboration with WikiClub Tech and GDG Prayagraj, featuring hands-on pull-request workshops, project showcases, and developer networking.",
-    eligibility: "Open to all B.Tech students (1st, 2nd, 3rd & 4th Year) across all branches.",
+    description: "Driving open-source culture on campus! Organized by STIC in collaboration with WikiClub Tech and GDG Prayagraj. Building directly on the roadmap introduced in our orientation, students will master Git & GitHub workflows, resolve 'good first issues', and make live pull requests to global open-source repositories under mentor guidance.",
+    eligibility: "Open to all B.Tech students (1st, 2nd, 3rd & 4th Year) across CSE, IT, EL, and EE branches.",
     actions: [
-      { label: "Register Interest", url: "#contact", isInternal: true, primary: true },
+      { label: "Register Interest / Join", url: "#contact", isInternal: true, primary: true },
       { label: "Explore STIC GitHub", url: "https://github.com/sticsarecmzp", isInternal: false, primary: false }
-    ]
-  },
-  {
-    id: "event-upcoming-1",
-    type: "upcoming",
-    category: "Hackathon",
-    title: "STIC HackSprint 2026: 24-Hour Campus Hackathon",
-    date: "November 14 – 15, 2026",
-    time: "24-Hour Overnight Sprint",
-    venue: "Central Computer Lab & Workshop Hall, SAREC Mirzapur",
-    badge: "REGISTRATIONS OPEN",
-    accent: "amber",
-    description: "The flagship annual hackathon bringing together cross-departmental teams to build innovative solutions for campus challenges, smart governance, and AI automation.",
-    eligibility: "Open to all B.Tech students (1st, 2nd, 3rd & 4th Year) across CSE, IT, EL, and EE.",
-    actions: [
-      { label: "Register for HackSprint", url: "#contact", isInternal: true, primary: true },
-      { label: "View Problem Tracks", url: "#domains", isInternal: true, primary: false }
-    ]
-  },
-  {
-    id: "event-upcoming-2",
-    type: "upcoming",
-    category: "Technical Masterclass",
-    title: "DSA & Competitive Programming Masterclass: Roadmap 2026",
-    date: "October 28, 2026",
-    time: "4:00 PM – 6:30 PM IST",
-    venue: "Central Computer Lab & Hybrid Stream",
-    badge: "UPCOMING WORKSHOP",
-    accent: "purple",
-    description: "Senior club leads share the exact roadmap to master LeetCode, Codeforces, time-space complexity, recursion, and dynamic programming for technical interviews.",
-    eligibility: "Open to all students aiming for top-tier product engineering careers.",
-    actions: [
-      { label: "Reserve Seat (Free)", url: "#contact", isInternal: true, primary: true }
     ]
   },
   {
     id: "event-past-buildwithai",
     type: "past",
-    category: "Milestone Initiative",
-    title: "Build with AI: Campus AI/ML Developer Initiative",
-    date: "Milestone Session",
-    time: "Multi-Week Hands-on Series",
-    venue: "Central Computer Lab, SAREC Mirzapur",
-    badge: "MILESTONE ACHIEVED",
+    category: "Milestone Hands-on Masterclass",
+    title: "Build With AI: Mirzapur Edition (Collab: GDG Prayagraj & TFUG Prayagraj)",
+    date: "April 4, 2026",
+    time: "9:00 AM – Full Day Hands-on Session",
+    venue: "Seminar Hall & Computer Lab, SAREC Mirzapur",
+    badge: "COMPLETED MILESTONE",
     accent: "purple",
-    description: "Milestone hands-on developer initiative introducing students to modern Artificial Intelligence, Machine Learning models, and intelligent systems. Set the foundation for active AI and open-source projects on campus.",
-    recap: "Over 120+ students across CSE, IT, EL, and EE built predictive models, explored neural networks, and developed AI-assisted applications.",
+    speaker: "Nitin Tiwari Sir (Google Developer Expert / GDG Prayagraj)",
+    coordinators: "Pawan Kumar Yadav, Piyush Kushwaha & STIC Student Team",
+    description: "Milestone practical AI masterclass organized at SAREC Mirzapur in collaboration with GDG Prayagraj and TFUG Prayagraj (ML Prayagraj). Featured in-depth sessions by Google Developer Expert Nitin Tiwari on Vision Language Models (VLMs), Google's open models (PaliGemma 2, Gemma 3n), MatFormer architecture, and live in-browser AI inference.",
+    recap: "Over 120+ student engineers across all engineering departments attended, ran live browser AI models (including Fashion Sketch2Runway demo), and received official certificates of participation.",
+    photos: [
+      {
+        url: "/assets/events/build-with-ai/bwa-01.jpg",
+        caption: "Google Developer Expert Nitin Tiwari delivering the session on Vision Language Models & PaliGemma 2",
+        alt: "Nitin Tiwari presenting at Build With AI SAREC Mirzapur"
+      },
+      {
+        url: "/assets/events/build-with-ai/bwa-02.jpg",
+        caption: "GDG Prayagraj x SARECM Build With AI: Mirzapur Edition team & student coordinators",
+        alt: "Build With AI team at SAREC Mirzapur entrance"
+      },
+      {
+        url: "/assets/events/build-with-ai/bwa-03.jpg",
+        caption: "SAREC student developers participating in the hands-on AI masterclass in the auditorium",
+        alt: "Students attending Build With AI session"
+      },
+      {
+        url: "/assets/events/build-with-ai/bwa-04.jpg",
+        caption: "Live browser AI inference demonstration: Fashion Sketch2Runway interactive web app",
+        alt: "Live demo of Fashion Sketch2Runway"
+      },
+      {
+        url: "/assets/events/build-with-ai/bwa-05.jpg",
+        caption: "Certificate felicitation acknowledging student organizers and active contributors",
+        alt: "Certificate presentation at SAREC Mirzapur"
+      },
+      {
+        url: "/assets/events/build-with-ai/bwa-06.jpg",
+        caption: "Google Developer Groups Prayagraj x SARECM community collaboration meeting in session",
+        alt: "GDG Prayagraj x SAREC collaboration meeting"
+      }
+    ],
     actions: [
-      { label: "Explore STIC Projects", url: "https://github.com/sticsarecmzp", isInternal: false, primary: true }
+      { label: "View Post on LinkedIn", url: "https://www.linkedin.com/posts/stic-sarec-mirzapur_activity-7450132771399729152-N3fo", isInternal: false, primary: true },
+      { label: "Explore STIC Projects", url: "https://github.com/sticsarecmzp", isInternal: false, primary: false }
     ]
   },
   {
-    id: "event-past-1",
+    id: "event-past-orientation",
     type: "past",
-    category: "Bootcamp Recap",
-    title: "Hands-on Git, GitHub & Open Source Contribution Sprint",
-    date: "September 18, 2026",
-    time: "Completed Session",
-    venue: "Central Computer Lab, SAREC",
-    badge: "COMPLETED",
-    accent: "cyan",
-    description: "Practical workshop on distributed version control, branching strategies, resolving merge conflicts, and making first verified PR contributions to STIC campus repositories.",
-    recap: "85+ student engineers configured Git SSH keys, resolved merge conflicts, and submitted their first pull requests on GitHub.",
+    category: "Community Orientation",
+    title: "Freshers Orientation & Technical Guilds Roadmap Kickoff",
+    date: "Completed Campus Session",
+    time: "Comprehensive Technical Roadmap",
+    venue: "Conference Hall, SAREC Mirzapur",
+    badge: "ROADMAP UNVEILED",
+    accent: "amber",
+    speaker: "Piyush Kushwaha (Overall Coordinator & Tech Lead), Pawan Kumar Yadav & Core Team",
+    description: "Conducted to eliminate early-stage confusion for incoming engineering freshers and provide clear, guided technical trajectories. Unveiled 4 core engineering domains: Open Source Contribution, Web & Mobile Development, Competitive Programming (DSA), and AI/Machine Learning.",
+    recap: "Addressed common beginner roadblocks, demonstrated how to start from ground zero, and laid out the pathway to hackathons and SIH. Mentored by seniors Shivansh Mishra & Utkarsh Aryan Mishra with guidance from Ankit Kumar Verma sir (GDG Prayagraj).",
+    photos: [
+      {
+        url: "/assets/events/orientation/orientation-01.jpg",
+        caption: "STIC student leadership team at the Freshers Orientation & Technical Roadmap kickoff",
+        alt: "STIC team at orientation"
+      },
+      {
+        url: "/assets/events/orientation/orientation-02.jpg",
+        caption: "Student Co-founder Piyush Kushwaha presenting Track 02: Open Source Contribution at the podium",
+        alt: "Open Source Contribution presentation"
+      },
+      {
+        url: "/assets/events/orientation/orientation-03.jpg",
+        caption: "Student Co-founder Pawan Kumar Yadav presenting the AI/ML & Deep Learning roadmap",
+        alt: "Deep learning path presentation"
+      },
+      {
+        url: "/assets/events/orientation/orientation-04.jpg",
+        caption: "Executive council members and student engineers attending the roadmap orientation",
+        alt: "Students at STIC orientation"
+      }
+    ],
     actions: [
-      { label: "View GitHub Repositories", url: "https://github.com/sticsarecmzp", isInternal: false, primary: true }
+      { label: "View Post on LinkedIn", url: "https://www.linkedin.com/posts/stic-sarec-mirzapur_webdevelopment-genai-studentdeveloper-activity-7449718872049389570-KEMx", isInternal: false, primary: true },
+      { label: "Meet Leadership Team", url: "#leadership", isInternal: true, primary: false }
     ]
   },
   {
-    id: "event-past-2",
-    type: "past",
-    category: "Ideathon Recap",
-    title: "STIC Internal Ideathon: Smart India Hackathon (SIH) Qualifier",
-    date: "August 24, 2026",
-    time: "Completed Session",
-    venue: "Seminar Hall, SAREC Mirzapur",
-    badge: "COMPLETED",
-    accent: "emerald",
-    description: "14 cross-departmental student squads pitched technology solutions across Smart Agriculture, Campus Utilities, and AI Healthcare. Top 3 teams shortlisted for faculty mentorship.",
-    recap: "14 squads pitched prototypes; 3 winning squads received dedicated faculty mentorship and project incubation guidance.",
-    actions: [
-      { label: "Explore Open Source Projects", url: "https://github.com/sticsarecmzp", isInternal: false, primary: true }
-    ]
-  },
-  {
-    id: "news-circular-1",
+    id: "news-collab-opensource",
     type: "news",
-    category: "Official Circular",
-    title: "STIC 2026-27 Executive Council & Domain Leads Announced",
-    date: "October 10, 2026",
-    time: "Official Release",
-    venue: "STIC SAREC Mirzapur",
+    category: "Official Announcement",
+    title: "STIC Driving Open Source Culture with WikiClub Tech & GDG Prayagraj",
+    date: "Official Circular",
+    time: "Campus Announcement",
+    venue: "SAREC Mirzapur",
     badge: "OFFICIAL NEWS",
-    accent: "rose",
-    description: "Announcing the newly appointed student executive council and technical domain coordinators across Web, AI/ML, CP/DSA, CyberSec, and Embedded Systems.",
-    actions: [
-      { label: "Meet the Leadership Team", url: "#leadership", isInternal: true, primary: true }
-    ]
-  },
-  {
-    id: "news-circular-2",
-    type: "news",
-    category: "Campus Update",
-    title: "STIC Open Innovation Lab Open for Student Project Squads",
-    date: "September 02, 2026",
-    time: "Facility Announcement",
-    venue: "Central Computer Center, SAREC Mirzapur",
-    badge: "ANNOUNCEMENT",
     accent: "cyan",
-    description: "Dedicated workstation bay, high-speed campus internet, and test hardware kits (ESP32, sensor modules) now accessible for registered STIC project squads.",
+    description: "Following our milestone Build with AI initiative, STIC is actively fostering real-world developer practices on campus in formal collaboration with WikiClub Tech and GDG Prayagraj to prepare students for Smart India Hackathon (SIH), Google Summer of Code (GSoC), and product engineering roles.",
     actions: [
-      { label: "Learn How to Join", url: "#workflow", isInternal: true, primary: true }
+      { label: "Connect with STIC", url: "#contact", isInternal: true, primary: true }
     ]
   }
 ];

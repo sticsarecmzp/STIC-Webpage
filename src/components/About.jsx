@@ -58,6 +58,57 @@ export default function About() {
                 <p className="initiative-text">
                   Following our milestone <strong>Build with AI</strong> initiative, we are actively driving open-source culture on campus, currently organizing <strong>Open Source Day</strong> in collaboration with <strong>WikiClub Tech</strong> and <strong>GDG Prayagraj</strong>.
                 </p>
+
+                {/* Real Campus Event Photos Preview */}
+                <div className="initiative-photo-preview-grid">
+                  <div
+                    className="initiative-photo-thumb-card"
+                    onClick={() => scrollToSection("notices")}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        scrollToSection("notices");
+                      }
+                    }}
+                    title="View Build With AI event gallery"
+                  >
+                    <img
+                      src="/assets/events/build-with-ai/bwa-02.jpg"
+                      alt="Build With AI SAREC team and GDG Prayagraj"
+                      className="initiative-photo-thumb"
+                      loading="lazy"
+                    />
+                    <span className="initiative-photo-caption">
+                      Build With AI &bull; SAREC &amp; GDG Team
+                    </span>
+                  </div>
+
+                  <div
+                    className="initiative-photo-thumb-card"
+                    onClick={() => scrollToSection("notices")}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        scrollToSection("notices");
+                      }
+                    }}
+                    title="View Build With AI masterclass"
+                  >
+                    <img
+                      src="/assets/events/build-with-ai/bwa-01.jpg"
+                      alt="GDE Nitin Tiwari delivering Vision Language Models session"
+                      className="initiative-photo-thumb"
+                      loading="lazy"
+                    />
+                    <span className="initiative-photo-caption">
+                      GDE Nitin Tiwari &bull; Vision AI Session
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
