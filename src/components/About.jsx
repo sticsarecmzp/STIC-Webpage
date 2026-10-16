@@ -1,12 +1,12 @@
-import React from 'react';
-import { ArrowRight, Terminal } from 'lucide-react';
-import { COMMUNITY_INFO, ABOUT_POINTS } from '../data/communityData';
+import React from "react";
+import { ArrowRight, Terminal } from "lucide-react";
+import { COMMUNITY_INFO, ABOUT_POINTS } from "../data/communityData";
 
 export default function About() {
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -17,7 +17,8 @@ export default function About() {
           <span className="section-eyebrow">Community Overview</span>
           <h2 className="section-title">About STIC</h2>
           <p className="section-subtitle">
-            {COMMUNITY_INFO.fullName} &bull; The flagship student developer ecosystem at SAREC Mirzapur.
+            {COMMUNITY_INFO.fullName} &bull; The flagship student developer
+            ecosystem at SAREC Mirzapur.
           </p>
         </div>
 
@@ -32,20 +33,27 @@ export default function About() {
                 className="college-seal-img"
               />
               <div>
-                <span className="card-badge highlight-badge">Student Technical Society</span>
+                <span className="card-badge highlight-badge">
+                  Student Technical Society
+                </span>
                 <h3 className="college-title">{COMMUNITY_INFO.name}</h3>
-                <p className="college-meta-line">
-                  {COMMUNITY_INFO.fullName}
-                </p>
+                <p className="college-meta-line">{COMMUNITY_INFO.fullName}</p>
               </div>
             </div>
 
             <p className="about-text">
-              STIC (SAREC Mirzapur Technology & Innovation Community) is the official tech-driven student society of Samrat Ashoka Rajkiya Engineering College, Mirzapur. Built by students for students, STIC bridges the gap between academic curriculum and real-world technology.
-
-We focus on hands-on growth across core engineering domains: Data Structures & Algorithms (DSA), Full-Stack Development, Machine Learning, and Competitive Programming. From hosting hackathons to community workshops, our mission is to empower developers from ground zero to confident builders.
-
-Following our milestone Build with AI initiative, we are actively driving open-source culture on campus, currently organizing Open Source Day in collaboration with WikiClub Tech and GDG Prayagraj.
+              STIC (SAREC Mirzapur Technology & Innovation Community) is the
+              official tech-driven student society of Samrat Ashoka Rajkiya
+              Engineering College, Mirzapur. Built by students for students,
+              STIC bridges the gap between academic curriculum and real-world
+              technology. We focus on hands-on growth across core engineering
+              domains: Data Structures & Algorithms (DSA), Full-Stack
+              Development, Machine Learning, and Competitive Programming. From
+              hosting hackathons to community workshops, our mission is to
+              empower developers from ground zero to confident builders.
+              Following our milestone <strong>Build with AI</strong> initiative, we are actively
+              driving open-source culture on campus, currently organizing Open
+              Source Day in collaboration with WikiClub Tech and GDG Prayagraj.
             </p>
 
             <div className="college-meta-details">
@@ -71,7 +79,7 @@ Following our milestone Build with AI initiative, we are actively driving open-s
               <button
                 type="button"
                 className="btn-link"
-                onClick={() => scrollToSection('workflow')}
+                onClick={() => scrollToSection("workflow")}
               >
                 <span>How Work Happens in STIC (Step-by-Step)</span>
                 <ArrowRight size={14} strokeWidth={2} />
@@ -82,9 +90,13 @@ Following our milestone Build with AI initiative, we are actively driving open-s
           {/* Right Column: STIC Community Mission & Pillars */}
           <div className="about-card community-mission-card">
             <span className="card-badge">Our Culture</span>
-            <h3 className="community-title">Code &bull; Build &bull; Innovate</h3>
+            <h3 className="community-title">
+              Code &bull; Build &bull; Innovate
+            </h3>
             <p className="about-text">
-              A collaborative, developer-first environment where members learn by shipping real software, collaborating across engineering branches, and competing on national stages.
+              A collaborative, developer-first environment where members learn
+              by shipping real software, collaborating across engineering
+              branches, and competing on national stages.
             </p>
 
             <div className="pillars-grid">
@@ -106,7 +118,9 @@ Following our milestone Build with AI initiative, we are actively driving open-s
               <div>
                 <h4 className="callout-title">Complete Beginner?</h4>
                 <p className="callout-desc">
-                  No previous coding experience required. STIC starts from ground zero with Git setup, basic programming, and algorithm fundamentals. Every newcomer is paired with senior mentors.
+                  No previous coding experience required. STIC starts from
+                  ground zero with Git setup, basic programming, and algorithm
+                  fundamentals. Every newcomer is paired with senior mentors.
                 </p>
               </div>
             </div>
