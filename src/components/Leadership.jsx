@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Shield, Sparkles, GraduationCap } from 'lucide-react';
+import { Award, Shield, Sparkles, GraduationCap, Users } from 'lucide-react';
 import { LEADERSHIP } from '../data/communityData';
 
 export default function Leadership() {
@@ -9,19 +9,19 @@ export default function Leadership() {
     <section id="leadership" className="section-padding leadership-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">Governance &amp; Mentorship</span>
-          <h2 className="section-title">Faculty Guidance &amp; Executive Team</h2>
+          <span className="section-eyebrow">People Behind STIC</span>
+          <h2 className="section-title">Who is Who: Faculty &amp; Student Leads</h2>
           <p className="section-subtitle">
-            Student-led execution under academic mentorship at SAREC Mirzapur.
+            Under academic mentorship from senior college faculty, STIC is 100% student-run, peer-mentored, and developer-executed.
           </p>
         </div>
 
-        {/* Faculty Mentorship Row (3 Faculty Members) */}
+        {/* 1. Faculty Mentorship Row */}
         <div className="leadership-subgroup">
           <div className="subgroup-header">
             <span className="neo-badge badge-faculty">
-              <GraduationCap size={13} strokeWidth={2.5} />
-              <span>Faculty Mentorship &amp; Direction</span>
+              <GraduationCap size={14} strokeWidth={2.5} />
+              <span>Faculty Mentors &amp; Advisors</span>
             </span>
             <span className="subgroup-count">Academic Leadership &bull; SAREC Mirzapur</span>
           </div>
@@ -66,14 +66,14 @@ export default function Leadership() {
           </div>
         </div>
 
-        {/* Co-Founders Row */}
+        {/* 2. Co-Founders Row */}
         <div className="leadership-subgroup">
           <div className="subgroup-header">
             <span className="neo-badge badge-founder">
-              <Sparkles size={13} strokeWidth={2.5} />
+              <Sparkles size={14} strokeWidth={2.5} />
               <span>Student Co-Founders</span>
             </span>
-            <span className="subgroup-count">2 Student Initiators &bull; B.Tech IT</span>
+            <span className="subgroup-count">Founded STIC in 2023 &bull; B.Tech IT</span>
           </div>
 
           <div className="cofounders-grid">
@@ -93,14 +93,14 @@ export default function Leadership() {
           </div>
         </div>
 
-        {/* Executive Council Compact Grid */}
+        {/* 3. Executive Council Grid */}
         <div className="executives-container">
           <div className="executives-header">
             <span className="neo-badge badge-exec">
-              <Shield size={12} strokeWidth={2.5} />
-              <span>Executive Council</span>
+              <Shield size={13} strokeWidth={2.5} />
+              <span>Executive Council &amp; Domain Leads</span>
             </span>
-            <span className="exec-count-text">5 Student Leads &bull; IT &amp; CSE</span>
+            <span className="exec-count-text">5 Active Student Leads &bull; IT &amp; CSE</span>
           </div>
 
           <div className="executives-grid">
@@ -113,7 +113,10 @@ export default function Leadership() {
                   <span className="neo-tag mini-tag">{exec.affiliation}</span>
                 </div>
                 <h4 className="exec-name">{exec.name}</h4>
-                <p className="exec-focus">{exec.focus}</p>
+                <p className="exec-role-text">{exec.role}</p>
+                <div className="exec-focus-badge">
+                  <span>{exec.focus}</span>
+                </div>
               </div>
             ))}
           </div>

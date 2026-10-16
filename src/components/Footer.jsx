@@ -16,12 +16,9 @@ export default function Footer() {
           <div className="footer-brand-col">
             <div className="footer-brand-header">
               <img
-                src="/assets/logos/sarec-college-seal.webp"
-                alt="SAREC College Seal"
+                src="/assets/logos/stic-logo-light.png"
+                alt="STIC Community Emblem"
                 className="footer-seal-img"
-                onError={(e) => {
-                  e.currentTarget.src = '/assets/logos/sarec-college-seal.png';
-                }}
               />
               <div>
                 <span className="footer-brand-title">{COMMUNITY_INFO.name}</span>
@@ -30,13 +27,13 @@ export default function Footer() {
             </div>
 
             <p className="footer-college-text">
-              {COMMUNITY_INFO.college}
+              Software &amp; Technology Innovation Club
               <br />
-              <span className="footer-aktu-badge">Affiliated to AKTU Lucknow</span>
+              <span className="footer-aktu-badge">SAREC Mirzapur</span>
             </p>
 
             <p className="footer-mission-text">
-              Official student technical community &bull; SAREC Mirzapur.
+              Official student technical community &bull; Code, build &amp; innovate.
             </p>
           </div>
 

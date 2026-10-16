@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Mail } from 'lucide-react';
+import { ArrowDown, Bell, Mail } from 'lucide-react';
 import { COMMUNITY_INFO, COMMUNITY_STATS } from '../data/communityData';
 
 export default function Hero() {
@@ -15,27 +15,29 @@ export default function Hero() {
       <div className="container">
         {/* Clean, Spacious 2-Column Layout */}
         <div className="hero-grid-2col">
-          {/* Left Column: Clear Identity, College Name & CTAs */}
+          {/* Left Column: Clear Community Identity */}
           <div className="hero-left-content">
             <div className="institution-pill">
               <span className="live-dot" aria-hidden="true" />
-              <span>{COMMUNITY_INFO.collegeShort} &bull; State Govt. Engineering College</span>
+              <span>{COMMUNITY_INFO.collegeShort} &bull; Student Technical Society</span>
             </div>
 
-            <h1 className="hero-title-main">
-              STIC
-            </h1>
+            <div className="hero-branding-group">
+              <h1 className="hero-title-main">
+                {COMMUNITY_INFO.name}
+              </h1>
+              
+              <h2 className="hero-tagline-text">
+                {COMMUNITY_INFO.fullName}
+              </h2>
+            </div>
 
-            <p className="hero-tagline-text">
-              {COMMUNITY_INFO.fullName}
-            </p>
-
-            <p className="hero-college-name">
-              {COMMUNITY_INFO.college}
+            <p className="hero-tagline-motto">
+              &ldquo;{COMMUNITY_INFO.tagline}&rdquo;
             </p>
 
             <p className="hero-description">
-              Official student technical community &bull; Code, build &amp; innovate.
+              The premier student technical society and engineering incubator at SAREC Mirzapur. We empower aspiring engineers from ground zero through hands-on software development, AI &amp; data science projects, competitive programming, and peer-to-peer mentorship.
             </p>
 
             <div className="hero-actions">
@@ -48,15 +50,23 @@ export default function Hero() {
                 <span>Connect With Us</span>
               </button>
 
-              <a
-                href={COMMUNITY_INFO.collegeWebsite}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
                 className="btn btn-secondary"
+                onClick={() => scrollToSection('workflow')}
               >
-                <span>College Portal</span>
-                <ExternalLink size={15} strokeWidth={2.5} />
-              </a>
+                <span>How It Works</span>
+                <ArrowDown size={15} strokeWidth={2.5} />
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => scrollToSection('notices')}
+              >
+                <Bell size={15} strokeWidth={2} />
+                <span>Notices &amp; Events</span>
+              </button>
             </div>
           </div>
 
@@ -72,8 +82,8 @@ export default function Hero() {
               </div>
 
               <div className="emblem-info">
-                <span className="emblem-badge-pill">STUDENT TECHNICAL SOCIETY</span>
-                <span className="emblem-tagline">{COMMUNITY_INFO.tagline}</span>
+                <span className="emblem-badge-pill">{COMMUNITY_INFO.name}</span>
+                <span className="emblem-tagline">{COMMUNITY_INFO.fullName}</span>
               </div>
 
               <div className="emblem-meta-line">

@@ -6,10 +6,10 @@ export default function Departments() {
     <section id="departments" className="section-padding departments-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">Academic Framework</span>
-          <h2 className="section-title">Participating Departments</h2>
+          <span className="section-eyebrow">Cross-Disciplinary Community</span>
+          <h2 className="section-title">Branches &amp; Engineering Disciplines</h2>
           <p className="section-subtitle">
-            STIC is open to students across all four B.Tech engineering disciplines at SAREC Mirzapur.
+            STIC brings together builders, coders, and innovators from all engineering streams at SAREC Mirzapur.
           </p>
         </div>
 

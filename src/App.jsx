@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Workflow from './components/Workflow';
 import FocusAreas from './components/FocusAreas';
+import NoticeBoard from './components/NoticeBoard';
 import Departments from './components/Departments';
 import Leadership from './components/Leadership';
 import Contact from './components/Contact';
@@ -77,7 +79,9 @@ export default function App() {
           <>
             <Hero />
             <About />
+            <Workflow />
             <FocusAreas />
+            <NoticeBoard />
             <Departments />
             <Leadership />
             <Contact />
