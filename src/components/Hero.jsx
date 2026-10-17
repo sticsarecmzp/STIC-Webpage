@@ -87,7 +87,7 @@ export default function Hero() {
               </div>
 
               <div className="emblem-meta-line">
-                <span>EST. 2023 &bull; SAREC MIRZAPUR</span>
+                <span>EST. 2025 &bull; SAREC MIRZAPUR</span>
               </div>
             </div>
           </div>

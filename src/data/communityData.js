@@ -6,7 +6,7 @@ export const COMMUNITY_INFO = {
   collegeShort: "SAREC Mirzapur",
   university: "Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow",
   institutionType: "State Government Engineering College, Uttar Pradesh",
-  establishedYear: "2023",
+  establishedYear: "2025",
   collegeWebsite: "https://www.sarecmzp.ac.in/",
   tagline: "Code, Build, Innovate",
   officialEmail: "sticsarecmzp@gmail.com",
@@ -20,9 +20,9 @@ export const COMMUNITY_INFO = {
 };
 
 export const COMMUNITY_STATS = [
-  { value: "5", label: "Tech Focus Tracks" },
-  { value: "20+", label: "Collaborative Projects" },
-  { value: "2023", label: "Community Est." },
+  { value: "4", label: "Tech Focus Tracks" },
+  { value: "2", label: "Collaborative Projects" },
+  { value: "2025", label: "Community Est." },
   { value: "100%", label: "Student-Led & Open" }
 ];
 
