@@ -41,7 +41,7 @@ export const COMMUNITY_WORKFLOW = [
     title: "Peer Learning & Lab Coding Sprints",
     subtitle: "Central Computer Lab, SAREC",
     description: "Participate in weekly hands-on coding sessions, guided algorithmic problem solving, and modern development masterclasses led by senior student leads and guided by faculty mentors.",
-    accent: "purple"
+    accent: "amber"
   },
   {
     step: "03",
@@ -49,7 +49,7 @@ export const COMMUNITY_WORKFLOW = [
     title: "Build Real Software on GitHub",
     subtitle: "Interdisciplinary Collaboration",
     description: "Team up in squads across CSE, IT, EL, and EE branches. Use production Git workflows to build campus portals, community tools, automation systems, and public open-source software.",
-    accent: "amber"
+    accent: "cyan"
   },
   {
     step: "04",
@@ -57,7 +57,7 @@ export const COMMUNITY_WORKFLOW = [
     title: "Hackathons, SIH & Career Growth",
     subtitle: "National Stages & Industry Portfolios",
     description: "Represent SAREC Mirzapur at Smart India Hackathon (SIH) and premier national hackathons. Build an authentic, verified developer portfolio to secure top-tier engineering internships and job opportunities.",
-    accent: "emerald"
+    accent: "amber"
   }
 ];
 
@@ -95,28 +95,28 @@ export const FOCUS_AREAS = [
   {
     id: "ai-ds",
     title: "AI / ML & Data",
-    accent: "purple",
+    accent: "amber",
     description: "Machine learning, neural networks, predictive modeling, and data pipelines.",
     tags: ["Python", "TensorFlow", "PyTorch", "Pandas", "Scikit-Learn"]
   },
   {
     id: "cp-dsa",
     title: "CP & Algorithms",
-    accent: "amber",
+    accent: "cyan",
     description: "Data structures, algorithmic problem solving & competitive coding contests.",
     tags: ["C++", "DSA", "LeetCode", "Codeforces", "System Design"]
   },
   {
     id: "cyber-cloud",
     title: "CyberSec & DevOps",
-    accent: "emerald",
+    accent: "cyan",
     description: "Defensive security, Linux systems, Docker containers & CI/CD deployment.",
     tags: ["Linux", "Docker", "Git/CI", "OWASP", "Cloud Ops"]
   },
   {
     id: "iot-robotics",
     title: "Systems & Embedded",
-    accent: "rose",
+    accent: "amber",
     description: "Microcontrollers, telemetry, physical computing & robotics hardware.",
     tags: ["Arduino", "ESP32", "Sensors", "Robotics", "Embedded C"]
   }
@@ -149,7 +149,7 @@ export const NOTICES_AND_EVENTS = [
     time: "9:00 AM – Full Day Hands-on Session",
     venue: "Seminar Hall & Computer Lab, SAREC Mirzapur",
     badge: "COMPLETED MILESTONE",
-    accent: "purple",
+    accent: "amber",
     speaker: "Nitin Tiwari Sir (Google Developer Expert / GDG Prayagraj)",
     coordinators: "Pawan Kumar Yadav, Piyush Kushwaha & STIC Student Team",
     description: "Milestone practical AI masterclass organized at SAREC Mirzapur in collaboration with GDG Prayagraj and TFUG Prayagraj (ML Prayagraj). Featured in-depth sessions by Google Developer Expert Nitin Tiwari on Vision Language Models (VLMs), Google's open models (PaliGemma 2, Gemma 3n), MatFormer architecture, and live in-browser AI inference.",
@@ -200,7 +200,7 @@ export const NOTICES_AND_EVENTS = [
     time: "Comprehensive Technical Roadmap",
     venue: "Conference Hall, SAREC Mirzapur",
     badge: "ROADMAP UNVEILED",
-    accent: "amber",
+    accent: "cyan",
     speaker: "Piyush Kushwaha (Overall Coordinator & Tech Lead), Pawan Kumar Yadav & Core Team",
     description: "Conducted to eliminate early-stage confusion for incoming engineering freshers and provide clear, guided technical trajectories. Unveiled 4 core engineering domains: Open Source Contribution, Web & Mobile Development, Competitive Programming (DSA), and AI/Machine Learning.",
     recap: "Addressed common beginner roadblocks, demonstrated how to start from ground zero, and laid out the pathway to hackathons and SIH. Mentored by seniors Shivansh Mishra & Utkarsh Aryan Mishra with guidance from Ankit Kumar Verma sir (GDG Prayagraj).",
@@ -240,7 +240,7 @@ export const NOTICES_AND_EVENTS = [
     time: "Campus Announcement",
     venue: "SAREC Mirzapur",
     badge: "OFFICIAL NEWS",
-    accent: "cyan",
+    accent: "amber",
     description: "Following our milestone Build with AI initiative, STIC is actively fostering real-world developer practices on campus in formal collaboration with WikiClub Tech and GDG Prayagraj to prepare students for Smart India Hackathon (SIH), Google Summer of Code (GSoC), and product engineering roles.",
     actions: [
       { label: "Connect with STIC", url: "#contact", isInternal: true, primary: true }
@@ -303,50 +303,55 @@ export const LEADERSHIP = {
       fallbackImage: "/assets/faculty/abhinav-gupta.jpg"
     }
   ],
-  coFounders: [
+  executives: [
     {
       name: "Piyush Kushwaha",
-      role: "Student Co-founder",
+      role: "Co-Founder & Executive Member",
       affiliation: "B.Tech IT",
-      focus: "Web & Mobile Platforms, Cloud Architecture & DevOps"
+      focus: "Overall Coordinator & Tech Lead, Platforms & DevOps",
+      image: "/assets/team/piyush-kushwaha.jpg"
     },
     {
       name: "Pawan Kumar Yadav",
-      role: "Student Co-founder",
+      role: "Co-Founder & Executive Member",
       affiliation: "B.Tech IT",
-      focus: "Competitive Programming, DSA & Linux Systems"
-    }
-  ],
-  executives: [
-    {
-      name: "Ayush Mishra",
-      role: "Executive Member",
-      affiliation: "B.Tech IT",
-      focus: "AI & Data Science, Promotion & Technical Outreach"
-    },
-    {
-      name: "Sidhant Maurya",
-      role: "Executive Member",
-      affiliation: "B.Tech CSE",
-      focus: "AI & Data Science, Open-Source Development"
-    },
-    {
-      name: "Khushi Umrao",
-      role: "Executive Member",
-      affiliation: "B.Tech CSE",
-      focus: "Creative UI/UX Design & Event Brand Graphics"
+      focus: "Competitive Programming, DSA, Deep Learning & Systems",
+      image: "/assets/team/pawan-kumar-yadav-v2.jpg"
     },
     {
       name: "Aditi Yadav",
       role: "Executive Member",
       affiliation: "B.Tech IT",
-      focus: "Sponsorship & Institutional Relations, Public Relations"
+      focus: "Sponsorship & Institutional Relations, Public Relations",
+      image: "/assets/team/aditi-yadav.jpg"
+    },
+    {
+      name: "Sidhant Maurya",
+      role: "Executive Member",
+      affiliation: "B.Tech CSE",
+      focus: "AI & Data Science, Open-Source Development",
+      image: "/assets/team/sidhant-maurya.jpg"
+    },
+    {
+      name: "Khushi Umrao",
+      role: "Executive Member",
+      affiliation: "B.Tech CSE",
+      focus: "Creative UI/UX Design & Event Brand Graphics",
+      image: "/assets/team/khushi-umrao.jpg"
+    },
+    {
+      name: "Ayush Mishra",
+      role: "Executive Member",
+      affiliation: "B.Tech IT",
+      focus: "AI & Data Science, Promotion & Technical Outreach",
+      image: "/assets/team/ayush-mishra.jpg"
     },
     {
       name: "Shital Kushwaha",
       role: "Executive Member",
       affiliation: "B.Tech CSE",
-      focus: "Visual Design, Media Assets & Community Identity"
+      focus: "Visual Design, Media Assets & Community Identity",
+      image: "/assets/team/shital-kushwaha.jpg"
     }
   ]
 };
