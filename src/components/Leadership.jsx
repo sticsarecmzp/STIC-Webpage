@@ -72,7 +72,7 @@ export default function Leadership() {
               <Shield size={13} strokeWidth={2.5} />
               <span>Co-Founders &amp; Executive Members</span>
             </span>
-            <span className="exec-count-text">{executives.length} Student Leads &bull; Founded 2023 &bull; IT &amp; CSE</span>
+            <span className="exec-count-text">{executives.length} Student Leads &bull; Founded 2025 &bull; IT &amp; CSE</span>
           </div>
 
           <div className="executives-grid">

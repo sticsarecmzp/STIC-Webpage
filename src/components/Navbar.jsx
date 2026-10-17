@@ -8,7 +8,7 @@ export default function Navbar({ theme, onToggleTheme, onHome }) {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) setMobileMenuOpen(false);
+      if (window.innerWidth > 960) setMobileMenuOpen(false);
     };
 
     const handleScroll = () => {
