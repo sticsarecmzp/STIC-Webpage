@@ -187,11 +187,12 @@ export default function RegistrationForm() {
             </div>
           </fieldset>
 
-          <button
-            type="submit"
-            className="registration-submit"
-            disabled={formData.interests.length === 0}
-          >
+         <button
+  type="submit"
+  className="registration-submit"
+>
+  Register Now →
+</button>
             Register Now →
           </button>
 
