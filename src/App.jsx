@@ -10,6 +10,7 @@ import Leadership from './components/Leadership';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
+import RegistrationForm from './components/RegistrationForm';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import BackToTop from './components/BackToTop';
 import { useScrollReveal } from './hooks/useScrollReveal';
