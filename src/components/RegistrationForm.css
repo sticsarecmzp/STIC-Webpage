@@ -1,0 +1,227 @@
+/* Registration Page */
+.registration-page {
+  min-height: 100vh;
+  padding: 110px 24px 70px;
+  background: var(--bg, #0f1724);
+  color: var(--text, #f8fafc);
+  font-family: inherit;
+}
+
+.registration-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.registration-back {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: var(--text, #f8fafc);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.registration-back:hover {
+  color: #ff9f0a;
+}
+
+.registration-heading {
+  margin-bottom: 36px;
+}
+
+.registration-tag {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid #ff9f0a;
+  border-radius: 4px;
+  color: #ff9f0a;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.registration-heading h1 {
+  margin: 22px 0 12px;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.registration-heading h1 span {
+  color: #ff9f0a;
+}
+
+.registration-heading p {
+  max-width: 620px;
+  color: var(--muted, #a9b4c5);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.registration-form {
+  padding: 32px;
+  border: 1px solid var(--border, #293448);
+  border-top: 4px solid #ff9f0a;
+  border-radius: 8px;
+  background: var(--surface, #172131);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+.registration-form h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.registration-form-note {
+  margin: 0 0 28px;
+  color: var(--muted, #a9b4c5);
+  font-size: 13px;
+}
+
+.registration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.registration-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.registration-grid input,
+.registration-grid select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--border, #354258);
+  border-radius: 5px;
+  background: var(--input-bg, #101927);
+  color: var(--text, #f8fafc);
+  font: inherit;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.registration-grid input:focus,
+.registration-grid select:focus {
+  border-color: #ff9f0a;
+  box-shadow: 0 0 0 3px rgba(255, 159, 10, 0.13);
+}
+
+.registration-grid input::placeholder {
+  color: #8490a3;
+}
+
+.registration-grid select {
+  cursor: pointer;
+}
+
+.registration-full-width {
+  grid-column: 1 / -1;
+}
+
+.registration-interests {
+  margin: 30px 0;
+  padding: 20px;
+  border: 1px solid var(--border, #354258);
+  border-radius: 6px;
+}
+
+.registration-interests legend {
+  padding: 0 8px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.registration-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.registration-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--border, #354258);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.registration-option:hover {
+  border-color: #ff9f0a;
+  background: rgba(255, 159, 10, 0.05);
+}
+
+.registration-option input {
+  width: 16px;
+  height: 16px;
+  accent-color: #ff9f0a;
+  cursor: pointer;
+}
+
+.registration-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 5px;
+  background: #ff9f0a;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.registration-submit:hover:not(:disabled) {
+  background: #ffb52e;
+}
+
+.registration-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.registration-privacy {
+  margin: 18px 0 0;
+  color: var(--muted, #a9b4c5);
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .registration-page {
+    padding: 90px 16px 40px;
+  }
+
+  .registration-form {
+    padding: 22px 18px;
+  }
+
+  .registration-grid,
+  .registration-options {
+    grid-template-columns: 1fr;
+  }
+
+  .registration-full-width {
+    grid-column: auto;
+  }
+
+  .registration-heading h1 {
+    font-size: 34px;
+  }
+}
