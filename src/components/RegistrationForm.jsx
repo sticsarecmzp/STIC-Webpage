@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './RegistrationForm.css';
+import { saveRegistrationToFirestore } from '../firebase';
 
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -14,7 +15,10 @@ export default function RegistrationForm() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
+  // Handle text fields and dropdowns
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -24,6 +28,7 @@ export default function RegistrationForm() {
     }));
   };
 
+  // Handle interest checkboxes
   const handleInterestChange = (e) => {
     const { value, checked } = e.target;
 
@@ -35,32 +40,83 @@ export default function RegistrationForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  // Submit registration to Firebase
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Frontend testing only.
-    // Backend/database connection is not added yet.
-    setSubmitted(true);
+    setLoading(true);
+    setError('');
+
+    try {
+      const registrationData = {
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        college: formData.college.trim(),
+        branch: formData.branch,
+        year: formData.year,
+        github: formData.github.trim(),
+        interests: formData.interests,
+      };
+
+      const registrationId =
+        await saveRegistrationToFirestore(registrationData);
+
+      if (!registrationId) {
+        throw new Error(
+          'Registration could not be saved to Firebase.'
+        );
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Registration error:', err);
+
+      setError(
+        'Registration failed. Please check your internet connection and try again.'
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
+  // Registration success screen
   if (submitted) {
     return (
       <section className="registration-page">
         <div className="registration-container">
           <div className="registration-success">
             <h2>Thank You!</h2>
+
             <p>
-              Your form has been submitted for frontend testing.
-              Your details have not been saved to the database yet.
+              Your registration has been submitted successfully.
+              Your details have been saved.
             </p>
 
             <button
               type="button"
               className="registration-submit"
-              onClick={() => setSubmitted(false)}
+              onClick={() => {
+                setSubmitted(false);
+                setFormData({
+                  fullName: '',
+                  email: '',
+                  phone: '',
+                  college: '',
+                  branch: '',
+                  year: '',
+                  github: '',
+                  interests: [],
+                });
+                setError('');
+              }}
             >
-              Back to Form
+              Register Another Student
             </button>
+
+            <a href="/" className="registration-back">
+              ← Back to Home
+            </a>
           </div>
         </div>
       </section>
@@ -100,6 +156,7 @@ export default function RegistrationForm() {
           </p>
 
           <div className="registration-grid">
+            {/* Full Name */}
             <label>
               Full Name *
               <input
@@ -109,10 +166,12 @@ export default function RegistrationForm() {
                 value={formData.fullName}
                 onChange={handleChange}
                 autoComplete="name"
+                maxLength={100}
                 required
               />
             </label>
 
+            {/* Email */}
             <label>
               Email Address *
               <input
@@ -122,10 +181,12 @@ export default function RegistrationForm() {
                 value={formData.email}
                 onChange={handleChange}
                 autoComplete="email"
+                maxLength={254}
                 required
               />
             </label>
 
+            {/* Phone */}
             <label>
               Phone Number *
               <input
@@ -141,6 +202,7 @@ export default function RegistrationForm() {
               />
             </label>
 
+            {/* College */}
             <label>
               College Name *
               <input
@@ -149,10 +211,12 @@ export default function RegistrationForm() {
                 placeholder="Enter your college name"
                 value={formData.college}
                 onChange={handleChange}
+                maxLength={150}
                 required
               />
             </label>
 
+            {/* Branch */}
             <label>
               Branch *
               <select
@@ -174,6 +238,7 @@ export default function RegistrationForm() {
               </select>
             </label>
 
+            {/* Year */}
             <label>
               Year of Study *
               <select
@@ -190,6 +255,7 @@ export default function RegistrationForm() {
               </select>
             </label>
 
+            {/* GitHub */}
             <label className="registration-full-width">
               GitHub Profile (Optional)
               <input
@@ -198,10 +264,12 @@ export default function RegistrationForm() {
                 placeholder="https://github.com/yourusername"
                 value={formData.github}
                 onChange={handleChange}
+                maxLength={300}
               />
             </label>
           </div>
 
+          {/* Interests */}
           <fieldset className="registration-interests">
             <legend>Areas of Interest *</legend>
 
@@ -231,11 +299,27 @@ export default function RegistrationForm() {
             </div>
           </fieldset>
 
+          {/* Require at least one interest */}
+          {formData.interests.length === 0 && (
+            <p className="registration-form-note">
+              Please select at least one area of interest.
+            </p>
+          )}
+
+          {/* Error message */}
+          {error && (
+            <p role="alert" className="registration-form-note">
+              {error}
+            </p>
+          )}
+
+          {/* Submit */}
           <button
             type="submit"
             className="registration-submit"
+            disabled={loading || formData.interests.length === 0}
           >
-            Register Now →
+            {loading ? 'Submitting...' : 'Register Now →'}
           </button>
 
           <p className="registration-privacy">
