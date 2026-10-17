@@ -10,6 +10,7 @@ import Leadership from './components/Leadership';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
+import RegistrationForm from './components/RegistrationForm';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import BackToTop from './components/BackToTop';
 import { useScrollReveal } from './hooks/useScrollReveal';
@@ -53,7 +54,13 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const is404 = currentPath !== '/' && currentPath !== '' && currentPath !== '/index.html';
+  const isRegistration = currentPath === '/register';
+
+const is404 =
+  !isRegistration &&
+  currentPath !== '/' &&
+  currentPath !== '' &&
+  currentPath !== '/index.html';
 
   return (
     <div className="app-layout">
@@ -73,20 +80,22 @@ export default function App() {
       />
 
       <main id="main-content">
-        {is404 ? (
-          <NotFound onNavigateHome={handleNavigateHome} />
-        ) : (
-          <>
-            <Hero />
-            <About />
-            <Workflow />
-            <FocusAreas />
-            <NoticeBoard />
-            <Departments />
-            <Leadership />
-            <Contact />
-          </>
-        )}
+        {isRegistration ? (
+  <RegistrationForm />
+) : is404 ? (
+  <NotFound onNavigateHome={handleNavigateHome} />
+) : (
+  <>
+    <Hero />
+    <About />
+    <Workflow />
+    <FocusAreas />
+    <NoticeBoard />
+    <Departments />
+    <Leadership />
+    <Contact />
+  </>
+)}
       </main>
 
       <Footer />

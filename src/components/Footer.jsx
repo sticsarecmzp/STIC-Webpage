@@ -121,14 +121,20 @@ export default function Footer() {
             >
               <WhatsAppIcon size={16} />
             </a>
+            
+         
             <a
-              href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=sticsarecmzp@gmail.com&su=STIC%20Website%20Enquiry"
+              target="_blank"
+              rel="noopener noreferrer"
               className="footer-icon-btn"
               aria-label="Email"
               title="Email"
             >
               <Mail size={16} strokeWidth={1.8} />
             </a>
+
+
           </div>
 
           <div className="footer-copy-text">
