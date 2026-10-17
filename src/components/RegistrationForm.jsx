@@ -13,6 +13,8 @@ export default function RegistrationForm() {
     interests: [],
   });
 
+  const [submitted, setSubmitted] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -35,8 +37,35 @@ export default function RegistrationForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Form submitted successfully! Backend connection is pending.');
+
+    // Frontend testing only.
+    // Backend/database connection is not added yet.
+    setSubmitted(true);
   };
+
+  if (submitted) {
+    return (
+      <section className="registration-page">
+        <div className="registration-container">
+          <div className="registration-success">
+            <h2>Thank You!</h2>
+            <p>
+              Your form has been submitted for frontend testing.
+              Your details have not been saved to the database yet.
+            </p>
+
+            <button
+              type="button"
+              className="registration-submit"
+              onClick={() => setSubmitted(false)}
+            >
+              Back to Form
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="registration-page">
@@ -60,8 +89,12 @@ export default function RegistrationForm() {
           </p>
         </div>
 
-        <form className="registration-form" onSubmit={handleSubmit}>
+        <form
+          className="registration-form"
+          onSubmit={handleSubmit}
+        >
           <h2>Student Information</h2>
+
           <p className="registration-form-note">
             Fields marked * are required.
           </p>
@@ -75,6 +108,7 @@ export default function RegistrationForm() {
                 placeholder="Enter your full name"
                 value={formData.fullName}
                 onChange={handleChange}
+                autoComplete="name"
                 required
               />
             </label>
@@ -87,6 +121,7 @@ export default function RegistrationForm() {
                 placeholder="you@example.com"
                 value={formData.email}
                 onChange={handleChange}
+                autoComplete="email"
                 required
               />
             </label>
@@ -101,6 +136,7 @@ export default function RegistrationForm() {
                 onChange={handleChange}
                 pattern="[0-9]{10}"
                 maxLength={10}
+                autoComplete="tel"
                 required
               />
             </label>
@@ -126,8 +162,12 @@ export default function RegistrationForm() {
                 required
               >
                 <option value="">Select your branch</option>
-                <option value="CSE">Computer Science (CSE)</option>
-                <option value="IT">Information Technology (IT)</option>
+                <option value="CSE">
+                  Computer Science (CSE)
+                </option>
+                <option value="IT">
+                  Information Technology (IT)
+                </option>
                 <option value="EL">EL</option>
                 <option value="EE">EE</option>
                 <option value="Other">Other</option>
@@ -174,31 +214,33 @@ export default function RegistrationForm() {
                 'DSA & Competitive Programming',
                 'SIH & GSoC',
               ].map((interest) => (
-                <label key={interest} className="registration-option">
+                <label
+                  key={interest}
+                  className="registration-option"
+                >
                   <input
                     type="checkbox"
                     value={interest}
                     checked={formData.interests.includes(interest)}
                     onChange={handleInterestChange}
                   />
+
                   <span>{interest}</span>
                 </label>
               ))}
             </div>
           </fieldset>
 
-         <button
-  type="submit"
-  className="registration-submit"
->
-  Register Now →
-</button>
+          <button
+            type="submit"
+            className="registration-submit"
+          >
             Register Now →
           </button>
 
           <p className="registration-privacy">
-            Your details will be used for event registration and
-            related communication.
+            Your details will be used for event registration
+            and related communication.
           </p>
         </form>
       </div>
