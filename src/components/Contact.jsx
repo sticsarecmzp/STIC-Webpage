@@ -1,43 +1,116 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, ExternalLink, Copy, Check, MessageSquare } from 'lucide-react';
+import {
+  Mail,
+  MapPin,
+  ExternalLink,
+  Copy,
+  Check,
+} from 'lucide-react';
+
 import { COMMUNITY_INFO } from '../data/communityData';
-import { GithubIcon, InstagramIcon, LinkedinIcon, WhatsAppIcon } from './Icons';
+import {
+  GithubIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  WhatsAppIcon,
+} from './Icons';
 
 export default function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(COMMUNITY_INFO.officialEmail);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        COMMUNITY_INFO.officialEmail
+      );
+
+      setCopiedEmail(true);
+
+      setTimeout(() => {
+        setCopiedEmail(false);
+      }, 2000);
+    } catch (error) {
+      console.error('Unable to copy email:', error);
+      window.location.href = `mailto:${COMMUNITY_INFO.officialEmail}`;
+    }
   };
 
+  const channels = [
+    {
+      name: 'Official College Website',
+      handle: 'sarecmzp.ac.in',
+      href: COMMUNITY_INFO.collegeWebsite,
+      Icon: ExternalLink,
+    },
+    {
+      name: 'GitHub Organization',
+      handle: 'github.com/sticsarecmzp',
+      href: COMMUNITY_INFO.githubOrg,
+      Icon: GithubIcon,
+    },
+    {
+      name: 'LinkedIn Community Page',
+      handle: 'stic-sarec-mirzapur',
+      href: COMMUNITY_INFO.linkedin,
+      Icon: LinkedinIcon,
+    },
+    {
+      name: 'Instagram',
+      handle: '@sticsarecmzp',
+      href: COMMUNITY_INFO.instagram,
+      Icon: InstagramIcon,
+    },
+    {
+      name: 'WhatsApp Community',
+      handle: 'Join Student Group',
+      href: COMMUNITY_INFO.whatsappGroup,
+      Icon: WhatsAppIcon,
+    },
+  ];
+
   return (
-    <section id="contact" className="section-padding contact-section">
+    <section
+      id="contact"
+      className="section-padding contact-section"
+    >
       <div className="container">
+        {/* Section Header */}
         <div className="section-header">
-          <span className="section-eyebrow">Communication &amp; Outreach</span>
-          <h2 className="section-title">Connect With Us</h2>
+          <span className="section-eyebrow">
+            Communication &amp; Outreach
+          </span>
+
+          <h2 className="section-title">
+            Connect With Us
+          </h2>
+
           <p className="section-subtitle">
-            Have questions about STIC or wish to collaborate? Reach out to us through our official channels.
+            Have questions about STIC or wish to collaborate?
+            Reach out to us through our official channels.
           </p>
         </div>
 
+        {/* Contact Cards */}
         <div className="contact-grid">
-          {/* Email & Venue Card */}
+          {/* Email and Venue */}
           <div className="contact-card primary-contact-card">
             <div className="contact-item">
               <div className="contact-icon-box">
                 <Mail size={20} strokeWidth={1.75} />
               </div>
+
               <div className="contact-item-content">
-                <span className="contact-label">Official Community Email</span>
+                <span className="contact-label">
+                  Official Community Email
+                </span>
+
                 <a
                   href={`mailto:${COMMUNITY_INFO.officialEmail}`}
                   className="contact-value-link"
                 >
                   {COMMUNITY_INFO.officialEmail}
                 </a>
+
                 <div className="contact-btn-row">
                   <a
                     href={`mailto:${COMMUNITY_INFO.officialEmail}`}
@@ -45,6 +118,7 @@ export default function Contact() {
                   >
                     <span>Send Message</span>
                   </a>
+
                   <button
                     type="button"
                     className="btn btn-ghost btn-sm"
@@ -53,7 +127,11 @@ export default function Contact() {
                   >
                     {copiedEmail ? (
                       <>
-                        <Check size={14} strokeWidth={2.5} style={{ color: 'var(--success)' }} />
+                        <Check
+                          size={14}
+                          strokeWidth={2.5}
+                          style={{ color: 'var(--success)' }}
+                        />
                         <span>Copied</span>
                       </>
                     ) : (
@@ -73,8 +151,12 @@ export default function Contact() {
               <div className="contact-icon-box">
                 <MapPin size={20} strokeWidth={1.75} />
               </div>
+
               <div className="contact-item-content">
-                <span className="contact-label">Campus Venue &amp; Address</span>
+                <span className="contact-label">
+                  Campus Venue &amp; Address
+                </span>
+
                 <p className="contact-venue-text">
                   <strong>{COMMUNITY_INFO.venue}</strong>
                   <br />
@@ -86,93 +168,50 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Online Channels Card */}
+          {/* Online Channels */}
           <div className="contact-card channels-card">
-            <h3 className="channels-card-title">Online Channels &amp; Links</h3>
+            <h3 className="channels-card-title">
+              Online Channels &amp; Links
+            </h3>
+
             <p className="channels-card-desc">
-              Follow our latest open-source repositories, campus announcements, and community updates.
+              Follow our latest open-source repositories,
+              campus announcements, and community updates.
             </p>
 
             <div className="channels-list">
-              <a
-                href={COMMUNITY_INFO.collegeWebsite}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="channel-link-row"
-              >
-                <div className="channel-icon-pill">
-                  <ExternalLink size={16} strokeWidth={1.75} />
-                </div>
-                <div className="channel-info">
-                  <span className="channel-name">Official College Website</span>
-                  <span className="channel-handle">sarecmzp.ac.in</span>
-                </div>
-                <ExternalLink size={14} className="channel-arrow" />
-              </a>
+              {channels.map((channel) => {
+                const Icon = channel.Icon;
 
-              <a
-                href={COMMUNITY_INFO.githubOrg}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="channel-link-row"
-              >
-                <div className="channel-icon-pill">
-                  <GithubIcon size={16} />
-                </div>
-                <div className="channel-info">
-                  <span className="channel-name">GitHub Organization</span>
-                  <span className="channel-handle">github.com/sticsarecmzp</span>
-                </div>
-                <ExternalLink size={14} className="channel-arrow" />
-              </a>
+                return (
+                  <a
+                    key={channel.name}
+                    href={channel.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="channel-link-row"
+                  >
+                    <div className="channel-icon-pill">
+                      <Icon size={16} />
+                    </div>
 
-              <a
-                href={COMMUNITY_INFO.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="channel-link-row"
-              >
-                <div className="channel-icon-pill">
-                  <LinkedinIcon size={16} />
-                </div>
-                <div className="channel-info">
-                  <span className="channel-name">LinkedIn Community Page</span>
-                  <span className="channel-handle">stic-sarec-mirzapur</span>
-                </div>
-                <ExternalLink size={14} className="channel-arrow" />
-              </a>
+                    <div className="channel-info">
+                      <span className="channel-name">
+                        {channel.name}
+                      </span>
 
-              <a
-                href={COMMUNITY_INFO.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="channel-link-row"
-              >
-                <div className="channel-icon-pill">
-                  <InstagramIcon size={16} />
-                </div>
-                <div className="channel-info">
-                  <span className="channel-name">Instagram</span>
-                  <span className="channel-handle">@sticsarecmzp</span>
-                </div>
-                <ExternalLink size={14} className="channel-arrow" />
-              </a>
+                      <span className="channel-handle">
+                        {channel.handle}
+                      </span>
+                    </div>
 
-              <a
-                href={COMMUNITY_INFO.whatsappGroup}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="channel-link-row"
-              >
-                <div className="channel-icon-pill">
-                  <WhatsAppIcon size={16} />
-                </div>
-                <div className="channel-info">
-                  <span className="channel-name">WhatsApp Community</span>
-                  <span className="channel-handle">Join Student Group</span>
-                </div>
-                <ExternalLink size={14} className="channel-arrow" />
-              </a>
+                    <ExternalLink
+                      size={14}
+                      className="channel-arrow"
+                    />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
