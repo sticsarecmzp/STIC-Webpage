@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {
   Calendar,
@@ -41,18 +42,34 @@ export default function NoticeBoard() {
     return item.type === activeFilter;
   });
 
-  const upcomingCount = NOTICES_AND_EVENTS.filter((n) => n.type === 'upcoming').length;
-  const pastCount = NOTICES_AND_EVENTS.filter((n) => n.type === 'past').length;
-  const newsCount = NOTICES_AND_EVENTS.filter((n) => n.type === 'news').length;
+  const upcomingCount = NOTICES_AND_EVENTS.filter(
+    (n) => n.type === 'upcoming'
+  ).length;
+
+  const pastCount = NOTICES_AND_EVENTS.filter(
+    (n) => n.type === 'past'
+  ).length;
+
+  const newsCount = NOTICES_AND_EVENTS.filter(
+    (n) => n.type === 'news'
+  ).length;
 
   return (
     <section id="notices" className="section-padding notices-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">Official Bulletin &amp; Activities</span>
-          <h2 className="section-title">Notices, Events &amp; Gallery</h2>
+          <span className="section-eyebrow">
+            Official Bulletin &amp; Activities
+          </span>
+
+          <h2 className="section-title">
+            Notices, Events &amp; Gallery
+          </h2>
+
           <p className="section-subtitle">
-            Authentic records of STIC campus initiatives &bull; Upcoming Open Source Day sprint, milestone Build With AI masterclass with GDG Prayagraj, and community roadmaps.
+            Authentic records of STIC campus initiatives &bull; Upcoming
+            Open Source Day sprint, milestone Build With AI masterclass
+            with GDG Prayagraj, and community roadmaps.
           </p>
         </div>
 
@@ -60,16 +77,22 @@ export default function NoticeBoard() {
         <div className="notices-filter-bar">
           <button
             type="button"
-            className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
+            className={`filter-btn ${
+              activeFilter === 'all' ? 'active' : ''
+            }`}
             onClick={() => setActiveFilter('all')}
           >
             <span>All Updates</span>
-            <span className="filter-count">{NOTICES_AND_EVENTS.length}</span>
+            <span className="filter-count">
+              {NOTICES_AND_EVENTS.length}
+            </span>
           </button>
 
           <button
             type="button"
-            className={`filter-btn ${activeFilter === 'upcoming' ? 'active' : ''}`}
+            className={`filter-btn ${
+              activeFilter === 'upcoming' ? 'active' : ''
+            }`}
             onClick={() => setActiveFilter('upcoming')}
           >
             <span className="filter-live-dot" aria-hidden="true" />
@@ -79,7 +102,9 @@ export default function NoticeBoard() {
 
           <button
             type="button"
-            className={`filter-btn ${activeFilter === 'past' ? 'active' : ''}`}
+            className={`filter-btn ${
+              activeFilter === 'past' ? 'active' : ''
+            }`}
             onClick={() => setActiveFilter('past')}
           >
             <History size={13} />
@@ -89,7 +114,9 @@ export default function NoticeBoard() {
 
           <button
             type="button"
-            className={`filter-btn ${activeFilter === 'news' ? 'active' : ''}`}
+            className={`filter-btn ${
+              activeFilter === 'news' ? 'active' : ''
+            }`}
             onClick={() => setActiveFilter('news')}
           >
             <Newspaper size={13} />
@@ -98,34 +125,46 @@ export default function NoticeBoard() {
           </button>
         </div>
 
-        {/* HORIZONTAL NOTICES & EVENTS LIST */}
+        {/* Horizontal Notices & Events List */}
         <div className="notices-horizontal-list">
           {filteredNotices.map((notice) => {
             const isUpcoming = notice.type === 'upcoming';
             const currentPhotoIdx = activePhotoIndex[notice.id] || 0;
             const hasPhotos = notice.photos && notice.photos.length > 0;
-            const activePhoto = hasPhotos ? notice.photos[currentPhotoIdx] : null;
+            const activePhoto = hasPhotos
+              ? notice.photos[currentPhotoIdx]
+              : null;
+
+            const isOpenSourceDay =
+              notice.id === 'event-upcoming-opensource';
 
             return (
               <div
                 key={notice.id}
-                className={`neo-card notice-horizontal-card ${isUpcoming ? 'notice-upcoming-glow' : ''}`}
+                className={`neo-card notice-horizontal-card ${
+                  isUpcoming ? 'notice-upcoming-glow' : ''
+                }`}
               >
-                {/* LEFT COLUMN: Media Showcase (Real Photos or Tech Banner) */}
+                {/* Left Column: Media */}
                 <div className="notice-card-visual">
                   {hasPhotos ? (
                     <div className="horizontal-media-box">
                       <div className="horizontal-media-header">
                         <div className="media-header-left">
-                          <Camera size={13} className="media-cam-icon" />
-                          <span>Event Photos &bull; {notice.photos.length} Verified</span>
+                          <Camera
+                            size={13}
+                            className="media-cam-icon"
+                          />
+                          <span>
+                            Event Photos &bull; {notice.photos.length} Verified
+                          </span>
                         </div>
+
                         <span className="media-counter">
                           Photo {currentPhotoIdx + 1} of {notice.photos.length}
                         </span>
                       </div>
 
-                      {/* Main Featured Photo Preview */}
                       <div
                         className="horizontal-photo-preview"
                         onClick={() => setLightboxPhoto(activePhoto)}
@@ -145,8 +184,12 @@ export default function NoticeBoard() {
                           className="horizontal-preview-img"
                           loading="lazy"
                         />
+
                         <div className="horizontal-photo-overlay">
-                          <p className="horizontal-photo-caption">{activePhoto.caption}</p>
+                          <p className="horizontal-photo-caption">
+                            {activePhoto.caption}
+                          </p>
+
                           <span className="expand-pill">
                             <Maximize2 size={12} />
                             <span>Expand</span>
@@ -154,16 +197,20 @@ export default function NoticeBoard() {
                         </div>
                       </div>
 
-                      {/* Horizontal Thumbnail Slider Row */}
                       <div className="horizontal-thumbs-track">
                         {notice.photos.map((photo, pIdx) => {
                           const isThumbSelected = currentPhotoIdx === pIdx;
+
                           return (
                             <button
                               key={pIdx}
                               type="button"
-                              className={`horizontal-thumb-btn ${isThumbSelected ? 'active' : ''}`}
-                              onClick={() => handlePhotoSelect(notice.id, pIdx)}
+                              className={`horizontal-thumb-btn ${
+                                isThumbSelected ? 'active' : ''
+                              }`}
+                              onClick={() =>
+                                handlePhotoSelect(notice.id, pIdx)
+                              }
                               aria-label={`View photo ${pIdx + 1}: ${photo.caption}`}
                             >
                               <img
@@ -178,13 +225,17 @@ export default function NoticeBoard() {
                       </div>
                     </div>
                   ) : (
-                    /* Tech Visual Card for Upcoming / News Without Photo Array */
-                    <div className="horizontal-banner-box">
+                    <div
+                      className={`horizontal-banner-box ${
+                        isOpenSourceDay ? 'open-source-day-banner' : ''
+                      }`}
+                    >
                       <div className="banner-top-badge-row">
                         <span className="banner-partner-badge">
                           <Terminal size={12} />
                           <span>STIC &bull; WIKICLUB &bull; GDG</span>
                         </span>
+
                         <span className="banner-live-indicator">
                           <span className="pulse-dot" />
                           <span>{notice.badge}</span>
@@ -193,35 +244,53 @@ export default function NoticeBoard() {
 
                       <div className="banner-highlight-body">
                         <div className="banner-date-stamp">
-                       <span className="stamp-month">COMING</span>
-                       <span className="stamp-day">SOON</span>
-                      <span className="stamp-sub">SAREC MIRZAPUR</span>
-                      </div>
+                          <span className="stamp-month">COMING</span>
+                          <span className="stamp-day">SOON</span>
+                          <span className="stamp-sub">
+                            SAREC MIRZAPUR
+                          </span>
+                        </div>
 
                         <div className="banner-topics-list">
-                          <span className="banner-topic-chip">Git Workflows</span>
-                          <span className="banner-topic-chip">GitHub PRs</span>
-                          <span className="banner-topic-chip">Open Source Sprints</span>
-                          <span className="banner-topic-chip">SIH &amp; GSoC Prep</span>
+                          <span className="banner-topic-chip">
+                            Git Workflows
+                          </span>
+                          <span className="banner-topic-chip">
+                            GitHub PRs
+                          </span>
+                          <span className="banner-topic-chip">
+                            Open Source Sprints
+                          </span>
+                          <span className="banner-topic-chip">
+                            SIH &amp; GSoC Prep
+                          </span>
                         </div>
                       </div>
 
                       <div className="banner-footer-quote">
-                        <span>"Building genuine open-source contributors from Day 1 on campus."</span>
+                        <span>
+                          "Building genuine open-source contributors from
+                          Day 1 on campus."
+                        </span>
                       </div>
                     </div>
                   )}
                 </div>
 
-                {/* RIGHT COLUMN: Full Notice Information & Actions */}
+                {/* Right Column: Notice Information */}
                 <div className="notice-card-content">
                   <div className="notice-card-top">
                     <div className="notice-badge-group">
-                      <span className={`notice-status-badge badge-${notice.type}`}>
+                      <span
+                        className={`notice-status-badge badge-${notice.type}`}
+                      >
                         {isUpcoming && <span className="pulse-dot" />}
                         <span>{notice.badge}</span>
                       </span>
-                      <span className="notice-category-tag">{notice.category}</span>
+
+                      <span className="notice-category-tag">
+                        {notice.category}
+                      </span>
                     </div>
 
                     <div className="notice-datetime-tag">
@@ -230,9 +299,10 @@ export default function NoticeBoard() {
                     </div>
                   </div>
 
-                  <h3 className="horizontal-notice-title">{notice.title}</h3>
+                  <h3 className="horizontal-notice-title">
+                    {notice.title}
+                  </h3>
 
-                  {/* Speaker & Coordinator details */}
                   {notice.speaker && (
                     <div className="notice-speaker-row">
                       <UserCheck size={14} className="speaker-icon" />
@@ -241,6 +311,7 @@ export default function NoticeBoard() {
                       </span>
                     </div>
                   )}
+
                   {notice.coordinators && (
                     <div className="notice-speaker-row">
                       <Users size={14} className="speaker-icon" />
@@ -250,12 +321,12 @@ export default function NoticeBoard() {
                     </div>
                   )}
 
-                  {/* Venue and Timing */}
                   <div className="notice-location-row">
                     <div className="notice-loc-item">
                       <MapPin size={13} />
                       <span>{notice.venue}</span>
                     </div>
+
                     {notice.time && (
                       <div className="notice-loc-item">
                         <Clock size={13} />
@@ -264,14 +335,14 @@ export default function NoticeBoard() {
                     )}
                   </div>
 
-                  {/* Description */}
                   <p className="notice-desc">{notice.description}</p>
 
-                  {/* Eligibility or Recap Box */}
                   {notice.eligibility && (
                     <div className="notice-info-box eligibility-box">
                       <span className="info-box-label">ELIGIBILITY:</span>
-                      <span className="info-box-val">{notice.eligibility}</span>
+                      <span className="info-box-val">
+                        {notice.eligibility}
+                      </span>
                     </div>
                   )}
 
@@ -282,7 +353,6 @@ export default function NoticeBoard() {
                     </div>
                   )}
 
-                  {/* Action Links & Buttons */}
                   <div className="notice-card-actions">
                     {notice.actions &&
                       notice.actions.map((act, aIdx) => {
@@ -291,21 +361,28 @@ export default function NoticeBoard() {
                             <button
                               key={aIdx}
                               type="button"
-                              className={`btn btn-sm ${act.primary ? 'btn-primary' : 'btn-secondary'}`}
-                              onClick={() => scrollToSection(act.url.replace('#', ''))}
+                              className={`btn btn-sm ${
+                                act.primary ? 'btn-primary' : 'btn-secondary'
+                              }`}
+                              onClick={() =>
+                                scrollToSection(act.url.replace('#', ''))
+                              }
                             >
                               <span>{act.label}</span>
                               <ArrowRight size={13} strokeWidth={2} />
                             </button>
                           );
                         }
+
                         return (
                           <a
                             key={aIdx}
                             href={act.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`btn btn-sm ${act.primary ? 'btn-primary' : 'btn-secondary'}`}
+                            className={`btn btn-sm ${
+                              act.primary ? 'btn-primary' : 'btn-secondary'
+                            }`}
                           >
                             <span>{act.label}</span>
                             <ExternalLink size={13} strokeWidth={2} />
@@ -319,12 +396,16 @@ export default function NoticeBoard() {
           })}
         </div>
 
-        {/* Community Submission / Propose Event Box */}
+        {/* Community Submission Box */}
         <div className="notices-footer-note">
           <div className="footer-note-left">
             <Sparkles size={16} className="note-sparkle-icon" />
-            <span>Have an idea for a technical workshop or want to collaborate with STIC?</span>
+            <span>
+              Have an idea for a technical workshop or want to collaborate
+              with STIC?
+            </span>
           </div>
+
           <button
             type="button"
             className="btn-link"
@@ -336,7 +417,7 @@ export default function NoticeBoard() {
         </div>
       </div>
 
-      {/* Lightbox Modal for Photo Inspection */}
+      {/* Lightbox Modal */}
       {lightboxPhoto && (
         <div
           className="lightbox-backdrop"
@@ -344,7 +425,10 @@ export default function NoticeBoard() {
           role="dialog"
           aria-modal="true"
         >
-          <div className="lightbox-modal" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="lightbox-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               type="button"
               className="lightbox-close-btn"
@@ -353,6 +437,7 @@ export default function NoticeBoard() {
             >
               <X size={18} />
             </button>
+
             <div className="lightbox-image-wrapper">
               <img
                 src={lightboxPhoto.url}
@@ -360,6 +445,7 @@ export default function NoticeBoard() {
                 className="lightbox-full-img"
               />
             </div>
+
             <div className="lightbox-caption">
               <p>{lightboxPhoto.caption}</p>
             </div>
