@@ -142,7 +142,6 @@ export default function Leadership() {
           <div className="executives-header">
             <span className="neo-badge badge-exec">
               <Shield size={13} strokeWidth={2.5} />
-
               <span>
                 Co-Founders &amp; Executive Members
               </span>
@@ -230,22 +229,23 @@ export default function Leadership() {
             {coreTeam.map((member) => (
               <div
                 key={member.name}
-                className="neo-card exec-mini-card core-team-card"
+                className="neo-card core-team-card"
               >
-                <div className="exec-photo-wrap">
+                <div className="core-team-photo-wrap">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="exec-photo core-team-photo"
+                    className="core-team-photo"
                     loading="lazy"
                     onError={(e) => {
-                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.alt =
+                        `${member.name} photo unavailable`;
                     }}
                   />
                 </div>
 
-                <div className="exec-card-body">
-                  <h4 className="exec-name">
+                <div className="core-team-card-body">
+                  <h4 className="core-team-name">
                     {member.name}
                   </h4>
                 </div>
