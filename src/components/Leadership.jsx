@@ -82,6 +82,7 @@ export default function Leadership() {
                       src={f.image}
                       alt={f.name}
                       className="faculty-photo"
+                      loading="lazy"
                       onError={(e) => {
                         if (
                           f.fallbackImage &&
@@ -136,7 +137,7 @@ export default function Leadership() {
           </div>
         </div>
 
-        {/* 2. Co-Founders & Executive Members */}
+        {/* 2. Executive Members */}
         <div className="executives-container">
           <div className="executives-header">
             <span className="neo-badge badge-exec">
@@ -212,8 +213,8 @@ export default function Leadership() {
           </div>
         </div>
 
-        {/* 3. Core Team — After Executive Members */}
-        <div className="leadership-subgroup">
+        {/* 3. Core Team */}
+        <div className="leadership-subgroup core-team-section">
           <div className="subgroup-header">
             <span className="neo-badge badge-faculty">
               <Users size={14} strokeWidth={2.5} />
@@ -225,17 +226,17 @@ export default function Leadership() {
             </span>
           </div>
 
-          <div className="executives-grid">
+          <div className="core-team-grid">
             {coreTeam.map((member) => (
               <div
                 key={member.name}
-                className="neo-card exec-mini-card"
+                className="neo-card exec-mini-card core-team-card"
               >
                 <div className="exec-photo-wrap">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="exec-photo"
+                    className="exec-photo core-team-photo"
                     loading="lazy"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
