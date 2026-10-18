@@ -128,7 +128,7 @@ export const FOCUS_AREAS = [
 export const NOTICES_AND_EVENTS = [
   {
     id: "event-upcoming-opensource",
-    type: "upcoming",
+    type: "Coming Soon",
     category: "Flagship Campus Initiative",
     title: "Open Source Day (Collab: WikiClub Tech & GDG Prayagraj)",
     date: "Upcoming Campus Event",
