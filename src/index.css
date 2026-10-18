@@ -3362,3 +3362,17 @@ img {
     text-align: left;
   }
 }
+/* open source-day banner */
+
+.open-source-day-banner {
+  background-image:
+    linear-gradient(
+      rgba(10, 15, 30, 0.45),
+      rgba(10, 15, 30, 0.75)
+    ),
+    url('/assets/events/Poster.jpeg');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
