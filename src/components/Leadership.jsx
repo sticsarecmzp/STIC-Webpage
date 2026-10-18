@@ -12,7 +12,6 @@ import { LEADERSHIP } from '../data/communityData';
 export default function Leadership() {
   const { faculty, executives } = LEADERSHIP;
 
-  // STIC Core Team
   const coreTeam = [
     {
       name: 'Harshita Mishra',
@@ -39,7 +38,7 @@ export default function Leadership() {
     >
       <div className="container">
 
-        {/* Main Section Header */}
+        {/* Main Header */}
         <div className="section-header">
           <span className="section-eyebrow">
             People Behind STIC
@@ -55,9 +54,8 @@ export default function Leadership() {
           </p>
         </div>
 
-        {/* 1. Faculty Mentorship Row */}
+        {/* 1. Faculty Mentors */}
         <div className="leadership-subgroup">
-
           <div className="subgroup-header">
             <span className="neo-badge badge-faculty">
               <GraduationCap size={14} strokeWidth={2.5} />
@@ -138,51 +136,12 @@ export default function Leadership() {
           </div>
         </div>
 
-        {/* 2. STIC Core Team */}
-        <div className="leadership-subgroup">
-
-          <div className="subgroup-header">
-            <span className="neo-badge badge-faculty">
-              <Users size={14} strokeWidth={2.5} />
-              <span>Core Team</span>
-            </span>
-
-            <span className="subgroup-count">
-              The People Behind STIC
-            </span>
-          </div>
-
-          <div className="executives-grid">
-            {coreTeam.map((member) => (
-              <div
-                key={member.name}
-                className="neo-card exec-mini-card"
-              >
-                <div className="exec-photo-wrap">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="exec-photo"
-                    loading="lazy"
-                  />
-                </div>
-
-                <div className="exec-card-body">
-                  <h4 className="exec-name">
-                    {member.name}
-                  </h4>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* 3. Co-Founders & Executive Members */}
+        {/* 2. Co-Founders & Executive Members */}
         <div className="executives-container">
-
           <div className="executives-header">
             <span className="neo-badge badge-exec">
               <Shield size={13} strokeWidth={2.5} />
+
               <span>
                 Co-Founders &amp; Executive Members
               </span>
@@ -247,6 +206,47 @@ export default function Leadership() {
                   <div className="exec-focus-badge">
                     <span>{exec.focus}</span>
                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 3. Core Team — After Executive Members */}
+        <div className="leadership-subgroup">
+          <div className="subgroup-header">
+            <span className="neo-badge badge-faculty">
+              <Users size={14} strokeWidth={2.5} />
+              <span>Core Team</span>
+            </span>
+
+            <span className="subgroup-count">
+              The People Behind STIC
+            </span>
+          </div>
+
+          <div className="executives-grid">
+            {coreTeam.map((member) => (
+              <div
+                key={member.name}
+                className="neo-card exec-mini-card"
+              >
+                <div className="exec-photo-wrap">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="exec-photo"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                </div>
+
+                <div className="exec-card-body">
+                  <h4 className="exec-name">
+                    {member.name}
+                  </h4>
                 </div>
               </div>
             ))}
