@@ -3370,7 +3370,7 @@ img {
       rgba(10, 15, 30, 0.45),
       rgba(10, 15, 30, 0.75)
     ),
-    url('/assets/events/Poster.jpeg');
+    url('/assets/Poster.jpeg');
 
   background-size: cover;
   background-position: center;
