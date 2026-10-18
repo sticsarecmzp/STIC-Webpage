@@ -193,10 +193,10 @@ export default function NoticeBoard() {
 
                       <div className="banner-highlight-body">
                         <div className="banner-date-stamp">
-                          <span className="stamp-month">FEB</span>
-                          <span className="stamp-day">2026</span>
-                          <span className="stamp-sub">SAREC MIRZAPUR</span>
-                        </div>
+                       <span className="stamp-month">COMING</span>
+                       <span className="stamp-day">SOON</span>
+                      <span className="stamp-sub">SAREC MIRZAPUR</span>
+                      </div>
 
                         <div className="banner-topics-list">
                           <span className="banner-topic-chip">Git Workflows</span>
