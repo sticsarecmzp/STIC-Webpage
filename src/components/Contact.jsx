@@ -29,7 +29,9 @@ I would like to know more about STIC.
 
 Thank you.`;
 
-  const emailLink = `mailto:${email}?subject=${encodeURIComponent(
+  const emailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+    email
+  )}&su=${encodeURIComponent(
     subject
   )}&body=${encodeURIComponent(message)}`;
 
@@ -128,6 +130,8 @@ Thank you.`;
                   {/* Send Message Button */}
                   <a
                     href={emailLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn btn-secondary btn-sm"
                   >
                     <Mail size={14} />
