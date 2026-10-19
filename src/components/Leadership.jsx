@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Award,
@@ -12,6 +11,13 @@ import { LEADERSHIP } from '../data/communityData';
 
 export default function Leadership() {
   const { faculty, executives } = LEADERSHIP;
+
+  // Faculty image paths — exact GitHub filenames
+  const facultyImages = {
+    'Dr. Amit Kumar Tiwari': '/assets/faculty/Amit.jpeg',
+    'Dr. Prince Rajpoot': '/assets/faculty/Prince.jpeg',
+    'Dr. Abhinav Gupta': '/assets/faculty/Abhinay.jpeg',
+  };
 
   // Core Team Members
   const coreTeam = [
@@ -76,6 +82,9 @@ export default function Leadership() {
               const isCoordinator =
                 f.role === 'Faculty Coordinator';
 
+              const imagePath =
+                facultyImages[f.name] || f.image;
+
               return (
                 <div
                   key={f.id}
@@ -83,14 +92,18 @@ export default function Leadership() {
                 >
                   <div className="faculty-photo-wrap">
                     <img
-                      src={f.image}
+                      src={imagePath}
                       alt={f.name}
                       className="faculty-photo"
                       loading="lazy"
                       onError={(e) => {
                         if (
                           f.fallbackImage &&
-                          e.currentTarget.src !== f.fallbackImage
+                          e.currentTarget.src !==
+                            new URL(
+                              f.fallbackImage,
+                              window.location.origin
+                            ).href
                         ) {
                           e.currentTarget.src = f.fallbackImage;
                         }
@@ -146,9 +159,7 @@ export default function Leadership() {
           <div className="executives-header">
             <span className="neo-badge badge-exec">
               <Shield size={13} strokeWidth={2.5} />
-              <span>
-                Student Leads &amp; Organizers
-              </span>
+              <span>Student Leads &amp; Organizers</span>
             </span>
 
             <span className="exec-count-text">
