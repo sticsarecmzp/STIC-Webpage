@@ -27,10 +27,12 @@ export default function FocusAreas() {
             const accentClass = `domain-${area.accent || 'cyan'}`;
             return (
               <div key={area.id} className={`focus-card ${accentClass}`}>
-                <div className={`focus-icon-box ${accentClass}-icon`}>
-                  <IconComponent size={22} strokeWidth={1.75} />
+                <div className="focus-card-header">
+                  <div className={`focus-icon-box ${accentClass}-icon`}>
+                    <IconComponent size={18} strokeWidth={2} />
+                  </div>
+                  <h3 className="focus-card-title">{area.title}</h3>
                 </div>
-                <h3 className="focus-card-title">{area.title}</h3>
                 <p className="focus-card-desc">{area.description}</p>
                 <div className="focus-tags-list">
                   {area.tags.map((tag, idx) => (

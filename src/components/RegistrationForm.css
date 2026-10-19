@@ -86,13 +86,13 @@
 }
 
 [data-theme='light'] .registration-form {
-  background: rgba(255, 255, 255, 0.96);
+  background: #FFFFFF;
   border-color: #CBD5E1;
   box-shadow: 0 20px 48px rgba(15, 23, 42, 0.09), 4px 4px 0px #0F172A;
 }
 
 [data-theme='dark'] .registration-form {
-  background: rgba(17, 24, 39, 0.94);
+  background: #111827;
   border-color: rgba(245, 158, 11, 0.35);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 4px 4px 0px rgba(245, 158, 11, 0.25);
 }

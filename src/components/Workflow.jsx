@@ -55,18 +55,18 @@ export default function Workflow() {
               href={COMMUNITY_INFO.whatsappGroup}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary"
+              className="btn btn-primary btn-sm"
             >
               <span>Join WhatsApp Group</span>
-              <ExternalLink size={14} strokeWidth={2} />
+              <ExternalLink size={13} strokeWidth={2} />
             </a>
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-secondary btn-sm"
               onClick={() => scrollToSection('domains')}
             >
               <span>Explore Learning Tracks</span>
-              <ArrowRight size={14} strokeWidth={2} />
+              <ArrowRight size={13} strokeWidth={2} />
             </button>
           </div>
         </div>

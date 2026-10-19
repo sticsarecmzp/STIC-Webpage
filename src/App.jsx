@@ -5,7 +5,6 @@ import About from './components/About';
 import Workflow from './components/Workflow';
 import FocusAreas from './components/FocusAreas';
 import NoticeBoard from './components/NoticeBoard';
-import Departments from './components/Departments';
 import Leadership from './components/Leadership';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -106,7 +105,6 @@ const is404 =
     <Workflow />
     <FocusAreas />
     <NoticeBoard />
-    <Departments />
     <Leadership />
     <Contact />
   </>

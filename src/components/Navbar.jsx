@@ -141,9 +141,6 @@ export default function Navbar({ theme, onToggleTheme, onHome }) {
               <a href="#leadership" className="mobile-nav-link" onClick={closeMenu}>
                 Team &amp; Mentors
               </a>
-              <a href="#departments" className="mobile-nav-link" onClick={closeMenu}>
-                Departments
-              </a>
               <a href="#contact" className="mobile-nav-link" onClick={closeMenu}>
                 Contact &amp; Connect
               </a>

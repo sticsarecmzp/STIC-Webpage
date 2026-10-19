@@ -44,7 +44,7 @@ export default function Footer() {
               <li><a href="#top">Home</a></li>
               <li><a href="#about">About STIC</a></li>
               <li><a href="#domains">Learning Domains</a></li>
-              <li><a href="#departments">Departments</a></li>
+              <li><a href="#notices">Events &amp; Updates</a></li>
               <li><a href="#contact">Contact &amp; Connect</a></li>
             </ul>
           </div>
