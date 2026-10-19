@@ -32,7 +32,7 @@ export const COMMUNITY_WORKFLOW = [
     title: "Pick What You Want to Learn",
     subtitle: "Open to 1st to 4th Year",
     description:
-      "Choose what interests you—Web Development, DSA, Machine Learning, or Systems. There are no prerequisites. Everyone starts somewhere, and we help you get set up from day one.",
+      "Choose what interests you—Web Development, DSA, Mobile Apps, or Systems. There are no prerequisites. Everyone starts somewhere, and we help you get set up from day one.",
     accent: "cyan"
   },
   {
@@ -97,12 +97,12 @@ export const FOCUS_AREAS = [
     tags: ["React", "JavaScript", "Node.js", "Next.js", "APIs"]
   },
   {
-    id: "ai-ds",
-    title: "Machine Learning & Data",
+    id: "app-dev",
+    title: "Mobile & App Development",
     accent: "amber",
     description:
-      "Exploring Python, data analysis, neural networks, and building practical machine learning models.",
-    tags: ["Python", "NumPy", "Pandas", "Scikit-Learn", "Machine Learning"]
+      "Building responsive mobile applications, cross-platform apps, and modern interfaces using Flutter and React Native.",
+    tags: ["Flutter", "React Native", "Dart", "Android", "Mobile UI"]
   },
   {
     id: "cp-dsa",
@@ -154,10 +154,10 @@ export const NOTICES_AND_EVENTS = [
     ]
   },
   {
-    id: "event-past-buildwithai",
+    id: "event-past-webmasterclass",
     type: "past",
-    category: "AI Masterclass",
-    title: "Build With AI: Mirzapur Edition (Collab: GDG Prayagraj & TFUG)",
+    category: "Tech Masterclass",
+    title: "Full-Stack & Cloud Architecture (Collab: GDG Prayagraj)",
     date: "April 4, 2026",
     time: "Full Day Hands-on Session",
     venue: "Seminar Hall & Computer Lab, SAREC Mirzapur",
@@ -167,45 +167,45 @@ export const NOTICES_AND_EVENTS = [
     coordinators:
       "Pawan Kumar Yadav, Piyush Kushwaha & STIC Student Team",
     description:
-      "Hands-on AI session hosted at SAREC Mirzapur with GDG Prayagraj and TFUG Prayagraj. Google Developer Expert Nitin Tiwari demonstrated Vision Language Models (VLMs), open models (PaliGemma 2, Gemma 3n), and running interactive models in the browser.",
+      "Hands-on full-stack engineering and cloud deployment workshop hosted at SAREC Mirzapur with GDG Prayagraj. Industry mentors demonstrated modern application design, scalable backend APIs, and collaborative development workflows.",
     recap:
-      "Over 120+ students from across all departments attended, ran live demos on their laptops, and received participation certificates.",
+      "Over 120+ students from across all departments attended, coded practical applications on their laptops, and received participation certificates.",
     photos: [
       {
-        url: "/assets/events/build-with-ai/bwa-01.jpg",
+        url: "/assets/events/orientation/orientation-01.jpg",
         caption:
-          "Google Developer Expert Nitin Tiwari delivering the session on Vision Language Models",
-        alt: "Nitin Tiwari presenting at Build With AI SAREC Mirzapur"
+          "STIC leadership team and coordinators at the campus technical session",
+        alt: "STIC leadership team at SAREC Mirzapur"
       },
       {
-        url: "/assets/events/build-with-ai/bwa-02.jpg",
+        url: "/assets/events/orientation/orientation-02.jpg",
         caption:
-          "GDG Prayagraj and SAREC student coordinators at the event",
-        alt: "Build With AI team at SAREC Mirzapur entrance"
+          "Mentors delivering full-stack and open-source roadmap session",
+        alt: "Full-stack developer roadmap session at SAREC Mirzapur"
       },
       {
-        url: "/assets/events/build-with-ai/bwa-03.jpg",
+        url: "/assets/events/orientation/orientation-03.jpg",
         caption:
           "Students participating in the hands-on coding masterclass",
-        alt: "Students attending Build With AI session"
+        alt: "Students attending coding masterclass session"
       },
       {
-        url: "/assets/events/build-with-ai/bwa-04.jpg",
+        url: "/assets/events/orientation/orientation-04.jpg",
         caption:
-          "Interactive browser AI demo: Fashion Sketch2Runway application",
-        alt: "Live demo of Fashion Sketch2Runway"
+          "Interactive development walkthrough and architecture demonstration",
+        alt: "Interactive developer walkthrough at SAREC Mirzapur"
       },
       {
-        url: "/assets/events/build-with-ai/bwa-05.jpg",
+        url: "/assets/events/orientation/orientation-05.jpg",
         caption:
-          "Certificate presentation acknowledging active student contributors",
+          "Certificate distribution and student contributor recognition",
         alt: "Certificate presentation at SAREC Mirzapur"
       },
       {
-        url: "/assets/events/build-with-ai/bwa-06.jpg",
+        url: "/assets/events/orientation/orientation-06.jpg",
         caption:
-          "Community collaboration discussion between GDG Prayagraj and SAREC team",
-        alt: "GDG Prayagraj x SAREC collaboration meeting"
+          "Community collaboration and future workshop roadmap discussion",
+        alt: "STIC community collaboration meeting"
       }
     ],
     actions: [
@@ -236,7 +236,7 @@ export const NOTICES_AND_EVENTS = [
     speaker:
       "Piyush Kushwaha, Pawan Kumar Yadav & Senior Student Leads",
     description:
-      "Organized to help first-year students start their engineering journey with clear direction. We discussed learning tracks in Open Source, Web Development, DSA, and Machine Learning, and explained how to get started from scratch.",
+      "Organized to help first-year students start their engineering journey with clear direction. We discussed learning tracks in Open Source, Web Development, DSA, and Cloud Systems, and explained how to get started from scratch.",
     recap:
       "Addressed common beginner doubts, showed how to set up dev environments, and mapped out paths to hackathons and placements with senior mentors.",
     photos: [
@@ -255,8 +255,8 @@ export const NOTICES_AND_EVENTS = [
       {
         url: "/assets/events/orientation/orientation-03.jpg",
         caption:
-          "Pawan Kumar Yadav introducing Machine Learning and DSA",
-        alt: "Machine learning roadmap presentation"
+          "Pawan Kumar Yadav introducing Software Systems and DSA",
+        alt: "Software systems roadmap presentation"
       },
       {
         url: "/assets/events/orientation/orientation-04.jpg",
@@ -268,7 +268,7 @@ export const NOTICES_AND_EVENTS = [
     actions: [
       {
         label: "View Post on LinkedIn",
-        url: "https://www.linkedin.com/posts/stic-sarec-mirzapur_webdevelopment-genai-studentdeveloper-activity-7449718872049389570-KEMx",
+        url: "https://www.linkedin.com/posts/stic-sarec-mirzapur_activity-7449718872049389570-KEMx",
         isInternal: false,
         primary: true
       },
@@ -353,7 +353,7 @@ export const LEADERSHIP = {
       name: "Pawan Kumar Yadav",
       role: "Co-Founder & Lead Member",
       affiliation: "B.Tech IT",
-      focus: "Competitive Programming, DSA & Machine Learning",
+      focus: "Competitive Programming, DSA & System Design",
       image: "/assets/team/pawan-kumar-yadav-v2.jpg"
     },
     {
@@ -367,7 +367,7 @@ export const LEADERSHIP = {
       name: "Sidhant Maurya",
       role: "Executive Member",
       affiliation: "B.Tech CSE",
-      focus: "Python, Open-Source & Machine Learning",
+      focus: "Python, Open-Source & Backend Systems",
       image: "/assets/team/sidhant-maurya.jpg"
     },
     {

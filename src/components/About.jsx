@@ -46,7 +46,7 @@ export default function About() {
               </p>
 
               <p className="about-text">
-                We focus on learning by doing—practicing <strong>Data Structures &amp; Algorithms</strong>, building <strong>full-stack web apps</strong>, and exploring <strong>machine learning</strong>. Whether you have never written a line of code or you already love building projects, you will find support and collaborators here.
+                We focus on learning by doing—practicing <strong>Data Structures &amp; Algorithms</strong>, building <strong>full-stack web apps</strong>, and creating <strong>practical open-source projects</strong>. Whether you have never written a line of code or you already love building projects, you will find support and collaborators here.
               </p>
 
               <div className="initiative-highlight-box">
@@ -67,16 +67,16 @@ export default function About() {
                         scrollToSection("notices");
                       }
                     }}
-                    title="View Build With AI event gallery"
+                    title="View STIC community leadership gallery"
                   >
                     <img
-                      src="/assets/events/build-with-ai/bwa-02.jpg"
-                      alt="Build With AI SAREC team and GDG Prayagraj"
+                      src="/assets/events/orientation/orientation-01.jpg"
+                      alt="STIC student leadership team at SAREC Mirzapur"
                       className="initiative-photo-thumb"
                       loading="lazy"
                     />
                     <span className="initiative-photo-caption">
-                      Build With AI &bull; SAREC &amp; GDG Team
+                      STIC &bull; Student Leadership Team
                     </span>
                   </div>
 
@@ -91,16 +91,16 @@ export default function About() {
                         scrollToSection("notices");
                       }
                     }}
-                    title="View Build With AI masterclass"
+                    title="View campus technical roadmap session"
                   >
                     <img
-                      src="/assets/events/build-with-ai/bwa-01.jpg"
-                      alt="GDE Nitin Tiwari delivering Vision Language Models session"
+                      src="/assets/events/orientation/orientation-02.jpg"
+                      alt="Open source and developer roadmap presentation at SAREC Mirzapur"
                       className="initiative-photo-thumb"
                       loading="lazy"
                     />
                     <span className="initiative-photo-caption">
-                      GDE Nitin Tiwari &bull; Vision AI Session
+                      Technical Roadmaps &bull; Open Source
                     </span>
                   </div>
                 </div>

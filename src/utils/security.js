@@ -12,7 +12,7 @@ export const ALLOWED_YEARS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
 
 // Allowed primary technology guilds
 export const ALLOWED_GUILDS = [
-  'AI/ML Syndicate',
+  'Systems & Architecture Guild',
   'Web & Mobile Guild',
   'STIC Coding Guild',
   'Open Source SAREC',

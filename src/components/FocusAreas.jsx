@@ -1,12 +1,12 @@
 import React from 'react';
-import { Code, Terminal, Cpu, Brain, ShieldCheck, Layers } from 'lucide-react';
+import { Code, Terminal, Smartphone, ShieldCheck, Layers } from 'lucide-react';
 import { FOCUS_AREAS } from '../data/communityData';
 
 const ICONS = {
   'software': Code,
-  'ai-ds': Brain,
+  'app-dev': Smartphone,
   'cp-dsa': Terminal,
-  'cyber-devops': ShieldCheck
+  'cyber-cloud': ShieldCheck
 };
 
 export default function FocusAreas() {

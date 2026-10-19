@@ -285,7 +285,7 @@ export default function RegistrationForm() {
                 'Git & GitHub',
                 'Open Source',
                 'Web Development',
-                'AI / ML',
+                'Mobile App Dev',
                 'DSA & Competitive Programming',
                 'SIH & GSoC',
               ].map((interest) => (
