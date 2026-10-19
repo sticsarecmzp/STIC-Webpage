@@ -3075,6 +3075,8 @@ img {
 .site-footer {
   background: var(--bg-surface);
   border-top: 1px solid var(--border-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding-top: 3.5rem;
   padding-bottom: 2.5rem;
 }
@@ -3678,57 +3680,71 @@ img {
   }
 }
 
-/* ===== Online Channels & Links Redesign ===== */
+/* ===== Online Channels & Contact Section (Theme-Aware: Light & Dark) ===== */
 
 .contact-section .channels-card {
   position: relative;
   overflow: hidden;
   padding: 32px;
-  border: 1px solid #f59e0b;
-  border-radius: 18px;
-  background: #111827;
-  box-shadow: 5px 6px 0 rgba(245, 158, 11, 0.28);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition:
     border-color 0.25s ease,
     box-shadow 0.25s ease,
     transform 0.25s ease;
 }
 
+[data-theme='dark'] .contact-section .channels-card {
+  border-color: rgba(245, 158, 11, 0.3);
+  box-shadow: 4px 5px 0 rgba(245, 158, 11, 0.16);
+}
+
 .contact-section .channels-card:hover {
+  border-color: var(--border-card-hover);
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+[data-theme='dark'] .contact-section .channels-card:hover {
   border-color: #fbbf24;
   box-shadow: 6px 8px 0 rgba(245, 158, 11, 0.35);
-  transform: translateY(-2px);
 }
 
 .contact-section .channels-card-title {
   margin: 0 0 14px;
   font-size: 1.5rem;
-  font-weight: 750;
-  color: #f9fafb;
+  font-weight: 800;
+  color: var(--text-primary);
 }
 
 .contact-section .channels-card-desc {
   margin: 0;
-  color: #cbd5e1;
+  color: var(--text-secondary);
   line-height: 1.7;
 }
 
 .contact-section .channels-list {
   display: grid;
-  gap: 16px;
-  margin-top: 28px;
+  gap: 14px;
+  margin-top: 24px;
 }
 
 .contact-section .channel-link-row {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
   min-width: 0;
-  padding: 18px 20px;
-  border: 1px solid transparent;
-  border-radius: 11px;
-  background: #1f2937;
+  padding: 14px 18px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-elevated);
   text-decoration: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition:
     background 0.25s ease,
     border-color 0.25s ease,
@@ -3737,10 +3753,10 @@ img {
 }
 
 .contact-section .channel-link-row:hover {
-  background: #172235;
-  border-color: #f59e0b;
+  background: var(--bg-surface);
+  border-color: var(--primary-cta);
   transform: translateX(4px);
-  box-shadow: 0 5px 18px rgba(245, 158, 11, 0.08);
+  box-shadow: var(--btn-shadow);
 }
 
 .contact-section .channel-icon-pill {
@@ -3748,12 +3764,12 @@ img {
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgba(245, 158, 11, 0.22);
-  border-radius: 10px;
-  background: #111827;
-  color: #f59e0b;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xs);
+  background: var(--bg-surface);
+  color: var(--primary-cta);
   transition:
     color 0.25s ease,
     background 0.25s ease,
@@ -3761,8 +3777,8 @@ img {
 }
 
 .contact-section .channel-link-row:hover .channel-icon-pill {
-  background: #f59e0b;
-  color: #111827;
+  background: var(--primary-cta);
+  color: var(--primary-cta-text);
   transform: scale(1.06);
 }
 
@@ -3770,32 +3786,33 @@ img {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   min-width: 0;
 }
 
 .contact-section .channel-name {
-  color: #f9fafb;
-  font-size: 1rem;
+  color: var(--text-primary);
+  font-size: 0.98rem;
   font-weight: 700;
 }
 
 .contact-section .channel-handle {
-  color: #9ca3af;
-  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-family: var(--font-mono);
   overflow-wrap: anywhere;
 }
 
 .contact-section .channel-arrow {
   flex-shrink: 0;
-  color: #9ca3af;
+  color: var(--text-tertiary);
   transition:
     color 0.25s ease,
     transform 0.25s ease;
 }
 
 .contact-section .channel-link-row:hover .channel-arrow {
-  color: #f59e0b;
+  color: var(--primary-cta);
   transform: translate(2px, -2px);
 }
 
@@ -3806,17 +3823,17 @@ img {
 
   .contact-section .channels-list {
     gap: 12px;
-    margin-top: 22px;
+    margin-top: 20px;
   }
 
   .contact-section .channel-link-row {
     gap: 12px;
-    padding: 14px 12px;
+    padding: 12px 14px;
   }
 
   .contact-section .channel-icon-pill {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
   }
 
   .contact-section .channel-name {
@@ -3837,179 +3854,97 @@ img {
   }
 }
 
+/* Contact Cards Theme Styling */
+.contact-section .primary-contact-card {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 32px;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
 
-/* Make both Contact cards match the STIC dark theme */
-.contact-section .primary-contact-card,
-.contact-section .channels-card {
-  background: #111827;
-  color: #f9fafb;
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  border-radius: 18px;
+[data-theme='dark'] .contact-section .primary-contact-card {
+  border-color: rgba(245, 158, 11, 0.3);
   box-shadow: 4px 5px 0 rgba(245, 158, 11, 0.16);
+}
+
+.contact-section .primary-contact-card:hover {
+  border-color: var(--border-card-hover);
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+[data-theme='dark'] .contact-section .primary-contact-card:hover {
+  border-color: #fbbf24;
+  box-shadow: 6px 8px 0 rgba(245, 158, 11, 0.35);
 }
 
 /* Contact labels and details */
 .contact-section .contact-label {
-  color: #f59e0b;
+  display: block;
+  font-size: var(--step--2);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  color: var(--primary-cta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
 }
 
-.contact-section .contact-venue-text,
+.contact-section .contact-venue-text {
+  color: var(--text-secondary);
+  font-size: var(--step--1);
+  line-height: 1.55;
+}
+
 .contact-section .contact-venue-text strong {
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
 .contact-section .contact-value-link {
-  color: #f9fafb;
+  font-size: var(--step-0);
+  font-weight: 800;
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--primary-cta);
+  text-decoration-thickness: 2px;
+  transition: color var(--transition-fast);
+}
+
+.contact-section .contact-value-link:hover {
+  color: var(--primary-cta);
 }
 
 /* Contact icons */
 .contact-section .contact-icon-box {
-  background: #1f2937;
-  color: #f59e0b;
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-surface-elevated);
+  color: var(--primary-cta);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xs);
+  flex-shrink: 0;
 }
 
 /* Divider */
 .contact-section .contact-divider {
-  border-color: rgba(148, 163, 184, 0.2);
-}
-
-/* Online channel cards */
-.contact-section .channel-link-row {
-  background: #1f2937;
-  border: 1px solid rgba(148, 163, 184, 0.1);
-}
-
-.contact-section .channel-icon-pill {
-  background: #111827;
-  color: #f59e0b;
-  border: 1px solid rgba(245, 158, 11, 0.25);
-}
-
-/* Hover effects */
-.contact-section .primary-contact-card:hover,
-.contact-section .channels-card:hover {
-  border-color: #f59e0b;
-  box-shadow: 5px 7px 0 rgba(245, 158, 11, 0.22);
-}
-
-.contact-section .channel-link-row:hover {
-  border-color: #f59e0b;
-  background: #172235;
-}
-
-.contact-section .channel-link-row:hover .channel-icon-pill {
-  background: #f59e0b;
-  color: #111827;
-}
-
-/* Keep text readable */
-.contact-section .channels-card-title,
-.contact-section .channel-name {
-  color: #f9fafb;
-}
-
-.contact-section .channels-card-desc,
-.contact-section .channel-handle {
-  color: #cbd5e1;
+  height: 1px;
+  background: var(--border-card);
+  margin: 1.75rem 0;
 }
 
 
-/* Fix footer visibility */
-footer,
-.site-footer,
-.footer {
-  opacity: 1 !important;
-  filter: none !important;
-  visibility: visible !important;
-  color: inherit;
-}
 
-footer *,
-.site-footer *,
-.footer * {
-  filter: none;
-}
-
-/* Keep footer content readable */
-footer a,
-.site-footer a,
-.footer a {
-  opacity: 1;
-  visibility: visible;
-}
-
-
-/* ===== FIX: Footer Visibility and Contrast ===== */
-
-footer,
-.footer,
-.site-footer {
-  position: relative;
-  background: #0b1220 !important;
-  background-image: none !important;
-  color: #e5e7eb !important;
-  opacity: 1 !important;
-  filter: none !important;
-  visibility: visible !important;
-  isolation: isolate;
-}
-
-/* Footer headings and text */
-footer h1,
-footer h2,
-footer h3,
-footer h4,
-footer p,
-footer span,
-footer li,
-.footer h1,
-.footer h2,
-.footer h3,
-.footer p,
-.footer span,
-.site-footer h1,
-.site-footer h2,
-.site-footer h3,
-.site-footer p,
-.site-footer span {
-  color: #e5e7eb !important;
-  opacity: 1 !important;
-  filter: none !important;
-}
-
-/* Footer links */
-footer a,
-.footer a,
-.site-footer a {
-  color: #cbd5e1 !important;
-  opacity: 1 !important;
-  text-decoration-color: transparent;
-  transition: color 0.2s ease;
-}
-
-footer a:hover,
-.footer a:hover,
-.site-footer a:hover {
-  color: #f59e0b !important;
-}
-
-/* Footer icons */
-footer svg,
-.footer svg,
-.site-footer svg {
-  color: #f59e0b !important;
-  opacity: 1 !important;
-}
-
-/* Footer copyright */
-footer small,
-.footer small,
-.site-footer small {
-  color: #9ca3af !important;
-  opacity: 1 !important;
-}
 
 
 
