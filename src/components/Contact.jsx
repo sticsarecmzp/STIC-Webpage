@@ -6,6 +6,22 @@ import { GithubIcon, InstagramIcon, LinkedinIcon, WhatsAppIcon } from './Icons';
 export default function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
+  const email = COMMUNITY_INFO.officialEmail;
+
+  const subject = 'STIC Website Inquiry';
+
+  const message = `Hello STIC Team,
+
+I would like to know more about STIC.
+
+Thank you.`;
+
+  const emailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+    email
+  )}&su=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(message)}`;
+
   const handleCopyEmail = async () => {
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -38,6 +54,7 @@ export default function Contact() {
           </p>
         </div>
 
+        {/* Contact Cards */}
         <div className="contact-grid">
           {/* Email & Venue Card */}
           <div className="contact-card primary-contact-card">
@@ -48,10 +65,10 @@ export default function Contact() {
               <div className="contact-item-content">
                 <span className="contact-label">Email Us</span>
                 <a
-                  href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+                  href={`mailto:${email}`}
                   className="contact-value-link"
                 >
-                  {COMMUNITY_INFO.officialEmail}
+                  {email}
                 </a>
                 <div className="contact-btn-row">
                   <a
@@ -63,7 +80,9 @@ export default function Contact() {
                   <button
                     type="button"
                     className="btn btn-ghost btn-sm"
+                    className="btn btn-ghost btn-sm"
                     onClick={handleCopyEmail}
+                    title="Copy email to clipboard"
                     title="Copy email to clipboard"
                   >
                     {copiedEmail ? (
