@@ -99,8 +99,7 @@ Thank you.`;
           </h2>
 
           <p className="section-subtitle">
-            Have questions about STIC or wish to collaborate?
-            Reach out to us through our official channels.
+            Reach out for inquiries, collaborations, or community participation.
           </p>
         </div>
 
@@ -193,8 +192,7 @@ Thank you.`;
             </h3>
 
             <p className="channels-card-desc">
-              Follow our latest open-source repositories,
-              campus announcements, and community updates.
+              Official repositories, discussion groups, and updates.
             </p>
 
             <div className="channels-list">

@@ -29,7 +29,7 @@ export default function NotFound({ onNavigateHome }) {
         </h1>
 
         <p style={{ fontSize: 'var(--step-0)', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '2rem' }}>
-          The page or route you are trying to visit does not exist on the STIC platform.
+          The requested route does not exist.
         </p>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', justifyContent: 'center', marginBottom: '2rem' }}>
@@ -39,7 +39,7 @@ export default function NotFound({ onNavigateHome }) {
             onClick={handleHomeClick}
           >
             <Home size={16} strokeWidth={1.5} />
-            <span>Return to Home</span>
+            <span>Back Home</span>
           </button>
         </div>
 

@@ -28,38 +28,38 @@ export const COMMUNITY_STATS = [
 export const COMMUNITY_WORKFLOW = [
   {
     step: "01",
-    phase: "Getting Started",
-    title: "Pick What You Want to Learn",
-    subtitle: "Open to 1st to 4th Year",
+    phase: "Explore",
+    title: "Choose Your Track",
+    subtitle: "Open to 1st–4th Year",
     description:
-      "Choose what interests you—Web Development, DSA, Mobile Apps, or Systems. There are no prerequisites. Everyone starts somewhere, and we help you get set up from day one.",
+      "Web, DSA, Mobile, or Systems. Zero prerequisites — start from scratch with curated roadmaps.",
     accent: "cyan"
   },
   {
     step: "02",
-    phase: "Weekly Meetups",
-    title: "Learn & Code in the Lab",
-    subtitle: "Central Computer Lab, SAREC",
+    phase: "Practice",
+    title: "Hands-on Lab Sessions",
+    subtitle: "Central Computer Lab",
     description:
-      "We meet for hands-on sessions in the lab. Seniors walk through practical problem-solving approaches, help debug your code, and share tips for tech careers.",
+      "Weekly coding meetups, live debugging sessions, and practical mentorship from senior students.",
     accent: "amber"
   },
   {
     step: "03",
-    phase: "Building Together",
-    title: "Work on Real Projects",
+    phase: "Build",
+    title: "Team Projects",
     subtitle: "Cross-Branch Teams",
     description:
-      "Team up with friends across CSE, IT, EL, and EE. Use Git and GitHub to collaborate on useful software, tools for the campus, and open-source contributions.",
+      "Collaborate across CSE, IT, EL, and EE on real campus tools and open-source software via Git & GitHub.",
     accent: "cyan"
   },
   {
     step: "04",
-    phase: "Competitions",
-    title: "Compete in Hackathons",
-    subtitle: "Hackathons & Opportunities",
+    phase: "Compete",
+    title: "Hackathons & Careers",
+    subtitle: "SIH & Placement Prep",
     description:
-      "Form college teams for Smart India Hackathon (SIH) and regional tech contests. Build a strong project portfolio that stands out in internship and placement drives.",
+      "Form college teams for Smart India Hackathon and build a standout technical portfolio.",
     accent: "amber"
   }
 ];
@@ -68,22 +68,22 @@ export const DEPARTMENTS = [
   {
     code: "CSE",
     name: "Computer Science & Engineering",
-    description: "Algorithms, operating systems & computing foundations."
+    description: "Algorithms, systems & computing foundations."
   },
   {
     code: "IT",
     name: "Information Technology",
-    description: "Web engineering, cloud infrastructure & software systems."
+    description: "Web engineering, cloud systems & security."
   },
   {
     code: "EL",
     name: "Electronics Engineering",
-    description: "Embedded circuits, microcontrollers & robotics hardware."
+    description: "Embedded systems, microcontrollers & IoT."
   },
   {
     code: "EE",
     name: "Electrical Engineering",
-    description: "Power electronics, IoT interfacing & automation."
+    description: "Power electronics, automation & control."
   }
 ];
 
@@ -93,15 +93,15 @@ export const FOCUS_AREAS = [
     title: "Web & App Development",
     accent: "cyan",
     description:
-      "Building responsive websites, interactive web applications, and backend APIs using modern tools.",
+      "Modern web applications, responsive user interfaces, and scalable backend APIs.",
     tags: ["React", "JavaScript", "Node.js", "Next.js", "APIs"]
   },
   {
     id: "app-dev",
-    title: "Mobile & App Development",
+    title: "Mobile App Development",
     accent: "amber",
     description:
-      "Building responsive mobile applications, cross-platform apps, and modern interfaces using Flutter and React Native.",
+      "Cross-platform iOS & Android mobile applications built with Flutter and React Native.",
     tags: ["Flutter", "React Native", "Dart", "Android", "Mobile UI"]
   },
   {
@@ -109,16 +109,16 @@ export const FOCUS_AREAS = [
     title: "DSA & Problem Solving",
     accent: "cyan",
     description:
-      "Building strong problem-solving skills in C++, mastering data structures, and practicing for competitive coding and interviews.",
-    tags: ["C++", "Data Structures", "Algorithms", "LeetCode", "Logic Building"]
+      "Data structures, algorithmic thinking, and competitive programming prep in C++.",
+    tags: ["C++", "Data Structures", "Algorithms", "LeetCode", "Logic"]
   },
   {
     id: "cyber-cloud",
     title: "DevOps & Systems",
     accent: "cyan",
     description:
-      "Learning Linux essentials, Git workflows, Docker containers, and practical software hosting.",
-    tags: ["Linux", "Git & GitHub", "Docker", "Web Security", "Hosting"]
+      "Linux fundamentals, Git workflows, Docker containers, and secure cloud deployments.",
+    tags: ["Linux", "Git & GitHub", "Docker", "Web Security", "Cloud"]
   }
 ];
 
@@ -130,14 +130,14 @@ export const NOTICES_AND_EVENTS = [
     title: "Open Source Day (Collab: WikiClub Tech & GDG Prayagraj)",
     poster: "/assets/Poster.jpeg",
     date: "Upcoming Campus Event",
-    time: "Full-Day Hands-on Contribution Sprint",
-    venue: "Central Computer Center / Seminar Hall, SAREC Mirzapur",
+    time: "Contribution Sprint",
+    venue: "Central Computer Center / Seminar Hall",
     badge: "Upcoming",
     accent: "cyan",
     description:
-      "A hands-on sprint organized by STIC with WikiClub Tech and GDG Prayagraj. Mentors will help students set up Git, navigate GitHub repositories, find beginner-friendly issues, and submit their first pull requests to open-source projects.",
+      "A hands-on sprint with WikiClub Tech and GDG Prayagraj. Learn Git, discover beginner-friendly issues, and submit your first open-source pull requests.",
     eligibility:
-      "Open to all B.Tech students (1st, 2nd, 3rd & 4th Year) across all branches.",
+      "Open to all B.Tech students (1st–4th Year) across all departments.",
     actions: [
       {
         label: "Register / Join",
@@ -159,17 +159,17 @@ export const NOTICES_AND_EVENTS = [
     category: "Tech Masterclass",
     title: "Full-Stack & Cloud Architecture (Collab: GDG Prayagraj)",
     date: "April 4, 2026",
-    time: "Full Day Hands-on Session",
-    venue: "Seminar Hall & Computer Lab, SAREC Mirzapur",
+    time: "Hands-on Masterclass",
+    venue: "Seminar Hall & Computer Lab",
     badge: "Past Event",
     accent: "amber",
-    speaker: "Nitin Tiwari Sir (Google Developer Expert / GDG Prayagraj)",
+    speaker: "Nitin Tiwari (GDE / GDG Prayagraj)",
     coordinators:
-      "Pawan Kumar Yadav, Piyush Kushwaha & STIC Student Team",
+      "Pawan Kumar Yadav, Piyush Kushwaha & STIC Team",
     description:
-      "Hands-on full-stack engineering and cloud deployment workshop hosted at SAREC Mirzapur with GDG Prayagraj. Industry mentors demonstrated modern application design, scalable backend APIs, and collaborative development workflows.",
+      "Full-stack web engineering and cloud deployment session covering production architectures, scalable APIs, and Git-driven collaboration.",
     recap:
-      "Over 120+ students from across all departments attended, coded practical applications on their laptops, and received participation certificates.",
+      "120+ students coded live on laptops and received participation certificates.",
     photos: [
       {
         url: "/assets/events/orientation/orientation-01.jpg",
@@ -210,7 +210,7 @@ export const NOTICES_AND_EVENTS = [
     ],
     actions: [
       {
-        label: "View Post on LinkedIn",
+        label: "View on LinkedIn",
         url: "https://www.linkedin.com/posts/stic-sarec-mirzapur_activity-7450132771399729152-N3fo",
         isInternal: false,
         primary: true
@@ -229,16 +229,16 @@ export const NOTICES_AND_EVENTS = [
     category: "Orientation",
     title: "Freshers Orientation & Learning Roadmaps",
     date: "Completed Session",
-    time: "Introductory Roadmap & Q&A",
+    time: "Roadmaps & Q&A",
     venue: "Conference Hall, SAREC Mirzapur",
     badge: "Past Event",
     accent: "cyan",
     speaker:
-      "Piyush Kushwaha, Pawan Kumar Yadav & Senior Student Leads",
+      "Piyush Kushwaha, Pawan Kumar Yadav & Leads",
     description:
-      "Organized to help first-year students start their engineering journey with clear direction. We discussed learning tracks in Open Source, Web Development, DSA, and Cloud Systems, and explained how to get started from scratch.",
+      "Introduction to engineering tracks in Open Source, Web Development, DSA, and Systems with dev setup guidance for beginners.",
     recap:
-      "Addressed common beginner doubts, showed how to set up dev environments, and mapped out paths to hackathons and placements with senior mentors.",
+      "Clarified starter tracks, setup dev environments, and connected freshers with senior mentors.",
     photos: [
       {
         url: "/assets/events/orientation/orientation-01.jpg",
@@ -267,7 +267,7 @@ export const NOTICES_AND_EVENTS = [
     ],
     actions: [
       {
-        label: "View Post on LinkedIn",
+        label: "View on LinkedIn",
         url: "https://www.linkedin.com/posts/stic-sarec-mirzapur_activity-7449718872049389570-KEMx",
         isInternal: false,
         primary: true
@@ -286,22 +286,22 @@ export const ABOUT_POINTS = [
   {
     title: "Hands-on Projects",
     description:
-      "Learn by building tools, websites, and applications rather than just reading theory."
+      "Build real-world web apps and tools rather than just reading theory."
   },
   {
     title: "Senior Mentorship",
     description:
-      "3rd and 4th year students help freshers with DSA, debugging, and roadmap guidance."
+      "Direct guidance on DSA problem solving, debugging, and tech stacks."
   },
   {
     title: "Hackathons & SIH",
     description:
-      "Teaming up across departments to participate in Smart India Hackathon and college competitions."
+      "Form cross-branch campus teams for Smart India Hackathon and contests."
   },
   {
-    title: "Open Source & Workshops",
+    title: "Open Source",
     description:
-      "Hands-on sessions on Git, GitHub, collaborative workflows, and software development."
+      "Learn Git workflows, collaborate publicly, and make merged pull requests."
   }
 ];
 

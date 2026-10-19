@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import './RegistrationForm.css';
 import { saveRegistrationToFirestore } from '../firebase';
+import {
+  validateSafeUrl,
+  sanitizeForSpreadsheet,
+  sanitizeText,
+  checkSubmissionRateLimit,
+  recordSubmissionTimestamp
+} from '../utils/security';
+
+const ALLOWED_BRANCHES = ['CSE', 'IT', 'EL', 'EE', 'Other'];
+const ALLOWED_YEARS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
 
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -12,6 +22,7 @@ export default function RegistrationForm() {
     year: '',
     github: '',
     interests: [],
+    hp_field: '' // Bot honeypot trap
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -47,57 +58,101 @@ export default function RegistrationForm() {
     }));
   };
 
-  // Submit registration to Firebase
+  // Submit registration with cybersecurity defenses
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 1. Bot Honeypot Defense: Silently neutralize automated bot scrapers
+    if (formData.hp_field) {
+      setSubmitted(true);
+      return;
+    }
+
+    // 2. Client-Side Rate Limiter: Prevent automated flood / DoS spamming
+    const rateCheck = checkSubmissionRateLimit('stic_reg_cooldown', 15000);
+    if (!rateCheck.allowed) {
+      setError(`Please wait ${rateCheck.remainingSeconds}s before submitting again.`);
+      return;
+    }
 
     setLoading(true);
     setError('');
 
     try {
-      const registrationData = {
-        fullName: formData.fullName.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone.trim(),
-        college: formData.college.trim(),
-        branch: formData.branch,
-        year: formData.year,
-        github: formData.github.trim(),
-        interests: formData.interests,
-      };
+      const cleanName = sanitizeText(formData.fullName, 100);
+      const cleanEmail = sanitizeText(formData.email, 120).toLowerCase();
+      const cleanPhone = sanitizeText(formData.phone, 10);
+      const cleanCollege = sanitizeText(formData.college, 120);
+      const cleanGithub = sanitizeText(formData.github, 200);
 
-      const registrationId =
-        await saveRegistrationToFirestore(registrationData);
-
-      if (!registrationId) {
-        throw new Error(
-          'Registration could not be saved to Firebase.'
-        );
+      // Validation bounds
+      if (cleanName.length < 2) {
+        throw new Error('Please enter a valid full name.');
       }
 
+      const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,24}$/;
+      if (!emailRegex.test(cleanEmail)) {
+        throw new Error('Please enter a valid email address.');
+      }
+
+      if (!/^[0-9]{10}$/.test(cleanPhone)) {
+        throw new Error('Please enter a valid 10-digit mobile number.');
+      }
+
+      if (!ALLOWED_BRANCHES.includes(formData.branch)) {
+        throw new Error('Please select a valid branch.');
+      }
+
+      if (!ALLOWED_YEARS.includes(formData.year)) {
+        throw new Error('Please select your academic year.');
+      }
+
+      // 3. GitHub Profile URL Safety & SSRF / Executable Sideloading Guard
+      if (cleanGithub) {
+        const urlValidation = validateSafeUrl(cleanGithub);
+        if (!urlValidation.valid) {
+          throw new Error(urlValidation.error || 'Please provide a valid, safe HTTP/HTTPS profile URL.');
+        }
+      }
+
+      // 4. Formula & CSV Injection Prevention (CWE-1236)
+      const registrationData = {
+        fullName: sanitizeForSpreadsheet(cleanName),
+        email: sanitizeForSpreadsheet(cleanEmail),
+        phone: sanitizeForSpreadsheet(cleanPhone),
+        college: sanitizeForSpreadsheet(cleanCollege),
+        branch: formData.branch,
+        year: formData.year,
+        github: cleanGithub ? sanitizeForSpreadsheet(cleanGithub) : 'N/A',
+        interests: formData.interests.map(i => sanitizeForSpreadsheet(sanitizeText(i, 50))),
+      };
+
+      const registrationId = await saveRegistrationToFirestore(registrationData);
+
+      if (!registrationId) {
+        throw new Error('Registration could not be recorded. Please try again.');
+      }
+
+      // Record successful submission timestamp for rate limiting
+      recordSubmissionTimestamp('stic_reg_cooldown');
       setSubmitted(true);
     } catch (err) {
-      console.error('Registration error:', err);
-
-      setError(
-        'Registration failed. Please check your internet connection and try again.'
-      );
+      setError(err?.message || 'Registration failed. Please check details and try again.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Registration success screen
+  // Registration success screen (Minimal & Clean)
   if (submitted) {
     return (
       <section className="registration-page">
         <div className="registration-container">
           <div className="registration-success">
-            <h2>Thank You!</h2>
+            <h2>Registration Received</h2>
 
             <p>
-              Your registration has been submitted successfully.
-              Your details have been saved.
+              Your details have been securely recorded. We look forward to seeing you at our lab sessions.
             </p>
 
             <button
@@ -114,6 +169,7 @@ export default function RegistrationForm() {
                   year: '',
                   github: '',
                   interests: [],
+                  hp_field: ''
                 });
                 setError('');
               }}
@@ -143,12 +199,11 @@ export default function RegistrationForm() {
           </span>
 
           <h1>
-            Event <span>Registration</span>
+            Student <span>Registration</span>
           </h1>
 
           <p>
-            Join our technical community, collaborate with students,
-            and start contributing to open source.
+            Join technical tracks, project sprints, and open-source contributions.
           </p>
         </div>
 
@@ -156,10 +211,22 @@ export default function RegistrationForm() {
           className="registration-form"
           onSubmit={handleSubmit}
         >
-          <h2>Student Information</h2>
+          {/* Honeypot anti-bot trap */}
+          <input
+            type="text"
+            name="hp_field"
+            value={formData.hp_field}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}
+          />
+
+          <h2>Student Details</h2>
 
           <p className="registration-form-note">
-            Fields marked * are required.
+            Required fields marked *
           </p>
 
           <div className="registration-grid">
@@ -326,12 +393,11 @@ export default function RegistrationForm() {
             className="registration-submit"
             disabled={loading || formData.interests.length === 0}
           >
-            {loading ? 'Submitting...' : 'Register Now →'}
+            {loading ? 'Submitting...' : 'Register →'}
           </button>
 
           <p className="registration-privacy">
-            Your details will be used for event registration
-            and related communication.
+            Your details are securely handled for community participation.
           </p>
         </form>
       </div>

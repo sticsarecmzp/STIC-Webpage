@@ -54,7 +54,7 @@ export default function Leadership() {
           </h2>
 
           <p className="section-subtitle">
-            STIC is guided by faculty advisors at SAREC Mirzapur and organized by passionate student developers.
+            Guided by faculty mentors; organized by active student engineers.
           </p>
         </div>
 

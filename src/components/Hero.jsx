@@ -65,7 +65,7 @@ export default function Hero() {
             </p>
 
             <p className="hero-description">
-              A student-run community at SAREC Mirzapur. We code together, build real software, explore modern tools, and help each other learn from scratch.
+              The student developer community at SAREC Mirzapur. Code together, master DSA, and build open-source software.
             </p>
 
             {/* Hero Action Buttons */}
@@ -78,7 +78,7 @@ export default function Hero() {
                 onClick={handleRegister}
               >
                 <UserPlus size={16} strokeWidth={2.5} />
-                <span>Join the Community</span>
+                <span>Join STIC</span>
               </button>
 
               {/* How It Works Button */}
@@ -87,7 +87,7 @@ export default function Hero() {
                 className="btn btn-secondary"
                 onClick={() => scrollToSection('workflow')}
               >
-                <span>How It Works</span>
+                <span>Workflow</span>
                 <ArrowDown size={15} strokeWidth={2.5} />
               </button>
 
@@ -98,7 +98,7 @@ export default function Hero() {
                 onClick={() => scrollToSection('notices')}
               >
                 <Bell size={15} strokeWidth={2} />
-                <span>Events &amp; Updates</span>
+                <span>Events</span>
               </button>
 
               {/* Connect With Us Button */}
@@ -108,7 +108,7 @@ export default function Hero() {
                 onClick={() => scrollToSection('contact')}
               >
                 <Mail size={16} strokeWidth={2} />
-                <span>Get in Touch</span>
+                <span>Contact</span>
               </button>
 
             </div>

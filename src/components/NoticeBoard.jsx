@@ -46,7 +46,7 @@ export default function NoticeBoard() {
           </h2>
 
           <p className="section-subtitle">
-            Stay updated with upcoming workshops, coding sessions, and photos from our events at SAREC Mirzapur.
+            Upcoming workshops, contribution sprints, and campus event gallery.
           </p>
         </div>
 
@@ -304,7 +304,7 @@ export default function NoticeBoard() {
           <div className="footer-note-left">
             <Sparkles size={16} className="note-sparkle-icon" />
             <span>
-              Have an idea for a workshop or want to collaborate with STIC?
+              Want to propose a workshop or collaborate with STIC?
             </span>
           </div>
 
@@ -313,7 +313,7 @@ export default function NoticeBoard() {
             className="btn-link"
             onClick={() => scrollToSection('contact')}
           >
-            <span>Get in Touch With Us</span>
+            <span>Contact Team</span>
             <ArrowRight size={13} strokeWidth={2} />
           </button>
         </div>

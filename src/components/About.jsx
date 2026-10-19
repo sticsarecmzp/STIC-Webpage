@@ -42,16 +42,16 @@ export default function About() {
 
             <div className="about-official-content">
               <p className="about-text">
-                <strong>STIC ({COMMUNITY_INFO.fullName})</strong> is a community run entirely by students at Samrat Ashoka Rajkiya Engineering College, Mirzapur. We started the club to make coding and software development practical, accessible, and fun for everyone on campus.
+                <strong>STIC ({COMMUNITY_INFO.fullName})</strong> is the student developer community of Samrat Ashoka Rajkiya Engineering College, Mirzapur. We bridge the gap between academic theory and production software engineering through collaborative coding, open-source projects, and peer mentorship.
               </p>
 
               <p className="about-text">
-                We focus on learning by doing—practicing <strong>Data Structures &amp; Algorithms</strong>, building <strong>full-stack web apps</strong>, and creating <strong>practical open-source projects</strong>. Whether you have never written a line of code or you already love building projects, you will find support and collaborators here.
+                From first-year fundamentals to advanced systems and competitive programming, members collaborate across CSE, IT, EL, and EE departments in the campus computer labs.
               </p>
 
               <div className="initiative-highlight-box">
                 <p className="initiative-text">
-                  We frequently organize workshops, coding sessions, and hackathon teams. Up next, we are hosting <strong>Open Source Day</strong> in collaboration with <strong>WikiClub Tech</strong> and <strong>GDG Prayagraj</strong> to help students make their first open-source contributions.
+                  Hands-on workshops, contribution sprints, and hackathons. Currently preparing for <strong>Open Source Day</strong> in collaboration with <strong>WikiClub Tech</strong> and <strong>GDG Prayagraj</strong>.
                 </p>
 
                 {/* Real Campus Event Photos Preview */}
@@ -114,7 +114,7 @@ export default function About() {
               </div>
               <div className="meta-row">
                 <span className="meta-name">Target Cohort</span>
-                <span className="meta-val">1st to 4th Year (All Branches)</span>
+                <span className="meta-val">1st–4th Year (All Branches)</span>
               </div>
               <div className="meta-row">
                 <span className="meta-name">Membership</span>
@@ -132,7 +132,7 @@ export default function About() {
                 className="btn-link"
                 onClick={() => scrollToSection("workflow")}
               >
-                <span>See How We Learn &amp; Build Together</span>
+                <span>Explore Workflow</span>
                 <ArrowRight size={14} strokeWidth={2} />
               </button>
             </div>
@@ -145,7 +145,7 @@ export default function About() {
               Code &bull; Build &bull; Innovate
             </h3>
             <p className="about-text">
-              A community where members learn by actually writing code, teaming up across college branches, and building cool things together.
+              Real software development through practical engineering, cross-discipline teamwork, and open-source contributions.
             </p>
 
             <div className="pillars-grid">
@@ -165,9 +165,9 @@ export default function About() {
                 <Terminal size={18} strokeWidth={2} />
               </div>
               <div>
-                <h4 className="callout-title">New to coding?</h4>
+                <h4 className="callout-title">Beginner Friendly</h4>
                 <p className="callout-desc">
-                  You don't need any prior experience. We help everyone install their developer tools, learn Git basics, and connect with senior students who can help whenever you're stuck.
+                  Zero prerequisites required. We help you install dev tools, master Git basics, and connect with senior mentors.
                 </p>
               </div>
             </div>

@@ -17,7 +17,7 @@ export default function Workflow() {
           <span className="section-eyebrow">How It Works</span>
           <h2 className="section-title">How STIC Works</h2>
           <p className="section-subtitle">
-            From writing your first program to building projects and going to hackathons — here is how we learn together.
+            From writing your first line of code to shipping projects and winning hackathons.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default function Workflow() {
 
               <div className="workflow-footer-pill">
                 <CheckCircle size={14} className="workflow-check-icon" />
-                <span>Guided by senior students</span>
+                <span>Senior Guided</span>
               </div>
             </div>
           ))}
@@ -45,9 +45,9 @@ export default function Workflow() {
         {/* Workflow Bottom Summary Banner */}
         <div className="workflow-cta-banner">
           <div className="banner-left">
-            <h4 className="banner-title">No prior experience needed</h4>
+            <h4 className="banner-title">Zero Prerequisites</h4>
             <p className="banner-desc">
-              Everyone starts as a beginner. Bring your laptop, come to the computer lab, and learn alongside your peers.
+              Bring your laptop to the central computer lab and start building alongside peers.
             </p>
           </div>
           <div className="banner-actions">
@@ -57,7 +57,7 @@ export default function Workflow() {
               rel="noopener noreferrer"
               className="btn btn-primary btn-sm"
             >
-              <span>Join WhatsApp Group</span>
+              <span>Join WhatsApp</span>
               <ExternalLink size={13} strokeWidth={2} />
             </a>
             <button
@@ -65,7 +65,7 @@ export default function Workflow() {
               className="btn btn-secondary btn-sm"
               onClick={() => scrollToSection('domains')}
             >
-              <span>Explore Learning Tracks</span>
+              <span>Learning Tracks</span>
               <ArrowRight size={13} strokeWidth={2} />
             </button>
           </div>

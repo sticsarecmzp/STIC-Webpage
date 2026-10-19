@@ -17,7 +17,7 @@ export default function FocusAreas() {
           <span className="section-eyebrow">Learning Domains</span>
           <h2 className="section-title">What We Learn &amp; Build</h2>
           <p className="section-subtitle">
-            Practical tech skills you can learn and practice with us at SAREC Mirzapur.
+            Core tracks designed for real-world engineering proficiency.
           </p>
         </div>
 
