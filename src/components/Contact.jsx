@@ -125,6 +125,7 @@ Thank you.`;
                 </a>
 
                 <div className="contact-btn-row">
+                  {/* Send Message Button */}
                   <a
                     href={emailLink}
                     className="btn btn-secondary btn-sm"
@@ -133,6 +134,7 @@ Thank you.`;
                     <span>Send Message</span>
                   </a>
 
+                  {/* Copy Email Button */}
                   <button
                     type="button"
                     className="btn btn-ghost btn-sm"
