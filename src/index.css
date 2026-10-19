@@ -3824,3 +3824,82 @@ img {
 }
 
 
+/* Make both Contact cards match the STIC dark theme */
+.contact-section .primary-contact-card,
+.contact-section .channels-card {
+  background: #111827;
+  color: #f9fafb;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 18px;
+  box-shadow: 4px 5px 0 rgba(245, 158, 11, 0.16);
+}
+
+/* Contact labels and details */
+.contact-section .contact-label {
+  color: #f59e0b;
+}
+
+.contact-section .contact-venue-text,
+.contact-section .contact-venue-text strong {
+  color: #e5e7eb;
+}
+
+.contact-section .contact-value-link {
+  color: #f9fafb;
+}
+
+/* Contact icons */
+.contact-section .contact-icon-box {
+  background: #1f2937;
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 10px;
+}
+
+/* Divider */
+.contact-section .contact-divider {
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+/* Online channel cards */
+.contact-section .channel-link-row {
+  background: #1f2937;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.contact-section .channel-icon-pill {
+  background: #111827;
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+/* Hover effects */
+.contact-section .primary-contact-card:hover,
+.contact-section .channels-card:hover {
+  border-color: #f59e0b;
+  box-shadow: 5px 7px 0 rgba(245, 158, 11, 0.22);
+}
+
+.contact-section .channel-link-row:hover {
+  border-color: #f59e0b;
+  background: #172235;
+}
+
+.contact-section .channel-link-row:hover .channel-icon-pill {
+  background: #f59e0b;
+  color: #111827;
+}
+
+/* Keep text readable */
+.contact-section .channels-card-title,
+.contact-section .channel-name {
+  color: #f9fafb;
+}
+
+.contact-section .channels-card-desc,
+.contact-section .channel-handle {
+  color: #cbd5e1;
+}
+
+
+
