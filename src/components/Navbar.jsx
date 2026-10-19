@@ -83,9 +83,9 @@ export default function Navbar({ theme, onToggleTheme, onHome }) {
             <nav className="nav-links-desktop" aria-label="Main Navigation">
               <a href="#about" className="nav-anchor">About</a>
               <a href="#workflow" className="nav-anchor">How It Works</a>
-              <a href="#domains" className="nav-anchor">Focus Areas</a>
-              <a href="#notices" className="nav-anchor">Notices &amp; Events</a>
-              <a href="#leadership" className="nav-anchor">Leadership</a>
+              <a href="#domains" className="nav-anchor">Learning Domains</a>
+              <a href="#notices" className="nav-anchor">Events &amp; Updates</a>
+              <a href="#leadership" className="nav-anchor">Team &amp; Mentors</a>
               <a href="#contact" className="nav-anchor">Contact</a>
             </nav>
 
@@ -130,19 +130,19 @@ export default function Navbar({ theme, onToggleTheme, onHome }) {
                 About STIC
               </a>
               <a href="#workflow" className="mobile-nav-link" onClick={closeMenu}>
-                How It Works (Process)
+                How It Works
               </a>
               <a href="#domains" className="mobile-nav-link" onClick={closeMenu}>
-                Technical Focus Areas
+                Learning Domains
               </a>
               <a href="#notices" className="mobile-nav-link" onClick={closeMenu}>
-                Notices, Events &amp; News
+                Events &amp; Updates
               </a>
               <a href="#leadership" className="mobile-nav-link" onClick={closeMenu}>
-                Faculty &amp; Leadership
+                Team &amp; Mentors
               </a>
               <a href="#departments" className="mobile-nav-link" onClick={closeMenu}>
-                Engineering Departments
+                Departments
               </a>
               <a href="#contact" className="mobile-nav-link" onClick={closeMenu}>
                 Contact &amp; Connect

@@ -41,16 +41,15 @@ export default function Leadership() {
         {/* Main Header */}
         <div className="section-header">
           <span className="section-eyebrow">
-            People Behind STIC
+            Team &amp; Mentors
           </span>
 
           <h2 className="section-title">
-            Who is Who: Faculty &amp; Student Leads
+            Faculty Advisors &amp; Student Leads
           </h2>
 
           <p className="section-subtitle">
-            Under academic mentorship from senior college faculty,
-            STIC is 100% student-run, peer-mentored, and developer-executed.
+            STIC is guided by faculty advisors at SAREC Mirzapur and organized by passionate student developers.
           </p>
         </div>
 
@@ -63,7 +62,7 @@ export default function Leadership() {
             </span>
 
             <span className="subgroup-count">
-              Academic Leadership &bull; SAREC Mirzapur
+              Academic Advisory &bull; SAREC Mirzapur
             </span>
           </div>
 
@@ -143,12 +142,12 @@ export default function Leadership() {
             <span className="neo-badge badge-exec">
               <Shield size={13} strokeWidth={2.5} />
               <span>
-                Co-Founders &amp; Executive Members
+                Student Leads &amp; Organizers
               </span>
             </span>
 
             <span className="exec-count-text">
-              {executives.length} Student Leads &bull; Founded 2025 &bull; IT &amp; CSE
+              {executives.length} Student Organizers &bull; SAREC Mirzapur
             </span>
           </div>
 
@@ -221,7 +220,7 @@ export default function Leadership() {
             </span>
 
             <span className="subgroup-count">
-              The People Behind STIC
+              Active Student Contributors
             </span>
           </div>
 

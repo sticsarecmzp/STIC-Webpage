@@ -1,7 +1,7 @@
 export const COMMUNITY_INFO = {
   name: "STIC",
   fullName: "SAREC Mirzapur Technology & Innovation Community",
-  subtitle: "Student Technical Society & Innovation Hub",
+  subtitle: "Student Developer Club & Technical Community",
   college: "Samrat Ashoka Rajkiya Engineering College, Mirzapur",
   collegeShort: "SAREC Mirzapur",
   university: "Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow",
@@ -10,10 +10,8 @@ export const COMMUNITY_INFO = {
   collegeWebsite: "https://www.sarecmzp.ac.in/",
   tagline: "Code, Build, Innovate",
   officialEmail: "sticsarecmzp@gmail.com",
-  venue: "Central Computer Lab & Innovation Workshop, SAREC Mirzapur",
+  venue: "Central Computer Lab, SAREC Mirzapur",
   location: "Mirzapur, Uttar Pradesh - 231001",
-  officialAbout:
-    "STIC (SAREC Mirzapur Technology & Innovation Community) is the official tech-driven student society of Samrat Ashoka Rajkiya Engineering College, Mirzapur. Built by students for students, STIC bridges the gap between academic curriculum and real-world technology. We focus on hands-on growth across core engineering domains: Data Structures & Algorithms (DSA), Full-Stack Development, Machine Learning, and Competitive Programming. From hosting hackathons to community workshops, our mission is to empower developers from ground zero to confident builders. Following our milestone Build with AI initiative, we are actively driving open-source culture on campus, currently organizing Open Source Day in collaboration with WikiClub Tech and GDG Prayagraj.",
   githubOrg: "https://github.com/sticsarecmzp",
   instagram: "https://www.instagram.com/sticsarecmzp",
   linkedin: "https://www.linkedin.com/company/stic-sarec-mirzapur/",
@@ -21,47 +19,47 @@ export const COMMUNITY_INFO = {
 };
 
 export const COMMUNITY_STATS = [
-  { value: "4", label: "Tech Focus Tracks" },
-  { value: "2", label: "Collaborative Projects" },
-  { value: "2025", label: "Community Est." },
-  { value: "100%", label: "Student-Led & Open" }
+  { value: "4", label: "Learning Domains" },
+  { value: "2", label: "Active Projects" },
+  { value: "2025", label: "Started In" },
+  { value: "100%", label: "Free for Students" }
 ];
 
 export const COMMUNITY_WORKFLOW = [
   {
     step: "01",
-    phase: "Onboarding & Track Selection",
-    title: "Join a Technical Track (Guild)",
-    subtitle: "From Zero to Active Builder",
+    phase: "Getting Started",
+    title: "Pick What You Want to Learn",
+    subtitle: "Open to 1st to 4th Year",
     description:
-      "Whether you are a 1st year beginner or an experienced developer, pick one or more technical tracks: Web & Mobile, AI/ML, CP/DSA, or CyberSec & DevOps. No prerequisites required—we start from ground zero.",
+      "Choose what interests you—Web Development, DSA, Machine Learning, or Systems. There are no prerequisites. Everyone starts somewhere, and we help you get set up from day one.",
     accent: "cyan"
   },
   {
     step: "02",
-    phase: "Weekly Sprints & Mentorship",
-    title: "Peer Learning & Lab Coding Sprints",
+    phase: "Weekly Meetups",
+    title: "Learn & Code in the Lab",
     subtitle: "Central Computer Lab, SAREC",
     description:
-      "Participate in weekly hands-on coding sessions, guided algorithmic problem solving, and modern development masterclasses led by senior student leads and guided by faculty mentors.",
+      "We meet for hands-on sessions in the lab. Seniors walk through practical problem-solving approaches, help debug your code, and share tips for tech careers.",
     accent: "amber"
   },
   {
     step: "03",
-    phase: "Team Project Incubation",
-    title: "Build Real Software on GitHub",
-    subtitle: "Interdisciplinary Collaboration",
+    phase: "Building Together",
+    title: "Work on Real Projects",
+    subtitle: "Cross-Branch Teams",
     description:
-      "Team up in squads across CSE, IT, EL, and EE branches. Use production Git workflows to build campus portals, community tools, automation systems, and public open-source software.",
+      "Team up with friends across CSE, IT, EL, and EE. Use Git and GitHub to collaborate on useful software, tools for the campus, and open-source contributions.",
     accent: "cyan"
   },
   {
     step: "04",
-    phase: "Competitions & Careers",
-    title: "Hackathons, SIH & Career Growth",
-    subtitle: "National Stages & Industry Portfolios",
+    phase: "Competitions",
+    title: "Compete in Hackathons",
+    subtitle: "Hackathons & Opportunities",
     description:
-      "Represent SAREC Mirzapur at Smart India Hackathon (SIH) and premier national hackathons. Build an authentic, verified developer portfolio to secure top-tier engineering internships and job opportunities.",
+      "Form college teams for Smart India Hackathon (SIH) and regional tech contests. Build a strong project portfolio that stands out in internship and placement drives.",
     accent: "amber"
   }
 ];
@@ -89,66 +87,66 @@ export const DEPARTMENTS = [
   }
 ];
 
-// Updated: Systems & Embedded domain removed.
 export const FOCUS_AREAS = [
   {
     id: "software",
-    title: "Web & Mobile",
+    title: "Web & App Development",
     accent: "cyan",
     description:
-      "Production-grade web apps, responsive UIs, and modern API microservices.",
-    tags: ["React", "Node.js", "TypeScript", "Next.js", "APIs"]
+      "Building responsive websites, interactive web applications, and backend APIs using modern tools.",
+    tags: ["React", "JavaScript", "Node.js", "Next.js", "APIs"]
   },
   {
     id: "ai-ds",
-    title: "AI / ML & Data",
+    title: "Machine Learning & Data",
     accent: "amber",
     description:
-      "Machine learning, neural networks, predictive modeling, and data pipelines.",
-    tags: ["Python", "TensorFlow", "PyTorch", "Pandas", "Scikit-Learn"]
+      "Exploring Python, data analysis, neural networks, and building practical machine learning models.",
+    tags: ["Python", "NumPy", "Pandas", "Scikit-Learn", "Machine Learning"]
   },
   {
     id: "cp-dsa",
-    title: "CP & Algorithms",
+    title: "DSA & Problem Solving",
     accent: "cyan",
     description:
-      "Data structures, algorithmic problem solving & competitive coding contests.",
-    tags: ["C++", "DSA", "LeetCode", "Codeforces", "System Design"]
+      "Building strong problem-solving skills in C++, mastering data structures, and practicing for competitive coding and interviews.",
+    tags: ["C++", "Data Structures", "Algorithms", "LeetCode", "Logic Building"]
   },
   {
     id: "cyber-cloud",
-    title: "CyberSec & DevOps",
+    title: "DevOps & Systems",
     accent: "cyan",
     description:
-      "Defensive security, Linux systems, Docker containers & CI/CD deployment.",
-    tags: ["Linux", "Docker", "Git/CI", "OWASP", "Cloud Ops"]
+      "Learning Linux essentials, Git workflows, Docker containers, and practical software hosting.",
+    tags: ["Linux", "Git & GitHub", "Docker", "Web Security", "Hosting"]
   }
 ];
 
 export const NOTICES_AND_EVENTS = [
   {
     id: "event-upcoming-opensource",
-    type: "Coming Soon",
-    category: "Flagship Campus Initiative",
+    type: "upcoming",
+    category: "Workshop",
     title: "Open Source Day (Collab: WikiClub Tech & GDG Prayagraj)",
+    poster: "/assets/Poster.jpeg",
     date: "Upcoming Campus Event",
-    time: "Full-Day Collaborative Contribution Sprint",
+    time: "Full-Day Hands-on Contribution Sprint",
     venue: "Central Computer Center / Seminar Hall, SAREC Mirzapur",
-    badge: "UPCOMING EVENT",
+    badge: "Upcoming",
     accent: "cyan",
     description:
-      "Driving open-source culture on campus! Organized by STIC in collaboration with WikiClub Tech and GDG Prayagraj. Building directly on the roadmap introduced in our orientation, students will master Git & GitHub workflows, resolve 'good first issues', and make live pull requests to global open-source repositories under mentor guidance.",
+      "A hands-on sprint organized by STIC with WikiClub Tech and GDG Prayagraj. Mentors will help students set up Git, navigate GitHub repositories, find beginner-friendly issues, and submit their first pull requests to open-source projects.",
     eligibility:
-      "Open to all B.Tech students (1st, 2nd, 3rd & 4th Year) across CSE, IT, EL, and EE branches.",
+      "Open to all B.Tech students (1st, 2nd, 3rd & 4th Year) across all branches.",
     actions: [
       {
-        label: "Register Interest / Join",
-        url: "#contact",
+        label: "Register / Join",
+        url: "/register",
         isInternal: true,
         primary: true
       },
       {
-        label: "Explore STIC GitHub",
+        label: "Visit STIC GitHub",
         url: "https://github.com/sticsarecmzp",
         isInternal: false,
         primary: false
@@ -158,55 +156,55 @@ export const NOTICES_AND_EVENTS = [
   {
     id: "event-past-buildwithai",
     type: "past",
-    category: "Milestone Hands-on Masterclass",
-    title: "Build With AI: Mirzapur Edition (Collab: GDG Prayagraj & TFUG Prayagraj)",
+    category: "AI Masterclass",
+    title: "Build With AI: Mirzapur Edition (Collab: GDG Prayagraj & TFUG)",
     date: "April 4, 2026",
-    time: "9:00 AM – Full Day Hands-on Session",
+    time: "Full Day Hands-on Session",
     venue: "Seminar Hall & Computer Lab, SAREC Mirzapur",
-    badge: "COMPLETED MILESTONE",
+    badge: "Past Event",
     accent: "amber",
     speaker: "Nitin Tiwari Sir (Google Developer Expert / GDG Prayagraj)",
     coordinators:
       "Pawan Kumar Yadav, Piyush Kushwaha & STIC Student Team",
     description:
-      "Milestone practical AI masterclass organized at SAREC Mirzapur in collaboration with GDG Prayagraj and TFUG Prayagraj (ML Prayagraj). Featured in-depth sessions by Google Developer Expert Nitin Tiwari on Vision Language Models (VLMs), Google's open models (PaliGemma 2, Gemma 3n), MatFormer architecture, and live in-browser AI inference.",
+      "Hands-on AI session hosted at SAREC Mirzapur with GDG Prayagraj and TFUG Prayagraj. Google Developer Expert Nitin Tiwari demonstrated Vision Language Models (VLMs), open models (PaliGemma 2, Gemma 3n), and running interactive models in the browser.",
     recap:
-      "Over 120+ student engineers across all engineering departments attended, ran live browser AI models (including Fashion Sketch2Runway demo), and received official certificates of participation.",
+      "Over 120+ students from across all departments attended, ran live demos on their laptops, and received participation certificates.",
     photos: [
       {
         url: "/assets/events/build-with-ai/bwa-01.jpg",
         caption:
-          "Google Developer Expert Nitin Tiwari delivering the session on Vision Language Models & PaliGemma 2",
+          "Google Developer Expert Nitin Tiwari delivering the session on Vision Language Models",
         alt: "Nitin Tiwari presenting at Build With AI SAREC Mirzapur"
       },
       {
         url: "/assets/events/build-with-ai/bwa-02.jpg",
         caption:
-          "GDG Prayagraj x SARECM Build With AI: Mirzapur Edition team & student coordinators",
+          "GDG Prayagraj and SAREC student coordinators at the event",
         alt: "Build With AI team at SAREC Mirzapur entrance"
       },
       {
         url: "/assets/events/build-with-ai/bwa-03.jpg",
         caption:
-          "SAREC student developers participating in the hands-on AI masterclass in the auditorium",
+          "Students participating in the hands-on coding masterclass",
         alt: "Students attending Build With AI session"
       },
       {
         url: "/assets/events/build-with-ai/bwa-04.jpg",
         caption:
-          "Live browser AI inference demonstration: Fashion Sketch2Runway interactive web app",
+          "Interactive browser AI demo: Fashion Sketch2Runway application",
         alt: "Live demo of Fashion Sketch2Runway"
       },
       {
         url: "/assets/events/build-with-ai/bwa-05.jpg",
         caption:
-          "Certificate felicitation acknowledging student organizers and active contributors",
+          "Certificate presentation acknowledging active student contributors",
         alt: "Certificate presentation at SAREC Mirzapur"
       },
       {
         url: "/assets/events/build-with-ai/bwa-06.jpg",
         caption:
-          "Google Developer Groups Prayagraj x SARECM community collaboration meeting in session",
+          "Community collaboration discussion between GDG Prayagraj and SAREC team",
         alt: "GDG Prayagraj x SAREC collaboration meeting"
       }
     ],
@@ -218,7 +216,7 @@ export const NOTICES_AND_EVENTS = [
         primary: true
       },
       {
-        label: "Explore STIC Projects",
+        label: "Explore GitHub",
         url: "https://github.com/sticsarecmzp",
         isInternal: false,
         primary: false
@@ -228,42 +226,42 @@ export const NOTICES_AND_EVENTS = [
   {
     id: "event-past-orientation",
     type: "past",
-    category: "Community Orientation",
-    title: "Freshers Orientation & Technical Guilds Roadmap Kickoff",
-    date: "Completed Campus Session",
-    time: "Comprehensive Technical Roadmap",
+    category: "Orientation",
+    title: "Freshers Orientation & Learning Roadmaps",
+    date: "Completed Session",
+    time: "Introductory Roadmap & Q&A",
     venue: "Conference Hall, SAREC Mirzapur",
-    badge: "ROADMAP UNVEILED",
+    badge: "Past Event",
     accent: "cyan",
     speaker:
-      "Piyush Kushwaha (Overall Coordinator & Tech Lead), Pawan Kumar Yadav & Core Team",
+      "Piyush Kushwaha, Pawan Kumar Yadav & Senior Student Leads",
     description:
-      "Conducted to eliminate early-stage confusion for incoming engineering freshers and provide clear, guided technical trajectories. Unveiled 4 core engineering domains: Open Source Contribution, Web & Mobile Development, Competitive Programming (DSA), and AI/Machine Learning.",
+      "Organized to help first-year students start their engineering journey with clear direction. We discussed learning tracks in Open Source, Web Development, DSA, and Machine Learning, and explained how to get started from scratch.",
     recap:
-      "Addressed common beginner roadblocks, demonstrated how to start from ground zero, and laid out the pathway to hackathons and SIH. Mentored by seniors Shivansh Mishra & Utkarsh Aryan Mishra with guidance from Ankit Kumar Verma sir (GDG Prayagraj).",
+      "Addressed common beginner doubts, showed how to set up dev environments, and mapped out paths to hackathons and placements with senior mentors.",
     photos: [
       {
         url: "/assets/events/orientation/orientation-01.jpg",
         caption:
-          "STIC student leadership team at the Freshers Orientation & Technical Roadmap kickoff",
+          "STIC student leadership team at the Freshers Orientation kickoff",
         alt: "STIC team at orientation"
       },
       {
         url: "/assets/events/orientation/orientation-02.jpg",
         caption:
-          "Student Co-founder Piyush Kushwaha presenting Track 02: Open Source Contribution at the podium",
-        alt: "Open Source Contribution presentation"
+          "Piyush Kushwaha introducing Open Source and Git workflows",
+        alt: "Open Source presentation"
       },
       {
         url: "/assets/events/orientation/orientation-03.jpg",
         caption:
-          "Student Co-founder Pawan Kumar Yadav presenting the AI/ML & Deep Learning roadmap",
-        alt: "Deep learning path presentation"
+          "Pawan Kumar Yadav introducing Machine Learning and DSA",
+        alt: "Machine learning roadmap presentation"
       },
       {
         url: "/assets/events/orientation/orientation-04.jpg",
         caption:
-          "Executive council members and student engineers attending the roadmap orientation",
+          "Students attending the technical roadmap orientation",
         alt: "Students at STIC orientation"
       }
     ],
@@ -275,31 +273,10 @@ export const NOTICES_AND_EVENTS = [
         primary: true
       },
       {
-        label: "Meet Leadership Team",
+        label: "Meet the Team",
         url: "#leadership",
         isInternal: true,
         primary: false
-      }
-    ]
-  },
-  {
-    id: "news-collab-opensource",
-    type: "news",
-    category: "Official Announcement",
-    title: "STIC Driving Open Source Culture with WikiClub Tech & GDG Prayagraj",
-    date: "Official Circular",
-    time: "Campus Announcement",
-    venue: "SAREC Mirzapur",
-    badge: "OFFICIAL NEWS",
-    accent: "amber",
-    description:
-      "Following our milestone Build with AI initiative, STIC is actively fostering real-world developer practices on campus in formal collaboration with WikiClub Tech and GDG Prayagraj to prepare students for Smart India Hackathon (SIH), Google Summer of Code (GSoC), and product engineering roles.",
-    actions: [
-      {
-        label: "Connect with STIC",
-        url: "#contact",
-        isInternal: true,
-        primary: true
       }
     ]
   }
@@ -307,24 +284,24 @@ export const NOTICES_AND_EVENTS = [
 
 export const ABOUT_POINTS = [
   {
-    title: "Applied Software & Systems",
+    title: "Hands-on Projects",
     description:
-      "Building production web platforms, AI pipelines, and embedded IoT systems."
+      "Learn by building tools, websites, and applications rather than just reading theory."
   },
   {
-    title: "Peer-to-Peer Mentorship",
+    title: "Senior Mentorship",
     description:
-      "Senior guidance in algorithms, competitive programming, and developer roadmaps."
+      "3rd and 4th year students help freshers with DSA, debugging, and roadmap guidance."
   },
   {
-    title: "Hackathons & SIH Sprints",
+    title: "Hackathons & SIH",
     description:
-      "Assembling interdisciplinary teams for national hackathons and open challenges."
+      "Teaming up across departments to participate in Smart India Hackathon and college competitions."
   },
   {
-    title: "Open Source & Bootcamps",
+    title: "Open Source & Workshops",
     description:
-      "Modern Git workflows, hands-on workshops, and student tech talks."
+      "Hands-on sessions on Git, GitHub, collaborative workflows, and software development."
   }
 ];
 
@@ -337,7 +314,7 @@ export const LEADERSHIP = {
       designation: "Associate Professor",
       affiliation: "Dept. of Computer Science & Engineering",
       college: "SAREC Mirzapur",
-      focus: "Academic Leadership, Research & Computer Lab Mentorship",
+      focus: "Academic Leadership & Computer Lab Guidance",
       image: "/assets/faculty/amit-kumar-tiwari.webp",
       fallbackImage: "/assets/faculty/amit-kumar-tiwari.jpg"
     },
@@ -348,7 +325,7 @@ export const LEADERSHIP = {
       designation: "Associate Professor",
       affiliation: "Dept. of Electronics Engineering",
       college: "SAREC Mirzapur",
-      focus: "WSN, IoT Hardware, AI/ML & Embedded Systems",
+      focus: "IoT Hardware, Embedded Systems & Student Projects",
       image: "/assets/faculty/prince-rajpoot.webp",
       fallbackImage: "/assets/faculty/prince-rajpoot.jpg"
     },
@@ -359,7 +336,7 @@ export const LEADERSHIP = {
       designation: "Associate Professor",
       affiliation: "Dept. of Electronics Engineering",
       college: "SAREC Mirzapur",
-      focus: "Semiconductor Devices, VLSI & Low-Power Architectures",
+      focus: "Semiconductor Devices & Circuit Design",
       image: "/assets/faculty/abhinav-gupta.webp",
       fallbackImage: "/assets/faculty/abhinav-gupta.jpg"
     }
@@ -367,51 +344,51 @@ export const LEADERSHIP = {
   executives: [
     {
       name: "Piyush Kushwaha",
-      role: "Co-Founder & Executive Member",
+      role: "Co-Founder & Lead Coordinator",
       affiliation: "B.Tech IT",
-      focus: "Overall Coordinator & Tech Lead, Platforms & DevOps",
+      focus: "Web Development, DevOps & Community Coordination",
       image: "/assets/team/piyush-kushwaha.jpg"
     },
     {
       name: "Pawan Kumar Yadav",
-      role: "Co-Founder & Executive Member",
+      role: "Co-Founder & Lead Member",
       affiliation: "B.Tech IT",
-      focus: "Competitive Programming, DSA, Deep Learning & Systems",
+      focus: "Competitive Programming, DSA & Machine Learning",
       image: "/assets/team/pawan-kumar-yadav-v2.jpg"
     },
     {
       name: "Aditi Yadav",
       role: "Executive Member",
       affiliation: "B.Tech IT",
-      focus: "Sponsorship & Institutional Relations, Public Relations",
+      focus: "Event Coordination & Student Outreach",
       image: "/assets/team/aditi-yadav.jpg"
     },
     {
       name: "Sidhant Maurya",
       role: "Executive Member",
       affiliation: "B.Tech CSE",
-      focus: "AI & Data Science, Open-Source Development",
+      focus: "Python, Open-Source & Machine Learning",
       image: "/assets/team/sidhant-maurya.jpg"
     },
     {
       name: "Khushi Umrao",
       role: "Executive Member",
       affiliation: "B.Tech CSE",
-      focus: "Creative UI/UX Design & Event Brand Graphics",
+      focus: "UI/UX Design & Creative Lead",
       image: "/assets/team/khushi-umrao.jpg"
     },
     {
       name: "Ayush Mishra",
       role: "Executive Member",
       affiliation: "B.Tech IT",
-      focus: "AI & Data Science, Promotion & Technical Outreach",
+      focus: "Web Development & Community Outreach",
       image: "/assets/team/ayush-mishra.jpg"
     },
     {
       name: "Shital Kushwaha",
       role: "Executive Member",
       affiliation: "B.Tech CSE",
-      focus: "Visual Design, Media Assets & Community Identity",
+      focus: "Design, Visual Assets & Media",
       image: "/assets/team/shital-kushwaha.jpg"
     }
   ]

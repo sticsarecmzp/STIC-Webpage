@@ -14,11 +14,10 @@ export default function About() {
     <section id="about" className="section-padding about-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">Community Overview</span>
+          <span className="section-eyebrow">Who We Are</span>
           <h2 className="section-title">About STIC</h2>
           <p className="section-subtitle">
-            {COMMUNITY_INFO.fullName} &bull; The flagship student developer
-            ecosystem at SAREC Mirzapur.
+            {COMMUNITY_INFO.fullName} &bull; The student developer club at SAREC Mirzapur.
           </p>
         </div>
 
@@ -34,7 +33,7 @@ export default function About() {
               />
               <div>
                 <span className="card-badge highlight-badge">
-                  Student Technical Society
+                  Student Developer Club
                 </span>
                 <h3 className="college-title">{COMMUNITY_INFO.name}</h3>
                 <p className="college-meta-line">{COMMUNITY_INFO.fullName}</p>
@@ -43,20 +42,16 @@ export default function About() {
 
             <div className="about-official-content">
               <p className="about-text">
-                <strong>STIC ({COMMUNITY_INFO.fullName})</strong> is the official tech-driven student society of Samrat Ashoka Rajkiya Engineering College, Mirzapur. Built by students for students, STIC bridges the gap between academic curriculum and real-world technology.
+                <strong>STIC ({COMMUNITY_INFO.fullName})</strong> is a community run entirely by students at Samrat Ashoka Rajkiya Engineering College, Mirzapur. We started the club to make coding and software development practical, accessible, and fun for everyone on campus.
               </p>
 
               <p className="about-text">
-                We focus on hands-on growth across core engineering domains: <strong>Data Structures &amp; Algorithms (DSA)</strong>, <strong>Full-Stack Development</strong>, <strong>Machine Learning</strong>, and <strong>Competitive Programming</strong>. From hosting hackathons to community workshops, our mission is to empower developers from ground zero to confident builders.
+                We focus on learning by doing—practicing <strong>Data Structures &amp; Algorithms</strong>, building <strong>full-stack web apps</strong>, and exploring <strong>machine learning</strong>. Whether you have never written a line of code or you already love building projects, you will find support and collaborators here.
               </p>
 
               <div className="initiative-highlight-box">
-                <div className="initiative-badge-row">
-                  <span className="initiative-badge">FLAGSHIP COLLABORATION</span>
-                  <span className="initiative-tag">OPEN SOURCE SPRINT</span>
-                </div>
                 <p className="initiative-text">
-                  Following our milestone <strong>Build with AI</strong> initiative, we are actively driving open-source culture on campus, currently organizing <strong>Open Source Day</strong> in collaboration with <strong>WikiClub Tech</strong> and <strong>GDG Prayagraj</strong>.
+                  We frequently organize workshops, coding sessions, and hackathon teams. Up next, we are hosting <strong>Open Source Day</strong> in collaboration with <strong>WikiClub Tech</strong> and <strong>GDG Prayagraj</strong> to help students make their first open-source contributions.
                 </p>
 
                 {/* Real Campus Event Photos Preview */}
@@ -137,7 +132,7 @@ export default function About() {
                 className="btn-link"
                 onClick={() => scrollToSection("workflow")}
               >
-                <span>How Work Happens in STIC (Step-by-Step)</span>
+                <span>See How We Learn &amp; Build Together</span>
                 <ArrowRight size={14} strokeWidth={2} />
               </button>
             </div>
@@ -145,14 +140,12 @@ export default function About() {
 
           {/* Right Column: STIC Community Mission & Pillars */}
           <div className="about-card community-mission-card">
-            <span className="card-badge">Our Culture</span>
+            <span className="card-badge">Community Values</span>
             <h3 className="community-title">
               Code &bull; Build &bull; Innovate
             </h3>
             <p className="about-text">
-              A collaborative, developer-first environment where members learn
-              by shipping real software, collaborating across engineering
-              branches, and competing on national stages.
+              A community where members learn by actually writing code, teaming up across college branches, and building cool things together.
             </p>
 
             <div className="pillars-grid">
@@ -172,11 +165,9 @@ export default function About() {
                 <Terminal size={18} strokeWidth={2} />
               </div>
               <div>
-                <h4 className="callout-title">Complete Beginner?</h4>
+                <h4 className="callout-title">New to coding?</h4>
                 <p className="callout-desc">
-                  No previous coding experience required. STIC starts from
-                  ground zero with Git setup, basic programming, and algorithm
-                  fundamentals. Every newcomer is paired with senior mentors.
+                  You don't need any prior experience. We help everyone install their developer tools, learn Git basics, and connect with senior students who can help whenever you're stuck.
                 </p>
               </div>
             </div>

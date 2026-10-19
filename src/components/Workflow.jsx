@@ -1,13 +1,6 @@
 import React from 'react';
-import { ArrowRight, CheckCircle, Compass, Users, Code2, Rocket } from 'lucide-react';
-import { COMMUNITY_WORKFLOW } from '../data/communityData';
-
-const ICONS_MAP = {
-  Compass,
-  Users,
-  Code2,
-  Rocket
-};
+import { ArrowRight, CheckCircle, ExternalLink } from 'lucide-react';
+import { COMMUNITY_WORKFLOW, COMMUNITY_INFO } from '../data/communityData';
 
 export default function Workflow() {
   const scrollToSection = (id) => {
@@ -21,10 +14,10 @@ export default function Workflow() {
     <section id="workflow" className="section-padding workflow-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">Operating Model &amp; Roadmap</span>
+          <span className="section-eyebrow">How It Works</span>
           <h2 className="section-title">How STIC Works</h2>
           <p className="section-subtitle">
-            From your very first line of code to building production software and winning hackathons — here is our 4-step builder journey.
+            From writing your first program to building projects and going to hackathons — here is how we learn together.
           </p>
         </div>
 
@@ -43,7 +36,7 @@ export default function Workflow() {
 
               <div className="workflow-footer-pill">
                 <CheckCircle size={14} className="workflow-check-icon" />
-                <span>Mentored by senior leads &amp; faculty</span>
+                <span>Guided by senior students</span>
               </div>
             </div>
           ))}
@@ -52,25 +45,27 @@ export default function Workflow() {
         {/* Workflow Bottom Summary Banner */}
         <div className="workflow-cta-banner">
           <div className="banner-left">
-            <h4 className="banner-title">Zero Experience Required to Start</h4>
+            <h4 className="banner-title">No prior experience needed</h4>
             <p className="banner-desc">
-              Every master coder was once a beginner. Bring your laptop and your curiosity to the Central Computer Lab.
+              Everyone starts as a beginner. Bring your laptop, come to the computer lab, and learn alongside your peers.
             </p>
           </div>
           <div className="banner-actions">
-            <button
-              type="button"
+            <a
+              href={COMMUNITY_INFO.whatsappGroup}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-primary"
-              onClick={() => scrollToSection('contact')}
             >
               <span>Join WhatsApp Group</span>
-            </button>
+              <ExternalLink size={14} strokeWidth={2} />
+            </a>
             <button
               type="button"
               className="btn btn-secondary"
               onClick={() => scrollToSection('domains')}
             >
-              <span>Explore 5 Focus Tracks</span>
+              <span>Explore Learning Tracks</span>
               <ArrowRight size={14} strokeWidth={2} />
             </button>
           </div>

@@ -18,6 +18,13 @@ export default function RegistrationForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const handleBackHome = (e) => {
+    if (e) e.preventDefault();
+    window.history.pushState({}, '', '/');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Handle text fields and dropdowns
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -114,7 +121,7 @@ export default function RegistrationForm() {
               Register Another Student
             </button>
 
-            <a href="/" className="registration-back">
+            <a href="/" className="registration-back" onClick={handleBackHome}>
               ← Back to Home
             </a>
           </div>
@@ -126,7 +133,7 @@ export default function RegistrationForm() {
   return (
     <section className="registration-page">
       <div className="registration-container">
-        <a href="/" className="registration-back">
+        <a href="/" className="registration-back" onClick={handleBackHome}>
           ← Back to Home
         </a>
 

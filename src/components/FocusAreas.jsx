@@ -6,8 +6,7 @@ const ICONS = {
   'software': Code,
   'ai-ds': Brain,
   'cp-dsa': Terminal,
-  'cyber-devops': ShieldCheck,
-  'iot-robotics': Cpu
+  'cyber-devops': ShieldCheck
 };
 
 export default function FocusAreas() {
@@ -15,10 +14,10 @@ export default function FocusAreas() {
     <section id="domains" className="section-padding focus-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">Technical Domains</span>
-          <h2 className="section-title">What We Explore &amp; Build</h2>
+          <span className="section-eyebrow">Learning Domains</span>
+          <h2 className="section-title">What We Learn &amp; Build</h2>
           <p className="section-subtitle">
-            Practical engineering tracks at SAREC Mirzapur.
+            Practical tech skills you can learn and practice with us at SAREC Mirzapur.
           </p>
         </div>
 

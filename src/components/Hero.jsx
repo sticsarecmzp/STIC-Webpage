@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, Bell, Mail } from 'lucide-react';
+import { ArrowDown, Bell, Mail, UserPlus } from 'lucide-react';
 import { COMMUNITY_INFO, COMMUNITY_STATS } from '../data/communityData';
 
 export default function Hero() {
@@ -12,7 +12,9 @@ export default function Hero() {
   };
 
   const handleRegister = () => {
-    window.location.href = '/register';
+    window.history.pushState({}, '', '/register');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -28,7 +30,7 @@ export default function Hero() {
             <div className="institution-pill">
               <span className="live-dot" aria-hidden="true" />
               <span>
-                {COMMUNITY_INFO.collegeShort} &bull; Student Technical Society
+                {COMMUNITY_INFO.collegeShort} &bull; Student Developer Club
               </span>
             </div>
 
@@ -47,12 +49,7 @@ export default function Hero() {
             </p>
 
             <p className="hero-description">
-              The official tech-driven student society of Samrat Ashoka
-              Rajkiya Engineering College, Mirzapur. Built by students
-              for students, STIC bridges the gap between academic
-              curriculum and real-world technology across Data Structures
-              &amp; Algorithms (DSA), Full-Stack Development, Machine
-              Learning, and Competitive Programming.
+              A student-run community at SAREC Mirzapur. We code together, build real software, explore modern tools, and help each other learn from scratch.
             </p>
 
             {/* Hero Action Buttons */}
@@ -64,8 +61,8 @@ export default function Hero() {
                 className="btn btn-primary"
                 onClick={handleRegister}
               >
-                <Mail size={16} strokeWidth={2.5} />
-                <span>Register Interest</span>
+                <UserPlus size={16} strokeWidth={2.5} />
+                <span>Join the Community</span>
               </button>
 
               {/* How It Works Button */}
@@ -85,7 +82,7 @@ export default function Hero() {
                 onClick={() => scrollToSection('notices')}
               >
                 <Bell size={15} strokeWidth={2} />
-                <span>Notices &amp; Events</span>
+                <span>Events &amp; Updates</span>
               </button>
 
               {/* Connect With Us Button */}
@@ -95,7 +92,7 @@ export default function Hero() {
                 onClick={() => scrollToSection('contact')}
               >
                 <Mail size={16} strokeWidth={2} />
-                <span>Connect With Us</span>
+                <span>Get in Touch</span>
               </button>
 
             </div>

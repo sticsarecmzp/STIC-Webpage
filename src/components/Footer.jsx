@@ -29,7 +29,7 @@ export default function Footer() {
             <p className="footer-college-text">
               {COMMUNITY_INFO.college}
               <br />
-              <span className="footer-aktu-badge">Official Tech-Driven Student Society</span>
+              <span className="footer-aktu-badge">Student Developer Community</span>
             </p>
 
             <p className="footer-mission-text">
@@ -43,7 +43,7 @@ export default function Footer() {
             <ul className="footer-links-list">
               <li><a href="#top">Home</a></li>
               <li><a href="#about">About STIC</a></li>
-              <li><a href="#domains">Technical Domains</a></li>
+              <li><a href="#domains">Learning Domains</a></li>
               <li><a href="#departments">Departments</a></li>
               <li><a href="#contact">Contact &amp; Connect</a></li>
             </ul>
