@@ -3553,11 +3553,17 @@ img {
   }
 
   .core-team-card .exec-card-body {
-    padding: 12px 6px;
+    padding: 12px 12px;
+    box-sizing: border-box;
   }
 
   .core-team-card .exec-name {
     font-size: 14px;
+   line-height: 1.4;
+   overflow-wrap: anywhere;
+   text-align: center;
+   padding: 0 2px;
+   box-sizing: border-box;
   }
 }
 /* ==========================================
