@@ -3902,4 +3902,30 @@ img {
 }
 
 
+/* Fix footer visibility */
+footer,
+.site-footer,
+.footer {
+  opacity: 1 !important;
+  filter: none !important;
+  visibility: visible !important;
+  color: inherit;
+}
+
+footer *,
+.site-footer *,
+.footer * {
+  filter: none;
+}
+
+/* Keep footer content readable */
+footer a,
+.site-footer a,
+.footer a {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+
 
