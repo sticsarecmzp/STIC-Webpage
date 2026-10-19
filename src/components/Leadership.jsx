@@ -27,12 +27,12 @@ export default function Leadership() {
     },
     {
       name: 'Om Prakash',
-      branch: 'Electrical',
+      branch: 'EL',
       image: '/assets/team/Om%20prakash.jpeg',
     },
     {
       name: 'Divyansh Vandan Srivastava',
-      branch: 'Electronics',
+      branch: 'EC',
       image: '/assets/team/Divyansh%20vandan.jpeg',
     },
   ];
