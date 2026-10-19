@@ -3936,5 +3936,77 @@ footer a,
 }
 
 
+/* ===== FIX: Footer Visibility and Contrast ===== */
+
+footer,
+.footer,
+.site-footer {
+  position: relative;
+  background: #0b1220 !important;
+  background-image: none !important;
+  color: #e5e7eb !important;
+  opacity: 1 !important;
+  filter: none !important;
+  visibility: visible !important;
+  isolation: isolate;
+}
+
+/* Footer headings and text */
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer p,
+footer span,
+footer li,
+.footer h1,
+.footer h2,
+.footer h3,
+.footer p,
+.footer span,
+.site-footer h1,
+.site-footer h2,
+.site-footer h3,
+.site-footer p,
+.site-footer span {
+  color: #e5e7eb !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Footer links */
+footer a,
+.footer a,
+.site-footer a {
+  color: #cbd5e1 !important;
+  opacity: 1 !important;
+  text-decoration-color: transparent;
+  transition: color 0.2s ease;
+}
+
+footer a:hover,
+.footer a:hover,
+.site-footer a:hover {
+  color: #f59e0b !important;
+}
+
+/* Footer icons */
+footer svg,
+.footer svg,
+.site-footer svg {
+  color: #f59e0b !important;
+  opacity: 1 !important;
+}
+
+/* Footer copyright */
+footer small,
+.footer small,
+.site-footer small {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+
+
 
 
