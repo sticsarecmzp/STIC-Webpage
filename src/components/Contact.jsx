@@ -72,7 +72,9 @@ Thank you.`;
                 </a>
                 <div className="contact-btn-row">
                   <a
-                    href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+                    href={emailLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn btn-secondary btn-sm"
                   >
                     <span>Send Message</span>
@@ -80,9 +82,7 @@ Thank you.`;
                   <button
                     type="button"
                     className="btn btn-ghost btn-sm"
-                    className="btn btn-ghost btn-sm"
                     onClick={handleCopyEmail}
-                    title="Copy email to clipboard"
                     title="Copy email to clipboard"
                   >
                     {copiedEmail ? (
