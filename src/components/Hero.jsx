@@ -1,11 +1,27 @@
-import React from 'react';
-import { ArrowDown, Bell, Mail, UserPlus } from 'lucide-react';
-import { COMMUNITY_INFO, COMMUNITY_STATS } from '../data/communityData';
+import React, { useState, useEffect } from 'react';
+import { ArrowDown, Bell, Mail, UserPlus, Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { COMMUNITY_INFO, COMMUNITY_STATS, NOTICES_AND_EVENTS } from '../data/communityData';
 
 export default function Hero() {
+  const upcomingEvents = NOTICES_AND_EVENTS.filter(
+    (n) => n.type === 'upcoming' || Boolean(n.poster)
+  );
+
+  const [currentNoticeIdx, setCurrentNoticeIdx] = useState(0);
+
+  // Auto-cycle through upcoming announcements if more than one exists
+  useEffect(() => {
+    if (upcomingEvents.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentNoticeIdx((prev) => (prev + 1) % upcomingEvents.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [upcomingEvents.length]);
+
+  const activeNotice = upcomingEvents[currentNoticeIdx] || NOTICES_AND_EVENTS[0];
+
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
-
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
@@ -24,7 +40,7 @@ export default function Hero() {
         {/* Hero Section: Two-Column Layout */}
         <div className="hero-grid-2col">
 
-          {/* Left Column */}
+          {/* Left Column: Headline, Description & Actions */}
           <div className="hero-left-content">
 
             <div className="institution-pill">
@@ -98,31 +114,102 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: STIC Emblem */}
+          {/* Right Column: Featured Upcoming Event Announcement & Poster Card */}
           <div className="hero-right-showcase">
-            <div className="neo-card stic-minimal-card">
+            <div className="neo-card hero-event-notice-card">
 
-              <div className="emblem-circle">
+              {/* Live Header Bar */}
+              <div className="hero-notice-header">
+                <div className="hero-notice-live-pill">
+                  <span className="live-dot" aria-hidden="true" />
+                  <span>Upcoming Event</span>
+                </div>
+                <span className="hero-notice-badge">
+                  {activeNotice.category || 'Workshop'}
+                </span>
+              </div>
+
+              {/* Announcement Poster Showcase */}
+              <div
+                className="hero-notice-poster-box"
+                onClick={() => scrollToSection('notices')}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    scrollToSection('notices');
+                  }
+                }}
+                title="Click to view full notice and event details"
+              >
                 <img
-                  src="/assets/logos/stic-logo-light.png"
-                  alt="STIC Official Emblem"
-                  className="emblem-img"
+                  src={activeNotice.poster || '/assets/Poster.jpeg'}
+                  alt={`${activeNotice.title} Official Announcement Poster`}
+                  className="hero-notice-poster-img"
+                  loading="eager"
                 />
+                <div className="hero-notice-poster-hover-tag">
+                  <span>View in Notice Board &rarr;</span>
+                </div>
               </div>
 
-              <div className="emblem-info">
-                <span className="emblem-badge-pill">
-                  {COMMUNITY_INFO.name}
-                </span>
+              {/* Event Content & Details */}
+              <div className="hero-notice-content">
+                <h3
+                  className="hero-notice-title"
+                  onClick={() => scrollToSection('notices')}
+                  title="Click to jump to Notice Board"
+                >
+                  {activeNotice.title}
+                </h3>
 
-                <span className="emblem-tagline">
-                  {COMMUNITY_INFO.fullName}
-                </span>
+                <div className="hero-notice-meta-line">
+                  <div className="hero-notice-meta-item">
+                    <Calendar size={13} strokeWidth={2} />
+                    <span>{activeNotice.date}</span>
+                  </div>
+                  <div className="hero-notice-meta-item">
+                    <MapPin size={13} strokeWidth={2} />
+                    <span>Central Computer Lab</span>
+                  </div>
+                </div>
+
+                <div className="hero-notice-action-row">
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-sm hero-notice-btn"
+                    onClick={handleRegister}
+                  >
+                    <UserPlus size={14} strokeWidth={2.2} />
+                    <span>Register Now</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-sm hero-notice-btn"
+                    onClick={() => scrollToSection('notices')}
+                  >
+                    <span>Full Notice</span>
+                    <ArrowRight size={13} strokeWidth={2.2} />
+                  </button>
+                </div>
               </div>
 
-              <div className="emblem-meta-line">
-                <span>EST. 2025 &bull; SAREC MIRZAPUR</span>
-              </div>
+              {/* Carousel dots if multiple upcoming announcements */}
+              {upcomingEvents.length > 1 && (
+                <div className="hero-notice-carousel-dots">
+                  {upcomingEvents.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className={`hero-notice-dot ${idx === currentNoticeIdx ? 'active' : ''}`}
+                      onClick={() => setCurrentNoticeIdx(idx)}
+                      aria-label={`Show announcement ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
 
             </div>
           </div>

@@ -69,6 +69,21 @@ const is404 =
         Skip to main content
       </a>
 
+      {/* Ambient Video Background */}
+      <div className="site-video-bg-container" aria-hidden="true">
+        <video
+          className="site-video-bg"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/assets/background.mp4" type="video/mp4" />
+          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_171521_25968ba2-b594-4b32-aab7-f6b69398a6fa.mp4" type="video/mp4" />
+        </video>
+        <div className="site-video-bg-overlay" />
+      </div>
+
       {/* Reading Progress Indicator */}
       <ScrollProgressBar />
 

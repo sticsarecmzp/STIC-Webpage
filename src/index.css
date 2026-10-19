@@ -795,10 +795,248 @@ img {
 }
 
 /* Right Column: Clean Minimal STIC Card */
+/* ==========================================================================
+   AMBIENT VIDEO BACKGROUND
+   ========================================================================== */
+.site-video-bg-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.site-video-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.28;
+  filter: saturate(1.15) contrast(1.05);
+}
+
+[data-theme='dark'] .site-video-bg {
+  opacity: 0.38;
+}
+
+[data-theme='light'] .site-video-bg {
+  opacity: 0.18;
+}
+
+.site-video-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--dot-grid-color) 1.25px, transparent 1.25px);
+  background-size: 28px 28px;
+}
+
+[data-theme='dark'] .site-video-bg-overlay {
+  background-color: rgba(10, 15, 30, 0.78);
+  backdrop-filter: blur(1.5px);
+}
+
+[data-theme='light'] .site-video-bg-overlay {
+  background-color: rgba(248, 250, 252, 0.84);
+  backdrop-filter: blur(1.5px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-video-bg {
+    display: none;
+  }
+}
+
+.app-layout {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   HERO UPCOMING EVENT NOTICE CARD
+   ========================================================================== */
 .hero-right-showcase {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
+}
+
+.hero-event-notice-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--card-shadow);
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.hero-event-notice-card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 12px 30px rgba(6, 182, 212, 0.14);
+  transform: translateY(-2px);
+}
+
+.hero-notice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.hero-notice-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: var(--accent-cyan-bg);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--accent-cyan-border);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-notice-badge {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  background: var(--bg-surface-elevated);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-card);
+}
+
+.hero-notice-poster-box {
+  width: 100%;
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-card);
+  background: #000;
+  cursor: pointer;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-notice-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--transition-normal);
+}
+
+.hero-notice-poster-box:hover .hero-notice-poster-img {
+  transform: scale(1.02);
+}
+
+.hero-notice-poster-hover-tag {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all var(--transition-fast);
+}
+
+.hero-notice-poster-box:hover .hero-notice-poster-hover-tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-notice-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.hero-notice-title {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin: 0;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.hero-notice-title:hover {
+  color: var(--accent-cyan);
+}
+
+.hero-notice-meta-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+}
+
+.hero-notice-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.hero-notice-action-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.hero-notice-btn {
+  width: 100%;
+  font-size: 0.78rem;
+  padding: 0.45rem 0.65rem;
+  gap: 0.35rem;
+}
+
+.hero-notice-carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.hero-notice-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border-card);
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.hero-notice-dot.active {
+  width: 16px;
+  border-radius: var(--radius-full);
+  background: var(--accent-cyan);
 }
 
 .stic-minimal-card {
