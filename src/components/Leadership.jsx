@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   Award,
@@ -12,21 +13,26 @@ import { LEADERSHIP } from '../data/communityData';
 export default function Leadership() {
   const { faculty, executives } = LEADERSHIP;
 
+  // Core Team Members
   const coreTeam = [
     {
       name: 'Harshita Mishra',
+      branch: 'CSE',
       image: '/assets/team/Harshita.jpeg',
     },
     {
       name: 'Anjesh',
+      branch: 'IT',
       image: '/assets/team/Anjesh.jpeg',
     },
     {
       name: 'Om Prakash',
+      branch: 'EL',
       image: '/assets/team/Om%20prakash.jpeg',
     },
     {
       name: 'Divyansh Vandan Srivastava',
+      branch: 'EC',
       image: '/assets/team/Divyansh%20vandan.jpeg',
     },
   ];
@@ -37,7 +43,6 @@ export default function Leadership() {
       className="section-padding leadership-section"
     >
       <div className="container">
-
         {/* Main Header */}
         <div className="section-header">
           <span className="section-eyebrow">
@@ -247,12 +252,25 @@ export default function Leadership() {
                   <h4 className="core-team-name">
                     {member.name}
                   </h4>
+
+                  <p className="exec-branch-line">
+                    <span className="exec-branch-name">
+                      B.Tech {member.branch}
+                    </span>
+
+                    <span className="exec-meta-dot">
+                      &bull;
+                    </span>
+
+                    <span className="exec-college-name">
+                      SAREC Mirzapur
+                    </span>
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
