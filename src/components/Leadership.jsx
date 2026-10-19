@@ -16,7 +16,7 @@ export default function Leadership() {
   const facultyImages = {
     'Dr. Amit Kumar Tiwari': '/assets/faculty/Amit.jpeg',
     'Dr. Prince Rajpoot': '/assets/faculty/Prince.jpeg',
-    'Dr. Abhinav Gupta': '/assets/faculty/Abhinay.jpeg',
+    'Dr. Abhinav Gupta': '/assets/faculty/Abhinav.jpeg',
   };
 
   // Core Team Members
