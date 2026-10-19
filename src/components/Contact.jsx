@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {
   Mail,
@@ -18,11 +19,23 @@ import {
 export default function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
+  const email = COMMUNITY_INFO.officialEmail;
+
+  const subject = 'STIC Website Inquiry';
+
+  const message = `Hello STIC Team,
+
+I would like to know more about STIC.
+
+Thank you.`;
+
+  const emailLink = `mailto:${email}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(message)}`;
+
   const handleCopyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(
-        COMMUNITY_INFO.officialEmail
-      );
+      await navigator.clipboard.writeText(email);
 
       setCopiedEmail(true);
 
@@ -31,7 +44,7 @@ export default function Contact() {
       }, 2000);
     } catch (error) {
       console.error('Unable to copy email:', error);
-      window.location.href = `mailto:${COMMUNITY_INFO.officialEmail}`;
+      window.location.href = `mailto:${email}`;
     }
   };
 
@@ -105,17 +118,18 @@ export default function Contact() {
                 </span>
 
                 <a
-                  href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+                  href={`mailto:${email}`}
                   className="contact-value-link"
                 >
-                  {COMMUNITY_INFO.officialEmail}
+                  {email}
                 </a>
 
                 <div className="contact-btn-row">
                   <a
-                    href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+                    href={emailLink}
                     className="btn btn-secondary btn-sm"
                   >
+                    <Mail size={14} />
                     <span>Send Message</span>
                   </a>
 
@@ -147,6 +161,7 @@ export default function Contact() {
 
             <div className="contact-divider" />
 
+            {/* Campus Venue and Address */}
             <div className="contact-item">
               <div className="contact-icon-box">
                 <MapPin size={20} strokeWidth={1.75} />
