@@ -19,11 +19,23 @@ import {
 export default function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
+  const email = COMMUNITY_INFO.officialEmail;
+
+  const subject = 'STIC Website Inquiry';
+
+  const message = `Hello STIC Team,
+
+I would like to know more about STIC.
+
+Thank you.`;
+
+  const emailLink = `mailto:${email}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(message)}`;
+
   const handleCopyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(
-        COMMUNITY_INFO.officialEmail
-      );
+      await navigator.clipboard.writeText(email);
 
       setCopiedEmail(true);
 
@@ -32,18 +44,9 @@ export default function Contact() {
       }, 2000);
     } catch (error) {
       console.error('Unable to copy email:', error);
-      window.location.href =
-        `mailto:${COMMUNITY_INFO.officialEmail}`;
+      window.location.href = `mailto:${email}`;
     }
   };
-
-  const gmailComposeUrl =
-    `https://mail.google.com/mail/?view=cm&fs=1` +
-    `&to=${encodeURIComponent(COMMUNITY_INFO.officialEmail)}` +
-    `&su=${encodeURIComponent('STIC Website Inquiry')}` +
-    `&body=${encodeURIComponent(
-      'Hello STIC Team,\n\nI would like to know more about STIC.\n\nThank you.'
-    )}`;
 
   const channels = [
     {
@@ -84,106 +87,116 @@ export default function Contact() {
       className="section-padding contact-section"
     >
       <div className="container">
-        <div className="section-heading">
+        {/* Section Header */}
+        <div className="section-header">
           <span className="section-eyebrow">
-            GET IN TOUCH
+            Communication &amp; Outreach
           </span>
 
-          <h2>
-            Let's Connect
+          <h2 className="section-title">
+            Connect With Us
           </h2>
 
-          <p>
-            Have a question, an idea, or want to collaborate
-            with STIC? We'd love to hear from you.
+          <p className="section-subtitle">
+            Have questions about STIC or wish to collaborate?
+            Reach out to us through our official channels.
           </p>
         </div>
 
+        {/* Contact Cards */}
         <div className="contact-grid">
-          <div className="contact-info">
-            <div className="contact-card">
-              <div className="contact-icon">
-                <Mail size={22} />
+          {/* Email and Venue */}
+          <div className="contact-card primary-contact-card">
+            <div className="contact-item">
+              <div className="contact-icon-box">
+                <Mail size={20} strokeWidth={1.75} />
               </div>
 
-              <div className="contact-card-content">
-                <h3>Email Us</h3>
-
-                <p>
-                  For questions, collaborations, and
-                  community-related queries.
-                </p>
+              <div className="contact-item-content">
+                <span className="contact-label">
+                  Official Community Email
+                </span>
 
                 <a
-                  href={`mailto:${COMMUNITY_INFO.officialEmail}`}
+                  href={`mailto:${email}`}
                   className="contact-value-link"
                 >
-                  {COMMUNITY_INFO.officialEmail}
+                  {email}
                 </a>
 
-                <div className="contact-actions">
+                <div className="contact-btn-row">
+                  {/* Send Message Button */}
                   <a
-                    href={gmailComposeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={emailLink}
                     className="btn btn-secondary btn-sm"
                   >
                     <Mail size={14} />
                     <span>Send Message</span>
                   </a>
 
+                  {/* Copy Email Button */}
                   <button
                     type="button"
+                    className="btn btn-ghost btn-sm"
                     onClick={handleCopyEmail}
-                    className="btn btn-secondary btn-sm"
+                    title="Copy email to clipboard"
                   >
                     {copiedEmail ? (
-                      <Check size={14} />
+                      <>
+                        <Check
+                          size={14}
+                          strokeWidth={2.5}
+                          style={{ color: 'var(--success)' }}
+                        />
+                        <span>Copied</span>
+                      </>
                     ) : (
-                      <Copy size={14} />
+                      <>
+                        <Copy size={14} strokeWidth={1.75} />
+                        <span>Copy Email</span>
+                      </>
                     )}
-
-                    <span>
-                      {copiedEmail ? 'Copied!' : 'Copy Email'}
-                    </span>
                   </button>
                 </div>
               </div>
             </div>
 
-            <div className="contact-card">
-              <div className="contact-icon">
-                <MapPin size={22} />
+            <div className="contact-divider" />
+
+            {/* Campus Venue and Address */}
+            <div className="contact-item">
+              <div className="contact-icon-box">
+                <MapPin size={20} strokeWidth={1.75} />
               </div>
 
-              <div className="contact-card-content">
-                <h3>Our Location</h3>
+              <div className="contact-item-content">
+                <span className="contact-label">
+                  Campus Venue &amp; Address
+                </span>
 
-                <p>
-                  SAREC, Mirzapur, Uttar Pradesh, India
+                <p className="contact-venue-text">
+                  <strong>{COMMUNITY_INFO.venue}</strong>
+                  <br />
+                  {COMMUNITY_INFO.college}
+                  <br />
+                  {COMMUNITY_INFO.location}
                 </p>
-
-                <a
-                  href="https://www.google.com/maps/search/?api=1&query=SAREC+Mirzapur"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="contact-value-link"
-                >
-                  View on Google Maps
-                </a>
               </div>
             </div>
           </div>
 
-          <div className="contact-social">
-            <h3>Connect With Us</h3>
+          {/* Online Channels */}
+          <div className="contact-card channels-card">
+            <h3 className="channels-card-title">
+              Online Channels &amp; Links
+            </h3>
 
-            <p>
-              Follow our community and stay updated with
-              activities, events, and opportunities.
+            <p className="channels-card-desc">
+              Follow our latest open-source repositories,
+              campus announcements, and community updates.
             </p>
 
-            <div className="social-links-list">
+            <div className="channels-list">
               {channels.map((channel) => {
                 const Icon = channel.Icon;
 
@@ -193,20 +206,25 @@ export default function Contact() {
                     href={channel.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="social-link-card"
+                    className="channel-link-row"
                   >
-                    <span className="social-link-icon">
-                      <Icon size={20} />
-                    </span>
+                    <div className="channel-icon-pill">
+                      <Icon size={16} />
+                    </div>
 
-                    <span className="social-link-content">
-                      <strong>{channel.name}</strong>
-                      <small>{channel.handle}</small>
-                    </span>
+                    <div className="channel-info">
+                      <span className="channel-name">
+                        {channel.name}
+                      </span>
+
+                      <span className="channel-handle">
+                        {channel.handle}
+                      </span>
+                    </div>
 
                     <ExternalLink
-                      size={16}
-                      className="social-link-arrow"
+                      size={14}
+                      className="channel-arrow"
                     />
                   </a>
                 );
