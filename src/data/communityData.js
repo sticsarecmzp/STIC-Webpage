@@ -315,8 +315,7 @@ export const LEADERSHIP = {
       affiliation: "Dept. of Computer Science & Engineering",
       college: "SAREC Mirzapur",
       focus: "Academic Leadership & Computer Lab Guidance",
-      image: "/assets/faculty/amit-kumar-tiwari.webp",
-      fallbackImage: "/assets/faculty/amit-kumar-tiwari.jpg"
+      image: "/assets/faculty/Amit.jpeg"
     },
     {
       id: "prince-rajpoot",
@@ -326,8 +325,7 @@ export const LEADERSHIP = {
       affiliation: "Dept. of Electronics Engineering",
       college: "SAREC Mirzapur",
       focus: "IoT Hardware, Embedded Systems & Student Projects",
-      image: "/assets/faculty/prince-rajpoot.webp",
-      fallbackImage: "/assets/faculty/prince-rajpoot.jpg"
+      image: "/assets/faculty/Prince.jpeg"
     },
     {
       id: "abhinav-gupta",
@@ -337,8 +335,7 @@ export const LEADERSHIP = {
       affiliation: "Dept. of Electronics Engineering",
       college: "SAREC Mirzapur",
       focus: "Semiconductor Devices & Circuit Design",
-      image: "/assets/faculty/abhinav-gupta.webp",
-      fallbackImage: "/assets/faculty/abhinav-gupta.jpg"
+      image: "/assets/faculty/Abhinav.jpeg"
     }
   ],
   executives: [
