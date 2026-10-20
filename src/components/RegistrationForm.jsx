@@ -8,7 +8,8 @@ import {
   auth
 } from '../firebase';
 import { GoogleIcon } from './Icons';
-import { ShieldCheck, CheckCircle2, Lock, RefreshCw } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, Lock, RefreshCw, ExternalLink, Sparkles } from 'lucide-react';
+import { COMMUNITY_INFO } from '../data/communityData';
 import {
   validateSafeUrl,
   sanitizeForSpreadsheet,
@@ -200,6 +201,7 @@ export default function RegistrationForm() {
       // Record successful submission timestamp for rate limiting
       recordSubmissionTimestamp('stic_reg_cooldown');
       setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       setError(err?.message || 'Registration failed. Please check details and try again.');
     } finally {
@@ -213,38 +215,72 @@ export default function RegistrationForm() {
       <section className="registration-page">
         <div className="registration-container">
           <div className="registration-success">
-            <h2>Registration Received</h2>
+            <div className="success-icon-badge">
+              <CheckCircle2 size={36} strokeWidth={2.2} />
+            </div>
 
-            <p>
-              Your details have been securely recorded. We look forward to seeing you at our lab sessions.
+            <h2>Thank you for registering for STIC Community!</h2>
+
+            <p className="success-intro-text">
+              Your details have been securely recorded. We look forward to seeing you at our lab sessions and developer sprints.
             </p>
 
-            <button
-              type="button"
-              className="registration-submit"
-              onClick={() => {
-                setSubmitted(false);
-                setFormData({
-                  fullName: googleUser?.displayName || '',
-                  email: googleUser?.email || '',
-                  phone: '',
-                  college: '',
-                  branch: '',
-                  year: '',
-                  github: '',
-                  interests: [],
-                  hp_field: ''
-                });
-                setError('');
-                setAuthError('');
-              }}
-            >
-              Register Another Student
-            </button>
+            {/* Open Source Day Google Form Callout */}
+            <div className="success-event-callout">
+              <div className="event-callout-header">
+                <span className="event-callout-tag">
+                  <Sparkles size={12} strokeWidth={2.5} />
+                  <span>UPCOMING WORKSHOP</span>
+                </span>
+                <h3 className="event-callout-title">Open Source Day</h3>
+                <span className="event-callout-collab">
+                  Collab: WikiClub Tech &bull; GDG Prayagraj
+                </span>
+              </div>
 
-            <a href="/" className="registration-back" onClick={handleBackHome}>
-              ← Back to Home
-            </a>
+              <p className="event-callout-desc">
+                Don't forget to register for our hands-on Open Source Day contribution sprint! Learn Git, contribute to campus repos, and earn verified certificates.
+              </p>
+
+              <a
+                href={COMMUNITY_INFO.openSourceDayForm || 'https://forms.gle/'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-event-register"
+              >
+                <span>Register for Open Source Day</span>
+                <ExternalLink size={15} strokeWidth={2.2} />
+              </a>
+            </div>
+
+            <div className="success-actions-row">
+              <button
+                type="button"
+                className="btn-register-another"
+                onClick={() => {
+                  setSubmitted(false);
+                  setFormData({
+                    fullName: googleUser?.displayName || '',
+                    email: googleUser?.email || '',
+                    phone: '',
+                    college: '',
+                    branch: '',
+                    year: '',
+                    github: '',
+                    interests: [],
+                    hp_field: ''
+                  });
+                  setError('');
+                  setAuthError('');
+                }}
+              >
+                Register Another Student
+              </button>
+
+              <a href="/" className="registration-back" onClick={handleBackHome}>
+                ← Back to Home
+              </a>
+            </div>
           </div>
         </div>
       </section>

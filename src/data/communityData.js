@@ -17,7 +17,8 @@ export const COMMUNITY_INFO = {
   githubOrg: "https://github.com/sticsarecmzp",
   instagram: "https://www.instagram.com/sticsarecmzp",
   linkedin: "https://www.linkedin.com/company/stic-sarec-mirzapur/",
-  whatsappGroup: "https://chat.whatsapp.com/LYFm0ufaEtIBjQ9Ao2MXU9"
+  whatsappGroup: "https://chat.whatsapp.com/LYFm0ufaEtIBjQ9Ao2MXU9",
+  openSourceDayForm: "https://docs.google.com/forms/d/e/1FAIpQLSfUl83plbNbxrTvZvdiUuxyqp1VuQXJDW50QrSvY9xEAZVZqw/viewform?usp=publish-editor"
 };
 
 export const COMMUNITY_STATS = [
@@ -142,15 +143,15 @@ export const NOTICES_AND_EVENTS = [
       "Open to all B.Tech students (1st–4th Year) across all departments.",
     actions: [
       {
-        label: "Register / Join",
-        url: "/register",
-        isInternal: true,
+        label: "Register for Open Source Day",
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSfUl83plbNbxrTvZvdiUuxyqp1VuQXJDW50QrSvY9xEAZVZqw/viewform?usp=publish-editor",
+        isInternal: false,
         primary: true
       },
       {
-        label: "Visit STIC GitHub",
-        url: "https://github.com/sticsarecmzp",
-        isInternal: false,
+        label: "Join STIC Community",
+        url: "/register",
+        isInternal: true,
         primary: false
       }
     ]
