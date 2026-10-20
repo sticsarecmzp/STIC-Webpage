@@ -15,7 +15,7 @@ const EMAIL_LINK =
   `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=STIC%20Website%20Enquiry`;
 
 const MAPS_LINK =
-  'https://www.google.com/maps/search/?api=1&query=Samrat+Ashok+Rajkiya+Engineering+College+Mirzapur+Uttar+Pradesh+231001';
+  'https://maps.app.goo.gl/WdbGH2mPbMcq5Bjj6';
 
 export default function Footer() {
   const scrollToTop = () => {

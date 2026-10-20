@@ -12,6 +12,8 @@ export const COMMUNITY_INFO = {
   officialEmail: "sticsarecmzp@gmail.com",
   venue: "Central Computer Lab, SAREC Mirzapur",
   location: "Mirzapur, Uttar Pradesh - 231001",
+  mapsUrl: "https://maps.app.goo.gl/WdbGH2mPbMcq5Bjj6",
+  googleMaps: "https://maps.app.goo.gl/WdbGH2mPbMcq5Bjj6",
   githubOrg: "https://github.com/sticsarecmzp",
   instagram: "https://www.instagram.com/sticsarecmzp",
   linkedin: "https://www.linkedin.com/company/stic-sarec-mirzapur/",
@@ -149,6 +151,75 @@ export const NOTICES_AND_EVENTS = [
         label: "Visit STIC GitHub",
         url: "https://github.com/sticsarecmzp",
         isInternal: false,
+        primary: false
+      }
+    ]
+  },
+  {
+    id: "event-past-bwa",
+    type: "past",
+    category: "AI Workshop & Masterclass",
+    title: "Build With AI: Mirzapur Edition (Collab: GDG Prayagraj x TFUG)",
+    date: "Completed Session",
+    time: "Masterclass & Hands-on Lab",
+    venue: "Auditorium & Computer Lab, SAREC Mirzapur",
+    badge: "Past Event",
+    accent: "cyan",
+    speaker: "Nitin Tiwari Sir (Google Developer Expert / GDG Prayagraj)",
+    coordinators: "Pawan Kumar Yadav, Piyush Kushwaha & STIC Student Team",
+    description:
+      "Milestone practical AI masterclass organized at SAREC Mirzapur in collaboration with GDG Prayagraj and TFUG Prayagraj (ML Prayagraj). Featured in-depth sessions by Google Developer Expert Nitin Tiwari on Vision Language Models (VLMs), Google's open models (PaliGemma 2, Gemma 3n), MatFormer architecture, and live in-browser AI inference.",
+    recap:
+      "Over 120+ student engineers across all engineering departments attended, ran live browser AI models (including Fashion Sketch2Runway demo), and received official certificates of participation.",
+    photos: [
+      {
+        url: "/assets/events/build-with-ai/bwa-01.jpg",
+        caption:
+          "Google Developer Expert Nitin Tiwari delivering the session on Vision Language Models & PaliGemma 2",
+        alt: "Nitin Tiwari presenting at Build With AI SAREC Mirzapur"
+      },
+      {
+        url: "/assets/events/build-with-ai/bwa-02.jpg",
+        caption:
+          "GDG Prayagraj x SARECM Build With AI: Mirzapur Edition team & student coordinators",
+        alt: "Build With AI team at SAREC Mirzapur entrance"
+      },
+      {
+        url: "/assets/events/build-with-ai/bwa-03.jpg",
+        caption:
+          "SAREC student developers participating in the hands-on AI masterclass in the auditorium",
+        alt: "Students attending Build With AI session"
+      },
+      {
+        url: "/assets/events/build-with-ai/bwa-04.jpg",
+        caption:
+          "Live browser AI inference demonstration: Fashion Sketch2Runway interactive web app",
+        alt: "Live demo of Fashion Sketch2Runway"
+      },
+      {
+        url: "/assets/events/build-with-ai/bwa-05.jpg",
+        caption:
+          "Certificate felicitation acknowledging student organizers and active contributors",
+        alt: "Certificate presentation at SAREC Mirzapur"
+      },
+      {
+        url: "/assets/events/build-with-ai/bwa-06.jpg",
+        caption:
+          "Google Developer Groups Prayagraj x SARECM community collaboration meeting in session",
+        alt: "GDG Prayagraj x SAREC collaboration meeting"
+      }
+    ],
+    actions: [
+      {
+        label: "View on LinkedIn",
+        url: "https://www.linkedin.com/posts/stic-sarec-mirzapur_activity-7450132771399729152-N3fo",
+        isInternal: false,
+        primary: true
+      },
+      {
+        label: "Meet the Team",
+        url: "#leadership",
+        isInternal: true,
         primary: false
       }
     ]

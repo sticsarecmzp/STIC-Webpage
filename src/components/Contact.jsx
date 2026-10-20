@@ -172,13 +172,32 @@ Thank you.`;
                   Campus Venue &amp; Address
                 </span>
 
-                <p className="contact-venue-text">
+                <a
+                  href={COMMUNITY_INFO.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-venue-text contact-venue-link"
+                  title="Open college location on Google Maps"
+                >
                   <strong>{COMMUNITY_INFO.venue}</strong>
                   <br />
-                  {COMMUNITY_INFO.college}
+                  <span className="contact-college-link">{COMMUNITY_INFO.college}</span>
                   <br />
                   {COMMUNITY_INFO.location}
-                </p>
+                </a>
+
+                <div className="contact-btn-row">
+                  <a
+                    href={COMMUNITY_INFO.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary btn-sm"
+                  >
+                    <MapPin size={14} />
+                    <span>View on Google Maps</span>
+                    <ExternalLink size={12} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>

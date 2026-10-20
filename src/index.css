@@ -4107,6 +4107,33 @@ img {
   color: #F8FAFC;
 }
 
+a.contact-venue-link {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+a.contact-venue-link:hover {
+  opacity: 0.92;
+}
+
+a.contact-venue-link .contact-college-link {
+  text-decoration: underline;
+  text-decoration-color: var(--accent-cyan, #06b6d4);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+[data-theme='light'] a.contact-venue-link:hover .contact-college-link {
+  color: #0284c7;
+}
+
+[data-theme='dark'] a.contact-venue-link:hover .contact-college-link {
+  color: #38bdf8;
+}
+
 .contact-section .contact-value-link {
   font-size: var(--step-0);
   font-weight: 800;
