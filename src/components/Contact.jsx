@@ -34,12 +34,9 @@ Thank you.`;
     `&su=${encodeURIComponent(subject)}` +
     `&body=${encodeURIComponent(message)}`;
 
-  // Google Maps address link
+  // Direct Google Maps link for college venue and address
   const mapsLink =
-    'https://www.google.com/maps/search/?api=1&query=' +
-    encodeURIComponent(
-      'Samrat Ashok Rajkiya Engineering College, Mirzapur, Uttar Pradesh 231001'
-    );
+    'https://www.google.com/maps/search/?api=1&query=Samrat+Ashok+Rajkiya+Engineering+College+Mirzapur+Uttar+Pradesh+231001';
 
   const handleCopyEmail = async () => {
     try {
@@ -89,7 +86,10 @@ Thank you.`;
   ];
 
   return (
-    <section id="contact" className="section-padding contact-section">
+    <section
+      id="contact"
+      className="section-padding contact-section"
+    >
       <div className="container">
         <div className="section-header">
           <h2 className="section-title">Connect With Us</h2>
@@ -99,7 +99,7 @@ Thank you.`;
         </div>
 
         <div className="contact-grid">
-          {/* Email and Address Card */}
+          {/* Email and Campus Address */}
           <div className="contact-card primary-contact-card">
             <div className="contact-item">
               <div className="contact-icon-box">
@@ -159,7 +159,7 @@ Thank you.`;
 
             <div className="contact-divider" />
 
-            {/* Clickable Campus Address */}
+            {/* Clickable Campus Venue and Address */}
             <div className="contact-item">
               <div className="contact-icon-box">
                 <MapPin size={18} strokeWidth={1.75} />
@@ -175,21 +175,21 @@ Thank you.`;
                   target="_blank"
                   rel="noopener noreferrer"
                   className="contact-venue-text"
+                  title="Open campus address in Google Maps"
                   style={{
                     display: 'block',
                     textDecoration: 'none',
                     cursor: 'pointer',
                     position: 'relative',
-                    zIndex: 2,
+                    zIndex: 10,
+                    pointerEvents: 'auto',
                   }}
-                  title="Open campus address in Google Maps"
                 >
                   <strong>{COMMUNITY_INFO.venue}</strong>
                   <br />
                   {COMMUNITY_INFO.college}
                   <br />
-                  {COMMUNITY_INFO.location}
-                  {' '}
+                  {COMMUNITY_INFO.location}{' '}
                   <ExternalLink
                     size={13}
                     style={{
@@ -202,7 +202,7 @@ Thank you.`;
             </div>
           </div>
 
-          {/* Online Channels Card */}
+          {/* Online Channels */}
           <div className="contact-card channels-card">
             <h3 className="channels-card-title">
               Online Channels &amp; Links
