@@ -34,9 +34,11 @@ Thank you.`;
     `&su=${encodeURIComponent(subject)}` +
     `&body=${encodeURIComponent(message)}`;
 
-  // Direct Google Maps link for college venue and address
   const mapsLink =
-    'https://www.google.com/maps/search/?api=1&query=Samrat+Ashok+Rajkiya+Engineering+College+Mirzapur+Uttar+Pradesh+231001';
+    'https://www.google.com/maps/search/?api=1&query=' +
+    encodeURIComponent(
+      'Samrat Ashok Rajkiya Engineering College, Mirzapur, Uttar Pradesh 231001'
+    );
 
   const handleCopyEmail = async () => {
     try {
@@ -86,10 +88,7 @@ Thank you.`;
   ];
 
   return (
-    <section
-      id="contact"
-      className="section-padding contact-section"
-    >
+    <section id="contact" className="section-padding contact-section">
       <div className="container">
         <div className="section-header">
           <h2 className="section-title">Connect With Us</h2>
@@ -99,7 +98,7 @@ Thank you.`;
         </div>
 
         <div className="contact-grid">
-          {/* Email and Campus Address */}
+          {/* Email and Campus Address Card */}
           <div className="contact-card primary-contact-card">
             <div className="contact-item">
               <div className="contact-icon-box">
@@ -159,7 +158,7 @@ Thank you.`;
 
             <div className="contact-divider" />
 
-            {/* Clickable Campus Venue and Address */}
+            {/* Campus Venue and Address stay in their original place */}
             <div className="contact-item">
               <div className="contact-icon-box">
                 <MapPin size={18} strokeWidth={1.75} />
@@ -170,39 +169,43 @@ Thank you.`;
                   Campus Venue &amp; Address
                 </span>
 
-                <a
-                  href={mapsLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="contact-venue-text"
-                  title="Open campus address in Google Maps"
-                  style={{
-                    display: 'block',
-                    textDecoration: 'none',
-                    cursor: 'pointer',
-                    position: 'relative',
-                    zIndex: 10,
-                    pointerEvents: 'auto',
-                  }}
-                >
+                {/* Original address display */}
+                <div className="contact-venue-text">
                   <strong>{COMMUNITY_INFO.venue}</strong>
                   <br />
                   {COMMUNITY_INFO.college}
                   <br />
-                  {COMMUNITY_INFO.location}{' '}
-                  <ExternalLink
-                    size={13}
-                    style={{
-                      display: 'inline',
-                      verticalAlign: 'middle',
-                    }}
-                  />
+                  {COMMUNITY_INFO.location}
+                </div>
+
+                {/* Separate Google Maps link */}
+                <a
+                  href={mapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Open campus address in Google Maps"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    marginTop: '10px',
+                    position: 'relative',
+                    zIndex: 20,
+                    pointerEvents: 'auto',
+                    color: '#FFA500',
+                    textDecoration: 'underline',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <MapPin size={15} />
+                  <span>Open in Google Maps</span>
+                  <ExternalLink size={13} />
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Online Channels */}
+          {/* Online Channels Card */}
           <div className="contact-card channels-card">
             <h3 className="channels-card-title">
               Online Channels &amp; Links
@@ -232,6 +235,7 @@ Thank you.`;
                       <span className="channel-name">
                         {channel.name}
                       </span>
+
                       <span className="channel-handle">
                         {channel.handle}
                       </span>
