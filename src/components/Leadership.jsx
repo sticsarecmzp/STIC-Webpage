@@ -1,282 +1,286 @@
-import React from "react";
-
+import React from 'react';
 import {
   Award,
   Shield,
   Sparkles,
   GraduationCap,
   Users,
-} from "lucide-react";
+} from 'lucide-react';
 
-import { LEADERSHIP } from "../data/communityData";
+import { LEADERSHIP } from '../data/communityData';
 
-const Leadership = () => {
-  const faculty = LEADERSHIP?.faculty || [];
-  const executives = LEADERSHIP?.executives || [];
+export default function Leadership() {
+  const { faculty, executives } = LEADERSHIP;
 
+  // Faculty image paths — exact GitHub filenames
+  const facultyImages = {
+    'Dr. Amit Kumar Tiwari': '/assets/faculty/Amit.jpeg',
+    'Dr. Prince Rajpoot': '/assets/faculty/Prince.jpeg',
+    'Dr. Abhinav Gupta': '/assets/faculty/Abhinav.jpeg',
+  };
+
+  // Core Team Members
   const coreTeam = [
     {
-      id: 1,
-      name: "Harshita Mishra",
-      role: "B.tech CSE SAREC Mirzapur",
-      image: "/assets/team/Harshita.jpeg",
+      name: 'Harshita Mishra',
+      branch: 'CSE',
+      image: '/assets/team/Harshita.jpeg',
     },
     {
-      id: 2,
-      name: "Anjesh",
-      role: "Core T",
-      image: "/assets/team/Anjesh.jpeg",
+      name: 'Anjesh',
+      branch: 'IT',
+      image: '/assets/team/Anjesh.jpeg',
     },
     {
-      id: 3,
-      name: "Om Prakash",
-      role: "Core Team Member",
-      image: "/assets/team/Om%20prakash.jpeg",
+      name: 'Om Prakash',
+      branch: 'EE',
+      image: '/assets/team/Om%20prakash.jpeg',
     },
     {
-      id: 4,
-      name: "Divyansh Vandan Srivastava",
-      role: "Core Team Member",
-      image: "/assets/team/Divyansh%20vandan.jpeg",
+      name: 'Divyansh Vandan Srivastava',
+      branch: 'EL',
+      image: '/assets/team/Divyansh%20vandan.jpeg',
     },
   ];
 
-  const normalizeName = (name = "") =>
-    name.trim().replace(/\s+/g, " ").toLowerCase();
-
-  const getFounderType = (name = "") => {
-    const normalizedName = normalizeName(name);
-
-    if (normalizedName.includes("piyush kushwaha")) {
-      return "founder";
-    }
-
-    if (normalizedName.includes("pawan kumar yadav")) {
-      return "cofounder";
-    }
-
-    return "";
-  };
-
-  const renderMemberCard = (member, index, section) => {
-    const founderType =
-      section === "executives"
-        ? getFounderType(member.name)
-        : "";
-
-    const cardClass = [
-      "neo-card",
-      section === "faculty" ? "faculty-card" : "",
-      section === "executives" ? "exec-mini-card" : "",
-      section === "core" ? "core-team-card" : "",
-      founderType === "founder" ? "founder-highlight" : "",
-      founderType === "cofounder" ? "cofounder-highlight" : "",
-    ]
-      .filter(Boolean)
-      .join(" ");
-
-    return (
-      <article
-        key={member.id || member.name || index}
-        className={cardClass}
-      >
-        {founderType && (
-          <div className={`founder-ribbon ${founderType}`}>
-            {founderType === "founder"
-              ? "FOUNDER"
-              : "CO-FOUNDER"}
-          </div>
-        )}
-
-        <div className="leadership-image-wrapper">
-          <img
-            src={
-              member.image ||
-              member.img ||
-              "/assets/default-avatar.png"
-            }
-            alt={member.name || "Team Member"}
-            className="leadership-image"
-            loading="lazy"
-            onError={(event) => {
-              event.currentTarget.style.visibility = "hidden";
-            }}
-          />
-        </div>
-
-        <div className="leadership-info">
-          {member.role && (
-            <span className="exec-role-pill">
-              {member.role}
-            </span>
-          )}
-
-          <h3 className="leadership-name">
-            {member.name}
-          </h3>
-
-          {member.designation && (
-            <p className="leadership-designation">
-              {member.designation}
-            </p>
-          )}
-
-          {member.department && (
-            <p className="leadership-department">
-              {member.department}
-            </p>
-          )}
-
-          {member.institution && (
-            <p className="faculty-institution">
-              {member.institution}
-            </p>
-          )}
-
-          {(member.description || member.bio) && (
-            <p className="leadership-description">
-              {member.description || member.bio}
-            </p>
-          )}
-
-          {(member.linkedin ||
-            member.github ||
-            member.website) && (
-            <div className="leadership-socials">
-              {member.linkedin && (
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LinkedIn
-                </a>
-              )}
-
-              {member.github && (
-                <a
-                  href={member.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-              )}
-
-              {member.website && (
-                <a
-                  href={member.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Website
-                </a>
-              )}
-            </div>
-          )}
-        </div>
-      </article>
-    );
-  };
-
   return (
     <section
-      className="leadership-section"
       id="leadership"
+      className="section-padding leadership-section"
     >
-      {/* Main Heading */}
-      <div className="leadership-header">
-        <span className="section-eyebrow">
-          <Sparkles size={16} />
-          THE PEOPLE BEHIND STIC
-        </span>
+      <div className="container">
+        {/* Main Header */}
+        <div className="section-header">
+          
 
-        <h1 className="leadership-main-title">
-          Meet Our <span>Leadership</span>
-        </h1>
+          <h2 className="section-title">
+            Faculty Advisors &amp; Student Leads
+          </h2>
 
-        <p className="leadership-subtitle">
-          Meet the mentors, leaders, and dedicated team members
-          working together to build our community.
-        </p>
-      </div>
+          <p className="section-subtitle">
+            Guided by faculty mentors; organized by active student engineers.
+          </p>
+        </div>
 
-      {/* Faculty */}
-      <div className="leadership-group faculty-group">
-        <div className="leadership-group-heading">
-          <div className="leadership-heading-icon faculty-heading-icon">
-            <GraduationCap size={25} />
+        {/* 1. Faculty Mentors */}
+        <div className="leadership-subgroup">
+          <div className="subgroup-header">
+            <span className="neo-badge badge-faculty">
+              <GraduationCap size={14} strokeWidth={2.5} />
+              <span>Faculty Mentors &amp; Advisors</span>
+            </span>
+
+            <span className="subgroup-count">
+              Academic Advisory &bull; SAREC Mirzapur
+            </span>
           </div>
 
-          <div>
-            <h2>Faculty Mentors &amp; Advisors</h2>
-            <p>
-              Guidance, mentorship, and academic support.
-            </p>
+          <div className="faculty-grid">
+            {faculty.map((f) => {
+              const isCoordinator =
+                f.role === 'Faculty Coordinator';
+
+              const imagePath =
+                facultyImages[f.name] || f.image;
+
+              return (
+                <div
+                  key={f.id}
+                  className="neo-card faculty-card"
+                >
+                  <div className="faculty-photo-wrap">
+                    <img
+                      src={imagePath}
+                      alt={f.name}
+                      className="faculty-photo"
+                      loading="lazy"
+                      onError={(e) => {
+                        if (
+                          f.fallbackImage &&
+                          e.currentTarget.src !==
+                            new URL(
+                              f.fallbackImage,
+                              window.location.origin
+                            ).href
+                        ) {
+                          e.currentTarget.src = f.fallbackImage;
+                        }
+                      }}
+                    />
+                  </div>
+
+                  <div className="neo-badge-row">
+                    <span
+                      className={`neo-badge ${
+                        isCoordinator
+                          ? 'badge-faculty'
+                          : 'badge-mentor'
+                      }`}
+                    >
+                      {isCoordinator ? (
+                        <Award size={12} strokeWidth={2.5} />
+                      ) : (
+                        <Sparkles size={12} strokeWidth={2.5} />
+                      )}
+
+                      <span>{f.role}</span>
+                    </span>
+
+                    <span className="neo-tag">
+                      {f.designation}
+                    </span>
+                  </div>
+
+                  <h3 className="leader-name">
+                    {f.name}
+                  </h3>
+
+                  <p className="leader-role">
+                    {f.affiliation}
+                  </p>
+
+                  <p className="leader-college">
+                    {f.college}
+                  </p>
+
+                  <div className="leader-focus-pill">
+                    <span>{f.focus}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        <div className="leadership-grid faculty-grid">
-          {faculty.map((member, index) =>
-            renderMemberCard(member, index, "faculty")
-          )}
-        </div>
-      </div>
+        {/* 2. Executive Members */}
+        <div className="executives-container">
+          <div className="executives-header">
+            <span className="neo-badge badge-exec">
+              <Shield size={13} strokeWidth={2.5} />
+              <span>Student Leads &amp; Organizers</span>
+            </span>
 
-      {/* Executives */}
-      <div className="leadership-group executive-group">
-        <div className="leadership-group-heading">
-          <div className="leadership-heading-icon executive-heading-icon">
-            <Shield size={25} />
+            <span className="exec-count-text">
+              {executives.length} Student Organizers &bull; SAREC Mirzapur
+            </span>
           </div>
 
-          <div>
-            <h2>Co-Founders &amp; Executive Members</h2>
-            <p>
-              The leaders driving our vision and initiatives forward.
-            </p>
+          <div className="executives-grid">
+            {executives.map((exec, idx) => (
+              <div
+                key={idx}
+                className="neo-card exec-mini-card"
+              >
+                <div className="exec-photo-wrap">
+                  {exec.image ? (
+                    <img
+                      src={exec.image}
+                      alt={exec.name}
+                      className="exec-photo"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="exec-photo-placeholder">
+                      <span className="exec-large-initials">
+                        {exec.name
+                          .split(' ')
+                          .map((n) => n[0])
+                          .join('')}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="exec-card-body">
+                  <div className="exec-role-pill-wrap">
+                    <span className="exec-role-pill">
+                      {exec.role}
+                    </span>
+                  </div>
+
+                  <h4 className="exec-name">
+                    {exec.name}
+                  </h4>
+
+                  <p className="exec-branch-line">
+                    <span className="exec-branch-name">
+                      {exec.affiliation}
+                    </span>
+
+                    <span className="exec-meta-dot">
+                      &bull;
+                    </span>
+
+                    <span className="exec-college-name">
+                      SAREC Mirzapur
+                    </span>
+                  </p>
+
+                  <div className="exec-focus-badge">
+                    <span>{exec.focus}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="leadership-grid executive-grid">
-          {executives.map((member, index) =>
-            renderMemberCard(member, index, "executives")
-          )}
-        </div>
-      </div>
+        {/* 3. Core Team */}
+        <div className="leadership-subgroup core-team-section">
+          <div className="subgroup-header">
+            <span className="neo-badge badge-faculty">
+              <Users size={14} strokeWidth={2.5} />
+              <span>Core Team</span>
+            </span>
 
-      {/* Core Team */}
-      <div className="leadership-group core-team-group">
-        <div className="leadership-group-heading">
-          <div className="leadership-heading-icon core-heading-icon">
-            <Users size={25} />
+            <span className="subgroup-count">
+              Active Student Contributors
+            </span>
           </div>
 
-          <div>
-            <h2>Core Team</h2>
-            <p>
-              The passionate people who make things happen.
-            </p>
+          <div className="core-team-grid">
+            {coreTeam.map((member) => (
+              <div
+                key={member.name}
+                className="neo-card core-team-card"
+              >
+                <div className="core-team-photo-wrap">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="core-team-photo"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.alt =
+                        `${member.name} photo unavailable`;
+                    }}
+                  />
+                </div>
+
+                <div className="core-team-card-body">
+                  <h4 className="core-team-name">
+                    {member.name}
+                  </h4>
+
+                  <p className="exec-branch-line">
+                    <span className="exec-branch-name">
+                      B.Tech {member.branch}
+                    </span>
+
+                    <span className="exec-meta-dot">
+                      &bull;
+                    </span>
+
+                    <span className="exec-college-name">
+                      SAREC Mirzapur
+                    </span>
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-
-        <div className="leadership-grid core-team-grid">
-          {coreTeam.map((member, index) =>
-            renderMemberCard(member, index, "core")
-          )}
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="leadership-footer">
-        <Award size={22} />
-
-        <p>
-          Together, we learn, lead, innovate, and grow.
-        </p>
       </div>
     </section>
   );
-};
-
-export default Leadership;
+}
