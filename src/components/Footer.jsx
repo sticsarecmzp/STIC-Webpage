@@ -1,7 +1,21 @@
+
 import React from 'react';
 import { ExternalLink, Mail, ArrowUp } from 'lucide-react';
-import { GithubIcon, InstagramIcon, LinkedinIcon, WhatsAppIcon } from './Icons';
+import {
+  GithubIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  WhatsAppIcon
+} from './Icons';
 import { COMMUNITY_INFO } from '../data/communityData';
+
+const EMAIL = 'sticsarecmzp@gmail.com';
+
+const EMAIL_LINK =
+  `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=STIC%20Website%20Enquiry`;
+
+const MAPS_LINK =
+  'https://www.google.com/maps/search/?api=1&query=Samrat+Ashok+Rajkiya+Engineering+College+Sheetla+Mandir+Bathua+Rewa+Road+Teliyaganj+Mirzapur+231001';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -12,6 +26,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container">
         <div className="footer-main-grid">
+
           {/* Identity Column */}
           <div className="footer-brand-col">
             <div className="footer-brand-header">
@@ -20,16 +35,23 @@ export default function Footer() {
                 alt="STIC Community Emblem"
                 className="footer-seal-img"
               />
+
               <div>
-                <span className="footer-brand-title">{COMMUNITY_INFO.name}</span>
-                <span className="footer-brand-subtitle">{COMMUNITY_INFO.fullName}</span>
+                <span className="footer-brand-title">
+                  {COMMUNITY_INFO.name}
+                </span>
+                <span className="footer-brand-subtitle">
+                  {COMMUNITY_INFO.fullName}
+                </span>
               </div>
             </div>
 
             <p className="footer-college-text">
               {COMMUNITY_INFO.college}
               <br />
-              <span className="footer-aktu-badge">Student Developer Community</span>
+              <span className="footer-aktu-badge">
+                Student Developer Community
+              </span>
             </p>
 
             <p className="footer-mission-text">
@@ -37,7 +59,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Nav Links */}
+          {/* Quick Navigation */}
           <div className="footer-nav-col">
             <span className="footer-col-title">Navigation</span>
             <ul className="footer-links-list">
@@ -49,9 +71,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Institutional Portal & Contact */}
+          {/* Institutional Links */}
           <div className="footer-nav-col">
             <span className="footer-col-title">Institutional Links</span>
+
             <ul className="footer-links-list">
               <li>
                 <a
@@ -64,19 +87,28 @@ export default function Footer() {
                   <ExternalLink size={12} />
                 </a>
               </li>
+
               <li>
-               <a
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${COMMUNITY_INFO.officialEmail}&su=STIC%20Website%20Enquiry`}
-                target="_blank"
-                rel="noopener noreferrer"
+                <a
+                  href={EMAIL_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-    {COMMUNITY_INFO.officialEmail}
-  </a>
-</li>
+                  {EMAIL}
+                </a>
+              </li>
+
               <li>
-                <span className="footer-venue-text">
-                  SAREC Campus, Mirzapur, U.P.
-                </span>
+                <a
+                  href={MAPS_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-venue-text"
+                >
+                  SAREC Campus, Sheetla Mandir, Bathua, Rewa Road,
+                  Teliyaganj, Mirzapur, U.P. - 231001
+                  <ExternalLink size={12} />
+                </a>
               </li>
             </ul>
           </div>
@@ -95,6 +127,7 @@ export default function Footer() {
             >
               <GithubIcon size={16} />
             </a>
+
             <a
               href={COMMUNITY_INFO.linkedin}
               target="_blank"
@@ -105,6 +138,7 @@ export default function Footer() {
             >
               <LinkedinIcon size={16} />
             </a>
+
             <a
               href={COMMUNITY_INFO.instagram}
               target="_blank"
@@ -115,6 +149,7 @@ export default function Footer() {
             >
               <InstagramIcon size={16} />
             </a>
+
             <a
               href={COMMUNITY_INFO.whatsappGroup}
               target="_blank"
@@ -125,10 +160,9 @@ export default function Footer() {
             >
               <WhatsAppIcon size={16} />
             </a>
-            
-         
+
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=sticsarecmzp@gmail.com&su=STIC%20Website%20Enquiry"
+              href={EMAIL_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="footer-icon-btn"
@@ -137,12 +171,12 @@ export default function Footer() {
             >
               <Mail size={16} strokeWidth={1.8} />
             </a>
-
-
           </div>
 
           <div className="footer-copy-text">
-            &copy; {COMMUNITY_INFO.establishedYear} &ndash; 2026 {COMMUNITY_INFO.name} &bull; {COMMUNITY_INFO.collegeShort}. All rights reserved.
+            &copy; {COMMUNITY_INFO.establishedYear} &ndash; 2026{' '}
+            {COMMUNITY_INFO.name} &bull; {COMMUNITY_INFO.collegeShort}.
+            {' '}All rights reserved.
           </div>
 
           <button
