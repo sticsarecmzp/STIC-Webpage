@@ -1,45 +1,69 @@
+
 import { useEffect } from 'react';
 
-/**
- * Custom hook that observes sections and elements with the `.scroll-reveal` class,
- * adding `.is-visible` as they enter the viewport for smooth trending entrance animations.
- */
 export function useScrollReveal() {
   useEffect(() => {
-    // If user prefers reduced motion, mark all visible immediately
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const elements = document.querySelectorAll('.scroll-reveal, #main-content > section, .institution-strip');
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
 
-    if (prefersReducedMotion) {
-      elements.forEach(el => el.classList.add('is-visible'));
-      return;
-    }
+    const revealElements = () => {
+      const elements = document.querySelectorAll(
+        '.scroll-reveal, #main-content > section, .institution-strip'
+      );
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.08,
-        rootMargin: '0px 0px -40px 0px'
+      if (prefersReducedMotion) {
+        elements.forEach((el) => el.classList.add('is-visible'));
+        return;
       }
-    );
 
-    elements.forEach((el) => {
-      // Ensure element has .scroll-reveal class if it was matched by tag
-      if (!el.classList.contains('scroll-reveal')) {
-        el.classList.add('scroll-reveal');
-      }
-      observer.observe(el);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.08,
+          rootMargin: '0px 0px -40px 0px'
+        }
+      );
+
+      elements.forEach((el) => {
+        if (!el.classList.contains('scroll-reveal')) {
+          el.classList.add('scroll-reveal');
+        }
+
+        // Already visible elements ko hidden state mein mat rakho
+        if (el.classList.contains('is-visible')) {
+          return;
+        }
+
+        observer.observe(el);
+      });
+    };
+
+    revealElements();
+
+    // Route change ya DOM update ke baad naye elements ko observe karo
+    const mutationObserver = new MutationObserver(() => {
+      revealElements();
     });
 
+    const main = document.querySelector('#main-content');
+
+    if (main) {
+      mutationObserver.observe(main, {
+        childList: true,
+        subtree: true
+      });
+    }
+
     return () => {
-      observer.disconnect();
+      mutationObserver.disconnect();
     };
   }, []);
 }
