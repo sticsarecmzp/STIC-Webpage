@@ -34,10 +34,15 @@ Thank you.`;
     `&su=${encodeURIComponent(subject)}` +
     `&body=${encodeURIComponent(message)}`;
 
+  const mapsLink =
+    'https://www.google.com/maps/search/?api=1&query=' +
+    encodeURIComponent(
+      'Samrat Ashok Rajkiya Engineering College, Mirzapur, Uttar Pradesh 231001'
+    );
+
   const handleCopyEmail = async () => {
     try {
       await navigator.clipboard.writeText(email);
-
       setCopiedEmail(true);
 
       setTimeout(() => {
@@ -88,20 +93,14 @@ Thank you.`;
       className="section-padding contact-section"
     >
       <div className="container">
-        {/* Section Header */}
         <div className="section-header">
-          
-
-          <h2 className="section-title">
-            Connect With Us
-          </h2>
+          <h2 className="section-title">Connect With Us</h2>
 
           <p className="section-subtitle">
             Reach out for inquiries, collaborations, or community participation.
           </p>
         </div>
 
-        {/* Contact Cards */}
         <div className="contact-grid">
           {/* Email and Venue */}
           <div className="contact-card primary-contact-card">
@@ -116,7 +115,9 @@ Thank you.`;
                 </span>
 
                 <a
-                  href={`mailto:${email}`}
+                  href={emailLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="contact-value-link"
                 >
                   {email}
@@ -161,7 +162,7 @@ Thank you.`;
 
             <div className="contact-divider" />
 
-            {/* Campus Venue and Address */}
+            {/* Clickable Campus Address */}
             <div className="contact-item">
               <div className="contact-icon-box">
                 <MapPin size={18} strokeWidth={1.75} />
@@ -172,13 +173,29 @@ Thank you.`;
                   Campus Venue &amp; Address
                 </span>
 
-                <p className="contact-venue-text">
+                <a
+                  href={mapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-venue-text"
+                  style={{
+                    display: 'block',
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                  }}
+                  title="Open campus address in Google Maps"
+                >
                   <strong>{COMMUNITY_INFO.venue}</strong>
                   <br />
                   {COMMUNITY_INFO.college}
                   <br />
                   {COMMUNITY_INFO.location}
-                </p>
+                  {' '}
+                  <ExternalLink
+                    size={13}
+                    style={{ display: 'inline', verticalAlign: 'middle' }}
+                  />
+                </a>
               </div>
             </div>
           </div>
