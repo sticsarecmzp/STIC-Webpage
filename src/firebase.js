@@ -1,5 +1,14 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
+} from 'firebase/auth';
 
 /**
  * Firebase Client Configuration
@@ -27,6 +36,58 @@ const app = isConfigured
 // Initialize Cloud Firestore database
 export const db = app ? getFirestore(app) : null;
 
+// Initialize Firebase Authentication & Google Auth Provider
+export const auth = app ? getAuth(app) : null;
+
+if (auth && typeof window !== 'undefined') {
+  try {
+    setPersistence(auth, browserLocalPersistence).catch(() => {});
+  } catch {}
+}
+
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.addScope('email');
+googleProvider.addScope('profile');
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
+
+export { onAuthStateChanged };
+
+/**
+ * Initiates Google Sign-In with popup
+ * @returns {Promise<import('firebase/auth').User>} Authenticated user object
+ */
+export async function signInWithGoogle() {
+  if (!auth) {
+    throw new Error('Firebase Authentication is not configured. Please check .env settings.');
+  }
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    return result.user;
+  } catch (err) {
+    console.error('Google Sign-in error:', err);
+    if (err?.code === 'auth/popup-closed-by-user') {
+      throw new Error('Google sign-in popup was closed before completing verification.');
+    }
+    if (err?.code === 'auth/unauthorized-domain') {
+      throw new Error('Domain not authorized. Please add this domain to Firebase Console -> Authentication -> Settings -> Authorized Domains.');
+    }
+    if (err?.code === 'auth/operation-not-allowed') {
+      throw new Error('Google Sign-in is not enabled. In Firebase Console, go to Authentication -> Sign-in method -> Enable Google.');
+    }
+    throw err;
+  }
+}
+
+/**
+ * Signs out current Google user
+ */
+export async function logOut() {
+  if (!auth) return;
+  await signOut(auth);
+}
+
 /**
  * Saves a student registration application to Cloud Firestore database
  * @param {Object} registrationData - Sanitized student registration payload
@@ -34,8 +95,9 @@ export const db = app ? getFirestore(app) : null;
  */
 export async function saveRegistrationToFirestore(registrationData) {
   if (!db) {
-    console.warn('Firestore is not configured. Set VITE_FIREBASE_* environment variables in .env.');
-    return null;
+    const msg = 'Firestore is not configured. Set VITE_FIREBASE_* environment variables in .env.';
+    console.warn(msg);
+    throw new Error(msg);
   }
   try {
     const registrationsRef = collection(db, 'registrations');
@@ -46,16 +108,22 @@ export async function saveRegistrationToFirestore(registrationData) {
       status: 'pending'
     });
 
-    // 2.5 second timeout safeguard prevents infinite hang if Firestore database is not yet enabled
+    // 15-second timeout safeguard for network connections
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Firestore connection timeout (database may be pending initialization)')), 2500)
+      setTimeout(() => reject(new Error('Connection timed out. Please check your internet connection and try again.')), 15000)
     );
 
     const docRef = await Promise.race([docPromise, timeoutPromise]);
     return docRef.id;
   } catch (err) {
-    console.warn('saveRegistrationToFirestore notice:', err?.message || err);
-    return null;
+    console.error('saveRegistrationToFirestore error:', err);
+    if (err?.code === 'permission-denied') {
+      throw new Error('Firestore permission denied: Please update your Firestore Security Rules in Firebase Console.');
+    }
+    if (err?.code === 'unavailable') {
+      throw new Error('Firebase service is currently unavailable. Please check your connection.');
+    }
+    throw err;
   }
 }
 

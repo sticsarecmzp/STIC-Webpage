@@ -1,6 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './RegistrationForm.css';
-import { saveRegistrationToFirestore } from '../firebase';
+import {
+  saveRegistrationToFirestore,
+  signInWithGoogle,
+  logOut,
+  onAuthStateChanged,
+  auth
+} from '../firebase';
+import { GoogleIcon } from './Icons';
+import { ShieldCheck, CheckCircle2, Lock, RefreshCw } from 'lucide-react';
 import {
   validateSafeUrl,
   sanitizeForSpreadsheet,
@@ -25,9 +33,61 @@ export default function RegistrationForm() {
     hp_field: '' // Bot honeypot trap
   });
 
+  const [googleUser, setGoogleUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(false);
+  const [authError, setAuthError] = useState('');
+
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // Observe Google Authentication state
+  useEffect(() => {
+    if (!auth) return;
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setGoogleUser(user);
+        setFormData((prev) => ({
+          ...prev,
+          fullName: prev.fullName || user.displayName || '',
+          email: user.email || prev.email,
+        }));
+      } else {
+        setGoogleUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleGoogleSignIn = async () => {
+    setAuthLoading(true);
+    setAuthError('');
+    setError('');
+    try {
+      const user = await signInWithGoogle();
+      if (user) {
+        setGoogleUser(user);
+        setFormData((prev) => ({
+          ...prev,
+          fullName: prev.fullName || user.displayName || '',
+          email: user.email || prev.email,
+        }));
+      }
+    } catch (err) {
+      setAuthError(err?.message || 'Google account verification failed. Please try again.');
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleGoogleSignOut = async () => {
+    try {
+      await logOut();
+      setGoogleUser(null);
+    } catch (err) {
+      console.warn('Sign out notice:', err);
+    }
+  };
 
   const handleBackHome = (e) => {
     if (e) e.preventDefault();
@@ -125,6 +185,10 @@ export default function RegistrationForm() {
         year: formData.year,
         github: cleanGithub ? sanitizeForSpreadsheet(cleanGithub) : 'N/A',
         interests: formData.interests.map(i => sanitizeForSpreadsheet(sanitizeText(i, 50))),
+        verifiedWithGoogle: Boolean(googleUser),
+        googleUid: googleUser?.uid || null,
+        googleEmail: googleUser?.email || null,
+        googlePhotoURL: googleUser?.photoURL || null
       };
 
       const registrationId = await saveRegistrationToFirestore(registrationData);
@@ -161,8 +225,8 @@ export default function RegistrationForm() {
               onClick={() => {
                 setSubmitted(false);
                 setFormData({
-                  fullName: '',
-                  email: '',
+                  fullName: googleUser?.displayName || '',
+                  email: googleUser?.email || '',
                   phone: '',
                   college: '',
                   branch: '',
@@ -172,6 +236,7 @@ export default function RegistrationForm() {
                   hp_field: ''
                 });
                 setError('');
+                setAuthError('');
               }}
             >
               Register Another Student
@@ -229,6 +294,79 @@ export default function RegistrationForm() {
             Required fields marked *
           </p>
 
+          {/* Google Account Verification Card */}
+          <div className="registration-google-card">
+            {!googleUser ? (
+              <div className="google-unverified-row">
+                <div className="google-unverified-info">
+                  <div className="google-badge-tag">
+                    <ShieldCheck size={13} strokeWidth={2.5} />
+                    <span>GOOGLE ACCOUNT VERIFICATION</span>
+                  </div>
+                  <h3 className="google-box-title">Verify with Google</h3>
+                  <p className="google-box-subtitle">
+                    Connect your Google account to verify your student email and auto-fill your details.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  className="btn-google-action"
+                  onClick={handleGoogleSignIn}
+                  disabled={authLoading}
+                >
+                  <GoogleIcon size={18} />
+                  <span>{authLoading ? 'Verifying...' : 'Verify with Google'}</span>
+                </button>
+              </div>
+            ) : (
+              <div className="google-verified-row">
+                <div className="google-verified-profile">
+                  {googleUser.photoURL ? (
+                    <img
+                      src={googleUser.photoURL}
+                      alt={googleUser.displayName || 'Google Profile'}
+                      className="google-profile-pic"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <div className="google-profile-pic-placeholder">
+                      {(googleUser.displayName || googleUser.email || 'G')[0].toUpperCase()}
+                    </div>
+                  )}
+                  <div className="google-profile-meta">
+                    <div className="google-verified-status-tag">
+                      <CheckCircle2 size={12} strokeWidth={2.5} />
+                      <span>GOOGLE VERIFIED ACCOUNT</span>
+                    </div>
+                    <div className="google-profile-name">
+                      {googleUser.displayName || 'Verified Student'}
+                    </div>
+                    <div className="google-profile-email">
+                      {googleUser.email}
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className="btn-google-switch"
+                  onClick={handleGoogleSignOut}
+                  title="Switch to another Google account"
+                >
+                  <RefreshCw size={12} strokeWidth={2} />
+                  <span>Switch</span>
+                </button>
+              </div>
+            )}
+
+            {authError && (
+              <div className="registration-error-box" style={{ marginTop: '14px', marginBottom: 0 }} role="alert">
+                {authError}
+              </div>
+            )}
+          </div>
+
           <div className="registration-grid">
             {/* Full Name */}
             <label>
@@ -247,7 +385,15 @@ export default function RegistrationForm() {
 
             {/* Email */}
             <label>
-              Email Address *
+              <div className="label-title-row">
+                <span>Email Address *</span>
+                {googleUser && (
+                  <span className="verified-inline-tag">
+                    <Lock size={11} strokeWidth={2.5} />
+                    <span>Google Verified</span>
+                  </span>
+                )}
+              </div>
               <input
                 type="email"
                 name="email"
@@ -256,6 +402,8 @@ export default function RegistrationForm() {
                 onChange={handleChange}
                 autoComplete="email"
                 maxLength={254}
+                readOnly={Boolean(googleUser)}
+                className={googleUser ? 'input-locked-verified' : ''}
                 required
               />
             </label>
@@ -382,7 +530,7 @@ export default function RegistrationForm() {
 
           {/* Error message */}
           {error && (
-            <p role="alert" className="registration-form-note">
+            <p role="alert" className="registration-error-box">
               {error}
             </p>
           )}

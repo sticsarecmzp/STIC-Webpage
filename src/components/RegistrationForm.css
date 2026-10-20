@@ -105,9 +105,209 @@
 }
 
 .registration-form-note {
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   color: var(--text-secondary);
   font-size: 13.5px;
+}
+
+/* Google Account Verification Card */
+.registration-google-card {
+  margin-bottom: 24px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm, 8px);
+  border: 1.5px solid var(--border-card);
+  transition: all var(--transition-fast, 0.15s);
+}
+
+[data-theme='light'] .registration-google-card {
+  background: #F8FAFC;
+  border-color: #E2E8F0;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+[data-theme='dark'] .registration-google-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.google-unverified-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.google-badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: var(--accent-amber-bg);
+  color: var(--accent-amber);
+  border: 1px solid var(--accent-amber-border);
+  margin-bottom: 6px;
+}
+
+.google-box-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.google-box-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.btn-google-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: var(--radius-xs, 6px);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast, 0.15s);
+  border: 1.5px solid #CBD5E1;
+  background: #FFFFFF;
+  color: #0F172A;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.btn-google-action:hover:not(:disabled) {
+  background: #F8FAFC;
+  border-color: #94A3B8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.btn-google-action:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-google-action:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Verified Google User Row */
+.google-verified-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.google-verified-profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.google-profile-pic {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-cyan);
+  object-fit: cover;
+}
+
+.google-profile-pic-placeholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-cyan-bg);
+  border: 2px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.google-verified-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  font-weight: 800;
+  color: var(--accent-cyan);
+  margin-bottom: 2px;
+}
+
+.google-profile-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.google-profile-email {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.btn-google-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-xs, 4px);
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid var(--border-card);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s);
+}
+
+.btn-google-switch:hover {
+  color: var(--primary-cta);
+  border-color: var(--primary-cta);
+}
+
+.label-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.verified-inline-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #10B981;
+  font-weight: 700;
+}
+
+.input-locked-verified {
+  cursor: default !important;
+}
+
+[data-theme='light'] .input-locked-verified {
+  background: #F1F5F9 !important;
+  color: #334155 !important;
+}
+
+[data-theme='dark'] .input-locked-verified {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #E2E8F0 !important;
 }
 
 .registration-grid {
