@@ -310,85 +310,101 @@ export const ABOUT_POINTS = [
 export const LEADERSHIP = {
   faculty: [
     {
-      id: "amit-tiwari",
+      id: 1,
       name: "Dr. Amit Kumar Tiwari",
       role: "Faculty Coordinator",
+      image: "/assets/faculty/Amit.jpeg",
       designation: "Associate Professor",
-      affiliation: "Dept. of Computer Science & Engineering",
-      college: "SAREC Mirzapur",
-      focus: "Academic Leadership & Computer Lab Guidance",
-      image: "/assets/faculty/Amit.jpeg"
+      department: "Dept. of Computer Science & Engineering",
+      institution: "SAREC Mirzapur",
+      description: "Academic Leadership & Computer Lab Guidance",
     },
     {
-      id: "prince-rajpoot",
+      id: 2,
       name: "Dr. Prince Rajpoot",
       role: "Faculty Mentor",
+      image: "/assets/faculty/Prince.jpeg",
       designation: "Associate Professor",
-      affiliation: "Dept. of Electronics Engineering",
-      college: "SAREC Mirzapur",
-      focus: "IoT Hardware, Embedded Systems & Student Projects",
-      image: "/assets/faculty/Prince.jpeg"
+      department: "Dept. of Electronics Engineering",
+      institution: "SAREC Mirzapur",
+      description: "IoT Hardware, Embedded Systems & Student Projects",
     },
     {
-      id: "abhinav-gupta",
+      id: 3,
       name: "Dr. Abhinav Gupta",
       role: "Faculty Mentor",
+      image: "/assets/faculty/Abhinav.jpeg",
       designation: "Associate Professor",
-      affiliation: "Dept. of Electronics Engineering",
-      college: "SAREC Mirzapur",
-      focus: "Semiconductor Devices & Circuit Design",
-      image: "/assets/faculty/Abhinav.jpeg"
-    }
+      department: "Dept. of Electronics Engineering",
+      institution: "SAREC Mirzapur",
+      description: "Semiconductor Devices & Circuit Design",
+    },
   ],
+
   executives: [
     {
+      id: 1,
       name: "Piyush Kushwaha",
       role: "Co-Founder & Lead Coordinator",
-      affiliation: "B.Tech IT",
-      focus: "Web Development & Software Development",
-      image: "/assets/team/piyush-kushwaha.jpg"
+      image: "/assets/team/Piyush.jpeg",
+      designation: "B.Tech IT",
+      institution: "SAREC Mirzapur",
+      description: "Web Development & Software Development",
     },
     {
+      id: 2,
       name: "Pawan Kumar Yadav",
       role: "Co-Founder & Lead Member",
-      affiliation: "B.Tech IT",
-      focus: "Linux, Open Source & AI/ML",
-      image: "/assets/team/pawan-kumar-yadav-v2.jpg"
+      image: "/assets/team/Pawan.jpeg",
+      designation: "B.Tech IT",
+      institution: "SAREC Mirzapur",
+      description: "Core Development & Activities",
     },
     {
+      id: 3,
       name: "Aditi Yadav",
       role: "Executive Member",
-      affiliation: "B.Tech IT",
-      focus: "Compèring & Outreach",
-      image: "/assets/team/aditi-yadav.jpg"
+      image: "/assets/team/Aditi.jpeg",
+      designation: "B.Tech IT",
+      institution: "SAREC Mirzapur",
+      description: "Community & Outreach",
     },
     {
+      id: 4,
       name: "Sidhant Maurya",
       role: "Executive Member",
-      affiliation: "B.Tech CSE",
-      focus: "AI/ML & Data Science",
-      image: "/assets/team/sidhant-maurya.jpg"
+      image: "/assets/team/Sidhant.jpeg",
+      designation: "B.Tech",
+      institution: "SAREC Mirzapur",
+      description: "Student Activities",
     },
     {
+      id: 5,
       name: "Khushi Umrao",
       role: "Executive Member",
-      affiliation: "B.Tech CSE",
-      focus: "UI/UX & Graphic Design",
-      image: "/assets/team/khushi-umrao.jpg"
+      image: "/assets/team/Khushi.jpeg",
+      designation: "B.Tech",
+      institution: "SAREC Mirzapur",
+      description: "Community Initiatives",
     },
     {
+      id: 6,
       name: "Ayush Mishra",
       role: "Executive Member",
-      affiliation: "B.Tech IT",
-      focus: "AI/ML & Data Science",
-      image: "/assets/team/ayush-mishra.jpg"
+      image: "/assets/team/Ayush.jpeg",
+      designation: "B.Tech",
+      institution: "SAREC Mirzapur",
+      description: "Technical Activities",
     },
     {
+      id: 7,
       name: "Shital Kushwaha",
       role: "Executive Member",
-      affiliation: "B.Tech CSE",
-      focus: "DSA & Outreach",
-      image: "/assets/team/shital-kushwaha.jpg"
-    }
-  ]
+      image: "/assets/team/Shital.jpeg",
+      designation: "B.Tech",
+      institution: "SAREC Mirzapur",
+      description: "Student Coordination",
+    },
+  ],
 };
+

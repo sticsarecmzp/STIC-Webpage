@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Award,
   Shield,
@@ -13,18 +14,17 @@ const Leadership = () => {
   const faculty = LEADERSHIP?.faculty || [];
   const executives = LEADERSHIP?.executives || [];
 
-  // Core Team Members
   const coreTeam = [
     {
       id: 1,
       name: "Harshita Mishra",
-      role: "Core Team Member",
+      role: "B.tech CSE SAREC Mirzapur",
       image: "/assets/team/Harshita.jpeg",
     },
     {
       id: 2,
       name: "Anjesh",
-      role: "Core Team Member",
+      role: "Core T",
       image: "/assets/team/Anjesh.jpeg",
     },
     {
@@ -41,11 +41,9 @@ const Leadership = () => {
     },
   ];
 
-  // Normalize names
   const normalizeName = (name = "") =>
     name.trim().replace(/\s+/g, " ").toLowerCase();
 
-  // Founder and Co-Founder identification
   const getFounderType = (name = "") => {
     const normalizedName = normalizeName(name);
 
@@ -60,7 +58,6 @@ const Leadership = () => {
     return "";
   };
 
-  // Reusable Member Card
   const renderMemberCard = (member, index, section) => {
     const founderType =
       section === "executives"
@@ -79,11 +76,10 @@ const Leadership = () => {
       .join(" ");
 
     return (
-      <div
+      <article
         key={member.id || member.name || index}
         className={cardClass}
       >
-        {/* Founder / Co-Founder Ribbon */}
         {founderType && (
           <div className={`founder-ribbon ${founderType}`}>
             {founderType === "founder"
@@ -92,7 +88,6 @@ const Leadership = () => {
           </div>
         )}
 
-        {/* Member Image */}
         <div className="leadership-image-wrapper">
           <img
             src={
@@ -109,17 +104,16 @@ const Leadership = () => {
           />
         </div>
 
-        {/* Member Details */}
         <div className="leadership-info">
-          <h3 className="leadership-name">
-            {member.name}
-          </h3>
-
           {member.role && (
             <span className="exec-role-pill">
               {member.role}
             </span>
           )}
+
+          <h3 className="leadership-name">
+            {member.name}
+          </h3>
 
           {member.designation && (
             <p className="leadership-designation">
@@ -133,19 +127,18 @@ const Leadership = () => {
             </p>
           )}
 
-          {member.description && (
-            <p className="leadership-description">
-              {member.description}
+          {member.institution && (
+            <p className="faculty-institution">
+              {member.institution}
             </p>
           )}
 
-          {member.bio && (
+          {(member.description || member.bio) && (
             <p className="leadership-description">
-              {member.bio}
+              {member.description || member.bio}
             </p>
           )}
 
-          {/* Social Links */}
           {(member.linkedin ||
             member.github ||
             member.website) && (
@@ -155,7 +148,6 @@ const Leadership = () => {
                   href={member.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${member.name} LinkedIn`}
                 >
                   LinkedIn
                 </a>
@@ -166,7 +158,6 @@ const Leadership = () => {
                   href={member.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${member.name} GitHub`}
                 >
                   GitHub
                 </a>
@@ -177,7 +168,6 @@ const Leadership = () => {
                   href={member.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${member.name} Website`}
                 >
                   Website
                 </a>
@@ -185,13 +175,15 @@ const Leadership = () => {
             </div>
           )}
         </div>
-      </div>
+      </article>
     );
   };
 
   return (
-    <section className="leadership-section" id="leadership">
-
+    <section
+      className="leadership-section"
+      id="leadership"
+    >
       {/* Main Heading */}
       <div className="leadership-header">
         <span className="section-eyebrow">
@@ -209,7 +201,7 @@ const Leadership = () => {
         </p>
       </div>
 
-      {/* 1. FACULTY MENTORS & ADVISORS */}
+      {/* Faculty */}
       <div className="leadership-group faculty-group">
         <div className="leadership-group-heading">
           <div className="leadership-heading-icon faculty-heading-icon">
@@ -231,7 +223,7 @@ const Leadership = () => {
         </div>
       </div>
 
-      {/* 2. CO-FOUNDERS & EXECUTIVE MEMBERS */}
+      {/* Executives */}
       <div className="leadership-group executive-group">
         <div className="leadership-group-heading">
           <div className="leadership-heading-icon executive-heading-icon">
@@ -253,7 +245,7 @@ const Leadership = () => {
         </div>
       </div>
 
-      {/* 3. CORE TEAM */}
+      {/* Core Team */}
       <div className="leadership-group core-team-group">
         <div className="leadership-group-heading">
           <div className="leadership-heading-icon core-heading-icon">
@@ -283,7 +275,6 @@ const Leadership = () => {
           Together, we learn, lead, innovate, and grow.
         </p>
       </div>
-
     </section>
   );
 };
