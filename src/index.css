@@ -4446,6 +4446,77 @@ a.contact-venue-link .contact-college-link {
   z-index: 10;
 }
 
+/* founder and co-founder*/
+
+/* Founder highlight - Gold */
+.exec-mini-card.founder-highlight {
+  border: 2px solid #e5a000;
+  box-shadow: 0 0 0 3px rgba(229, 160, 0, 0.16),
+              0 8px 24px rgba(229, 160, 0, 0.20);
+}
+
+.founder-ribbon.founder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f5b301, #ffe69a);
+  color: #3b2700;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Co-Founder highlight - Cyan */
+.exec-mini-card.cofounder-highlight {
+  border: 2px solid #22c7d9;
+  box-shadow: 0 0 0 3px rgba(34, 199, 217, 0.13),
+              0 8px 22px rgba(34, 199, 217, 0.18);
+}
+
+.founder-ribbon.cofounder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22c7d9, #a5f3fc);
+  color: #06343b;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.exec-mini-card.founder-highlight .exec-role-pill {
+  background: linear-gradient(135deg, #f5b301, #ffe69a);
+  color: #3b2700;
+  font-weight: 800;
+}
+
+.exec-mini-card.cofounder-highlight .exec-role-pill {
+  background: linear-gradient(135deg, #22c7d9, #a5f3fc);
+  color: #06343b;
+  font-weight: 800;
+}
+
+.exec-mini-card.founder-highlight,
+.exec-mini-card.cofounder-highlight {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+@media (hover: hover) {
+  .exec-mini-card.founder-highlight:hover,
+  .exec-mini-card.cofounder-highlight:hover {
+    transform: translateY(-4px);
+  }
+}
+
+
 
 
 
