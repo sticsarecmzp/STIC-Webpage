@@ -41,29 +41,31 @@ const Leadership = () => {
     },
   ];
 
-  // Normalize names to avoid spacing and capitalization issues.
+  // Normalize names
   const normalizeName = (name = "") =>
     name.trim().replace(/\s+/g, " ").toLowerCase();
 
-  // Identify Founder and Co-Founder.
-  const getFounderType = (name) => {
+  // Founder and Co-Founder identification
+  const getFounderType = (name = "") => {
     const normalizedName = normalizeName(name);
 
-    if (normalizedName === "piyush kushwaha") {
+    if (normalizedName.includes("piyush kushwaha")) {
       return "founder";
     }
 
-    if (normalizedName === "pawan kumar yadav") {
+    if (normalizedName.includes("pawan kumar yadav")) {
       return "cofounder";
     }
 
     return "";
   };
 
-  // Reusable member card.
+  // Reusable Member Card
   const renderMemberCard = (member, index, section) => {
     const founderType =
-      section === "executives" ? getFounderType(member.name) : "";
+      section === "executives"
+        ? getFounderType(member.name)
+        : "";
 
     const cardClass = [
       "neo-card",
@@ -81,17 +83,23 @@ const Leadership = () => {
         key={member.id || member.name || index}
         className={cardClass}
       >
-        {/* Founder / Co-Founder Label */}
+        {/* Founder / Co-Founder Ribbon */}
         {founderType && (
           <div className={`founder-ribbon ${founderType}`}>
-            {founderType === "founder" ? "FOUNDER" : "CO-FOUNDER"}
+            {founderType === "founder"
+              ? "FOUNDER"
+              : "CO-FOUNDER"}
           </div>
         )}
 
         {/* Member Image */}
         <div className="leadership-image-wrapper">
           <img
-            src={member.image || member.img || "/assets/default-avatar.png"}
+            src={
+              member.image ||
+              member.img ||
+              "/assets/default-avatar.png"
+            }
             alt={member.name || "Team Member"}
             className="leadership-image"
             loading="lazy"
@@ -101,7 +109,7 @@ const Leadership = () => {
           />
         </div>
 
-        {/* Member Information */}
+        {/* Member Details */}
         <div className="leadership-info">
           <h3 className="leadership-name">
             {member.name}
@@ -138,7 +146,9 @@ const Leadership = () => {
           )}
 
           {/* Social Links */}
-          {(member.linkedin || member.github || member.website) && (
+          {(member.linkedin ||
+            member.github ||
+            member.website) && (
             <div className="leadership-socials">
               {member.linkedin && (
                 <a
@@ -181,6 +191,7 @@ const Leadership = () => {
 
   return (
     <section className="leadership-section" id="leadership">
+
       {/* Main Heading */}
       <div className="leadership-header">
         <span className="section-eyebrow">
@@ -198,9 +209,7 @@ const Leadership = () => {
         </p>
       </div>
 
-      {/* =========================================
-          1. FACULTY MENTORS & ADVISORS
-      ========================================= */}
+      {/* 1. FACULTY MENTORS & ADVISORS */}
       <div className="leadership-group faculty-group">
         <div className="leadership-group-heading">
           <div className="leadership-heading-icon faculty-heading-icon">
@@ -222,9 +231,7 @@ const Leadership = () => {
         </div>
       </div>
 
-      {/* =========================================
-          2. CO-FOUNDERS & EXECUTIVE MEMBERS
-      ========================================= */}
+      {/* 2. CO-FOUNDERS & EXECUTIVE MEMBERS */}
       <div className="leadership-group executive-group">
         <div className="leadership-group-heading">
           <div className="leadership-heading-icon executive-heading-icon">
@@ -246,9 +253,7 @@ const Leadership = () => {
         </div>
       </div>
 
-      {/* =========================================
-          3. CORE TEAM
-      ========================================= */}
+      {/* 3. CORE TEAM */}
       <div className="leadership-group core-team-group">
         <div className="leadership-group-heading">
           <div className="leadership-heading-icon core-heading-icon">
@@ -270,7 +275,7 @@ const Leadership = () => {
         </div>
       </div>
 
-      {/* Closing Section */}
+      {/* Footer */}
       <div className="leadership-footer">
         <Award size={22} />
 
@@ -278,6 +283,7 @@ const Leadership = () => {
           Together, we learn, lead, innovate, and grow.
         </p>
       </div>
+
     </section>
   );
 };
