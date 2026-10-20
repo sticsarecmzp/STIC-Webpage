@@ -4446,90 +4446,102 @@ a.contact-venue-link .contact-college-link {
   z-index: 10;
 }
 
-/* ================================
-   FOUNDER - GOLD / ORANGE HIGHLIGHT
-================================ */
+/* ==========================================
+   FOUNDER & CO-FOUNDER CARD HIGHLIGHTS
+========================================== */
 
-.exec-mini-card.founder-highlight {
-  border: 2px solid #ffb020;
-  box-shadow:
-    0 0 0 2px rgba(255, 176, 32, 0.16),
-    0 8px 24px rgba(255, 176, 32, 0.18);
-}
-
-.founder-ribbon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  margin: 10px auto;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.7px;
-}
-
-.founder-ribbon.founder {
-  background: linear-gradient(135deg, #ffb020, #ffe09a);
-  color: #302000;
-}
-
-.exec-mini-card.founder-highlight .exec-role-pill {
-  background: linear-gradient(135deg, #ffb020, #ffe09a);
-  color: #302000;
-  font-weight: 800;
-}
-
-
-/* ================================
-   CO-FOUNDER - ORANGE HIGHLIGHT
-================================ */
-
-.exec-mini-card.cofounder-highlight {
-  border: 2px solid #ff8c00;
-  box-shadow:
-    0 0 0 2px rgba(255, 140, 0, 0.15),
-    0 8px 24px rgba(255, 140, 0, 0.18);
-}
-
-.founder-ribbon.cofounder {
-  background: linear-gradient(135deg, #ff8c00, #ffc266);
-  color: #302000;
-}
-
-.exec-mini-card.cofounder-highlight .exec-role-pill {
-  background: linear-gradient(135deg, #ff8c00, #ffc266);
-  color: #302000;
-  font-weight: 800;
-}
-
-
-/* ================================
-   SMOOTH HOVER EFFECT
-================================ */
-
+/* Common Card Styling */
 .exec-mini-card.founder-highlight,
 .exec-mini-card.cofounder-highlight {
+  position: relative;
+  overflow: hidden;
   transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
-@media (hover: hover) {
-  .exec-mini-card.founder-highlight:hover,
-  .exec-mini-card.cofounder-highlight:hover {
-    transform: translateY(-4px);
-  }
+/* ==========================================
+   FOUNDER - PIYUSH KUSHWAHA
+   GOLDEN THEME
+========================================== */
+
+.exec-mini-card.founder-highlight {
+  border: 2px solid #ffbf00 !important;
+  box-shadow:
+    0 0 12px rgba(255, 191, 0, 0.25),
+    0 0 28px rgba(255, 191, 0, 0.12);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .exec-mini-card.founder-highlight,
-  .exec-mini-card.cofounder-highlight {
-    transition: none;
-  }
+.exec-mini-card.founder-highlight:hover {
+  transform: translateY(-7px);
+  border-color: #ffd700 !important;
+  box-shadow:
+    0 0 18px rgba(255, 191, 0, 0.45),
+    0 0 35px rgba(255, 191, 0, 0.2);
+}
+
+/* Founder Ribbon */
+.exec-mini-card.founder-highlight .founder-ribbon.founder {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffbf00, #ffe680);
+  color: #332400;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-align: center;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Founder Role Badge */
+.exec-mini-card.founder-highlight .exec-role-pill {
+  background: linear-gradient(135deg, #ffbf00, #ffe680) !important;
+  color: #332400 !important;
+  border: 1px solid #ffbf00;
+  font-weight: 800;
+  box-shadow: 0 0 10px rgba(255, 191, 0, 0.18);
 }
 
 
+/* ==========================================
+   CO-FOUNDER - PAWAN KUMAR YADAV
+   ORANGE THEME
+========================================== */
 
+.exec-mini-card.cofounder-highlight {
+  border: 2px solid #ff7a00 !important;
+  box-shadow:
+    0 0 12px rgba(255, 122, 0, 0.25),
+    0 0 28px rgba(255, 122, 0, 0.12);
+}
+
+.exec-mini-card.cofounder-highlight:hover {
+  transform: translateY(-7px);
+  border-color: #ff9d42 !important;
+  box-shadow:
+    0 0 18px rgba(255, 122, 0, 0.45),
+    0 0 35px rgba(255, 122, 0, 0.2);
+}
+
+/* Co-Founder Ribbon */
+.exec-mini-card.cofounder-highlight .founder-ribbon.cofounder {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff7a00, #ffc078);
+  color: #3d1c00;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-align: center;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Co-Founder Role Badge */
+.exec-mini-card.cofounder-highlight .exec-role-pill {
+  background: linear-gradient(135deg, #ff7a00, #ffc078) !important;
+  color: #3d1c00 !important;
+  border: 1px solid #ff7a00;
+  font-weight: 800;
+  box-shadow: 0 0 10px rgba(255, 122, 0, 0.18);
+}
