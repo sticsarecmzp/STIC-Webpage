@@ -34,6 +34,7 @@ Thank you.`;
     `&su=${encodeURIComponent(subject)}` +
     `&body=${encodeURIComponent(message)}`;
 
+  // Google Maps address link
   const mapsLink =
     'https://www.google.com/maps/search/?api=1&query=' +
     encodeURIComponent(
@@ -88,21 +89,17 @@ Thank you.`;
   ];
 
   return (
-    <section
-      id="contact"
-      className="section-padding contact-section"
-    >
+    <section id="contact" className="section-padding contact-section">
       <div className="container">
         <div className="section-header">
           <h2 className="section-title">Connect With Us</h2>
-
           <p className="section-subtitle">
             Reach out for inquiries, collaborations, or community participation.
           </p>
         </div>
 
         <div className="contact-grid">
-          {/* Email and Venue */}
+          {/* Email and Address Card */}
           <div className="contact-card primary-contact-card">
             <div className="contact-item">
               <div className="contact-icon-box">
@@ -182,6 +179,8 @@ Thank you.`;
                     display: 'block',
                     textDecoration: 'none',
                     cursor: 'pointer',
+                    position: 'relative',
+                    zIndex: 2,
                   }}
                   title="Open campus address in Google Maps"
                 >
@@ -193,14 +192,17 @@ Thank you.`;
                   {' '}
                   <ExternalLink
                     size={13}
-                    style={{ display: 'inline', verticalAlign: 'middle' }}
+                    style={{
+                      display: 'inline',
+                      verticalAlign: 'middle',
+                    }}
                   />
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Online Channels */}
+          {/* Online Channels Card */}
           <div className="contact-card channels-card">
             <h3 className="channels-card-title">
               Online Channels &amp; Links
@@ -230,7 +232,6 @@ Thank you.`;
                       <span className="channel-name">
                         {channel.name}
                       </span>
-
                       <span className="channel-handle">
                         {channel.handle}
                       </span>
