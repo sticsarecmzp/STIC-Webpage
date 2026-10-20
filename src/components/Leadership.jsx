@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   Award,
@@ -5,6 +6,7 @@ import {
   Sparkles,
   GraduationCap,
   Users,
+  Crown,
 } from 'lucide-react';
 
 import { LEADERSHIP } from '../data/communityData';
@@ -12,7 +14,7 @@ import { LEADERSHIP } from '../data/communityData';
 export default function Leadership() {
   const { faculty, executives } = LEADERSHIP;
 
-  // Faculty image paths — exact GitHub filenames
+  // Faculty image paths
   const facultyImages = {
     'Dr. Amit Kumar Tiwari': '/assets/faculty/Amit.jpeg',
     'Dr. Prince Rajpoot': '/assets/faculty/Prince.jpeg',
@@ -43,6 +45,23 @@ export default function Leadership() {
     },
   ];
 
+  const getFounderType = (role = '') => {
+    const normalizedRole = role.toLowerCase();
+
+    if (
+      normalizedRole.includes('co-founder') ||
+      normalizedRole.includes('cofounder')
+    ) {
+      return 'cofounder';
+    }
+
+    if (normalizedRole.includes('founder')) {
+      return 'founder';
+    }
+
+    return '';
+  };
+
   return (
     <section
       id="leadership"
@@ -51,8 +70,6 @@ export default function Leadership() {
       <div className="container">
         {/* Main Header */}
         <div className="section-header">
-          
-
           <h2 className="section-title">
             Faculty Advisors &amp; Student Leads
           </h2>
@@ -166,62 +183,94 @@ export default function Leadership() {
           </div>
 
           <div className="executives-grid">
-            {executives.map((exec, idx) => (
-              <div
-                key={idx}
-                className="neo-card exec-mini-card"
-              >
-                <div className="exec-photo-wrap">
-                  {exec.image ? (
-                    <img
-                      src={exec.image}
-                      alt={exec.name}
-                      className="exec-photo"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="exec-photo-placeholder">
-                      <span className="exec-large-initials">
-                        {exec.name
-                          .split(' ')
-                          .map((n) => n[0])
-                          .join('')}
+            {executives.map((exec, idx) => {
+              const founderType = getFounderType(exec.role);
+
+              return (
+                <div
+                  key={exec.id || exec.name || idx}
+                  className={`neo-card exec-mini-card ${
+                    founderType === 'founder'
+                      ? 'founder-highlight'
+                      : founderType === 'cofounder'
+                        ? 'cofounder-highlight'
+                        : ''
+                  }`}
+                >
+                  {/* Founder / Co-Founder label */}
+                  {founderType && (
+                    <div className={`founder-ribbon ${founderType}`}>
+                      <Crown size={13} strokeWidth={2.5} />
+                      <span>
+                        {founderType === 'founder'
+                          ? 'FOUNDER'
+                          : 'CO-FOUNDER'}
                       </span>
                     </div>
                   )}
-                </div>
 
-                <div className="exec-card-body">
-                  <div className="exec-role-pill-wrap">
-                    <span className="exec-role-pill">
-                      {exec.role}
-                    </span>
+                  <div className="exec-photo-wrap">
+                    {exec.image ? (
+                      <img
+                        src={exec.image}
+                        alt={exec.name}
+                        className="exec-photo"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="exec-photo-placeholder">
+                        <span className="exec-large-initials">
+                          {exec.name
+                            .split(' ')
+                            .map((n) => n[0])
+                            .join('')}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
-                  <h4 className="exec-name">
-                    {exec.name}
-                  </h4>
+                  <div className="exec-card-body">
+                    <div className="exec-role-pill-wrap">
+                      <span className="exec-role-pill">
+                        {founderType && (
+                          <Crown
+                            size={13}
+                            strokeWidth={2.5}
+                            style={{
+                              marginRight: '5px',
+                              verticalAlign: 'middle',
+                            }}
+                          />
+                        )}
+                        {exec.role}
+                      </span>
+                    </div>
 
-                  <p className="exec-branch-line">
-                    <span className="exec-branch-name">
-                      {exec.affiliation}
-                    </span>
+                    <h4 className="exec-name">
+                      {exec.name}
+                    </h4>
 
-                    <span className="exec-meta-dot">
-                      &bull;
-                    </span>
+                    <p className="exec-branch-line">
+                      <span className="exec-branch-name">
+                        {exec.affiliation}
+                      </span>
 
-                    <span className="exec-college-name">
-                      SAREC Mirzapur
-                    </span>
-                  </p>
+                      <span className="exec-meta-dot">
+                        &bull;
+                      </span>
 
-                  <div className="exec-focus-badge">
-                    <span>{exec.focus}</span>
+                      <span className="exec-college-name">
+                        SAREC Mirzapur
+                      </span>
+                    </p>
+
+                    <div className="exec-focus-badge">
+                      <span>{exec.focus}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
