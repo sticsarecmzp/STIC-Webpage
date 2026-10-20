@@ -1,4 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
+
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -12,6 +14,7 @@ import NotFound from './components/NotFound';
 import RegistrationForm from './components/RegistrationForm';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import BackToTop from './components/BackToTop';
+
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 export default function App() {
@@ -25,41 +28,73 @@ export default function App() {
     }
   });
 
-  const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
+  const [currentPath, setCurrentPath] = useState(
+    () => window.location.pathname
+  );
 
-  // Initialize scroll-driven entrance animations
+  // Initialize scroll reveal animations
   useScrollReveal();
 
+  // Restore Home page scroll animations after returning from registration
+  useEffect(() => {
+    if (
+      currentPath === '/' ||
+      currentPath === '' ||
+      currentPath === '/index.html'
+    ) {
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new Event('scroll'));
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentPath]);
+
+  // Apply the selected theme
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+
     try {
       localStorage.setItem('stic_theme', theme);
-    } catch {}
+    } catch {
+      // Local storage may be unavailable
+    }
   }, [theme]);
 
+  // Listen for browser navigation
   useEffect(() => {
-    const handlePopState = () => setCurrentPath(window.location.pathname);
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
+  // Navigate to Home without a full-page reload
   const handleNavigateHome = () => {
-    window.history.pushState({}, '', '/');
+    if (window.location.pathname !== '/') {
+      window.history.pushState({}, '', '/');
+    }
+
     setCurrentPath('/');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
   const isRegistration = currentPath === '/register';
 
-const is404 =
-  !isRegistration &&
-  currentPath !== '/' &&
-  currentPath !== '' &&
-  currentPath !== '/index.html';
+  const is404 =
+    !isRegistration &&
+    currentPath !== '/' &&
+    currentPath !== '' &&
+    currentPath !== '/index.html';
 
   return (
     <div className="app-layout">
@@ -77,43 +112,53 @@ const is404 =
           muted
           playsInline
         >
-          <source src="/assets/background.mp4" type="video/mp4" />
-          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_171521_25968ba2-b594-4b32-aab7-f6b69398a6fa.mp4" type="video/mp4" />
+          <source
+            src="/assets/background.mp4"
+            type="video/mp4"
+          />
+
+          <source
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_171521_25968ba2-b594-4b32-aab7-f6b69398a6fa.mp4"
+            type="video/mp4"
+          />
         </video>
+
         <div className="site-video-bg-overlay" />
       </div>
 
       {/* Reading Progress Indicator */}
       <ScrollProgressBar />
 
-      {/* Neo-brutalist Sticky Navbar */}
-      <Navbar 
-        theme={theme} 
-        onToggleTheme={toggleTheme} 
-        onHome={handleNavigateHome} 
+      {/* Navigation Bar */}
+      <Navbar
+        theme={theme}
+        onToggleTheme={toggleTheme}
+        onHome={handleNavigateHome}
       />
 
+      {/* Main Page Content */}
       <main id="main-content">
         {isRegistration ? (
-  <RegistrationForm />
-) : is404 ? (
-  <NotFound onNavigateHome={handleNavigateHome} />
-) : (
-  <>
-    <Hero />
-    <About />
-    <Workflow />
-    <FocusAreas />
-    <NoticeBoard />
-    <Leadership />
-    <Contact />
-  </>
-)}
+          <RegistrationForm />
+        ) : is404 ? (
+          <NotFound onNavigateHome={handleNavigateHome} />
+        ) : (
+          <>
+            <Hero />
+            <About />
+            <Workflow />
+            <FocusAreas />
+            <NoticeBoard />
+            <Leadership />
+            <Contact />
+          </>
+        )}
       </main>
 
+      {/* Footer */}
       <Footer />
 
-      {/* Back to top button */}
+      {/* Back to Top Button */}
       <BackToTop />
     </div>
   );

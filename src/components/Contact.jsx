@@ -34,10 +34,15 @@ Thank you.`;
     `&su=${encodeURIComponent(subject)}` +
     `&body=${encodeURIComponent(message)}`;
 
+  const mapsLink =
+    'https://www.google.com/maps/search/?api=1&query=' +
+    encodeURIComponent(
+      'Samrat Ashok Rajkiya Engineering College, Mirzapur, Uttar Pradesh 231001'
+    );
+
   const handleCopyEmail = async () => {
     try {
       await navigator.clipboard.writeText(email);
-
       setCopiedEmail(true);
 
       setTimeout(() => {
@@ -83,27 +88,17 @@ Thank you.`;
   ];
 
   return (
-    <section
-      id="contact"
-      className="section-padding contact-section"
-    >
+    <section id="contact" className="section-padding contact-section">
       <div className="container">
-        {/* Section Header */}
         <div className="section-header">
-          
-
-          <h2 className="section-title">
-            Connect With Us
-          </h2>
-
+          <h2 className="section-title">Connect With Us</h2>
           <p className="section-subtitle">
             Reach out for inquiries, collaborations, or community participation.
           </p>
         </div>
 
-        {/* Contact Cards */}
         <div className="contact-grid">
-          {/* Email and Venue */}
+          {/* Email and Campus Address Card */}
           <div className="contact-card primary-contact-card">
             <div className="contact-item">
               <div className="contact-icon-box">
@@ -116,7 +111,9 @@ Thank you.`;
                 </span>
 
                 <a
-                  href={`mailto:${email}`}
+                  href={emailLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="contact-value-link"
                 >
                   {email}
@@ -161,7 +158,7 @@ Thank you.`;
 
             <div className="contact-divider" />
 
-            {/* Campus Venue and Address */}
+            {/* Campus Venue and Address stay in their original place */}
             <div className="contact-item">
               <div className="contact-icon-box">
                 <MapPin size={18} strokeWidth={1.75} />
@@ -194,7 +191,7 @@ Thank you.`;
                     className="btn btn-secondary btn-sm"
                   >
                     <MapPin size={14} />
-                    <span>View on Google Maps</span>
+                    <span>Open in Google Maps</span>
                     <ExternalLink size={12} />
                   </a>
                 </div>
@@ -202,7 +199,7 @@ Thank you.`;
             </div>
           </div>
 
-          {/* Online Channels */}
+          {/* Online Channels Card */}
           <div className="contact-card channels-card">
             <h3 className="channels-card-title">
               Online Channels &amp; Links
