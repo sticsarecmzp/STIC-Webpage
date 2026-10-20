@@ -15,7 +15,7 @@ export const COMMUNITY_INFO = {
   githubOrg: "https://github.com/sticsarecmzp",
   instagram: "https://www.instagram.com/sticsarecmzp",
   linkedin: "https://www.linkedin.com/company/stic-sarec-mirzapur/",
-  whatsappGroup: "https://chat.whatsapp.com/HyFakBeKgHeBSF0E0k0sVT"
+  whatsappGroup: "https://chat.whatsapp.com/LYFm0ufaEtIBjQ9Ao2MXU9"
 };
 
 export const COMMUNITY_STATS = [
@@ -154,76 +154,6 @@ export const NOTICES_AND_EVENTS = [
     ]
   },
   {
-    id: "event-past-webmasterclass",
-    type: "past",
-    category: "Tech Masterclass",
-    title: "Full-Stack & Cloud Architecture (Collab: GDG Prayagraj)",
-    date: "April 4, 2026",
-    time: "Hands-on Masterclass",
-    venue: "Seminar Hall & Computer Lab",
-    badge: "Past Event",
-    accent: "amber",
-    speaker: "Nitin Tiwari (GDE / GDG Prayagraj)",
-    coordinators:
-      "Pawan Kumar Yadav, Piyush Kushwaha & STIC Team",
-    description:
-      "Full-stack web engineering and cloud deployment session covering production architectures, scalable APIs, and Git-driven collaboration.",
-    recap:
-      "120+ students coded live on laptops and received participation certificates.",
-    photos: [
-      {
-        url: "/assets/events/orientation/orientation-01.jpg",
-        caption:
-          "STIC leadership team and coordinators at the campus technical session",
-        alt: "STIC leadership team at SAREC Mirzapur"
-      },
-      {
-        url: "/assets/events/orientation/orientation-02.jpg",
-        caption:
-          "Mentors delivering full-stack and open-source roadmap session",
-        alt: "Full-stack developer roadmap session at SAREC Mirzapur"
-      },
-      {
-        url: "/assets/events/orientation/orientation-03.jpg",
-        caption:
-          "Students participating in the hands-on coding masterclass",
-        alt: "Students attending coding masterclass session"
-      },
-      {
-        url: "/assets/events/orientation/orientation-04.jpg",
-        caption:
-          "Interactive development walkthrough and architecture demonstration",
-        alt: "Interactive developer walkthrough at SAREC Mirzapur"
-      },
-      {
-        url: "/assets/events/orientation/orientation-05.jpg",
-        caption:
-          "Certificate distribution and student contributor recognition",
-        alt: "Certificate presentation at SAREC Mirzapur"
-      },
-      {
-        url: "/assets/events/orientation/orientation-06.jpg",
-        caption:
-          "Community collaboration and future workshop roadmap discussion",
-        alt: "STIC community collaboration meeting"
-      }
-    ],
-    actions: [
-      {
-        label: "View on LinkedIn",
-        url: "https://www.linkedin.com/posts/stic-sarec-mirzapur_activity-7450132771399729152-N3fo",
-        isInternal: false,
-        primary: true
-      },
-      {
-        label: "Explore GitHub",
-        url: "https://github.com/sticsarecmzp",
-        isInternal: false,
-        primary: false
-      }
-    ]
-  },
-  {
     id: "event-past-orientation",
     type: "past",
     category: "Orientation",
@@ -343,49 +273,49 @@ export const LEADERSHIP = {
       name: "Piyush Kushwaha",
       role: "Co-Founder & Lead Coordinator",
       affiliation: "B.Tech IT",
-      focus: "Web Development, DevOps & Community Coordination",
+      focus: "Web Development & Software Development",
       image: "/assets/team/piyush-kushwaha.jpg"
     },
     {
       name: "Pawan Kumar Yadav",
       role: "Co-Founder & Lead Member",
       affiliation: "B.Tech IT",
-      focus: "Competitive Programming, DSA & System Design",
+      focus: "Linux, Open Source & AI/ML",
       image: "/assets/team/pawan-kumar-yadav-v2.jpg"
     },
     {
       name: "Aditi Yadav",
       role: "Executive Member",
       affiliation: "B.Tech IT",
-      focus: "Event Coordination & Student Outreach",
+      focus: "Compèring & Outreach",
       image: "/assets/team/aditi-yadav.jpg"
     },
     {
       name: "Sidhant Maurya",
       role: "Executive Member",
       affiliation: "B.Tech CSE",
-      focus: "Python, Open-Source & Backend Systems",
+      focus: "AI/ML & Data Science",
       image: "/assets/team/sidhant-maurya.jpg"
     },
     {
       name: "Khushi Umrao",
       role: "Executive Member",
       affiliation: "B.Tech CSE",
-      focus: "UI/UX Design & Creative Lead",
+      focus: "UI/UX & Graphic Design",
       image: "/assets/team/khushi-umrao.jpg"
     },
     {
       name: "Ayush Mishra",
       role: "Executive Member",
       affiliation: "B.Tech IT",
-      focus: "Web Development & Community Outreach",
+      focus: "AI/ML & Data Science",
       image: "/assets/team/ayush-mishra.jpg"
     },
     {
       name: "Shital Kushwaha",
       role: "Executive Member",
       affiliation: "B.Tech CSE",
-      focus: "Design, Visual Assets & Media",
+      focus: "DSA & Outreach",
       image: "/assets/team/shital-kushwaha.jpg"
     }
   ]

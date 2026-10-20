@@ -37,10 +37,6 @@ export default function NoticeBoard() {
     <section id="notices" className="section-padding notices-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">
-            Campus Events &amp; Updates
-          </span>
-
           <h2 className="section-title">
             Notices, Events &amp; Gallery
           </h2>
@@ -302,20 +298,8 @@ export default function NoticeBoard() {
         {/* Community Submission Box */}
         <div className="notices-footer-note">
           <div className="footer-note-left">
-            <Sparkles size={16} className="note-sparkle-icon" />
-            <span>
-              Want to propose a workshop or collaborate with STIC?
-            </span>
+            
           </div>
-
-          <button
-            type="button"
-            className="btn-link"
-            onClick={() => scrollToSection('contact')}
-          >
-            <span>Contact Team</span>
-            <ArrowRight size={13} strokeWidth={2} />
-          </button>
         </div>
       </div>
 

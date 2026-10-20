@@ -14,7 +14,6 @@ export default function FocusAreas() {
     <section id="domains" className="section-padding focus-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">Learning Domains</span>
           <h2 className="section-title">What We Learn &amp; Build</h2>
           <p className="section-subtitle">
             Core tracks designed for real-world engineering proficiency.

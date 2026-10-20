@@ -14,7 +14,6 @@ export default function Workflow() {
     <section id="workflow" className="section-padding workflow-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">How It Works</span>
           <h2 className="section-title">How STIC Works</h2>
           <p className="section-subtitle">
             From writing your first line of code to shipping projects and winning hackathons.

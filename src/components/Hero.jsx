@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowDown, Bell, Mail, UserPlus, Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { WhatsAppIcon } from './Icons';
 import { COMMUNITY_INFO, COMMUNITY_STATS, NOTICES_AND_EVENTS } from '../data/communityData';
 
 export default function Hero() {
@@ -43,12 +44,7 @@ export default function Hero() {
           {/* Left Column: Headline, Description & Actions */}
           <div className="hero-left-content">
 
-            <div className="institution-pill">
-              <span className="live-dot" aria-hidden="true" />
-              <span>
-                {COMMUNITY_INFO.collegeShort} &bull; Student Developer Club
-              </span>
-            </div>
+            
 
             <div className="hero-branding-group">
               <h1 className="hero-title-main">
@@ -71,15 +67,17 @@ export default function Hero() {
             {/* Hero Action Buttons */}
             <div className="hero-actions">
 
-              {/* Registration Button */}
-              <button
-                type="button"
+              {/* WhatsApp Community Button */}
+              <a
+                href={COMMUNITY_INFO.whatsappGroup}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-primary"
-                onClick={handleRegister}
+                title="Join STIC WhatsApp Community"
               >
-                <UserPlus size={16} strokeWidth={2.5} />
-                <span>Join STIC</span>
-              </button>
+                <WhatsAppIcon size={16} />
+                <span>Join WhatsApp</span>
+              </a>
 
               {/* How It Works Button */}
               <button

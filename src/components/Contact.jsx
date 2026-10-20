@@ -90,9 +90,7 @@ Thank you.`;
       <div className="container">
         {/* Section Header */}
         <div className="section-header">
-          <span className="section-eyebrow">
-            Communication &amp; Outreach
-          </span>
+          
 
           <h2 className="section-title">
             Connect With Us
@@ -109,7 +107,7 @@ Thank you.`;
           <div className="contact-card primary-contact-card">
             <div className="contact-item">
               <div className="contact-icon-box">
-                <Mail size={20} strokeWidth={1.75} />
+                <Mail size={18} strokeWidth={1.75} />
               </div>
 
               <div className="contact-item-content">
@@ -166,7 +164,7 @@ Thank you.`;
             {/* Campus Venue and Address */}
             <div className="contact-item">
               <div className="contact-icon-box">
-                <MapPin size={20} strokeWidth={1.75} />
+                <MapPin size={18} strokeWidth={1.75} />
               </div>
 
               <div className="contact-item-content">
@@ -208,7 +206,7 @@ Thank you.`;
                     className="channel-link-row"
                   >
                     <div className="channel-icon-pill">
-                      <Icon size={20} strokeWidth={1.8} />
+                      <Icon size={16} strokeWidth={1.8} />
                     </div>
 
                     <div className="channel-info">
@@ -222,7 +220,7 @@ Thank you.`;
                     </div>
 
                     <ExternalLink
-                      size={18}
+                      size={15}
                       className="channel-arrow"
                     />
                   </a>

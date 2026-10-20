@@ -6,7 +6,6 @@ export default function Departments() {
     <section id="departments" className="section-padding departments-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">All Branches Welcome</span>
           <h2 className="section-title">Open to All Engineering Branches</h2>
           <p className="section-subtitle">
             Tech isn't just for computer science. Students from CSE, IT, EL, and EE collaborate and build together at SAREC Mirzapur.

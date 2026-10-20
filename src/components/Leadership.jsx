@@ -51,9 +51,7 @@ export default function Leadership() {
       <div className="container">
         {/* Main Header */}
         <div className="section-header">
-          <span className="section-eyebrow">
-            Team &amp; Mentors
-          </span>
+          
 
           <h2 className="section-title">
             Faculty Advisors &amp; Student Leads
