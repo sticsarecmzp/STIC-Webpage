@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Award,
@@ -6,7 +5,6 @@ import {
   Sparkles,
   GraduationCap,
   Users,
-  Crown,
 } from 'lucide-react';
 
 import { LEADERSHIP } from '../data/communityData';
@@ -14,7 +12,7 @@ import { LEADERSHIP } from '../data/communityData';
 export default function Leadership() {
   const { faculty, executives } = LEADERSHIP;
 
-  // Faculty image paths
+  // Faculty images — exact filenames
   const facultyImages = {
     'Dr. Amit Kumar Tiwari': '/assets/faculty/Amit.jpeg',
     'Dr. Prince Rajpoot': '/assets/faculty/Prince.jpeg',
@@ -45,18 +43,14 @@ export default function Leadership() {
     },
   ];
 
-  const getFounderType = (role = '') => {
-    const normalizedRole = role.toLowerCase();
-
-    if (
-      normalizedRole.includes('co-founder') ||
-      normalizedRole.includes('cofounder')
-    ) {
-      return 'cofounder';
+  // Founder / Co-Founder highlight
+  const getFounderType = (name) => {
+    if (name === 'Piyush Kushwaha') {
+      return 'founder';
     }
 
-    if (normalizedRole.includes('founder')) {
-      return 'founder';
+    if (name === 'Pawan Kumar Yadav') {
+      return 'cofounder';
     }
 
     return '';
@@ -68,6 +62,7 @@ export default function Leadership() {
       className="section-padding leadership-section"
     >
       <div className="container">
+
         {/* Main Header */}
         <div className="section-header">
           <h2 className="section-title">
@@ -184,7 +179,7 @@ export default function Leadership() {
 
           <div className="executives-grid">
             {executives.map((exec, idx) => {
-              const founderType = getFounderType(exec.role);
+              const founderType = getFounderType(exec.name);
 
               return (
                 <div
@@ -197,10 +192,11 @@ export default function Leadership() {
                         : ''
                   }`}
                 >
-                  {/* Founder / Co-Founder label */}
+                  {/* Founder / Co-Founder highlight label */}
                   {founderType && (
-                    <div className={`founder-ribbon ${founderType}`}>
-                      <Crown size={13} strokeWidth={2.5} />
+                    <div
+                      className={`founder-ribbon ${founderType}`}
+                    >
                       <span>
                         {founderType === 'founder'
                           ? 'FOUNDER'
@@ -232,16 +228,6 @@ export default function Leadership() {
                   <div className="exec-card-body">
                     <div className="exec-role-pill-wrap">
                       <span className="exec-role-pill">
-                        {founderType && (
-                          <Crown
-                            size={13}
-                            strokeWidth={2.5}
-                            style={{
-                              marginRight: '5px',
-                              verticalAlign: 'middle',
-                            }}
-                          />
-                        )}
                         {exec.role}
                       </span>
                     </div>
@@ -329,6 +315,7 @@ export default function Leadership() {
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );
