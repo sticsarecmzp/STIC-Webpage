@@ -4613,3 +4613,318 @@ a.contact-venue-link .contact-college-link {
     height: 260px;
   }
 }
+/* ==========================================
+   LEADERSHIP SECTION — LAYOUT FIX
+========================================== */
+
+#leadership.leadership-section {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#leadership .leadership-header {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+
+#leadership .leadership-main-title {
+  margin: 20px 0 12px;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+#leadership .leadership-main-title span {
+  color: var(--primary-cta, #ffb000);
+}
+
+#leadership .leadership-subtitle {
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.7;
+  color: var(--text-secondary, #cbd5e1);
+}
+
+#leadership .section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-card, #334155);
+  border-radius: 999px;
+  background: var(--bg-surface-elevated, #1e293b);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+#leadership .leadership-group {
+  width: 100%;
+  margin: 0 auto 64px;
+}
+
+#leadership .leadership-group-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+#leadership .leadership-group-heading h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  line-height: 1.3;
+}
+
+#leadership .leadership-group-heading p {
+  margin: 0;
+  color: var(--text-secondary, #cbd5e1);
+  line-height: 1.6;
+}
+
+#leadership .leadership-heading-icon {
+  display: flex;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--bg-surface-elevated, #1e293b);
+  border: 1px solid var(--border-card, #334155);
+}
+
+#leadership .leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  align-items: stretch;
+}
+
+#leadership .neo-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  padding: 16px;
+  border: 1px solid var(--border-card, #334155);
+  border-radius: 16px;
+  background: var(--bg-surface, #111827);
+  box-sizing: border-box;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#leadership .neo-card:hover {
+  transform: translateY(-4px);
+}
+
+#leadership .leadership-image-wrapper {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+#leadership .leadership-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 10px;
+}
+
+#leadership .leadership-info {
+  padding: 18px 4px 4px;
+  text-align: center;
+}
+
+#leadership .leadership-name {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+#leadership .exec-role-pill {
+  display: inline-block;
+  margin: 0 auto 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--bg-surface-elevated, #1e293b);
+  border: 1px solid var(--border-card, #334155);
+}
+
+#leadership .leadership-designation,
+#leadership .leadership-department,
+#leadership .leadership-description {
+  margin: 8px 0;
+  color: var(--text-secondary, #cbd5e1);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+#leadership .leadership-socials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+#leadership .leadership-socials a {
+  color: var(--primary-cta, #ffb000);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+#leadership .leadership-socials a:hover {
+  text-decoration: underline;
+}
+
+/* Founder — Gold */
+#leadership .exec-mini-card.founder-highlight {
+  border: 2px solid #ffbf00 !important;
+  box-shadow: 0 0 22px rgba(255, 191, 0, 0.2);
+}
+
+#leadership .founder-ribbon.founder {
+  display: block;
+  position: relative;
+  margin: -16px -16px 16px;
+  padding: 10px;
+  text-align: center;
+  background: linear-gradient(135deg, #ffbf00, #ffe680);
+  color: #332400;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+/* Co-Founder — Orange */
+#leadership .exec-mini-card.cofounder-highlight {
+  border: 2px solid #ff7a00 !important;
+  box-shadow: 0 0 22px rgba(255, 122, 0, 0.2);
+}
+
+#leadership .founder-ribbon.cofounder {
+  display: block;
+  position: relative;
+  margin: -16px -16px 16px;
+  padding: 10px;
+  text-align: center;
+  background: linear-gradient(135deg, #ff7a00, #ffc078);
+  color: #3d1c00;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+#leadership .founder-highlight .exec-role-pill {
+  background: linear-gradient(135deg, #ffbf00, #ffe680);
+  color: #332400;
+  border-color: #ffbf00;
+}
+
+#leadership .cofounder-highlight .exec-role-pill {
+  background: linear-gradient(135deg, #ff7a00, #ffc078);
+  color: #3d1c00;
+  border-color: #ff7a00;
+}
+
+/* Core team */
+#leadership .core-team-card {
+  display: flex;
+  flex-direction: column;
+}
+
+#leadership .core-team-card .leadership-info {
+  flex: 1;
+}
+
+/* Leadership footer */
+#leadership .leadership-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  text-align: center;
+  color: var(--text-secondary, #cbd5e1);
+}
+
+#leadership .leadership-footer p {
+  margin: 0;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  #leadership.leadership-section {
+    padding: 60px 20px;
+  }
+
+  #leadership .leadership-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  #leadership .leadership-image-wrapper {
+    height: 260px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  #leadership.leadership-section {
+    padding: 44px 14px;
+  }
+
+  #leadership .leadership-header {
+    margin-bottom: 40px;
+  }
+
+  #leadership .leadership-group {
+    margin-bottom: 44px;
+  }
+
+  #leadership .leadership-group-heading {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  #leadership .leadership-heading-icon {
+    flex-basis: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  #leadership .leadership-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  #leadership .leadership-image-wrapper {
+    height: 300px;
+  }
+
+  #leadership .leadership-footer {
+    align-items: flex-start;
+    font-size: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #leadership .neo-card {
+    transition: none;
+  }
+}
