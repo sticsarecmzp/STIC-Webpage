@@ -2797,9 +2797,13 @@ img {
 }
 
 .badge-exec {
-  background: var(--bg-surface-elevated);
-  color: var(--text-primary);
-  border-color: var(--border-card);
+  background: var(--primary-cta);
+  color: var(--primary-cta-text);
+  border-color: var(--primary-cta-text);
+}
+
+[data-theme='dark'] .badge-exec {
+  border-color: #F59E0B;
 }
 
 .neo-tag {
