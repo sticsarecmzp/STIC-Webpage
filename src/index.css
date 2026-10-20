@@ -2754,7 +2754,7 @@ img {
 .neo-badge-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 0.85rem;
   gap: 0.5rem;
   flex-wrap: wrap;
@@ -2826,12 +2826,14 @@ img {
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
+  border-radius: 12px;
+  text-align: center;
 }
 
 .faculty-photo-wrap {
   width: 100%;
   height: 250px;
-  border-radius: var(--radius-sm);
+  border-radius: 10px;
   overflow: hidden;
   margin-bottom: 1rem;
   border: 1px solid var(--border-card);
@@ -2845,6 +2847,7 @@ img {
   object-fit: cover;
   object-position: top center;
   display: block;
+  border-radius: 10px;
   transition: transform var(--transition-normal);
 }
 
@@ -2852,32 +2855,33 @@ img {
   transform: scale(1.03);
 }
 
-
-
 .leader-name {
-  font-size: var(--step-0);
+  font-size: 17px;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
   color: var(--text-primary);
   margin-bottom: 0.25rem;
+  text-align: center;
 }
 
 .leader-role {
-  font-size: var(--step--2);
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-secondary);
+  text-align: center;
 }
 
 .leader-college {
-  font-size: var(--step--2);
+  font-size: 12px;
   color: var(--text-tertiary);
   font-family: var(--font-mono);
   margin-bottom: 0.85rem;
+  text-align: center;
 }
 
 .leader-focus-pill {
   margin-top: auto;
-  font-size: var(--step--2);
+  font-size: 12px;
   font-family: var(--font-mono);
   font-weight: 700;
   background: var(--bg-surface-elevated);
@@ -2885,13 +2889,15 @@ img {
   padding: 0.4rem 0.65rem;
   border-radius: var(--radius-xs);
   color: var(--text-secondary);
+  text-align: center;
 }
 
 .leader-focus {
-  font-size: var(--step--2);
+  font-size: 12px;
   color: var(--text-secondary);
   line-height: 1.45;
   margin-top: 0.35rem;
+  text-align: center;
 }
 
 /* Executive Council Compact Grid */
@@ -2933,9 +2939,10 @@ img {
   padding: 1.1rem;
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-card);
-  border-radius: var(--radius-sm);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
+  text-align: center;
   transition: all var(--transition-fast);
 }
 
@@ -2949,7 +2956,7 @@ img {
 .exec-photo-wrap {
   width: 100%;
   height: 220px;
-  border-radius: var(--radius-xs);
+  border-radius: 10px;
   overflow: hidden;
   margin-bottom: 0.9rem;
   border: 1px solid var(--border-card);
@@ -2962,6 +2969,7 @@ img {
   object-fit: cover;
   object-position: top center;
   display: block;
+  border-radius: 10px;
   transition: transform var(--transition-normal);
 }
 
@@ -2975,6 +2983,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
   background: linear-gradient(135deg, var(--bg-surface-elevated) 0%, var(--bg-surface-subtle) 100%);
 }
 
@@ -2988,11 +2997,17 @@ img {
 .exec-card-body {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   flex: 1;
+  width: 100%;
 }
 
-/* Clean neutral role pill - NO harsh colored background or colored border */
+/* Clean neutral role pill - centered */
 .exec-role-pill-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   margin-bottom: 0.45rem;
 }
 
@@ -3012,23 +3027,28 @@ img {
 }
 
 .exec-name {
-  font-size: var(--step-0);
+  font-size: 17px;
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 0.2rem;
   letter-spacing: -0.015em;
   line-height: 1.25;
+  text-align: center;
+  width: 100%;
 }
 
 .exec-branch-line {
-  font-size: var(--step--2);
+  font-size: 12px;
   font-family: var(--font-mono);
   color: var(--text-tertiary);
   margin-bottom: 0.85rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
   font-weight: 600;
+  text-align: center;
+  width: 100%;
 }
 
 .exec-branch-name {
@@ -3050,6 +3070,8 @@ img {
   margin-top: auto;
   padding-top: 0.65rem;
   border-top: 1px dashed var(--border-card);
+  text-align: center;
+  width: 100%;
 }
 
 @media (max-width: 1080px) {
@@ -3581,7 +3603,8 @@ img {
 
 /* Member Details */
 
-.core-team-card .exec-card-body {
+.core-team-card .exec-card-body,
+.core-team-card .core-team-card-body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3594,7 +3617,8 @@ img {
 
 /* Member Name */
 
-.core-team-card .exec-name {
+.core-team-card .exec-name,
+.core-team-card .core-team-name {
   display: block;
   width: 100%;
   max-width: 100%;
