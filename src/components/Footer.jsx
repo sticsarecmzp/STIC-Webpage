@@ -65,10 +65,14 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href={`mailto:${COMMUNITY_INFO.officialEmail}`}>
-                  {COMMUNITY_INFO.officialEmail}
-                </a>
-              </li>
+               <a
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${COMMUNITY_INFO.officialEmail}&su=STIC%20Website%20Enquiry`}
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+    {COMMUNITY_INFO.officialEmail}
+  </a>
+</li>
               <li>
                 <span className="footer-venue-text">
                   SAREC Campus, Mirzapur, U.P.
