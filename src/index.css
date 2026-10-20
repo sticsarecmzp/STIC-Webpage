@@ -4446,67 +4446,75 @@ a.contact-venue-link .contact-college-link {
   z-index: 10;
 }
 
-/* founder and co-founder*/
+/* ================================
+   FOUNDER - GOLD / ORANGE HIGHLIGHT
+================================ */
 
-/* Founder highlight - Gold */
 .exec-mini-card.founder-highlight {
-  border: 2px solid #e5a000;
-  box-shadow: 0 0 0 3px rgba(229, 160, 0, 0.16),
-              0 8px 24px rgba(229, 160, 0, 0.20);
+  border: 2px solid #ffb020;
+  box-shadow:
+    0 0 0 2px rgba(255, 176, 32, 0.16),
+    0 8px 24px rgba(255, 176, 32, 0.18);
+}
+
+.founder-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
 }
 
 .founder-ribbon.founder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: fit-content;
-  margin: 10px auto;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #f5b301, #ffe69a);
-  color: #3b2700;
-  font-size: 11px;
-  font-weight: 800;
-}
-
-/* Co-Founder highlight - Cyan */
-.exec-mini-card.cofounder-highlight {
-  border: 2px solid #22c7d9;
-  box-shadow: 0 0 0 3px rgba(34, 199, 217, 0.13),
-              0 8px 22px rgba(34, 199, 217, 0.18);
-}
-
-.founder-ribbon.cofounder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: fit-content;
-  margin: 10px auto;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #22c7d9, #a5f3fc);
-  color: #06343b;
-  font-size: 11px;
-  font-weight: 800;
+  background: linear-gradient(135deg, #ffb020, #ffe09a);
+  color: #302000;
 }
 
 .exec-mini-card.founder-highlight .exec-role-pill {
-  background: linear-gradient(135deg, #f5b301, #ffe69a);
-  color: #3b2700;
+  background: linear-gradient(135deg, #ffb020, #ffe09a);
+  color: #302000;
   font-weight: 800;
+}
+
+
+/* ================================
+   CO-FOUNDER - ORANGE HIGHLIGHT
+================================ */
+
+.exec-mini-card.cofounder-highlight {
+  border: 2px solid #ff8c00;
+  box-shadow:
+    0 0 0 2px rgba(255, 140, 0, 0.15),
+    0 8px 24px rgba(255, 140, 0, 0.18);
+}
+
+.founder-ribbon.cofounder {
+  background: linear-gradient(135deg, #ff8c00, #ffc266);
+  color: #302000;
 }
 
 .exec-mini-card.cofounder-highlight .exec-role-pill {
-  background: linear-gradient(135deg, #22c7d9, #a5f3fc);
-  color: #06343b;
+  background: linear-gradient(135deg, #ff8c00, #ffc266);
+  color: #302000;
   font-weight: 800;
 }
 
+
+/* ================================
+   SMOOTH HOVER EFFECT
+================================ */
+
 .exec-mini-card.founder-highlight,
 .exec-mini-card.cofounder-highlight {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
 @media (hover: hover) {
@@ -4516,11 +4524,12 @@ a.contact-venue-link .contact-college-link {
   }
 }
 
-
-
-
-
-
+@media (prefers-reduced-motion: reduce) {
+  .exec-mini-card.founder-highlight,
+  .exec-mini-card.cofounder-highlight {
+    transition: none;
+  }
+}
 
 
 
