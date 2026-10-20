@@ -4408,6 +4408,17 @@ img {
   }
 }
 
+.contact-section,
+.contact-section a,
+.contact-section button {
+  pointer-events: auto !important;
+}
+
+.contact-section {
+  position: relative;
+  z-index: 10;
+}
+
 
 
 
