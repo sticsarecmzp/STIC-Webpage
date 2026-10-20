@@ -324,7 +324,7 @@ export const LEADERSHIP = {
       name: "Dr. Prince Rajpoot",
       role: "Faculty Mentor",
       designation: "Associate Professor",
-      affiliation: "Dept. of Electronics Engineering",
+      affiliation: "Dept. of Information Technology",
       college: "SAREC Mirzapur",
       focus: "IoT Hardware, Embedded Systems & Student Projects",
       image: "/assets/faculty/Prince.jpeg"
