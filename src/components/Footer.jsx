@@ -15,7 +15,7 @@ const EMAIL_LINK =
   `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=STIC%20Website%20Enquiry`;
 
 const MAPS_LINK =
-  'https://www.google.com/maps/search/?api=1&query=Samrat+Ashok+Rajkiya+Engineering+College+Sheetla+Mandir+Bathua+Rewa+Road+Teliyaganj+Mirzapur+231001';
+  'https://www.google.com/maps/search/?api=1&query=Samrat+Ashok+Rajkiya+Engineering+College+Mirzapur+Uttar+Pradesh+231001';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -59,7 +59,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Navigation */}
+          {/* Navigation */}
           <div className="footer-nav-col">
             <span className="footer-col-title">Navigation</span>
             <ul className="footer-links-list">
@@ -105,8 +105,8 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="footer-venue-text"
                 >
-                  SAREC Campus, Sheetla Mandir, Bathua, Rewa Road,
-                  Teliyaganj, Mirzapur, U.P. - 231001
+                  SAREC Campus, Mirzapur, Uttar Pradesh - 231001
+                  {' '}
                   <ExternalLink size={12} />
                 </a>
               </li>
