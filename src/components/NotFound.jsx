@@ -15,7 +15,7 @@ export default function NotFound({ onNavigateHome }) {
   return (
     <div className="not-found-section" style={{ minHeight: '75vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '3rem 1.5rem' }}>
       <div className="about-card" style={{ maxWidth: '580px', width: '100%', padding: 'clamp(2rem, 5vw, 3.5rem)', textAlign: 'center', margin: '0 auto' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.9rem', borderRadius: '999px', background: 'var(--badge-bg)', border: '1px solid var(--border-subtle)', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', fontWeight: 600, marginBottom: '1.25rem' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.9rem', borderRadius: '999px', background: 'var(--badge-bg)', border: '1px solid var(--border-subtle)', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-sans)', fontWeight: 600, marginBottom: '1.25rem' }}>
           <AlertTriangle size={14} strokeWidth={2} />
           <span>404 &bull; PAGE NOT FOUND</span>
         </div>
@@ -43,7 +43,7 @@ export default function NotFound({ onNavigateHome }) {
           </button>
         </div>
 
-        <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '1.25rem', fontSize: '0.8rem', color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}>
+        <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '1.25rem', fontSize: '0.8rem', color: 'var(--text-tertiary)', fontFamily: 'var(--font-sans)' }}>
           STIC &bull; Samrat Ashoka Rajkiya Engineering College, Mirzapur
         </div>
       </div>
