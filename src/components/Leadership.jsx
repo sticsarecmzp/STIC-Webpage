@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   Award,
@@ -12,7 +13,7 @@ import { LEADERSHIP } from '../data/communityData';
 export default function Leadership() {
   const { faculty, executives } = LEADERSHIP;
 
-  // Faculty image paths — exact GitHub filenames
+  // Faculty image paths
   const facultyImages = {
     'Dr. Amit Kumar Tiwari': '/assets/faculty/Amit.jpeg',
     'Dr. Prince Rajpoot': '/assets/faculty/Prince.jpeg',
@@ -37,9 +38,9 @@ export default function Leadership() {
       image: '/assets/team/Om%20prakash.jpeg',
     },
     {
-      name: 'Divyansh Vandan Srivastava',
-      branch: 'EL',
-      image: '/assets/team/Divyansh%20vandan.jpeg',
+      name: 'Pushparaj Maurya',
+      branch: 'CSE',
+      image: '/assets/team/Pushparaj.jpeg',
     },
   ];
 
@@ -49,10 +50,9 @@ export default function Leadership() {
       className="section-padding leadership-section"
     >
       <div className="container">
+
         {/* Main Header */}
         <div className="section-header">
-          
-
           <h2 className="section-title">
             Faculty Advisors &amp; Student Leads
           </h2>
@@ -280,6 +280,7 @@ export default function Leadership() {
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );
